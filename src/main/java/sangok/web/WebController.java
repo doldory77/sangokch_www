@@ -83,7 +83,7 @@ public class WebController {
 					File file = new File(imgRealPath + newlnfImgFileName);
 					mf.transferTo(file);
 					
-					/*Runtime.getRuntime().exec("chmod 666 " + file);*/
+					//Runtime.getRuntime().exec("chmod 666 " + file);
 				}
 			}
 			
