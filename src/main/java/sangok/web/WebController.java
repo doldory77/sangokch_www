@@ -43,27 +43,23 @@ public class WebController {
 	@Autowired
 	DefaultListableBeanFactory beanFactory;
 	
-	@Resource(name = "xxxService")
+	@Resource(name = "webService")
 	private WebService webService;
 
 	@RequestMapping(value = "/home.do")
 	public String home(HttpSession session, ModelMap model) throws Exception {
-//		String rootPath = session.getServletContext().getRealPath("/");
-//		LOGGER.debug("rootPath : =======> " + rootPath);
-		
-		Map<String, Object> params = new HashMap<String, Object>();
-//		params.put("MENU_LEVEL", new Integer(1));
-		params.put("P_LVL", new Integer(2));
-		List<Map<String, Object>> menuList = webService.selectMenu(params);
 		
 //		for (String beanName : beanFactory.getBeanDefinitionNames()) {
 //			LOGGER.debug("class : " + beanFactory.getBean(beanName).getClass().getName());
 //		}
 		
-		model.addAttribute("menu", menuList);
-		model.addAttribute("msg", "환영하고 축복합니다!");
-		
 		return "home/main";
+	}
+	
+	@RequestMapping(value = "/admin/board/write.do")
+	public String boardWrite(ModelMap model) throws Exception {
+		
+		return "admin/board/write";
 	}
 	
 	@RequestMapping(value = "/ckeditor5/imageUpload.do")

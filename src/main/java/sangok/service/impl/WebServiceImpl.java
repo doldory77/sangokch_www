@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import sangok.service.WebService;
 
-@Service("xxxService")
+@Service("webService")
 public class WebServiceImpl extends EgovAbstractServiceImpl implements WebService {
 
 	@Resource(name = "webDAO")

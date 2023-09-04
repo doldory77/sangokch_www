@@ -16,7 +16,7 @@
     </select>
     
     <procedure id="selectMenuBySP" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
-    	{ call SP_TEST_MENU(#P_LVL#) }
+    	{ call SP_GET_MENU(#P_MENU_GROUP#, NULL) }
     </procedure>
 
 </sqlMap>
