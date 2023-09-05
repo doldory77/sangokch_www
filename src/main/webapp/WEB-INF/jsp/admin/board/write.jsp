@@ -25,18 +25,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <title>Hello, world!</title>
+    <title>게시판작성</title>
   </head>
   <body>
   	
   	<form name="frm" id="frm" action="">
-  		<div class="form-group">
+  		<div class="form-group mb-2">
   			<label for="title">제목</label>
-  			<input type="text" name="subject" class="form-control" placeholder="제목을 입력하세요">
+  			<input type="text" id="title" name="SUBJECT" class="form-control" placeholder="제목을 입력하세요">
   		</div>
-  		<div class="form-group">
-  			<label for="content">내용</label>
-  			<textarea id="editor" name="content" class="form-control"></textarea>
+  		<div class="form-group mb-2">
+  			<label for="groupId">그룹ID</label>
+  			<select id="groupId" name="GROUP_ID">
+  				<c:forEach var="item" items="${groupIdList}">
+  				<option value="${item.MENU_ID}">${item.MENU_NM}</option>
+  				</c:forEach>
+  			</select>
+  		</div>
+  		<div class="form-group mb-2">
+  			<label for="groupId">화면표시여부</label>
+  			<select id="screenYn" name="SCREEN_YN">
+  				<c:forEach var="item" items="${YNCodeList}">
+  				<option value="${item.CODE}">${item.CODE_NM}</option>
+  				</c:forEach>
+  			</select>
+  		</div>
+  		<div class="form-group mb-2">
+  			<label for="groupId">사용여부</label>
+  			<select id="useYn" name="USE_YN">
+  				<c:forEach var="item" items="${YNCodeList}">
+  				<option value="${item.CODE}">${item.CODE_NM}</option>
+  				</c:forEach>
+  			</select>
+  		</div>
+  		<div class="form-group mb-2">
+  			<label for="editor">내용</label>
+  			<textarea id="editor" name="CONTENT" class="form-control"></textarea>
   		</div>
 	  	<div class="d-flex justify-content-center">
 	  		<input type="submit" class="btn btn-primary mt-3 mx-2" value="작성완료" />

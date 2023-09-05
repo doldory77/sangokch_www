@@ -5,18 +5,18 @@
 
 	<typeAlias alias="egovMap" type="egovframework.rte.psl.dataaccess.util.EgovMap"/>
 
-    <select id="selectMenu" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
+    <select id="selectCode" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
         <![CDATA[
-            SELECT MENU_ID
-            	 , MENU_NM
-              FROM H_MENU 
-             WHERE USE_YN = 'Y'
-               AND MENU_LEVEL = #MENU_LEVEL#
+		SELECT CODE
+			 , CODE_NM 
+		  FROM H_CODE
+		 WHERE GROUP_ID = #GRP_ID#
+		   AND USE_YN = 'Y'
         ]]>
     </select>
     
     <procedure id="selectMenuBySP" parameterClass="java.util.HashMap" resultClass="java.util.HashMap">
-    	{ call SP_GET_MENU(#P_MENU_GROUP#, NULL) }
+    	{ call SP_GET_MENU(#P_MENU_GROUP#, #P_DEPTH_CHAR#) }
     </procedure>
 
 </sqlMap>

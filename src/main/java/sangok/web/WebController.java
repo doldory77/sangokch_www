@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import sangok.service.WebService;
+import sangok.utils.JMap;
 
 /**
  * 
@@ -57,8 +58,14 @@ public class WebController {
 	}
 	
 	@RequestMapping(value = "/admin/board/write.do")
-	public String boardWrite(ModelMap model) throws Exception {
+	public String boardWrite(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		LOGGER.debug(params + "");
 		
+		List<Map<String, Object>> groupIdList = webService.selectMenu(JMap.instance("P_MENU_GROUP", null).put("P_DEPTH_CHAR", "--").build());
+		List<Map<String, Object>> YNCodeList = webService.selectCode(JMap.instance("GRP_ID", "CD0000").build());
+		
+		model.addAttribute("groupIdList", groupIdList);
+		model.addAttribute("YNCodeList", YNCodeList);
 		return "admin/board/write";
 	}
 	

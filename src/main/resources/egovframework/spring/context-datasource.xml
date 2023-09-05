@@ -19,9 +19,10 @@
     -->  
     
     <!-- Mysql (POM에서 commons-dbcp, mysql-connector-java 관련 라이브러리 설정 ) --> 
+        <!-- <property name="driverClassName" value="com.mysql.jdbc.Driver"/> -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://sangokch.org:3306/www" />
+        <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
+        <property name="url" value="jdbc:log4jdbc:mysql://sangokch.org:3306/www?serverTimezone=Asia/Seoul&amp;characterEncoding=UTF-8" />
         <property name="username" value="doldory"/>
         <property name="password" value="962131"/>
     </bean>
