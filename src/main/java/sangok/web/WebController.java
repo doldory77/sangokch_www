@@ -2,7 +2,6 @@ package sangok.web;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -23,7 +22,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import sangok.service.WebService;
+import sangok.service.impl.BoardItem;
 import sangok.utils.JMap;
+import sangok.utils.JStr;
 
 /**
  * 
@@ -67,6 +68,31 @@ public class WebController {
 		model.addAttribute("groupIdList", groupIdList);
 		model.addAttribute("YNCodeList", YNCodeList);
 		return "admin/board/write";
+	}
+	
+	@RequestMapping(value = "/admin/board/save.do")
+	public String boardSave(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		//#DEL_YN#, #SUBJECT#, #CONTENT#, #GROUP_ID#, #SEQ_NO#, #SCREEN_YN#, #DEPTH_NO#, #ORD_NO#, #USE_YN#, #USER_ID#
+		params.put("RTN_MSG", "");
+		params.put("DEL_YN", "N");
+		params.put("SEQ_NO", 0);
+		params.put("DEPTH_NO", 0);
+		params.put("ORD_NO", 0);
+		params.put("USER_ID", "SYS_TEST");
+		
+		BoardItem boardItem = new BoardItem();
+		boardItem.setSUBJECT(JStr.toStr(params.get("SUBJECT")));
+		boardItem.setCONTENT(JStr.toStr(params.get("CONTENT")));
+		boardItem.setGROUP_ID(JStr.toStr(params.get("GROUP_ID")));
+		boardItem.setSCREEN_YN(JStr.toStr(params.get("SCREEN_YN")));
+		boardItem.setUSE_YN(JStr.toStr(params.get("USE_YN")));
+		boardItem.setUSER_ID(JStr.toStr(params.get("USER_ID")));
+		//LOGGER.debug("==========> " + params);
+		webService.updateBoard(params);
+		LOGGER.debug("==========> " + JStr.toStr(params.get("SEQ_NO")));
+		//LOGGER.debug("==========> " + JStr.toStr(params.get("RTN_MSG")));
+		
+		return this.boardWrite(params, model);
 	}
 	
 	@RequestMapping(value = "/ckeditor5/imageUpload.do")

@@ -89,5 +89,22 @@
 				</choose>
 			</if>
 	</select>
+	
+	<select id="updateBoard" statementType="CALLABLE" parameterType="map" resultType="map">
+		{ 
+			call SP_MERGE_BOARD(
+				#{DEL_YN, mode=IN, jdbcType=VARCHAR}
+				, #{SUBJECT, mode=IN, jdbcType=VARCHAR}
+				, #{CONTENT, mode=IN, jdbcType=VARCHAR}
+				, #{GROUP_ID, mode=IN, jdbcType=VARCHAR}
+				, #{SEQ_NO, mode=INOUT, jdbcType=INTEGER}
+				, #{SCREEN_YN, mode=IN, jdbcType=VARCHAR}
+				, #{DEPTH_NO, mode=IN, jdbcType=FLOAT}
+				, #{ORD_NO, mode=IN, jdbcType=INTEGER}
+				, #{USE_YN, mode=IN, jdbcType=VARCHAR}
+				, #{USER_ID, mode=IN, jdbcType=VARCHAR}
+			) 
+		} 
+	</select>
 
 </mapper>

@@ -16,10 +16,10 @@
 package egovframework.example.sample.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.example.sample.service.SampleVO;
-
 import egovframework.rte.psl.dataaccess.mapper.Mapper;
 
 /**
@@ -87,5 +87,7 @@ public interface SampleMapper {
 	 * @exception
 	 */
 	int selectSampleListTotCnt(SampleDefaultVO searchVO);
+	
+	void updateBoard(Map<String, Object> params);
 
 }
