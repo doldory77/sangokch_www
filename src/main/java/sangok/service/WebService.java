@@ -11,4 +11,6 @@ public interface WebService {
 	
 	void updateBoard(Map<String, Object> params) throws Exception;
 	
+	List<Map<String, Object>> selectBoardList(Map<String, Object> params) throws Exception;
+	
 }

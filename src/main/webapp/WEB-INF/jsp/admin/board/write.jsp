@@ -29,40 +29,49 @@
   </head>
   <body>
   	<div class="container-md">
+  		<div class="row mb-3">
+  			<div class="col"><span class="fs-2">게시판(작성)</span></div>
+  		</div>
 		<form name="frm" method="POST" id="frm" action="/admin/board/save.do">
 	  	<div class="row align-items-center mb-2">
-	  		<div class="col-md-2">
+	  		<div class="col-md-1">
 	  			<label for="title">제목</label>
 	  		</div>
 	  		<div class="col">
 	  			<input type="text" id="title" name="SUBJECT" class="form-control" placeholder="제목을 입력하세요">
 	  		</div>
 	  	</div>
-	  	<div class="row align-items-center mb-2">
-	  		<div class="col-md-2">
+	  	<div class="row align-items-center">
+	  		<div class="col-md-1 mb-md-2">
 	  			<label for="groupId">그룹ID</label>
 	  		</div>
-	  		<div class="col-md-2">
+	  		<div class="col-md-2 mb-2">
 	  			<select class="form-select" id="groupId" name="GROUP_ID">
 	  				<c:forEach var="item" items="${groupIdList}">
 	  				<option value="${item.MENU_ID}">${item.MENU_NM}</option>
 	  				</c:forEach>
 	  			</select>
 	  		</div>
-	  		<div class="col-md-2">
-	  			<label for="groupId">화면표시여부</label>
+	  		<div class="col-md-1 mb-md-2">
+	  			<label for="groupId">화면표시</label>
 	  		</div>
-		  	<div class="col-md-2">
+		  	<div class="col-md-2 mb-2">
 	  			<select class="form-select" id="screenYn" name="SCREEN_YN">
 	  				<c:forEach var="item" items="${YNCodeList}">
 	  				<option value="${item.CODE}">${item.CODE_NM}</option>
 	  				</c:forEach>
 	  			</select>
 		  	</div>
-	  		<div class="col-md-2">
+	  		<div class="col-md-1 mb-md-2">
+	  			<label for="groupId">순번</label>
+	  		</div>
+	  		<div class="col-md-2 mb-2">
+	  			<input type="text" id="ordNo" name="ORD_NO" class="form-control" value="">
+	  		</div>
+	  		<div class="col-md-1 mb-md-2">
 	  			<label for="groupId">사용여부</label>
 	  		</div>
-	  		<div class="col-md-2">
+	  		<div class="col-md-2 mb-2">
 	  			<select class="form-select" id="useYn" name="USE_YN">
 	  				<c:forEach var="item" items="${YNCodeList}">
 	  				<option value="${item.CODE}">${item.CODE_NM}</option>
@@ -81,6 +90,9 @@
 		  		<input type="submit" class="btn btn-primary mt-3 mx-2" value="작성완료" />
 		  	</div>
 	  	</div>
+		  	<input type="hidden" name="DEL_YN" value="N">
+		  	<input type="hidden" name="SEQ_NO" value="0">
+		  	<input type="hidden" name="DEPTH_NO" value="0">
 	  	</form>
 	  </div>
 	

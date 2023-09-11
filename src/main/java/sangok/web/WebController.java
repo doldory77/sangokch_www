@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import sangok.service.WebService;
 import sangok.service.impl.BoardItem;
 import sangok.utils.JMap;
+import sangok.utils.JNum;
 import sangok.utils.JStr;
 
 /**
@@ -74,25 +75,30 @@ public class WebController {
 	public String boardSave(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		//#DEL_YN#, #SUBJECT#, #CONTENT#, #GROUP_ID#, #SEQ_NO#, #SCREEN_YN#, #DEPTH_NO#, #ORD_NO#, #USE_YN#, #USER_ID#
 		params.put("RTN_MSG", "");
-		params.put("DEL_YN", "N");
-		params.put("SEQ_NO", 0);
-		params.put("DEPTH_NO", 0);
-		params.put("ORD_NO", 0);
 		params.put("USER_ID", "SYS_TEST");
 		
-		BoardItem boardItem = new BoardItem();
-		boardItem.setSUBJECT(JStr.toStr(params.get("SUBJECT")));
-		boardItem.setCONTENT(JStr.toStr(params.get("CONTENT")));
-		boardItem.setGROUP_ID(JStr.toStr(params.get("GROUP_ID")));
-		boardItem.setSCREEN_YN(JStr.toStr(params.get("SCREEN_YN")));
-		boardItem.setUSE_YN(JStr.toStr(params.get("USE_YN")));
-		boardItem.setUSER_ID(JStr.toStr(params.get("USER_ID")));
-		//LOGGER.debug("==========> " + params);
+		LOGGER.debug("==========> " + params);
 		webService.updateBoard(params);
 		LOGGER.debug("==========> " + JStr.toStr(params.get("SEQ_NO")));
-		//LOGGER.debug("==========> " + JStr.toStr(params.get("RTN_MSG")));
+		LOGGER.debug("==========> " + JStr.toStr(params.get("RTN_MSG")));
 		
 		return this.boardWrite(params, model);
+	}
+	
+	@RequestMapping(value = "/admin/board/list.do")
+	public String boardList(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		if (JNum.isInteger(params.get("CURR_PAGE")) == false) {
+			params.put("CURR_PAGE", 1);
+		}
+		if (JStr.isStr(params.get("GROUP_ID")) == false) {
+			params.put("GROUP_ID", null);
+		}
+		List<Map<String, Object>> list = webService.selectBoardList(params);
+		
+		model.addAttribute("BOARD_LIST", list);
+		model.addAttribute("PAGE_CTL", params);
+		
+		return "admin/board/list";
 	}
 	
 	@RequestMapping(value = "/ckeditor5/imageUpload.do")

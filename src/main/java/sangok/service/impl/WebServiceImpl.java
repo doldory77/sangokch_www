@@ -47,4 +47,22 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 		}
 	}
 
+	@Override
+	public List<Map<String, Object>> selectBoardList(Map<String, Object> params) throws Exception {
+		try {
+			
+			params.put("BLOCK_START", 0);
+			params.put("BLOCK_END", 0);
+			params.put("TOTAL_PAGE", 0);
+			params.put("TOTAL_BLOCK", 0);
+			params.put("START_NUM", 0);
+			
+			return webMapper.selectBoardList(params); 
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
+	}
+
 }

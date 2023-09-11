@@ -9,4 +9,10 @@ public class JStr {
 			return null;
 		}
 	}
+	
+	public static boolean isStr(Object obj) {
+		if (obj == null) return false;
+		if (String.valueOf(obj).length() < 1) return false;
+		return true;
+	}
 }
