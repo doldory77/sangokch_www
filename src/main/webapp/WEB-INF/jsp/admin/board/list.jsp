@@ -55,9 +55,15 @@
 		</c:forEach>
 		</div>
 		<div class="d-flex">
-		<c:forEach var="i" begin="${PAGE_CTL.BLOCK_START}" end="${PAGE_CTL.BLOCK_END}">
-		<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/board/list.do?CURR_PAGE=${i}&GROUP_ID=">${i}</a>
-		</c:forEach>
+			<c:if test="${1 le PAGE_CTL.CURR_PAGE-1}">
+			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/board/list.do?CURR_PAGE=${PAGE_CTL.CURR_PAGE-1}&GROUP_ID=">-</a>
+			</c:if>
+			<c:forEach var="i" begin="${PAGE_CTL.BLOCK_START}" end="${PAGE_CTL.BLOCK_END}">
+			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/board/list.do?CURR_PAGE=${i}&GROUP_ID=">${i}</a>
+			</c:forEach>
+			<c:if test="${PAGE_CTL.TOTAL_PAGE ge PAGE_CTL.CURR_PAGE+1}">
+			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/board/list.do?CURR_PAGE=${PAGE_CTL.CURR_PAGE+1}&GROUP_ID=">+</a>
+			</c:if>
 		</div>
 	</div>
 	
