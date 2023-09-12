@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import sangok.service.WebService;
-import sangok.service.impl.BoardItem;
 import sangok.utils.JMap;
 import sangok.utils.JNum;
 import sangok.utils.JStr;
@@ -65,9 +64,12 @@ public class WebController {
 		
 		List<Map<String, Object>> groupIdList = webService.selectMenu(JMap.instance("P_MENU_GROUP", null).put("P_DEPTH_CHAR", "--").build());
 		List<Map<String, Object>> YNCodeList = webService.selectCode(JMap.instance("GRP_ID", "CD0000").build());
-		
+		Map<String, Object> boardDtl = webService.selectBoardDtl(params);
+		LOGGER.debug("BOARD_DTL === " + boardDtl);
 		model.addAttribute("groupIdList", groupIdList);
 		model.addAttribute("YNCodeList", YNCodeList);
+		model.addAttribute("BOARD_DTL", boardDtl);
+		
 		return "admin/board/write";
 	}
 	

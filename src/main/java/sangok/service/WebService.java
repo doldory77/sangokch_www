@@ -13,4 +13,6 @@ public interface WebService {
 	
 	List<Map<String, Object>> selectBoardList(Map<String, Object> params) throws Exception;
 	
+	Map<String, Object> selectBoardDtl(Map<String, Object> params) throws Exception;
+	
 }

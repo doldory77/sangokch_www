@@ -38,7 +38,7 @@
 	  			<label for="title">제목</label>
 	  		</div>
 	  		<div class="col">
-	  			<input type="text" id="title" name="SUBJECT" class="form-control" placeholder="제목을 입력하세요">
+	  			<input type="text" id="title" name="SUBJECT" class="form-control" placeholder="제목을 입력하세요" value="${not empty BOARD_DTL ? BOARD_DTL.SUBJECT : ''}">
 	  		</div>
 	  	</div>
 	  	<div class="row align-items-center">
@@ -48,7 +48,7 @@
 	  		<div class="col-md-2 mb-2">
 	  			<select class="form-select" id="groupId" name="GROUP_ID">
 	  				<c:forEach var="item" items="${groupIdList}">
-	  				<option value="${item.MENU_ID}">${item.MENU_NM}</option>
+	  				<option value="${item.MENU_ID}" <c:if test="${not empty BOARD_DTL && item.MENU_ID eq BOARD_DTL.GROUP_ID}">selected="selected"</c:if>>${item.MENU_NM}</option>
 	  				</c:forEach>
 	  			</select>
 	  		</div>

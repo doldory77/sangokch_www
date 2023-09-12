@@ -24,6 +24,7 @@
 			width:260px;
 			border:1px dotted #c2c2c2;
 			margin:2px;
+			cursor:pointer;
 		}
 		.board-frame .title {
 			font-size: 1.4rem;
@@ -44,6 +45,9 @@
 		  	'GRAD' 0,
 		  	'opsz' 24
 		}
+		.curr_page {
+			background-color:#c2c2c2;
+		}
 	</style>
   	
     <!-- Required meta tags -->
@@ -57,7 +61,7 @@
 	<div class="container-fluid">
 		<div class="d-flex flex-wrap justify-content-start">
 		<c:forEach var="item" items="${BOARD_LIST}">  
-			<div class="board-frame p-1">
+			<div class="board-frame p-1" onclick="location.href='/admin/board/write.do?GROUP_ID=${item.GROUP_ID}&SEQ_NO=${item.SEQ_NO}'">
 				<div><span class="sub1">${item.GROUP_NM}</span></div>
 				<div><span class="title ps-2">${item.SUBJECT}</span></div>
 				<div class="text-end"><span class="sub1">${item.REG_DT}</span></div>
@@ -65,16 +69,28 @@
 		</c:forEach>
 		</div>
 		<div class="d-flex">
+			<c:if test="${1 lt PAGE_CTL.CURR_PAGE}">
+			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/board/list.do?CURR_PAGE=1&GROUP_ID=">
+				<span class="material-symbols-outlined">first_page</span>
+			</a>	
+			</c:if>
 			<c:if test="${1 le PAGE_CTL.CURR_PAGE-1}">
-			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/board/list.do?CURR_PAGE=${PAGE_CTL.CURR_PAGE-1}&GROUP_ID=">-</a>
+			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/board/list.do?CURR_PAGE=${PAGE_CTL.CURR_PAGE-1}&GROUP_ID=">
+				<span class="material-symbols-outlined">keyboard_double_arrow_left</span>
+			</a>
 			</c:if>
 			<c:forEach var="i" begin="${PAGE_CTL.BLOCK_START}" end="${PAGE_CTL.BLOCK_END}">
-			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/board/list.do?CURR_PAGE=${i}&GROUP_ID=">${i}</a>
+			<a class="d-flex m-1 paging-btn justify-content-center align-items-center ${i eq PAGE_CTL.CURR_PAGE ? 'curr_page' : ''}" href="/admin/board/list.do?CURR_PAGE=${i}&GROUP_ID=">${i}</a>
 			</c:forEach>
 			<c:if test="${PAGE_CTL.TOTAL_PAGE ge PAGE_CTL.CURR_PAGE+1}">
 			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/board/list.do?CURR_PAGE=${PAGE_CTL.CURR_PAGE+1}&GROUP_ID=">
 				<span class="material-symbols-outlined">keyboard_double_arrow_right</span>
 			</a>
+			</c:if>
+			<c:if test="${PAGE_CTL.TOTAL_PAGE gt PAGE_CTL.CURR_PAGE}">
+			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/board/list.do?CURR_PAGE=${PAGE_CTL.TOTAL_PAGE}&GROUP_ID=">
+				<span class="material-symbols-outlined">last_page</span>
+			</a>	
 			</c:if>
 		</div>
 	</div>

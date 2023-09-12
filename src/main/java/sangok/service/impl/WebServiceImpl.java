@@ -8,8 +8,9 @@ import org.springframework.stereotype.Service;
 
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import sangok.service.WebService;
+import sangok.utils.JNum;
+import sangok.utils.JStr;
 
-@SuppressWarnings("unchecked")
 @Service("webService")
 public class WebServiceImpl extends EgovAbstractServiceImpl implements WebService {
 	
@@ -22,7 +23,7 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 			return (List<Map<String, Object>>) webMapper.selectMenuBySP(params);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw e;
+			throw processException("fail.common.sql", new String[]{"selectMenu",e.getMessage()});
 		}
 	}
 
@@ -32,7 +33,7 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 			return (List<Map<String, Object>>) webMapper.selectCode(params);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw e;
+			throw processException("fail.common.sql", new String[]{"selectCode",e.getMessage()});
 		}
 	}
 	
@@ -43,7 +44,7 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 			webMapper.updateBoard(params);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw e;
+			throw processException("fail.common.sql", new String[]{"updateBoard",e.getMessage()});
 		}
 	}
 
@@ -61,7 +62,19 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw e;
+			throw processException("fail.common.sql", new String[]{"selectBoardList",e.getMessage()});
+		}
+	}
+
+	@Override
+	public Map<String, Object> selectBoardDtl(Map<String, Object> params) throws Exception {
+		try {
+			if (JStr.isStr(params.get("GROUP_ID")) == false) params.put("GROUP_ID", null);
+			if (JNum.isInteger(params.get("SEQ_NO")) == false) params.put("SEQ_NO", 0);
+			return webMapper.selectBoardDtl(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw processException("fail.common.sql", new String[]{"selectBoardDtl",e.getMessage()});
 		}
 	}
 
