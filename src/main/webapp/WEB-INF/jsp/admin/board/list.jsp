@@ -12,6 +12,9 @@
   	<!-- COMMON CSS -->
   	<link href="/css/cmm.css" rel="stylesheet">
   	
+  	<!-- GOOGLE Font -->
+  	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+  	
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	
@@ -34,7 +37,14 @@
 			width:48px;
 			height:48px;
 		}
-  	</style>
+		.material-symbols-outlined {
+		  	font-variation-settings:
+		  	'FILL' 0,
+		  	'wght' 400,
+		  	'GRAD' 0,
+		  	'opsz' 24
+		}
+	</style>
   	
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -62,7 +72,9 @@
 			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/board/list.do?CURR_PAGE=${i}&GROUP_ID=">${i}</a>
 			</c:forEach>
 			<c:if test="${PAGE_CTL.TOTAL_PAGE ge PAGE_CTL.CURR_PAGE+1}">
-			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/board/list.do?CURR_PAGE=${PAGE_CTL.CURR_PAGE+1}&GROUP_ID=">+</a>
+			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/board/list.do?CURR_PAGE=${PAGE_CTL.CURR_PAGE+1}&GROUP_ID=">
+				<span class="material-symbols-outlined">keyboard_double_arrow_right</span>
+			</a>
 			</c:if>
 		</div>
 	</div>
