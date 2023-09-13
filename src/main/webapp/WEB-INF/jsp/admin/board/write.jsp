@@ -127,6 +127,7 @@
 		    .then( editor => {
 		    	console.log('Editor was initialized');
 		    	window.editor = editor;
+		    	<c:if test="${not empty BOARD_DTL}">editor.setData('${BOARD_DTL.CONTENT}')</c:if>
 		    } )
 		    .catch( error => {
 		        console.error( error );
