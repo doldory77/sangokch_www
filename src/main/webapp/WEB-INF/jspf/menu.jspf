@@ -1,0 +1,140 @@
+<%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+	  <nav class="menu_bar">
+	    <div>Navbar</div>
+	    <div class="main_menu_wrapper d-none d-lg-flex">
+	      <div class="main_menu">
+	        <input type="radio" name="main_menu_btn" id="main_id1">
+	        <label for="main_id1">장미과</label>
+	        <nav class="sub_menu_wrapper">
+	          <div class="sub_menu">
+	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id1">
+	            <label for="main_id1_sub_id1">산딸기</label>
+	          </div>
+	          <div class="sub_menu">
+	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id2">
+	            <label for="main_id1_sub_id2">블랙베리</label>
+	          </div>
+	          <div class="sub_menu">
+	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id3">
+	            <label for="main_id1_sub_id3">복분자</label>
+	          </div>
+	        </nav>
+	      </div>
+	      <div class="main_menu">
+	        <input type="radio" name="main_menu_btn" id="main_id2">
+	        <label for="main_id2">무환자나무과</label>
+	        <nav class="sub_menu_wrapper">
+	          <div class="sub_menu">
+	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id1">
+	            <label for="main_id1_sub_id1">과라나</label>
+	          </div>
+	          <div class="sub_menu">
+	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id2">
+	            <label for="main_id1_sub_id2">리치</label>
+	          </div>
+	          <div class="sub_menu">
+	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id3">
+	            <label for="main_id1_sub_id3">람부탄</label>
+	          </div>
+	          <div class="sub_menu">
+	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id3">
+	            <label for="main_id1_sub_id3">용안</label>
+	          </div>
+	        </nav>        
+	      </div>
+	      <div class="main_menu">
+	        <input type="radio" name="main_menu_btn" id="main_id3">
+	        <label for="main_id3">뽕나무과</label>
+	        <nav class="sub_menu_wrapper">
+	          <div class="sub_menu">
+	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id1">
+	            <label for="main_id1_sub_id1">오디</label>
+	          </div>
+	          <div class="sub_menu">
+	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id2">
+	            <label for="main_id1_sub_id2">무화과</label>
+	          </div>
+	          <div class="sub_menu">
+	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id3">
+	            <label for="main_id1_sub_id3">카눈</label>
+	          </div>
+	          <div class="sub_menu">
+	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id3">
+	            <label for="main_id1_sub_id3">빵나무</label>
+	          </div>
+	        </nav>        
+	      </div>
+	    </div>
+	    <div class="mbl_main_menu_btn d-block d-lg-none">
+	      <input type="checkbox" id="menuicon">
+	      <label for="menuicon">
+	        <span></span>
+	        <span></span>
+	        <span></span>
+	      </label>      
+	    </div>
+	  </nav>
+	  <div class="mbl_side_menu">
+	    <div>
+	      <input type="radio" name="mbl_main_menu_btn" id="mbl_side_main_menu1">
+	      <label for="mbl_side_main_menu1">장미과</label>
+	      <div class="mbl_sub_menu_wrapper">
+	          <div class="mbl_sub_menu">
+	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id1_sub_id1">
+	            <label for="mbl_main_id1_sub_id1">산딸기</label>
+	          </div>
+	          <div class="mbl_sub_menu">
+	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id1_sub_id2">
+	            <label for="mbl_main_id1_sub_id2">블랙베리</label>
+	          </div>
+	          <div class="mbl_sub_menu">
+	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id1_sub_id3">
+	            <label for="mbl_main_id1_sub_id3">복분자</label>
+	          </div>
+	        </div>      
+	    </div>
+	    <div>
+	      <input type="radio" name="mbl_main_menu_btn" id="mbl_side_main_menu2">
+	      <label for="mbl_side_main_menu2">무환자나무과</label>
+	        <div class="mbl_sub_menu_wrapper">
+	          <div class="mbl_sub_menu">
+	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id2_sub_id1">
+	            <label for="mbl_main_id2_sub_id1">과라나</label>
+	          </div>
+	          <div class="mbl_sub_menu">
+	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id2_sub_id2">
+	            <label for="mbl_main_id2_sub_id2">리치</label>
+	          </div>
+	          <div class="mbl_sub_menu">
+	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id2_sub_id3">
+	            <label for="mbl_main_id2_sub_id3">람부탄</label>
+	          </div>
+	          <div class="mbl_sub_menu">
+	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id2_sub_id4">
+	            <label for="mbl_main_id2_sub_id4">용안</label>
+	          </div>
+	        </div>      
+	    </div>
+	    <div>
+	      <input type="radio" name="mbl_main_menu_btn" id="mbl_side_main_menu3">
+	      <label for="mbl_side_main_menu3">뽕나무과</label>
+	        <div class="mbl_sub_menu_wrapper">
+	          <div class="mbl_sub_menu">
+	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id3_sub_id1">
+	            <label for="mbl_main_id3_sub_id1">오디</label>
+	          </div>
+	          <div class="mbl_sub_menu">
+	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id3_sub_id2">
+	            <label for="mbl_main_id3_sub_id2">무화과</label>
+	          </div>
+	          <div class="mbl_sub_menu">
+	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id3_sub_id3">
+	            <label for="mbl_main_id3_sub_id3">카눈</label>
+	          </div>
+	          <div class="mbl_sub_menu">
+	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id3_sub_id4">
+	            <label for="mbl_main_id3_sub_id4">빵나무</label>
+	          </div>
+	        </div>      
+	    </div>    
+	  </div>
