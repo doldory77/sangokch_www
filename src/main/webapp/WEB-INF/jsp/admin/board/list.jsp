@@ -25,6 +25,7 @@
 			border:1px dotted #c2c2c2;
 			margin:2px;
 			cursor:pointer;
+			position:relative;
 		}
 		.board-frame .title {
 			font-size: 1.4rem;
@@ -48,6 +49,16 @@
 		.curr_page {
 			background-color:#c2c2c2;
 		}
+		.board-frame-background {
+			position: absolute;
+		    left: 0;
+		    top: 0;
+		    right: 0;
+		    bottom: 0;
+		    z-index: -1;
+		    background-size: cover;
+		    opacity: 0.4;
+		}
 	</style>
   	
     <!-- Required meta tags -->
@@ -61,7 +72,8 @@
 	<div class="container-fluid">
 		<div class="d-flex flex-wrap justify-content-start">
 		<c:forEach var="item" items="${BOARD_LIST}">  
-			<div class="board-frame p-1" onclick="location.href='/admin/board/write.do?GROUP_ID=${item.GROUP_ID}&SEQ_NO=${item.SEQ_NO}'">
+			<div class="board-frame p-1" onclick="location.href='/admin/board/write.do?CURR_PAGE=${PAGE_CTL.CURR_PAGE}&GROUP_ID=${item.GROUP_ID}&SEQ_NO=${item.SEQ_NO}'">
+				<div class="board-frame-background" style='background-image: url(${item.ATTR01});'></div>
 				<div><span class="sub1">${item.GROUP_NM}</span></div>
 				<div><span class="title ps-2">${item.SUBJECT}</span></div>
 				<div class="text-end"><span class="sub1">${item.REG_DT}</span></div>

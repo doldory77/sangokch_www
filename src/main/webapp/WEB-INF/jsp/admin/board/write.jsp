@@ -58,7 +58,7 @@
 		  	<div class="col-md-2 mb-2">
 	  			<select class="form-select" id="screenYn" name="SCREEN_YN">
 	  				<c:forEach var="item" items="${YNCodeList}">
-	  				<option value="${item.CODE}">${item.CODE_NM}</option>
+	  				<option value="${item.CODE}" <c:if test="${not empty BOARD_DTL && item.CODE eq BOARD_DTL.SCREEN_YN}">selected="selected"</c:if>>${item.CODE_NM}</option>
 	  				</c:forEach>
 	  			</select>
 		  	</div>
@@ -66,7 +66,7 @@
 	  			<label for="groupId">순번</label>
 	  		</div>
 	  		<div class="col-md-2 mb-2">
-	  			<input type="text" id="ordNo" name="ORD_NO" class="form-control" value="">
+	  			<input type="text" id="ordNo" name="ORD_NO" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ORD_NO : ''}">
 	  		</div>
 	  		<div class="col-md-1 mb-md-2">
 	  			<label for="groupId">사용여부</label>
@@ -74,7 +74,7 @@
 	  		<div class="col-md-2 mb-2">
 	  			<select class="form-select" id="useYn" name="USE_YN">
 	  				<c:forEach var="item" items="${YNCodeList}">
-	  				<option value="${item.CODE}">${item.CODE_NM}</option>
+	  				<option value="${item.CODE}" <c:if test="${not empty BOARD_DTL && item.CODE eq BOARD_DTL.USE_YN}">selected="selected"</c:if>>${item.CODE_NM}</option>
 	  				</c:forEach>
 	  			</select>
 	  		</div>
@@ -90,9 +90,10 @@
 		  		<input type="submit" class="btn btn-primary mt-3 mx-2" value="작성완료" />
 		  	</div>
 	  	</div>
+		  	<input type="hidden" name="CURR_PAGE" value="${not empty CURR_PAGE ? CURR_PAGE : ''}">
 		  	<input type="hidden" name="DEL_YN" value="N">
-		  	<input type="hidden" name="SEQ_NO" value="0">
-		  	<input type="hidden" name="DEPTH_NO" value="0">
+		  	<input type="hidden" name="SEQ_NO" value="${not empty BOARD_DTL ? BOARD_DTL.SEQ_NO : '0'}">
+		  	<input type="hidden" name="DEPTH_NO" value="${not empty BOARD_DTL ? BOARD_DTL.DEPTH_NO : '0.0'}">
 	  	</form>
 	  </div>
 	

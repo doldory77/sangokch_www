@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
@@ -59,9 +60,8 @@ public class WebController {
 	}
 	
 	@RequestMapping(value = "/admin/board/write.do")
-	public String boardWrite(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+	public String boardWrite(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {
 		LOGGER.debug(params + "");
-		
 		List<Map<String, Object>> groupIdList = webService.selectMenu(JMap.instance("P_MENU_GROUP", null).put("P_DEPTH_CHAR", "--").build());
 		List<Map<String, Object>> YNCodeList = webService.selectCode(JMap.instance("GRP_ID", "CD0000").build());
 		Map<String, Object> boardDtl = webService.selectBoardDtl(params);
@@ -69,6 +69,7 @@ public class WebController {
 		model.addAttribute("groupIdList", groupIdList);
 		model.addAttribute("YNCodeList", YNCodeList);
 		model.addAttribute("BOARD_DTL", boardDtl);
+		model.addAttribute("CURR_PAGE", request.getParameter("CURR_PAGE"));		
 		
 		return "admin/board/write";
 	}
@@ -84,7 +85,9 @@ public class WebController {
 		LOGGER.debug("==========> " + JStr.toStr(params.get("SEQ_NO")));
 		LOGGER.debug("==========> " + JStr.toStr(params.get("RTN_MSG")));
 		
-		return this.boardWrite(params, model);
+		
+		//return this.boardWrite(params, model, request);
+		return "redirect:/admin/board/list.do?CURR_PAGE=" + params.get("CURR_PAGE") + "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
 	}
 	
 	@RequestMapping(value = "/admin/board/list.do")
@@ -107,8 +110,9 @@ public class WebController {
 	public String imageUpload(@RequestParam Map<String, Object> params, MultipartHttpServletRequest request, ModelMap model) throws Exception {
 		String imgPath = null;
 		try {
-			final String imgRealPath = request.getSession().getServletContext().getRealPath("/").concat("/images/");
-			final String imgUrlPath = request.getContextPath().concat("/images/");
+//			final String imgRealPath = request.getSession().getServletContext().getRealPath("/").concat("/images/");
+			final String imgRealPath = "C:\\dev\\eGovFrameDev-3.10.0-64bit\\workspace\\www\\src\\main\\webapp\\images\\board\\";
+			final String imgUrlPath = request.getContextPath().concat("/images/board/");
 			List<MultipartFile> fileList = request.getFiles("upload");
 			for (MultipartFile mf : fileList) {
 				if (fileList.get(0).getSize() > 0) {

@@ -29,4 +29,12 @@ public class JStr {
 		}
 		return rtn;
 	}
+	
+	public static String ifNull(Object obj, String defStr) {
+		if (isStr(obj)) {
+			return obj.toString();
+		} else {
+			return defStr;
+		}
+	}
 }
