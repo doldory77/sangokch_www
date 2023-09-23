@@ -88,7 +88,7 @@
 			</c:if>
 			<c:if test="${1 le PAGE_CTL.CURR_PAGE-1}">
 			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/board/list.do?CURR_PAGE=${PAGE_CTL.CURR_PAGE-1}&GROUP_ID=">
-				<span class="material-symbols-outlined">keyboard_double_arrow_left</span>
+				<span class="material-symbols-outlined">chevron_left</span>
 			</a>
 			</c:if>
 			<c:forEach var="i" begin="${PAGE_CTL.BLOCK_START}" end="${PAGE_CTL.BLOCK_END}">
@@ -96,7 +96,7 @@
 			</c:forEach>
 			<c:if test="${PAGE_CTL.TOTAL_PAGE ge PAGE_CTL.CURR_PAGE+1}">
 			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/board/list.do?CURR_PAGE=${PAGE_CTL.CURR_PAGE+1}&GROUP_ID=">
-				<span class="material-symbols-outlined">keyboard_double_arrow_right</span>
+				<span class="material-symbols-outlined">chevron_right</span>
 			</a>
 			</c:if>
 			<c:if test="${PAGE_CTL.TOTAL_PAGE gt PAGE_CTL.CURR_PAGE}">

@@ -46,6 +46,9 @@ public class WebController {
 	@Autowired
 	DefaultListableBeanFactory beanFactory;
 	
+	@Autowired
+	org.springframework.context.support.MessageSourceAccessor messageSourceAccessor;
+	
 	@Resource(name = "webService")
 	private WebService webService;
 
@@ -111,7 +114,8 @@ public class WebController {
 		String imgPath = null;
 		try {
 //			final String imgRealPath = request.getSession().getServletContext().getRealPath("/").concat("/images/");
-			final String imgRealPath = "C:\\dev\\eGovFrameDev-3.10.0-64bit\\workspace\\www\\src\\main\\webapp\\images\\board\\";
+//			final String imgRealPath = "C:\\dev\\eGovFrameDev-3.10.0-64bit\\workspace\\www\\src\\main\\webapp\\images\\board\\";
+			final String imgRealPath = messageSourceAccessor.getMessage("path.image.board");
 			final String imgUrlPath = request.getContextPath().concat("/images/board/");
 			List<MultipartFile> fileList = request.getFiles("upload");
 			for (MultipartFile mf : fileList) {
