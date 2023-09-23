@@ -13,6 +13,7 @@
   </head>
   <body>
 	<div class="wrapper">
+	
   		<%@ include file="/WEB-INF/jspf/menu.jspf" %>
   		
 	</div> 	
