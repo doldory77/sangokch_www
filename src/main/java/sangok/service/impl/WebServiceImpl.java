@@ -2,6 +2,7 @@ package sangok.service.impl;
 
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +14,8 @@ import sangok.utils.JStr;
 
 @Service("webService")
 public class WebServiceImpl extends EgovAbstractServiceImpl implements WebService {
+	
+	Pattern imgPattern = Pattern.compile("\"(/images/img_.*[.].{3})\"");
 	
 	@Autowired
 	WebMapper webMapper;
@@ -41,6 +44,9 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 	public void updateBoard(Map<String, Object> params) throws Exception {
 		try {
 			//webMapper.update("updateBoard", params);
+			String stdImgPath = JStr.extractStr(imgPattern, JStr.toStr(params.get("CONTENT")));
+			params.put("ATTR01", stdImgPath);
+			
 			webMapper.updateBoard(params);
 		} catch (Exception e) {
 			e.printStackTrace();
