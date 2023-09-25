@@ -13,6 +13,20 @@
         ]]>
     </select>
     
+    <select id="selectMenuByParentId" parameterType="map" resultType="map">
+        <![CDATA[
+		SELECT MENU_ID
+			 , MENU_NM
+			 , MENU_LEVEL
+			 , ORD_NO
+			 , URL
+			 , PARENT_MENU_ID
+		 FROM H_MENU 
+		WHERE PARENT_MENU_ID = #{PARENT_MENU_ID}
+		ORDER BY ORD_NO
+        ]]>
+    </select>
+    
     <select id="selectMenuBySP" statementType="CALLABLE" parameterType="map" resultType="map">
     	{ CALL SP_GET_MENU(#{P_MENU_GROUP}, #{P_DEPTH_CHAR}) }
     </select>

@@ -55,6 +55,8 @@ public class WebController {
 	@RequestMapping(value = "/home.do")
 	public String home(HttpSession session, ModelMap model) throws Exception {
 		
+		List<Map<String, Object>> menuList = webService.selectMenuByTree();
+		model.addAttribute("MENU_LIST", menuList);
 //		for (String beanName : beanFactory.getBeanDefinitionNames()) {
 //			LOGGER.debug("class : " + beanFactory.getBean(beanName).getClass().getName());
 //		}

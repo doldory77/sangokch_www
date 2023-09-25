@@ -1,7 +1,10 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" 	   uri="http://java.sun.com/jsp/jstl/functions" %>
+
 	  <!-- Header Menu -->
 	  <nav class="menu_bar">
-	    <div>Navbar</div>
+	    <div>Navbar ${fn:length(MENU_LIST)}</div>
 	    <div class="main_menu_wrapper d-none d-lg-flex">
 	      <div class="main_menu">
 	        <input type="radio" name="main_menu_btn" id="main_id1">
@@ -75,11 +78,15 @@
 	      </label>      
 	    </div>
 	  </nav>
+	  
 	  <!-- Side Menu -->
 	  <div class="mbl_side_menu">
 	    <div>
 	      <input type="radio" name="mbl_main_menu_btn" id="mbl_side_main_menu1">
-	      <label for="mbl_side_main_menu1">장미과</label>
+	      <label for="mbl_side_main_menu1">
+	      	<span>장미과</span>
+	      	<span class="material-symbols-outlined">chevron_right</span>
+	      </label>
 	      <div class="mbl_sub_menu_wrapper">
 	          <div class="mbl_sub_menu">
 	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id1_sub_id1">
@@ -93,12 +100,15 @@
 	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id1_sub_id3">
 	            <label for="mbl_main_id1_sub_id3">복분자</label>
 	          </div>
-	        </div>      
+	      </div>      
 	    </div>
 	    <div>
 	      <input type="radio" name="mbl_main_menu_btn" id="mbl_side_main_menu2">
-	      <label for="mbl_side_main_menu2">무환자나무과</label>
-	        <div class="mbl_sub_menu_wrapper">
+	      <label for="mbl_side_main_menu2">
+	      	<span>무환자나무과</span>
+	      	<span class="material-symbols-outlined">chevron_right</span>
+	      </label>
+	      <div class="mbl_sub_menu_wrapper">
 	          <div class="mbl_sub_menu">
 	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id2_sub_id1">
 	            <label for="mbl_main_id2_sub_id1">과라나</label>
@@ -115,12 +125,15 @@
 	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id2_sub_id4">
 	            <label for="mbl_main_id2_sub_id4">용안</label>
 	          </div>
-	        </div>      
+	      </div>      
 	    </div>
 	    <div>
 	      <input type="radio" name="mbl_main_menu_btn" id="mbl_side_main_menu3">
-	      <label for="mbl_side_main_menu3">뽕나무과</label>
-	        <div class="mbl_sub_menu_wrapper">
+	      <label for="mbl_side_main_menu3">
+	      	<span>뽕나무과</span>
+	      	<span class="material-symbols-outlined">chevron_right</span>
+	      </label>
+	      <div class="mbl_sub_menu_wrapper">
 	          <div class="mbl_sub_menu">
 	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id3_sub_id1">
 	            <label for="mbl_main_id3_sub_id1">오디</label>
@@ -137,6 +150,6 @@
 	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id3_sub_id4">
 	            <label for="mbl_main_id3_sub_id4">빵나무</label>
 	          </div>
-	        </div>      
+	      </div>      
 	    </div>    
 	  </div>

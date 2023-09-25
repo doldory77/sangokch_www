@@ -10,6 +10,8 @@ public interface WebMapper {
 
 	List<Map<String, Object>> selectCode(Map<String, Object> params) throws Exception;
 	
+	List<Map<String, Object>> selectMenuByParentId(Map<String, Object> params) throws Exception;
+	
 	List<Map<String, Object>> selectMenuBySP(Map<String, Object> params) throws Exception;
 	
 	void updateBoard(Map<String, Object> params) throws Exception;

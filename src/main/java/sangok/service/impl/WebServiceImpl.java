@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import sangok.service.WebService;
+import sangok.utils.JMap;
 import sangok.utils.JNum;
 import sangok.utils.JStr;
 
@@ -24,6 +25,20 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 	public List<Map<String, Object>> selectMenu(Map<String, Object> params) throws Exception {
 		try {
 			return (List<Map<String, Object>>) webMapper.selectMenuBySP(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw processException("fail.common.sql", new String[]{"selectMenu",e.getMessage()});
+		}
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectMenuByTree() throws Exception {
+		try {
+			List<Map<String, Object>> menuLvl1 = webMapper.selectMenuByParentId(JMap.instance("PARENT_MENU_ID", "00000000").build());
+			for (Map<String, Object> tmpMap : menuLvl1) {
+				tmpMap.put("SUB_MENU", webMapper.selectMenuByParentId(JMap.instance("PARENT_MENU_ID", tmpMap.get("MENU_ID")).build()));
+			}
+			return menuLvl1;
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw processException("fail.common.sql", new String[]{"selectMenu",e.getMessage()});
