@@ -97,7 +97,7 @@ nav.menu_bar:has(input[id="menuicon"]:checked) + div.mbl_side_menu { left: 0px; 
   height: 0px;
   overflow: hidden;
   transition: all .35s;
-  background-color: rgba(0,0,0,0.1);
+  
 }
 .mbl_sub_menu_wrapper input[type='checkbox'] {
   display: none;
@@ -105,12 +105,12 @@ nav.menu_bar:has(input[id="menuicon"]:checked) + div.mbl_side_menu { left: 0px; 
 .mbl_sub_menu_wrapper input[type='checkbox'] + label {
   width: 180px;
   margin-left: 50px;
-  line-height: 32px;
-  margin-top: 20px;
+  line-height: 52px;
   cursor: pointer;
   display: block;
-  border-bottom: 2px solid #26577C  
+  border-bottom: 2px solid #26577C;
+  background-color: rgba(0,0,0,0.1);  
 }
 .mbl_side_menu input[type='radio']:checked + label + div {
-  height: auto;
+  height: calc(52px * 4);
 }

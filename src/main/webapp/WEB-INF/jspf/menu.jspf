@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+	  <!-- Header Menu -->
 	  <nav class="menu_bar">
 	    <div>Navbar</div>
 	    <div class="main_menu_wrapper d-none d-lg-flex">
@@ -74,6 +75,7 @@
 	      </label>      
 	    </div>
 	  </nav>
+	  <!-- Side Menu -->
 	  <div class="mbl_side_menu">
 	    <div>
 	      <input type="radio" name="mbl_main_menu_btn" id="mbl_side_main_menu1">
