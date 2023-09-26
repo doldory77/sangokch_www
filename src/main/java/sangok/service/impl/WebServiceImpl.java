@@ -41,7 +41,7 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 			return menuLvl1;
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw processException("fail.common.sql", new String[]{"selectMenu",e.getMessage()});
+			throw processException("fail.common.sql", new String[]{"selectMenuByTree",e.getMessage()});
 		}
 	}
 
