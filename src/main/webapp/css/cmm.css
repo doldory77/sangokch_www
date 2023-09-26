@@ -1,3 +1,23 @@
 a:hover, a:visited, a:link, a:active {
 	text-decoration: none;
 }
+.mainItem {
+	overflow: hidden;
+	border: 1px solid #c2c2c2;
+	border-radius: 5px;
+}
+.mainItem > div {
+	min-width: 280px;
+    min-height: calc(280px * 3 / 5);
+    background-color: #c2c2c2;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.mainItem > div + p {
+	margin-top: 5px;
+	padding: 0 3px;
+	min-height: 120px;
+	max-height: 150px;
+}
