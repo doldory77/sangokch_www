@@ -2,7 +2,7 @@
 
 :root {
   --menu-bar-height: 48px;
-  --menu-btn-gap: 20px;
+  --menu-btn-gap: 10px;
 }
 .wrapper {
   position: relative;
@@ -24,7 +24,7 @@
   display: none;
 }
 .main_menu_wrapper input[type='radio'] + label {
-  margin-left: var(--menu-btn-gap);
+  padding: 0 var(--menu-btn-gap);
   cursor: pointer;
 }
 .main_menu_wrapper .main_menu > input[type='radio'] + label {
