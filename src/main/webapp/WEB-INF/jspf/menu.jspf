@@ -3,8 +3,8 @@
 <%@ taglib prefix="fn" 	   uri="http://java.sun.com/jsp/jstl/functions" %>
 
 	  <!-- Header Menu -->
-	  <nav class="menu_bar">
-	    <div>Navbar ${fn:length(MENU_LIST)}</div>
+	  <nav class="menu_bar" id="menu_bar">
+	    <div>Navbar</div>
 	    <div class="main_menu_wrapper d-none d-lg-flex">
 	      <c:forEach var="mMenu" items="${MENU_LIST}" varStatus="statusM">
 	      <div class="main_menu">
@@ -57,7 +57,22 @@
 	   
 	  </div>
 	  
-	  
+	  <script>
+	  $(function() {
+		  var prevScrollTop = 0;
+		  var delta = 5;
+		  document.addEventListener("scroll", function(){
+			  var nowScrollTop = $(window).scrollTop();
+			  if (Math.abs(prevScrollTop - nowScrollTop) <= delta) return;
+			  if (nowScrollTop > prevScrollTop) {
+				  $('#menu_bar').addClass('active');
+			  } else {
+				  $('#menu_bar').removeClass('active');
+			  }
+			  prevScrollTop = nowScrollTop;
+		  })
+	  })
+	  </script>
 	  <!-- Header Menu
 	  <nav class="menu_bar">
 	    <div>Navbar ${fn:length(MENU_LIST)}</div>

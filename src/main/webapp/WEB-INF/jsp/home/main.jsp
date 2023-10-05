@@ -18,7 +18,8 @@
 	</div>
 	
 	<div class="container-md">
-		<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3">
+		<div class="mainHead pt-5">HEAD IMG</div>
+		<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 mt-5">
 			<div class="col">
 				<div class="mainItem">
 					<div>IMG1</div>
