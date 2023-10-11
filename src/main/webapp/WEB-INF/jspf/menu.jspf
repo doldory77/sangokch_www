@@ -2,6 +2,22 @@
 <%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" 	   uri="http://java.sun.com/jsp/jstl/functions" %>
 
+	  <!-- Search Bar -->
+	  <div class="search_bar">
+	  	<div class="me-1">
+	  		<input type="checkbox" id="search_btn">
+	  		<label for="search_btn" class="d-flex justify-content-center  align-items-center">
+	  			<span class="fs-2 material-symbols-outlined">frame_inspect</span>
+	  		</label>
+	  	</div>
+	  	<div>
+		  	<form>
+		  		<input type="text">
+		  		<input type="submit" value="검색">
+		  	</form>
+	  	</div>
+	  </div>
+	  
 	  <!-- Header Menu -->
 	  <nav class="menu_bar" id="menu_bar">
 	    <div>Navbar</div>
@@ -57,6 +73,16 @@
 	   
 	  </div>
 	  
+	  <div class="popup-layer" id="popup">
+	  	<div class="popup-body">
+	  		<h3 id="popupTitle">TITLE</h3>
+	  		<p id="popupContent">전직대통령의 신분과 예우에 관하여는 법률로 정한다. 모든 국민은 종교의 자유를 가진다. 국회의원은 법률이 정하는 직을 겸할 수 없다. 혼인과 가족생활은 개인의 존엄과 양성의 평등을 기초로 성립되고 유지되어야 하며, 국가는 이를 보장한다.</p>
+	  		<div class="">
+		  		<a href="javascript: togglePopup();" class="btn btn-primary position-absolute bottom-0 start-50 translate-middle-x mb-3">닫기</a>
+	  		</div>
+	  	</div>
+	  </div>
+	  
 	  <script>
 	  $(function() {
 		  var prevScrollTop = 0;
@@ -72,155 +98,15 @@
 			  prevScrollTop = nowScrollTop;
 		  })
 	  })
-	  </script>
-	  <!-- Header Menu
-	  <nav class="menu_bar">
-	    <div>Navbar ${fn:length(MENU_LIST)}</div>
-	    <div class="main_menu_wrapper d-none d-lg-flex">
-	      <div class="main_menu">
-	        <input type="radio" name="main_menu_btn" id="main_id1">
-	        <label for="main_id1">장미과</label>
-	        <nav class="sub_menu_wrapper">
-	          <div class="sub_menu">
-	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id1">
-	            <label for="main_id1_sub_id1">산딸기</label>
-	          </div>
-	          <div class="sub_menu">
-	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id2">
-	            <label for="main_id1_sub_id2">블랙베리</label>
-	          </div>
-	          <div class="sub_menu">
-	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id3">
-	            <label for="main_id1_sub_id3">복분자</label>
-	          </div>
-	        </nav>
-	      </div>
-	      <div class="main_menu">
-	        <input type="radio" name="main_menu_btn" id="main_id2">
-	        <label for="main_id2">무환자나무과</label>
-	        <nav class="sub_menu_wrapper">
-	          <div class="sub_menu">
-	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id1">
-	            <label for="main_id1_sub_id1">과라나</label>
-	          </div>
-	          <div class="sub_menu">
-	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id2">
-	            <label for="main_id1_sub_id2">리치</label>
-	          </div>
-	          <div class="sub_menu">
-	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id3">
-	            <label for="main_id1_sub_id3">람부탄</label>
-	          </div>
-	          <div class="sub_menu">
-	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id3">
-	            <label for="main_id1_sub_id3">용안</label>
-	          </div>
-	        </nav>        
-	      </div>
-	      <div class="main_menu">
-	        <input type="radio" name="main_menu_btn" id="main_id3">
-	        <label for="main_id3">뽕나무과</label>
-	        <nav class="sub_menu_wrapper">
-	          <div class="sub_menu">
-	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id1">
-	            <label for="main_id1_sub_id1">오디</label>
-	          </div>
-	          <div class="sub_menu">
-	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id2">
-	            <label for="main_id1_sub_id2">무화과</label>
-	          </div>
-	          <div class="sub_menu">
-	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id3">
-	            <label for="main_id1_sub_id3">카눈</label>
-	          </div>
-	          <div class="sub_menu">
-	            <input type="radio" name="sub_menu_btn" id="main_id1_sub_id3">
-	            <label for="main_id1_sub_id3">빵나무</label>
-	          </div>
-	        </nav>        
-	      </div>
-	    </div>
-	    <div class="mbl_main_menu_btn d-block d-lg-none">
-	      <input type="checkbox" id="menuicon">
-	      <label for="menuicon">
-	        <span></span>
-	        <span></span>
-	        <span></span>
-	      </label>      
-	    </div>
-	  </nav> -->	  
 	  
-	  <!-- Side Menu
-	  <div class="mbl_side_menu">
-	    <div>
-	      <input type="radio" name="mbl_main_menu_btn" id="mbl_side_main_menu1">
-	      <label for="mbl_side_main_menu1">
-	      	<span>장미과</span>
-	      	<span class="material-symbols-outlined">chevron_right</span>
-	      </label>
-	      <div class="mbl_sub_menu_wrapper">
-	          <div class="mbl_sub_menu">
-	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id1_sub_id1">
-	            <label for="mbl_main_id1_sub_id1">산딸기</label>
-	          </div>
-	          <div class="mbl_sub_menu">
-	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id1_sub_id2">
-	            <label for="mbl_main_id1_sub_id2">블랙베리</label>
-	          </div>
-	          <div class="mbl_sub_menu">
-	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id1_sub_id3">
-	            <label for="mbl_main_id1_sub_id3">복분자</label>
-	          </div>
-	      </div>      
-	    </div>
-	    <div>
-	      <input type="radio" name="mbl_main_menu_btn" id="mbl_side_main_menu2">
-	      <label for="mbl_side_main_menu2">
-	      	<span>무환자나무과</span>
-	      	<span class="material-symbols-outlined">chevron_right</span>
-	      </label>
-	      <div class="mbl_sub_menu_wrapper">
-	          <div class="mbl_sub_menu">
-	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id2_sub_id1">
-	            <label for="mbl_main_id2_sub_id1">과라나</label>
-	          </div>
-	          <div class="mbl_sub_menu">
-	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id2_sub_id2">
-	            <label for="mbl_main_id2_sub_id2">리치</label>
-	          </div>
-	          <div class="mbl_sub_menu">
-	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id2_sub_id3">
-	            <label for="mbl_main_id2_sub_id3">람부탄</label>
-	          </div>
-	          <div class="mbl_sub_menu">
-	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id2_sub_id4">
-	            <label for="mbl_main_id2_sub_id4">용안</label>
-	          </div>
-	      </div>      
-	    </div>
-	    <div>
-	      <input type="radio" name="mbl_main_menu_btn" id="mbl_side_main_menu3">
-	      <label for="mbl_side_main_menu3">
-	      	<span>뽕나무과</span>
-	      	<span class="material-symbols-outlined">chevron_right</span>
-	      </label>
-	      <div class="mbl_sub_menu_wrapper">
-	          <div class="mbl_sub_menu">
-	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id3_sub_id1">
-	            <label for="mbl_main_id3_sub_id1">오디</label>
-	          </div>
-	          <div class="mbl_sub_menu">
-	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id3_sub_id2">
-	            <label for="mbl_main_id3_sub_id2">무화과</label>
-	          </div>
-	          <div class="mbl_sub_menu">
-	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id3_sub_id3">
-	            <label for="mbl_main_id3_sub_id3">카눈</label>
-	          </div>
-	          <div class="mbl_sub_menu">
-	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id3_sub_id4">
-	            <label for="mbl_main_id3_sub_id4">빵나무</label>
-	          </div>
-	      </div>      
-	    </div>    
-	  </div> -->	  
+	  function togglePopup(title, msg) {
+		  var $pop = $('#popup');
+		  if ($pop.css('display') == 'flex') {
+			  $pop.css('display', 'none');
+		  } else {
+			  if (title) $('#popupTitle').text(title);
+			  if (msg) $('#popupContent').text(msg);
+			  $pop.css('display', 'flex');
+		  }
+	  }
+	  </script>

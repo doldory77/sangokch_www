@@ -18,6 +18,9 @@
   			max-width: 800px;
   			margin: 0 auto;
   		}*/
+  		.ck-editor__editable {
+  			min-height: 250px; 
+  		}
   	</style>
   	
     <!-- Required meta tags -->
@@ -81,7 +84,13 @@
 	  	</div>
 	  	<div class="row">
 	  		<div class="col form-group">
-	  			<label for="editor">내용</label>
+	  			<label for="editor" class="d-flex justify-content-between">
+	  				<span>내용</span>
+	  				<span style="font-size:0.6rem;">
+		  				<span>그룹ID : ${not empty BOARD_DTL ? BOARD_DTL.GROUP_ID : ''}</span>
+		  				<span>/ 일련번호 : ${not empty BOARD_DTL ? BOARD_DTL.SEQ_NO : ''}</span>
+	  				</span>
+	  			</label>
 	  			<textarea id="editor" name="CONTENT" class="form-control"></textarea>
 	  		</div>
 	  	</div>

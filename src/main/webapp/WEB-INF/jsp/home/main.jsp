@@ -17,10 +17,14 @@
   		<%@ include file="/WEB-INF/jspf/menu.jspf" %>
 	</div>
 	
+	<div class="container-fluid pt-5 px-0">
+		<!-- <div class="mainHead">HEAD IMG</div> -->
+		<c:out value="${MAIN10.CONTENT}" escapeXml="false"></c:out>
+	</div>
 	<div class="container-md">
-		<div class="mainHead pt-5">HEAD IMG</div>
-		<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 mt-5">
-			<div class="col">
+		<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 mt-4">
+			<c:out value="${MAIN11.CONTENT}" escapeXml="false"></c:out>
+			<!-- <div class="col">
 				<div class="mainItem">
 					<div>IMG1</div>
 					<p>저작자·발명가·과학기술자와 예술가의 권리는 법률로써 보호한다. 모든 국민은 능력에 따라 균등하게 교육을 받을 권리를 가진다. 국회는 헌법개정안이 공고된 날로부터 60일 이내에 의결하여야 하며, 국회의 의결은 재적의원 3분의 2 이상의 찬성을 얻어야 한다.</p>
@@ -37,7 +41,7 @@
 					<div>IMG3</div>
 					<p>전직대통령의 신분과 예우에 관하여는 법률로 정한다. 모든 국민은 종교의 자유를 가진다. 국회의원은 법률이 정하는 직을 겸할 수 없다. 혼인과 가족생활은 개인의 존엄과 양성의 평등을 기초로 성립되고 유지되어야 하며, 국가는 이를 보장한다.</p>
 				</div>
-			</div>
+			</div> -->
 		</div>
 	</div>
 	

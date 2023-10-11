@@ -60,8 +60,13 @@ public class WebController {
 		if (menuList == null) {
 			menuList = webService.selectMenuByTree();
 		}
-//		List<Map<String, Object>> menuList = webService.selectMenuByTree();
+		Map<String, Object> MAIN10 = webService.selectBoardDtl(JMap.instance("GROUP_ID", "A0000000").put("SEQ_NO", 10).build());
+		Map<String, Object> MAIN11 = webService.selectBoardDtl(JMap.instance("GROUP_ID", "A0000000").put("SEQ_NO", 11).build());
+		
 		model.addAttribute("MENU_LIST", menuList);
+		model.addAttribute("MAIN10", MAIN10);
+		model.addAttribute("MAIN11", MAIN11);
+		
 //		for (String beanName : beanFactory.getBeanDefinitionNames()) {
 //			LOGGER.debug("class : " + beanFactory.getBean(beanName).getClass().getName());
 //		}

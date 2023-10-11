@@ -7,6 +7,53 @@
 .wrapper {
   position: relative;
 }
+.search_bar {
+	position: fixed;
+    top: 82px;
+    right: -360px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 5px;
+    transition: all .35s;
+}
+.search_bar input[type='checkbox'] {
+	display: none;
+}
+.search_bar input[type='text'] {
+	width: 300px;
+}
+.search_bar:has(input[type='checkbox']:checked) {
+	right: 0px;
+} 
+.popup-layer {
+	display: none;
+	height: 100vh;
+    width: 100vw;
+    position: fixed;
+    background: rgba(0,0,0,0.3);
+    justify-content: center;
+    align-items: center;	
+}
+
+.popup-body {
+	position: relative;
+	width: 50%;
+    height: 50%;
+    min-width: 420px;
+    background-color: #FAF1E4;
+    border-radius: 8px;
+    padding:10px;
+    box-shadow: 4.0px 8.0px 8.0px hsl(0deg 0% 0% / 0.38);	
+}
+
+.popup-body p {
+	border: 1px solid darkgray;
+    height: 350px;
+    padding: 2px;
+    overflow-y: auto;
+}
+
 .menu_bar {
   background-color: #071952;
   color: #F2F7A1;
