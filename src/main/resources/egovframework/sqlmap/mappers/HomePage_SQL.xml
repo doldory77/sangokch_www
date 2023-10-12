@@ -4,13 +4,7 @@
 
 
     <select id="selectCode" parameterType="map" resultType="map">
-        <![CDATA[
-		SELECT CODE
-			 , CODE_NM 
-		  FROM H_CODE
-		 WHERE GROUP_ID = #{GRP_ID}
-		   AND USE_YN = 'Y'
-        ]]>
+		{ CALL SP_GET_CODE(#{GRP_ID}, NULL, NULL) }
     </select>
     
     <select id="selectMenuByParentId" parameterType="map" resultType="map">

@@ -74,6 +74,13 @@ public class WebController {
 		return "home/main";
 	}
 	
+	@RequestMapping(value = "/admin/code/mng.do")
+	public String codeMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		
+		return "admin/code/mng";
+	}
+	
 	@RequestMapping(value = "/admin/board/write.do")
 	public String boardWrite(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {
 		LOGGER.debug(params + "");
