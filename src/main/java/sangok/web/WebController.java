@@ -74,11 +74,13 @@ public class WebController {
 		return "home/main";
 	}
 	
-	@RequestMapping(value = "/admin/code/mng.do")
-	public String codeMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+	@RequestMapping(value = "/admin/code/groupMng.do")
+	public String codeGroupMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
+		List<Map<String, Object>> GroupList = webService.selectCodeGroup(null);
+		model.addAttribute("CODE_GROUP", GroupList);
 		
-		return "admin/code/mng";
+		return "admin/code/groupMng";
 	}
 	
 	@RequestMapping(value = "/admin/board/write.do")

@@ -56,6 +56,16 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 	}
 	
 	@Override
+	public List<Map<String, Object>> selectCodeGroup(Map<String, Object> params) throws Exception {
+		try {
+			return (List<Map<String, Object>>) webMapper.selectCodeGroup(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw processException("fail.common.sql", new String[]{"selectCodeGroup",e.getMessage()});
+		}
+	}
+	
+	@Override
 	public void updateBoard(Map<String, Object> params) throws Exception {
 		try {
 			//webMapper.update("updateBoard", params);

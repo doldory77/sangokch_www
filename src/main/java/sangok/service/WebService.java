@@ -11,6 +11,8 @@ public interface WebService {
 	
 	List<Map<String, Object>> selectCode(Map<String, Object> params) throws Exception;
 	
+	List<Map<String, Object>> selectCodeGroup(Map<String, Object> params) throws Exception;
+	
 	void updateBoard(Map<String, Object> params) throws Exception;
 	
 	List<Map<String, Object>> selectBoardList(Map<String, Object> params) throws Exception;
