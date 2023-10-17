@@ -31,7 +31,7 @@
 					<input type="text" name="CODE_NM" class="form-control" id="codeNm">
 				</div>
 				<div class="mb-3">
-					<label for="useYn" class="form-label">코드명</label>
+					<label for="useYn" class="form-label">사용여부</label>
 					<select class="form-select" name="USE_YN" id="useYn">
 						<option value="Y">Y</option>
 						<option value="N">N</option>
@@ -59,7 +59,7 @@
 					<th scope="row">${status.count}</th>
 					<td>${code.GROUP_ID}</td>
 					<td>${code.GROUP_NM}</td>
-					<td>${code.CODE}</td>
+					<td><a href="javascript:false;" onclick="selectCode(this);">${code.CODE}</a></td>
 					<td>${code.CODE_NM}</td>
 					<td>${code.USE_YN}</td>
 				</tr>
@@ -69,4 +69,14 @@
 		
 	</div>
 </body>
+	<script>
+		var selectCode = function(that) {
+			var v_code = $(that).text();
+			var $tr = $(that).closest('tr');
+			//alert(v_groupId + '/' + $tr.children('td:eq(1)').text());
+			$('#code').val(v_code);
+			$('#codeNm').val($tr.children('td:eq(3)').text());
+			$('#useYn').val($tr.children('td:eq(4)').text()).prop('selected', true);
+		}
+	</script>
 </html>
