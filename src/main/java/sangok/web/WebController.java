@@ -75,7 +75,7 @@ public class WebController {
 	}
 	
 	@RequestMapping(value = "/admin/code/groupMng.do")
-	public String codeGroupMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+	public String groupMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
 		List<Map<String, Object>> GroupList = webService.selectCodeGroup(null);
 		model.addAttribute("CODE_GROUP", GroupList);
@@ -83,8 +83,19 @@ public class WebController {
 		return "admin/code/groupMng";
 	}
 	
+	@RequestMapping(value = "/admin/code/codeMng.do")
+	public String codeMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		List<Map<String, Object>> codeList = webService.selectCode(params);
+		
+		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
+		model.addAttribute("CODE", codeList);
+		
+		return "admin/code/codeMng";
+	}
+	
 	@RequestMapping(value = "/admin/code/saveCodeGroup.do")
-	public String saveCodeGroup(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+	public String saveGroup(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
 		params.put("RTN_MSG", "SUCCESS");
 		LOGGER.debug("==========> " + params);
@@ -93,11 +104,21 @@ public class WebController {
 		return "redirect:/admin/code/groupMng.do";
 	}
 	
+	@RequestMapping(value = "/admin/code/saveCode.do")
+	public String saveCode(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		params.put("RTN_MSG", "SUCCESS");
+		LOGGER.debug("==========> " + params);
+		webService.updateCode(params);
+		
+		return "redirect:/admin/code/codeMng.do?GROUP_ID="+params.get("GROUP_ID");
+	}
+	
 	@RequestMapping(value = "/admin/board/write.do")
 	public String boardWrite(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {
 		LOGGER.debug(params + "");
 		List<Map<String, Object>> groupIdList = webService.selectMenu(JMap.instance("P_MENU_GROUP", null).put("P_DEPTH_CHAR", "--").build());
-		List<Map<String, Object>> YNCodeList = webService.selectCode(JMap.instance("GRP_ID", "CD0000").build());
+		List<Map<String, Object>> YNCodeList = webService.selectCode(JMap.instance("GROUP_ID", "CD0000").build());
 		Map<String, Object> boardDtl = webService.selectBoardDtl(params);
 		LOGGER.debug("BOARD_DTL === " + boardDtl);
 		model.addAttribute("groupIdList", groupIdList);

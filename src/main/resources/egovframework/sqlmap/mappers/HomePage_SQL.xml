@@ -12,9 +12,18 @@
     		, #{GROUP_ID, mode=IN, jdbcType=VARCHAR}
     		, #{GROUP_NM, mode=IN, jdbcType=VARCHAR}) }
     </update>
+    
+    <update id="updateCode" statementType="CALLABLE" parameterType="map">
+    	{ CALL SP_MERGE_CODE(
+    		#{RTN_MSG, mode=INOUT, jdbcType=VARCHAR}
+    		, #{GROUP_ID, mode=IN, jdbcType=VARCHAR}
+    		, #{CODE, mode=IN, jdbcType=VARCHAR}
+    		, #{CODE_NM, mode=IN, jdbcType=VARCHAR}
+    		, #{USE_YN, mode=IN, jdbcType=VARCHAR}) }
+    </update>
 
     <select id="selectCode" parameterType="map" resultType="map">
-		{ CALL SP_GET_CODE(#{GRP_ID}, NULL, NULL) }
+		{ CALL SP_GET_CODE(#{GROUP_ID}, NULL, NULL) }
     </select>
     
     <select id="selectMenuByParentId" parameterType="map" resultType="map">

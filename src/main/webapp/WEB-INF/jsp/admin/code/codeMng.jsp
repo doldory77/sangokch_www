@@ -9,58 +9,64 @@
   <head>
 	<%@ include file="/WEB-INF/jspf/head.jspf" %>
 	<title>Insert title here</title>
-	
 </head>
 <body>
 	<div class="container-md">
-		<form method="POST" action="/admin/code/saveCodeGroup.do">
+		
+		<form method="POST" action="/admin/code/saveCode.do">
 			<fieldset>
-				<legend>그룹코드 등록</legend>
+				<legend>세부코드 등록</legend>
 				<div class="mb-3">
 					<label for="groupId" class="form-label">그룹코드</label>
-					<input type="text" name="GROUP_ID" class="form-control" id="groupId">
+					<input type="text" name="GROUP_ID" readonly class="form-control-plaintext" id="groupId" value="${GROUP_ID}">
 					<div class="form-text">세부코드를 구분하는 그룹코드입니다.(예: )</div>
 				</div>
 				<div class="mb-3">
-					<label for="groupNm" class="form-label">그룹코드명</label>
-					<input type="text" name="GROUP_NM" class="form-control" id="groupNm">
+					<label for="code" class="form-label">코드</label>
+					<input type="text" name="CODE" class="form-control" id="code">
+					<div class="form-text">세부코드</div>
+				</div>
+				<div class="mb-3">
+					<label for="codeNm" class="form-label">코드명</label>
+					<input type="text" name="CODE_NM" class="form-control" id="codeNm">
+				</div>
+				<div class="mb-3">
+					<label for="useYn" class="form-label">코드명</label>
+					<select class="form-select" name="USE_YN" id="useYn">
+						<option value="Y">Y</option>
+						<option value="N">N</option>
+					</select>
 				</div>
 				<button type="submit" class="btn btn-primary">생성</button>
 			</fieldset>
 		</form>
 		
 		<table class="table caption-top mt-4">
-			<caption>그룹코드목록</caption>
+			<caption>세부코드목록</caption>
 			<thead>
 				<tr>
 					<th scope="col">#</th>
 					<th scope="col">그룸코드ID</th>
 					<th scope="col">그룹코드명</th>
-					<th scope="col"></th>
+					<th scope="col">세부코드</th>
+					<th scope="col">세부코드명</th>
+					<th scope="col">사용여부</th>
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="group" items="${CODE_GROUP}" varStatus="status">
+				<c:forEach var="code" items="${CODE}" varStatus="status">
 				<tr>
 					<th scope="row">${status.count}</th>
-					<td><a href="javascript:false;" onclick="selectGroup(this);">${group.GROUP_ID}</a></td>
-					<td>${group.GROUP_NM}</td>
-					<td><a class="btn btn-secondary btn-sm" href="/admin/code/codeMng.do?GROUP_ID=${group.GROUP_ID}">상세</a></td>
+					<td>${code.GROUP_ID}</td>
+					<td>${code.GROUP_NM}</td>
+					<td>${code.CODE}</td>
+					<td>${code.CODE_NM}</td>
+					<td>${code.USE_YN}</td>
 				</tr>
 				</c:forEach>
 			</tbody>
 		</table>
 		
 	</div>
-	
 </body>
-	<script>
-		var selectGroup = function(that) {
-			var v_groupId = $(that).text();
-			var $tr = $(that).closest('tr');
-			//alert(v_groupId + '/' + $tr.children('td:eq(1)').text());
-			$('#groupId').val(v_groupId);
-			$('#groupNm').val($tr.children('td:eq(1)').text());
-		}
-	</script>
 </html>
