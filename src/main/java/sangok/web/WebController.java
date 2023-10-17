@@ -83,6 +83,16 @@ public class WebController {
 		return "admin/code/groupMng";
 	}
 	
+	@RequestMapping(value = "/admin/code/saveCodeGroup.do")
+	public String saveCodeGroup(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		params.put("RTN_MSG", "SUCCESS");
+		LOGGER.debug("==========> " + params);
+		webService.updateCodeGroup(params);
+		
+		return "redirect:/admin/code/groupMng.do";
+	}
+	
 	@RequestMapping(value = "/admin/board/write.do")
 	public String boardWrite(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {
 		LOGGER.debug(params + "");

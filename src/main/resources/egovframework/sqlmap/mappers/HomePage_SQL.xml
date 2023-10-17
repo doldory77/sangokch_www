@@ -5,6 +5,13 @@
 	<select id="selectCodeGroup" parameterType="map" resultType="map">
 		{ CALL SP_GET_CODE_GROUP() }
     </select>
+    
+    <update id="updateCodeGroup" statementType="CALLABLE" parameterType="map">
+    	{ CALL SP_MERGE_CODE_GROUP(
+    		#{RTN_MSG, mode=INOUT, jdbcType=VARCHAR}
+    		, #{GROUP_ID, mode=IN, jdbcType=VARCHAR}
+    		, #{GROUP_NM, mode=IN, jdbcType=VARCHAR}) }
+    </update>
 
     <select id="selectCode" parameterType="map" resultType="map">
 		{ CALL SP_GET_CODE(#{GRP_ID}, NULL, NULL) }

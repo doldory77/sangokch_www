@@ -18,6 +18,8 @@ public interface WebMapper {
 	
 	void updateBoard(Map<String, Object> params) throws Exception;
 	
+	void updateCodeGroup(Map<String, Object> params) throws Exception;
+	
 	List<Map<String, Object>> selectBoardList(Map<String, Object> params) throws Exception;
 	
 	Map<String, Object> selectBoardDtl(Map<String, Object> params) throws Exception;

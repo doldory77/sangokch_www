@@ -23,26 +23,41 @@
 </head>
 <body>
 	<div class="container-md">
-		<form action="" method="POST">
+		<form method="POST" action="/admin/code/saveCodeGroup.do">
 			<fieldset>
 				<legend>그룹코드 등록</legend>
 				<div class="mb-3">
-					<label for="" class="form-label">그룹코드</label>
-					<input type="text" class="form-control" id="">
+					<label for="groupId" class="form-label">그룹코드</label>
+					<input type="text" name="GROUP_ID" class="form-control" id="groupId">
 					<div class="form-text">세부코드를 구분하는 그룹코드입니다.(예: )</div>
 				</div>
 				<div class="mb-3">
-					<label for="" class="form-label">그룹코드명</label>
-					<input type="text" class="form-control" id="">
+					<label for="groupNm" class="form-label">그룹코드명</label>
+					<input type="text" name="GROUP_NM" class="form-control" id="groupNm">
 				</div>
 				<button type="submit" class="btn btn-primary">생성</button>
 			</fieldset>
 		</form>
 		
-		<div class="row row-cols-2">
-			<div class="col">AB000000</div>
-			<div class="col">여부코드</div>
-		</div>
+		<table class="table caption-top mt-4">
+			<caption>그룹코드목록</caption>
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">그룸코드ID</th>
+					<th scope="col">그룹코드명</th>
+				</tr>
+			</thead>
+			<tbody>
+				<c:forEach var="group" items="${CODE_GROUP}" varStatus="status">
+				<tr>
+					<th scope="row">${status.count}</th>
+					<td>${group.GROUP_ID}</td>
+					<td>${group.GROUP_NM}</td>
+				</tr>
+				</c:forEach>
+			</tbody>
+		</table>
 		
 	</div>
 </body>
