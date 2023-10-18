@@ -1,6 +1,7 @@
 package sangok.utils;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class JMap {
 
@@ -22,5 +23,10 @@ public class JMap {
 	public static JMap instance(String key, Object item) {
 		JMap jMap = new JMap();
 		return jMap.put(key, item);
+	}
+	
+	public static Map<String, Object> replaceFirst(Map<String, Object> refMap, String key, String target, String replacement) {
+		refMap.put(key, refMap.get(key).toString().replaceFirst(target, replacement));
+		return refMap;
 	}
 }

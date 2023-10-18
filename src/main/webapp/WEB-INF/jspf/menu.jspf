@@ -7,7 +7,7 @@
 	  	<div class="me-1">
 	  		<input type="checkbox" id="search_btn">
 	  		<label for="search_btn" class="d-flex justify-content-center  align-items-center">
-	  			<span class="fs-2 material-symbols-outlined">frame_inspect</span>
+	  			<span style="font-size:32px;" class="material-symbols-outlined">frame_inspect</span>
 	  		</label>
 	  	</div>
 	  	<div>

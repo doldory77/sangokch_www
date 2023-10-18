@@ -19,11 +19,11 @@
 	
 	<div class="container-fluid pt-5 px-0">
 		<!-- <div class="mainHead">HEAD IMG</div> -->
-		<c:out value="${MAIN10.CONTENT}" escapeXml="false"></c:out>
+		<c:out value="${MAIN01.CONTENT}" escapeXml="false"></c:out>
 	</div>
 	<div class="container-md">
 		<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 mt-4">
-			<c:out value="${MAIN11.CONTENT}" escapeXml="false"></c:out>
+			<c:out value="${MAIN02.CONTENT}" escapeXml="false"></c:out>
 			<!-- <div class="col">
 				<div class="mainItem">
 					<div>IMG1</div>

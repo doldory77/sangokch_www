@@ -60,12 +60,12 @@ public class WebController {
 		if (menuList == null) {
 			menuList = webService.selectMenuByTree();
 		}
-		Map<String, Object> MAIN10 = webService.selectBoardDtl2(JMap.instance("TAG_CD", "01").build());
-		Map<String, Object> MAIN11 = webService.selectBoardDtl2(JMap.instance("TAG_CD", "02").build());
+		Map<String, Object> MAIN01 = webService.selectBoardDtl2(JMap.instance("TAG_CD", "01").build());
+		Map<String, Object> MAIN02 = webService.selectBoardDtl2(JMap.instance("TAG_CD", "02").build());
 		
 		model.addAttribute("MENU_LIST", menuList);
-		model.addAttribute("MAIN10", MAIN10);
-		model.addAttribute("MAIN11", MAIN11);
+		model.addAttribute("MAIN01", JMap.replaceFirst(MAIN01, "CONTENT", "<h1>.+</h1>", ""));
+		model.addAttribute("MAIN02", JMap.replaceFirst(MAIN02, "CONTENT", "<h1>.+</h1>", ""));
 		
 //		for (String beanName : beanFactory.getBeanDefinitionNames()) {
 //			LOGGER.debug("class : " + beanFactory.getBean(beanName).getClass().getName());
