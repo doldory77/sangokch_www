@@ -6,9 +6,9 @@
 
 <!doctype html>
 <html lang="ko">
-  <head>
+<head>
 	<%@ include file="/WEB-INF/jspf/head.jspf" %>
-	<title>Insert title here</title>
+	<title>코드관리</title>
 </head>
 <body>
 	<div class="container-md">
@@ -37,7 +37,7 @@
 						<option value="N">N</option>
 					</select>
 				</div>
-				<button type="submit" class="btn btn-primary">생성</button>
+				<div class="text-end"><button type="submit" class="btn btn-primary">생성(수정)</button></div>
 			</fieldset>
 		</form>
 		

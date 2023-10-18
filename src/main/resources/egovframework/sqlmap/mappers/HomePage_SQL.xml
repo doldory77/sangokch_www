@@ -58,6 +58,7 @@
 				, #{ORD_NO, mode=IN, jdbcType=INTEGER}
 				, #{USE_YN, mode=IN, jdbcType=VARCHAR}
 				, #{USER_ID, mode=IN, jdbcType=VARCHAR}
+				, #{TAG_CD, mode=IN, jdbcType=VARCHAR}
 				, #{ATTR01, mode=IN, jdbcType=VARCHAR}
 			) 
 		} 

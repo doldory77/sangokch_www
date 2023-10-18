@@ -6,9 +6,9 @@
 
 <!doctype html>
 <html lang="ko">
-  <head>
+<head>
 	<%@ include file="/WEB-INF/jspf/head.jspf" %>
-	<title>Insert title here</title>
+	<title>코드그룹관리</title>
 	
 </head>
 <body>
@@ -25,7 +25,7 @@
 					<label for="groupNm" class="form-label">그룹코드명</label>
 					<input type="text" name="GROUP_NM" class="form-control" id="groupNm">
 				</div>
-				<button type="submit" class="btn btn-primary">생성</button>
+				<div class="text-end"><button type="submit" class="btn btn-primary">생성(수정)</button></div>
 			</fieldset>
 		</form>
 		
