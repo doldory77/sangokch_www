@@ -32,7 +32,7 @@
 		<table class="table caption-top mt-4">
 			<caption>그룹코드목록</caption>
 			<thead>
-				<tr>
+				<tr style="background-color:#F3F0CA">
 					<th scope="col">#</th>
 					<th scope="col">그룸코드ID</th>
 					<th scope="col">그룹코드명</th>

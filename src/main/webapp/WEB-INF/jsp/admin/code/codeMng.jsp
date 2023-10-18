@@ -18,7 +18,10 @@
 				<legend>세부코드 등록</legend>
 				<div class="mb-3">
 					<label for="groupId" class="form-label">그룹코드</label>
-					<input type="text" name="GROUP_ID" readonly class="form-control-plaintext" id="groupId" value="${GROUP_ID}">
+					<div>
+						<input style="display:inline-block; width:auto" type="text" name="GROUP_ID" readonly class="form-control-plaintext" id="groupId" value="${GROUP_ID}">
+						<a href="/admin/code/groupMng.do" class="btn-sm btn-secondary">코드그룹으로 이동</a>
+					</div>
 					<div class="form-text">세부코드를 구분하는 그룹코드입니다.(예: )</div>
 				</div>
 				<div class="mb-3">
@@ -44,7 +47,7 @@
 		<table class="table caption-top mt-4">
 			<caption>세부코드목록</caption>
 			<thead>
-				<tr>
+				<tr style="background-color:#F3F0CA">
 					<th scope="col">#</th>
 					<th scope="col">그룸코드ID</th>
 					<th scope="col">그룹코드명</th>

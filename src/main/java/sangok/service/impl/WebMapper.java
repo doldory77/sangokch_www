@@ -25,5 +25,7 @@ public interface WebMapper {
 	List<Map<String, Object>> selectBoardList(Map<String, Object> params) throws Exception;
 	
 	Map<String, Object> selectBoardDtl(Map<String, Object> params) throws Exception;
+	
+	Map<String, Object> selectBoardDtl2(Map<String, Object> params) throws Exception;
 
 }

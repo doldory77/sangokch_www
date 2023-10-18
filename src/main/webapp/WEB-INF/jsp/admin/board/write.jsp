@@ -82,8 +82,8 @@
 			  		</div>
 			  		<div class="col-md-5">
 			  			<select class="form-select" id="useYn" name="TAG_CD">
-			  				<c:forEach var="item" items="${YNCodeList}">
-			  				<option value="${item.CODE}" <c:if test="${not empty BOARD_DTL && item.CODE eq BOARD_DTL.USE_YN}">selected="selected"</c:if>>${item.CODE_NM}</option>
+			  				<c:forEach var="item" items="${TagCodeList}">
+			  				<option value="${item.CODE}" <c:if test="${not empty BOARD_DTL && item.CODE eq BOARD_DTL.TAG_CD}">selected="selected"</c:if>>${item.CODE_NM}</option>
 			  				</c:forEach>
 			  			</select>
 			  		</div>

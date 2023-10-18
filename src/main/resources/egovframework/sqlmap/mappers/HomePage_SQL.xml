@@ -81,4 +81,8 @@
 	<select id="selectBoardDtl" statementType="CALLABLE" parameterType="map" resultType="map">
 		{ CALL SP_GET_BOARD_DTL(#{GROUP_ID}, #{SEQ_NO}) }
 	</select>
+	
+	<select id="selectBoardDtl2" statementType="CALLABLE" parameterType="map" resultType="map">
+		{ CALL SP_GET_BOARD_DTL2(#{TAG_CD}) }
+	</select>
 </mapper>

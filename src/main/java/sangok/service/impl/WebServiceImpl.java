@@ -131,5 +131,15 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 			throw processException("fail.common.sql", new String[]{"selectBoardDtl",e.getMessage()});
 		}
 	}
+	
+	@Override
+	public Map<String, Object> selectBoardDtl2(Map<String, Object> params) throws Exception {
+		try {
+			return webMapper.selectBoardDtl2(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw processException("fail.common.sql", new String[]{"selectBoardDtl",e.getMessage()});
+		}
+	}
 
 }

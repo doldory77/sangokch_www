@@ -60,8 +60,8 @@ public class WebController {
 		if (menuList == null) {
 			menuList = webService.selectMenuByTree();
 		}
-		Map<String, Object> MAIN10 = webService.selectBoardDtl(JMap.instance("GROUP_ID", "A0000000").put("SEQ_NO", 10).build());
-		Map<String, Object> MAIN11 = webService.selectBoardDtl(JMap.instance("GROUP_ID", "A0000000").put("SEQ_NO", 11).build());
+		Map<String, Object> MAIN10 = webService.selectBoardDtl2(JMap.instance("TAG_CD", "01").build());
+		Map<String, Object> MAIN11 = webService.selectBoardDtl2(JMap.instance("TAG_CD", "02").build());
 		
 		model.addAttribute("MENU_LIST", menuList);
 		model.addAttribute("MAIN10", MAIN10);
@@ -118,11 +118,13 @@ public class WebController {
 	public String boardWrite(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {
 		LOGGER.debug(params + "");
 		List<Map<String, Object>> groupIdList = webService.selectMenu(JMap.instance("P_MENU_GROUP", null).put("P_DEPTH_CHAR", "--").build());
-		List<Map<String, Object>> YNCodeList = webService.selectCode(JMap.instance("GROUP_ID", "CD0000").build());
+		List<Map<String, Object>> YNCodeList = webService.selectCode(JMap.instance("GROUP_ID", "CD0000").put("USE_YN", "Y").build());
+		List<Map<String, Object>> TagCodeList = webService.selectCode(JMap.instance("GROUP_ID", "CD0001").put("USE_YN", "Y").build());
 		Map<String, Object> boardDtl = webService.selectBoardDtl(params);
 		LOGGER.debug("BOARD_DTL === " + boardDtl);
 		model.addAttribute("groupIdList", groupIdList);
 		model.addAttribute("YNCodeList", YNCodeList);
+		model.addAttribute("TagCodeList", TagCodeList);
 		model.addAttribute("BOARD_DTL", boardDtl);
 		model.addAttribute("CURR_PAGE", request.getParameter("CURR_PAGE"));		
 		
