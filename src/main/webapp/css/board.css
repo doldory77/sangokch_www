@@ -1,0 +1,39 @@
+.board-frame {
+	width:260px;
+	border:1px dotted #c2c2c2;
+	margin:2px;
+	cursor:pointer;
+	position:relative;
+}
+.board-frame .title {
+	font-size: 1.4rem;
+	font-weight: bold;
+}
+.board-frame .sub1 {
+	font-size: 0.8rem;
+}
+.paging-btn {
+	border:1px dotted #c2c2c2;
+	width:48px;
+	height:48px;
+}
+.material-symbols-outlined {
+  	font-variation-settings:
+  	'FILL' 0,
+  	'wght' 400,
+  	'GRAD' 0,
+  	'opsz' 24
+}
+.curr_page {
+	background-color:#c2c2c2;
+}
+.board-frame-background {
+	position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: -1;
+    background-size: cover;
+    opacity: 0.4;
+}

@@ -16,11 +16,27 @@
   	
   </head>
   <body>
-  
-	<jsp:include page="/WEB-INF/jspf/boardList.jsp" flush="false" />
+	<div class="container-fluid">
+		<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3">
+			<div class="col">
+				<div>
+					<div class="d-flex justify-content-between bg-primary">
+						<span class="text-light">MENU1</span>
+						<span><input onclick="" class="d-none" id="menu1" type="checkbox"><label for="menu1">+/-</label></span>
+					</div>
+					<ul>
+						<li>MENU1-1</li>
+						<li>MENU1-2</li>
+						<li>MENU1-3</li>
+						<li>MENU1-4</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	<script>
-		/*스크립트 작성*/
+		
 	</script>
 	
   </body>

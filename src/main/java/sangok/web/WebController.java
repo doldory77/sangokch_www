@@ -75,6 +75,15 @@ public class WebController {
 		return "home/main";
 	}
 	
+	@RequestMapping(value = "/admin/main.do")
+	public String adminMain(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		List<Map<String, Object>> MenuList = webService.selectMenuByTree();
+		model.addAttribute("MENU_LIST", MenuList);
+		
+		return "admin/adminMain";
+	}
+	
 	@RequestMapping(value = "/admin/code/groupMng.do")
 	public String groupMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
