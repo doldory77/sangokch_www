@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import sangok.service.WebService;
+import sangok.utils.JList;
 import sangok.utils.JMap;
 import sangok.utils.JNum;
 import sangok.utils.JStr;
@@ -60,12 +61,12 @@ public class WebController {
 		if (menuList == null) {
 			menuList = webService.selectMenuByTree();
 		}
-		Map<String, Object> MAIN01 = webService.selectBoardDtl2(JMap.instance("TAG_CD", "01").build());
-		Map<String, Object> MAIN02 = webService.selectBoardDtl2(JMap.instance("TAG_CD", "02").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtlByTag(JMap.instance("TAG_CD", "01").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtlByTag(JMap.instance("TAG_CD", "02").build());
 		
 		model.addAttribute("MENU_LIST", menuList);
-		model.addAttribute("MAIN01", JMap.replaceFirst(MAIN01, "CONTENT", "<h1>.+</h1>", ""));
-		model.addAttribute("MAIN02", JMap.replaceFirst(MAIN02, "CONTENT", "<h1>.+</h1>", ""));
+		model.addAttribute("MAIN01", JMap.replaceFirst(MAIN01, "CONTENT", "<h1>.+</h1>", "").get(0));
+		model.addAttribute("MAIN02_LIST", JMap.replaceFirst(MAIN02, "CONTENT", "<h1>.+</h1>", ""));
 		
 //		for (String beanName : beanFactory.getBeanDefinitionNames()) {
 //			LOGGER.debug("class : " + beanFactory.getBean(beanName).getClass().getName());
@@ -120,14 +121,13 @@ public class WebController {
 		List<Map<String, Object>> groupIdList = webService.selectMenu(JMap.instance("P_MENU_GROUP", null).put("P_DEPTH_CHAR", "--").build());
 		List<Map<String, Object>> YNCodeList = webService.selectCode(JMap.instance("GROUP_ID", "CD0000").put("USE_YN", "Y").build());
 		List<Map<String, Object>> TagCodeList = webService.selectCode(JMap.instance("GROUP_ID", "CD0001").put("USE_YN", "Y").build());
-		Map<String, Object> boardDtl = webService.selectBoardDtl(params);
-		LOGGER.debug("BOARD_DTL === " + boardDtl);
+		List<Map<String, Object>> boardDtlList = webService.selectBoardDtl(params);
+		LOGGER.debug("BOARD_DTL === " + boardDtlList);
 		model.addAttribute("groupIdList", groupIdList);
 		model.addAttribute("YNCodeList", YNCodeList);
 		model.addAttribute("TagCodeList", TagCodeList);
-		model.addAttribute("BOARD_DTL", boardDtl);
-		model.addAttribute("CURR_PAGE", request.getParameter("CURR_PAGE"));		
-		
+		model.addAttribute("BOARD_DTL", JList.get(boardDtlList, 0));
+		model.addAttribute("CURR_PAGE", request.getParameter("CURR_PAGE"));
 		return "admin/board/write";
 	}
 	

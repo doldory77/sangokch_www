@@ -121,7 +121,7 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 	}
 
 	@Override
-	public Map<String, Object> selectBoardDtl(Map<String, Object> params) throws Exception {
+	public List<Map<String, Object>> selectBoardDtl(Map<String, Object> params) throws Exception {
 		try {
 			if (JStr.isStr(params.get("GROUP_ID")) == false) params.put("GROUP_ID", null);
 			if (JNum.isInteger(params.get("SEQ_NO")) == false) params.put("SEQ_NO", 0);
@@ -133,12 +133,12 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 	}
 	
 	@Override
-	public Map<String, Object> selectBoardDtl2(Map<String, Object> params) throws Exception {
+	public List<Map<String, Object>> selectBoardDtlByTag(Map<String, Object> params) throws Exception {
 		try {
-			return webMapper.selectBoardDtl2(params);
+			return webMapper.selectBoardDtlByTag(params);
 		} catch (Exception e) {
 			e.printStackTrace();
-			throw processException("fail.common.sql", new String[]{"selectBoardDtl",e.getMessage()});
+			throw processException("fail.common.sql", new String[]{"selectBoardDtlByTag",e.getMessage()});
 		}
 	}
 

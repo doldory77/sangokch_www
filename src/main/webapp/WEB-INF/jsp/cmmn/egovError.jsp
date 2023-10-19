@@ -8,6 +8,9 @@
 </head>
 
 <body>
-    <spring:message code='fail.common.msg' />
+    <h1><spring:message code='fail.common.msg' /></h1>
+    <p>Exception: ${exception.getClass().getSimpleName()}</p>
+    <p>Message: ${exception.getMessage()}</p>
+    <p>Cause: ${exception.getCause()}</p>
 </body>
 </html>
