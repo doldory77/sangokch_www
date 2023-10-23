@@ -5,7 +5,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
 	<div class="container-fluid">
-		<h1>${BOARD_GROUP_TITLE}</h1>
+		
 		<div class="d-flex flex-wrap justify-content-start">
 		<c:forEach var="item" items="${BOARD_LIST}">  
 			<div class="board-frame p-1" onclick="location.href='/admin/board/write.do?CURR_PAGE=${PAGE_CTL.CURR_PAGE}&GROUP_ID=${item.GROUP_ID}&SEQ_NO=${item.SEQ_NO}'">

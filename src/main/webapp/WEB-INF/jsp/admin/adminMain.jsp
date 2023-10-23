@@ -34,18 +34,22 @@
 			height: 34px;
 			opacity: 1;
 		}
+		.group-menu-wrapper:hover {
+			box-shadow: 3px 3px 3px gray;
+		}
 		
 	</style>
   	
   </head>
   <body>
 	<div class="container-fluid">
-		<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3">
+		<div class="fs-4"><span class="material-symbols-outlined">local_florist</span><span>메뉴별 페이지 관리</span></div>
+		<div class="row g-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3">
 			<c:forEach var="mainMenu" items="${MENU_LIST}" varStatus="status">
 			<div class="col">
-				<div>
+				<div class="group-menu-wrapper">
 					<div class="group-menu d-flex justify-content-between align-items-center bg-primary px-1">
-						<span class="text-light">${mainMenu.MENU_NM}</span>
+						<span class="text-light">${mainMenu.MENU_NM} <span style="font-size:0.8rem;">${mainMenu.MENU_ID}</span></span>
 						<span>
 							<input class="d-none" id="menu${status.count}" type="checkbox">
 							<label for="menu${status.count}"><span class="material-symbols-outlined">expand_more</span></label>
@@ -53,7 +57,7 @@
 					</div>
 					<ul>
 						<c:forEach var="sumMenu" items="${mainMenu.SUB_MENU}">
-						<li>${sumMenu.MENU_NM}</li>
+						<li>${sumMenu.MENU_NM} <span style="font-size:0.8rem;">${sumMenu.MENU_ID}</span></li>
 						</c:forEach>
 					</ul>
 				</div>

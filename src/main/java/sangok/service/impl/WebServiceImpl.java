@@ -125,6 +125,7 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 		try {
 			if (JStr.isStr(params.get("GROUP_ID")) == false) params.put("GROUP_ID", null);
 			if (JNum.isInteger(params.get("SEQ_NO")) == false) params.put("SEQ_NO", 0);
+			if (JStr.isStr(params.get("TAG_CD")) == false) params.put("TAG_CD", null);
 			return webMapper.selectBoardDtl(params);
 		} catch (Exception e) {
 			e.printStackTrace();

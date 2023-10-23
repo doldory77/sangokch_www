@@ -74,12 +74,13 @@
 				, #{START_NUM, mode=OUT, jdbcType=INTEGER}
 				, #{CURR_PAGE, mode=IN, jdbcType=INTEGER}
 				, #{GROUP_ID, mode=IN, jdbcType=VARCHAR}
+				, #{TAG_CD, mode=IN, jdbcType=VARCHAR}
 			)
 		}
 	</select>
 	
 	<select id="selectBoardDtl" statementType="CALLABLE" parameterType="map" resultType="map">
-		{ CALL SP_GET_BOARD_DTL(#{GROUP_ID}, #{SEQ_NO}) }
+		{ CALL SP_GET_BOARD_DTL(#{GROUP_ID}, #{SEQ_NO}, #{TAG_CD}) }
 	</select>
 	
 	<select id="selectBoardDtlByTag" statementType="CALLABLE" parameterType="map" resultType="map">

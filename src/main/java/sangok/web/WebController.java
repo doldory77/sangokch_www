@@ -61,8 +61,8 @@ public class WebController {
 		if (menuList == null) {
 			menuList = webService.selectMenuByTree();
 		}
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtlByTag(JMap.instance("TAG_CD", "01").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtlByTag(JMap.instance("TAG_CD", "02").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").build());
 		
 		model.addAttribute("MENU_LIST", menuList);
 		model.addAttribute("MAIN01", JMap.replaceFirst(MAIN01, "CONTENT", "<h1>.+</h1>", "").get(0));
@@ -164,10 +164,14 @@ public class WebController {
 		if (JStr.isStr(params.get("GROUP_ID")) == false) {
 			params.put("GROUP_ID", null);
 		}
+		if (JStr.isStr(params.get("TAG_CD")) == false) {
+			params.put("TAG_CD", null);
+		}
 		List<Map<String, Object>> list = webService.selectBoardList(params);
 		
 		model.addAttribute("BOARD_LIST", list);
 		model.addAttribute("PAGE_CTL", params);
+		model.addAttribute("BOARD_TITLE", params.get("BOARD_TITLE"));
 		
 		return "admin/board/list";
 	}
