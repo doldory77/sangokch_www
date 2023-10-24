@@ -78,17 +78,36 @@ public class WebController {
 	@RequestMapping(value = "/admin/main.do")
 	public String adminMain(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
-		List<Map<String, Object>> MenuList = webService.selectMenuByTree();
-		model.addAttribute("MENU_LIST", MenuList);
+		List<Map<String, Object>> menuList = webService.selectMenuByTree();
+		model.addAttribute("MENU_LIST", menuList);
 		
 		return "admin/adminMain";
 	}
 	
+	@RequestMapping(value = "/admin/user/userMng.do")
+	public String userMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		List<Map<String, Object>> userList = webService.selectUser(JMap.instance("ID", null).put("PW", null).put("USE_YN", null).build());
+		model.addAttribute("USER_LIST", userList);
+		
+		return "admin/user/userMng";
+	}
+	
+	@RequestMapping(value = "/admin/user/saveUser.do")
+	public String saveUser(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		params.put("RTN_MSG", "SUCCESS");
+		LOGGER.debug("==========> " + params);
+		webService.updateUser(params);
+		
+		return "redirect:/admin/user/userMng.do";
+	}	
+	
 	@RequestMapping(value = "/admin/code/groupMng.do")
 	public String groupMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
-		List<Map<String, Object>> GroupList = webService.selectCodeGroup(null);
-		model.addAttribute("CODE_GROUP", GroupList);
+		List<Map<String, Object>> groupList = webService.selectCodeGroup(null);
+		model.addAttribute("CODE_GROUP", groupList);
 		
 		return "admin/code/groupMng";
 	}

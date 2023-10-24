@@ -44,6 +44,24 @@
     	{ CALL SP_GET_MENU(#{P_MENU_GROUP}, #{P_DEPTH_CHAR}) }
     </select>
     
+	<select id="selectUser" statementType="CALLABLE" parameterType="map" resultType="map">
+		{ CALL SP_GET_USER(#{ID}, #{PW}, #{USE_YN}) } 
+	</select>
+	
+    <update id="updateUser" statementType="CALLABLE" parameterType="map">
+    	{ 
+    		CALL SP_MERGE_USER(
+	    		#{RTN_MSG, mode=INOUT, jdbcType=VARCHAR}
+	    		, #{ID, mode=IN, jdbcType=VARCHAR}
+	    		, #{PW, mode=IN, jdbcType=VARCHAR}
+	    		, #{NEW_PW, mode=IN, jdbcType=VARCHAR}
+	    		, #{ADM_YN, mode=IN, jdbcType=VARCHAR}
+	    		, #{USE_YN, mode=IN, jdbcType=VARCHAR}
+	    		, #{ATTR01, mode=IN, jdbcType=VARCHAR}
+	    	) 
+    	}
+    </update>	    
+    
 	<select id="updateBoard" statementType="CALLABLE" parameterType="map">
 		{ 
 			CALL SP_MERGE_BOARD(

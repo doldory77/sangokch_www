@@ -25,4 +25,8 @@ public interface WebService {
 	
 	List<Map<String, Object>> selectBoardDtlByTag(Map<String, Object> params) throws Exception;
 	
+	List<Map<String, Object>> selectUser(Map<String, Object> params) throws Exception;
+	
+	void updateUser(Map<String, Object> params) throws Exception;
+	
 }
