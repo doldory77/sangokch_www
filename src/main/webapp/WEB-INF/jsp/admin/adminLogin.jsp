@@ -9,25 +9,41 @@
 <head>
 	<%@ include file="/WEB-INF/jspf/head.jspf" %>
 	<title>코드관리</title>
+	<style>
+		.login-wrap { positon:relative; }
+		.login-wrap .login-form {
+			position:absolute;
+			top:50%;
+			left:50%;
+			transform:translate(-50%, -50%);
+			width: 320px;
+			padding: 20px;
+			background-color: #ebebeb;
+			border-radius: 5px;
+			box-shadow: 1px 1px;
+		}
+	</style>
 </head>
 <body>
 	<div class="container-md">
-		
-		<form method="POST" action="/admin/login/loginCheck.do">
-			<fieldset>
-				<legend>로그인</legend>
-				<div class="mb-3">
-					<label for="userId" class="form-label">사용자 ID</label>
-					<input style="display:inline-block; width:auto" type="text" name="USER_ID" readonly class="form-control-plaintext" id="userId">
-				</div>
-				<div class="mb-3">
-					<label for="userPW" class="form-label">사용자 PW</label>
-					<input type="password" name="USER_PW" class="form-control" id="userPW">
-				</div>
-				<div class="text-end"><button type="submit" class="btn btn-primary">확인</button></div>
-			</fieldset>
-		</form>
-		
+		<div class="login-wrap">
+			<div class="login-form">
+			<form method="POST" action="/admin/login/loginCheck.do">
+				<fieldset>
+					<legend>로그인</legend>
+					<div class="mb-3">
+						<label for="userId" class="form-label">사용자 ID</label>
+						<input type="text" class="form-control" name="USER_ID" id="userId">
+					</div>
+					<div class="mb-3">
+						<label for="userPW" class="form-label">사용자 PW</label>
+						<input type="password" name="USER_PW" class="form-control" id="userPW">
+					</div>
+					<div class="text-center"><button type="submit" class="btn btn-primary">확인</button></div>
+				</fieldset>
+			</form>
+			</div>
+		</div>
 	</div>
 </body>
 	<script>
