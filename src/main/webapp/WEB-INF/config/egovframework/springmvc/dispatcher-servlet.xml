@@ -33,6 +33,15 @@
         <property name="paramName" value="language" />
     </bean>
     <bean id="webLogInterceptor" class="sangok.web.WebLogInterceptor"></bean>
+    
+    <mvc:interceptors>
+    	<mvc:interceptor>
+    		<mvc:mapping path="/admin/**" />
+    		<mvc:exclude-mapping path="/admin/login.do" />
+    		<mvc:exclude-mapping path="/admin/login/loginCheck.do" />
+    		<bean class="sangok.web.WebLoginCheckInterceptor" />
+    	</mvc:interceptor>
+    </mvc:interceptors>
 
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
         <property name="defaultErrorView" value="cmmn/egovError"/>

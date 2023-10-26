@@ -75,6 +75,29 @@ public class WebController {
 		return "home/main";
 	}
 	
+	@RequestMapping(value = "/admin/login.do")
+	public String adminLogin(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+//		List<Map<String, Object>> menuList = webService.selectMenuByTree();
+//		model.addAttribute("MENU_LIST", menuList);
+		
+		return "admin/adminLogin";
+	}
+	
+	@RequestMapping(value = "/admin/login/loginCheck.do")
+	public String adminLoginCheck(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {
+		request.getSession().setAttribute("USER_INFO", new UserInfo());
+		
+		return "redirect:/admin/main.do";
+	}
+	
+	@RequestMapping(value = "/admin/login/logout.do")
+	public String adminLoginOut(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {
+		request.getSession().invalidate();
+		
+		return "redirect:/admin/login.do";
+	}
+	
 	@RequestMapping(value = "/admin/main.do")
 	public String adminMain(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
