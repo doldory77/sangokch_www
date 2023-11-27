@@ -6,13 +6,20 @@
 	  <div class="search_bar">
 	  	<div class="me-1">
 	  		<input type="checkbox" id="search_btn">
-	  		<label for="search_btn" class="d-flex justify-content-center  align-items-center">
-	  			<span style="font-size:32px;" class="material-symbols-outlined">frame_inspect</span>
+	  		<label for="search_btn" class="d-flex justify-content-center align-items-center">
+	  			<span style="font-size:32px; cursor:pointer;" class="material-symbols-outlined">frame_inspect</span>
 	  		</label>
 	  	</div>
-	  	<div>
-		  	<form>
+	  	<div style="position: relative;">
+		  	<form id="searchBibleAndHymnForm">
+		  		<div style="position: absolute; top:-22px;">
+			  		<input type="radio" id="bible" name="DVSN" value="bible" checked="checked">
+			  		<label for="bible">성경구절</label>
+			  		<input type="radio" id="hymn" name="DVSN" value="hymn">
+			  		<label for="hymn">찬송가</label>
+		  		</div>
 		  		<input type="text">
+		  		<!-- <button class="btn btn-sm btn-secondary" onclick="searchSubmit();">검색</button> -->
 		  		<input type="submit" value="검색">
 		  	</form>
 	  	</div>
@@ -99,6 +106,27 @@
 		  })
 	  })
 	  
+	  $(function() {
+		  $('#searchBibleAndHymnForm').submit(function(event) {
+			  event.preventDefault();
+			  var formData =  $("#searchBibleAndHymnForm").serialize();
+			  $.ajax({
+				  type: 'POST'
+				  , url: '/bibleAndHymn.do'
+				  , dataType: 'JSON'
+				  , data: formData
+				  , success: function(json) {
+					  console.log(json);
+					  togglePopup('title', json);
+				  }
+			  	  , error: function(xhr, status, error) {
+			  		togglePopup('error', error);
+			  	  }
+				  
+			  });
+		  })
+	  })
+	  
 	  function togglePopup(title, msg) {
 		  var $pop = $('#popup');
 		  if ($pop.css('display') == 'flex') {
@@ -108,5 +136,25 @@
 			  if (msg) $('#popupContent').text(msg);
 			  $pop.css('display', 'flex');
 		  }
+	  }
+	  
+	  function searchSubmit(event) {
+		  //var formData = new FormData($('#searchBibleAndHymnForm'));
+		  var formData =  $("#searchBibleAndHymnForm").serialize();
+		  $.ajax({
+			  type: 'POST'
+			  , url: '/bibleAndHymn.do'
+			  , dataType: 'JSON'
+			  , data: formData
+			  , success: function(json) {
+				  console.log(json);
+				  togglePopup('title', json);
+			  }
+		  	  , error: function(xhr, status, error) {
+		  		togglePopup('error', error);
+		  	  }
+			  
+		  });
+		  //event.preventDefault();
 	  }
 	  </script>

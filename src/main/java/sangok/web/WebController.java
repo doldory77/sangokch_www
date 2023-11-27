@@ -2,6 +2,7 @@ package sangok.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -216,6 +217,21 @@ public class WebController {
 		model.addAttribute("BOARD_TITLE", params.get("BOARD_TITLE"));
 		
 		return "admin/board/list";
+	}
+	
+	@RequestMapping(value = "/bibleAndHymn.do")
+	public String bibleAndHymn(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		List<String> list = new ArrayList<String>();
+		list.add("1절 내용 블라블라블라...");
+		list.add("2절 내용 블라블라블라...");
+		list.add("3절 내용 블라블라블라...");
+		list.add("4절 내용 블라블라블라...");
+		list.add("5절 내용 블라블라블라...");
+		
+		model.put("title", "창세기 2장 1절~5절");
+		model.put("content", list);
+		
+		return "jsonView";
 	}
 	
 	@RequestMapping(value = "/ckeditor5/imageUpload.do")
