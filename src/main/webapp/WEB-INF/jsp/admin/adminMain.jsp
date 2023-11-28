@@ -37,27 +37,43 @@
 		.group-menu-wrapper:hover {
 			box-shadow: 3px 3px 3px gray;
 		}
+		.group-main-menu {
+			color: white;
+			display: inline-block;
+			width: 120px;
+			
+		}
+		.group-main-menu:hover {
+			color: white;
+		}
+		.group-main-menu+span {
+			color: white;
+		}
+		.menu-nm {
+			display: inline-block;
+			width: 120px;
+		}
 		
 	</style>
   	
   </head>
   <body>
 	<div class="container-fluid">
-		<div class="fs-4"><span class="material-symbols-outlined">local_florist</span><span>메뉴별 페이지 관리</span></div>
+		<div class="fs-4"><span>메뉴별 페이지 관리</span></div>
 		<div class="row g-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3">
 			<c:forEach var="mainMenu" items="${MENU_LIST}" varStatus="status">
 			<div class="col">
 				<div class="group-menu-wrapper">
 					<div class="group-menu d-flex justify-content-between align-items-center bg-primary px-1">
-						<span class="text-light">${mainMenu.MENU_NM} <span style="font-size:0.8rem;">${mainMenu.MENU_ID}</span></span>
+						<span><a class="group-main-menu" href="/admin/board/list.do?GROUP_ID=A0000000&SCREEN_YN=Y">${mainMenu.MENU_NM}</a><span style="font-size:0.8rem;">${mainMenu.MENU_ID}</span></span>
 						<span>
 							<input class="d-none" id="menu${status.count}" type="checkbox">
-							<label for="menu${status.count}"><span class="material-symbols-outlined">expand_more</span></label>
+							<label style="cursor: pointer;" for="menu${status.count}"><span class="material-symbols-outlined">expand_more</span></label>
 						</span>
 					</div>
 					<ul>
 						<c:forEach var="sumMenu" items="${mainMenu.SUB_MENU}">
-						<li>${sumMenu.MENU_NM} <span style="font-size:0.8rem;">${sumMenu.MENU_ID}</span></li>
+						<li style="cursor: pointer;"><span class="menu-nm">${sumMenu.MENU_NM}</span><span style="font-size:0.8rem;">${sumMenu.MENU_ID}</span></li>
 						</c:forEach>
 					</ul>
 				</div>

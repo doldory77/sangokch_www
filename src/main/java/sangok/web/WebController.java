@@ -210,6 +210,9 @@ public class WebController {
 		if (JStr.isStr(params.get("TAG_CD")) == false) {
 			params.put("TAG_CD", null);
 		}
+		if (JStr.isStr(params.get("SCREEN_YN")) == false) {
+			params.put("SCREEN_YN", null);
+		}
 		List<Map<String, Object>> list = webService.selectBoardList(params);
 		
 		model.addAttribute("BOARD_LIST", list);

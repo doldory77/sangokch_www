@@ -12,11 +12,11 @@
 	  	</div>
 	  	<div style="position: relative;">
 		  	<form id="searchBibleAndHymnForm">
-		  		<div style="position: absolute; top:-22px;">
+		  		<div style="position: absolute; bottom:-22px;">
 			  		<input type="radio" id="bible" name="DVSN" value="bible" checked="checked">
-			  		<label for="bible">성경구절</label>
+			  		<label for="bible" style="cursor: pointer;">성경구절</label>
 			  		<input type="radio" id="hymn" name="DVSN" value="hymn">
-			  		<label for="hymn">찬송가</label>
+			  		<label for="hymn" style="cursor: pointer;">찬송가</label>
 		  		</div>
 		  		<input type="text" name="SEARCH_KEYWORD">
 		  		<input type="submit" value="검색">
