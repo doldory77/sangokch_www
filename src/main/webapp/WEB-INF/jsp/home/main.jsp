@@ -9,7 +9,7 @@
 <html lang="ko">
   <head>
 	<%@ include file="/WEB-INF/jspf/head.jspf" %>
-
+	<link rel="stylesheet" href="/css/font.css">
     <title>Main</title>
   </head>
   <body>
