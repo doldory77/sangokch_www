@@ -221,14 +221,11 @@ public class WebController {
 	
 	@RequestMapping(value = "/bibleAndHymn.do")
 	public String bibleAndHymn(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
-		List<String> list = new ArrayList<String>();
-		list.add("1절 내용 블라블라블라...");
-		list.add("2절 내용 블라블라블라...");
-		list.add("3절 내용 블라블라블라...");
-		list.add("4절 내용 블라블라블라...");
-		list.add("5절 내용 블라블라블라...");
-		
-		model.put("title", "창세기 2장 1절~5절");
+		params.put("RTN_MSG", "SUCCESS");
+		List<Map<String, Object>> list = webService.selectBibleAndHymn(params);
+		model.put("dvsn", params.get("DVSN"));
+		model.put("title", params.get("SEARCH_KEYWORD"));
+		model.put("cnt", list == null ? 0 : list.size());
 		model.put("content", list);
 		
 		return "jsonView";

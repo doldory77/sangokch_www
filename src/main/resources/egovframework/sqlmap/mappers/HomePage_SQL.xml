@@ -104,4 +104,18 @@
 	<select id="selectBoardDtlByTag" statementType="CALLABLE" parameterType="map" resultType="map">
 		{ CALL SP_GET_BOARD_DTL_BYTAG(#{TAG_CD}) }
 	</select>
+	
+	<select id="selectBible" statementType="CALLABLE" parameterType="map" resultType="map">
+		{ CALL SP_GET_BIBLE(
+			#{RTN_MSG, mode=OUT, jdbcType=VARCHAR}
+			, #{SEARCH_KEYWORD, mode=IN, jdbcType=VARCHAR}
+		) }
+	</select>
+	
+	<select id="selectHymn" statementType="CALLABLE" parameterType="map" resultType="map">
+		{ CALL SP_GET_HYMN(
+			#{RTN_MSG, mode=OUT, jdbcType=VARCHAR}
+			, #{SEARCH_KEYWORD, mode=IN, jdbcType=VARCHAR}
+		) }
+	</select>
 </mapper>

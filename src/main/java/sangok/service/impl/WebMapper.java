@@ -31,5 +31,10 @@ public interface WebMapper {
 	List<Map<String, Object>> selectUser(Map<String, Object> params) throws Exception;
 	
 	void updateUser(Map<String, Object> params) throws Exception;
+	
+	List<Map<String, Object>> selectBible(Map<String, Object> params) throws Exception;
+	
+	List<Map<String, Object>> selectHymn(Map<String, Object> params) throws Exception;
+	
 
 }

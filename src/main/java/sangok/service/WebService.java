@@ -29,4 +29,6 @@ public interface WebService {
 	
 	void updateUser(Map<String, Object> params) throws Exception;
 	
+	List<Map<String, Object>> selectBibleAndHymn(Map<String, Object> params) throws Exception;
+	
 }

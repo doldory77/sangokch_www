@@ -18,8 +18,7 @@
 			  		<input type="radio" id="hymn" name="DVSN" value="hymn">
 			  		<label for="hymn">찬송가</label>
 		  		</div>
-		  		<input type="text">
-		  		<!-- <button class="btn btn-sm btn-secondary" onclick="searchSubmit();">검색</button> -->
+		  		<input type="text" name="SEARCH_KEYWORD">
 		  		<input type="submit" value="검색">
 		  	</form>
 	  	</div>
@@ -110,6 +109,7 @@
 		  $('#searchBibleAndHymnForm').submit(function(event) {
 			  event.preventDefault();
 			  var formData =  $("#searchBibleAndHymnForm").serialize();
+			  clearPopContent();
 			  $.ajax({
 				  type: 'POST'
 				  , url: '/bibleAndHymn.do'
@@ -117,7 +117,20 @@
 				  , data: formData
 				  , success: function(json) {
 					  console.log(json);
-					  togglePopup('title', json);
+					  if (json && json.dvsn) {
+						  var title = json.title;
+						  var content = '';
+						  if (json.dvsn == 'bible') {
+							  for(var i=0; i<json.cnt; i++) {
+								  content += (json.content[i].VERSE + ' : ' + json.content[i].CONTENT + '<br/>')
+							  }
+						  } else {
+							  title = json.content[0].PAGE_NO + ' ' + json.content[0].SUBJECT;
+							  content += json.content[0].LYRICS;
+						  }
+						  togglePopup(title, content);
+					  }
+					  
 				  }
 			  	  , error: function(xhr, status, error) {
 			  		togglePopup('error', error);
@@ -132,29 +145,14 @@
 		  if ($pop.css('display') == 'flex') {
 			  $pop.css('display', 'none');
 		  } else {
-			  if (title) $('#popupTitle').text(title);
-			  if (msg) $('#popupContent').text(msg);
+			  if (title) $('#popupTitle').html(title);
+			  if (msg) $('#popupContent').html(msg);
 			  $pop.css('display', 'flex');
 		  }
 	  }
 	  
-	  function searchSubmit(event) {
-		  //var formData = new FormData($('#searchBibleAndHymnForm'));
-		  var formData =  $("#searchBibleAndHymnForm").serialize();
-		  $.ajax({
-			  type: 'POST'
-			  , url: '/bibleAndHymn.do'
-			  , dataType: 'JSON'
-			  , data: formData
-			  , success: function(json) {
-				  console.log(json);
-				  togglePopup('title', json);
-			  }
-		  	  , error: function(xhr, status, error) {
-		  		togglePopup('error', error);
-		  	  }
-			  
-		  });
-		  //event.preventDefault();
+	  function clearPopContent() {
+		  $('#popupTitle').html('');
+		  $('#popupContent').html('');
 	  }
 	  </script>

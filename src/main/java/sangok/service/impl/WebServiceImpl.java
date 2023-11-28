@@ -164,4 +164,13 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 		}
 	}
 
+	@Override
+	public List<Map<String, Object>> selectBibleAndHymn(Map<String, Object> params) throws Exception {
+		if ("bible".equalsIgnoreCase(params.get("DVSN").toString())) {
+			return webMapper.selectBible(params);
+		} else {
+			return webMapper.selectHymn(params);
+		}
+	}
+
 }
