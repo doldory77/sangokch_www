@@ -21,7 +21,7 @@
 		<a class="btn btn-sm btn-secondary" href="/admin/board/write.do">작성</a>
 		<a href="/admin/main.do">관리자 메인</a>
 	</div>
-	<jsp:include page="/WEB-INF/jspf/boardList.jsp" flush="false" />
+	<jsp:include page="/WEB-INF/jspf/adminBoardList.jsp" flush="false" />
 	
 	<script>
 		/*스크립트 작성*/

@@ -2,7 +2,6 @@ package sangok.web;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -199,7 +198,7 @@ public class WebController {
 		return "redirect:/admin/board/list.do?CURR_PAGE=" + params.get("CURR_PAGE") + "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
 	}
 	
-	private List<Map<String, Object>> setBoardListInitParams(Map<String, Object> params) throws Exception {
+	private List<Map<String, Object>> setBoardListInitParams(Map<String, Object> params, ModelMap model) throws Exception {
 		if (JNum.isInteger(params.get("CURR_PAGE")) == false) {
 			params.put("CURR_PAGE", 1);
 		}
@@ -212,13 +211,19 @@ public class WebController {
 		if (JStr.isStr(params.get("SCREEN_YN")) == false) {
 			params.put("SCREEN_YN", null);
 		}
-		return webService.selectBoardList(params);
+		List<Map<String, Object>> list = webService.selectBoardList(params);
+		//model.addAttribute("PAGE", params.get("PAGE"));
+		//model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
+		//model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
+		model.addAttribute("BOARD_LIST", list);
+		model.addAttribute("PAGE_CTL", params);
+		return list;
 	}
 	
 	@RequestMapping(value = "/admin/board/list.do")
 	public String boardList(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
-		List<Map<String, Object>> list = this.setBoardListInitParams(params);
+		List<Map<String, Object>> list = this.setBoardListInitParams(params, model);
 		
 		model.addAttribute("BOARD_LIST", list);
 		model.addAttribute("PAGE_CTL", params);
@@ -230,10 +235,7 @@ public class WebController {
 	@RequestMapping(value = "/admin/adminPage.do")
 	public String adminPage(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		String jspAdminPage = params.get("PAGE").toString();
-		List<Map<String, Object>> list = this.setBoardListInitParams(params);
-		
-		model.addAttribute("BOARD_LIST", list);
-		model.addAttribute("PAGE_CTL", params);
+		this.setBoardListInitParams(params, model);
 		
 		return "admin/" + jspAdminPage.substring(0, 1) + "0000000/" + jspAdminPage;
 	}

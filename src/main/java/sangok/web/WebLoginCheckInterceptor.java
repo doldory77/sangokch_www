@@ -18,7 +18,7 @@ public class WebLoginCheckInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		
 		HttpSession session = request.getSession(false);
-		if (session.getAttribute("USER_INFO") == null) {
+		if (session == null || session.getAttribute("USER_INFO") == null) {
 			LOGGER.debug("current user is not logined");
 			response.sendRedirect("/admin/login.do");
 			return false;

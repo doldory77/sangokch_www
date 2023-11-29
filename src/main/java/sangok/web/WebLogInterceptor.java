@@ -15,8 +15,9 @@ public class WebLogInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
-		String rootPath = request.getSession().getServletContext().getRealPath("/");
-		LOGGER.debug("rootPath : =======> " + rootPath);
+//		String rootPath = request.getSession().getServletContext().getRealPath("/");
+//		LOGGER.debug("rootPath : =======> " + rootPath);
+		LOGGER.debug("REQUEST =======> " + request.getRequestURI() + (request.getQueryString() != null ? "?" + request.getQueryString() : ""));
 		return true;
 	}
 

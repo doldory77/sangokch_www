@@ -22,7 +22,7 @@
         <property name="interceptors">
             <list>
                 <ref bean="localeChangeInterceptor" />
-                <ref bean="webLogInterceptor" />
+                <!-- <ref bean="webLogInterceptor" /> -->
             </list>
         </property>
     </bean>
@@ -32,9 +32,13 @@
     <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
         <property name="paramName" value="language" />
     </bean>
-    <bean id="webLogInterceptor" class="sangok.web.WebLogInterceptor"></bean>
+    <!-- <bean id="webLogInterceptor" class="sangok.web.WebLogInterceptor"></bean> -->
     
     <mvc:interceptors>
+    	<mvc:interceptor>
+    		<mvc:mapping path="/**" />
+    		<bean class="sangok.web.WebLogInterceptor" />
+    	</mvc:interceptor>
     	<mvc:interceptor>
     		<mvc:mapping path="/admin/**" />
     		<mvc:exclude-mapping path="/admin/login.do" />
@@ -42,8 +46,8 @@
     		<bean class="sangok.web.WebLoginCheckInterceptor" />
     	</mvc:interceptor>
     </mvc:interceptors>
-
-    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+	<!-- org.springframework.web.servlet.handler.SimpleMappingExceptionResolver -->
+    <bean class="sangok.web.CustomSimpleMappingExceptionResolver">
         <property name="defaultErrorView" value="cmmn/egovError"/>
         <property name="exceptionMappings">
             <props>
