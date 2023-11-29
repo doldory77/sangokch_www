@@ -199,8 +199,7 @@ public class WebController {
 		return "redirect:/admin/board/list.do?CURR_PAGE=" + params.get("CURR_PAGE") + "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
 	}
 	
-	@RequestMapping(value = "/admin/board/list.do")
-	public String boardList(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+	private List<Map<String, Object>> setBoardListInitParams(Map<String, Object> params) throws Exception {
 		if (JNum.isInteger(params.get("CURR_PAGE")) == false) {
 			params.put("CURR_PAGE", 1);
 		}
@@ -213,13 +212,30 @@ public class WebController {
 		if (JStr.isStr(params.get("SCREEN_YN")) == false) {
 			params.put("SCREEN_YN", null);
 		}
-		List<Map<String, Object>> list = webService.selectBoardList(params);
+		return webService.selectBoardList(params);
+	}
+	
+	@RequestMapping(value = "/admin/board/list.do")
+	public String boardList(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		List<Map<String, Object>> list = this.setBoardListInitParams(params);
 		
 		model.addAttribute("BOARD_LIST", list);
 		model.addAttribute("PAGE_CTL", params);
 		model.addAttribute("BOARD_TITLE", params.get("BOARD_TITLE"));
 		
 		return "admin/board/list";
+	}
+	
+	@RequestMapping(value = "/admin/adminPage.do")
+	public String adminPage(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		String jspAdminPage = params.get("PAGE").toString();
+		List<Map<String, Object>> list = this.setBoardListInitParams(params);
+		
+		model.addAttribute("BOARD_LIST", list);
+		model.addAttribute("PAGE_CTL", params);
+		
+		return "admin/" + jspAdminPage.substring(0, 1) + "0000000/" + jspAdminPage;
 	}
 	
 	@RequestMapping(value = "/bibleAndHymn.do")

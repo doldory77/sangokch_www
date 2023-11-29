@@ -65,7 +65,7 @@
 			<div class="col">
 				<div class="group-menu-wrapper">
 					<div class="group-menu d-flex justify-content-between align-items-center bg-primary px-1">
-						<span><a class="group-main-menu" href="/admin/board/list.do?GROUP_ID=A0000000&SCREEN_YN=Y">${mainMenu.MENU_NM}</a><span style="font-size:0.8rem;">${mainMenu.MENU_ID}</span></span>
+						<span><a class="group-main-menu" href="/admin/adminPage.do?GROUP_ID=A0000000&SCREEN_YN=Y&PAGE=A0000000">${mainMenu.MENU_NM}</a><span style="font-size:0.8rem;">${mainMenu.MENU_ID}</span></span>
 						<span>
 							<input class="d-none" id="menu${status.count}" type="checkbox">
 							<label style="cursor: pointer;" for="menu${status.count}"><span class="material-symbols-outlined">expand_more</span></label>

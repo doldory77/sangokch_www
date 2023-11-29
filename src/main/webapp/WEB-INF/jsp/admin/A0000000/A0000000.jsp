@@ -8,7 +8,7 @@
 <html lang="ko">
   <head>
   	<%@ include file="/WEB-INF/jspf/head.jspf" %>
-	<title>화면구성</title>
+	<title>홈페이지 메인 관리</title>
 	
   	<style>
 
@@ -17,8 +17,9 @@
   </head>
   <body>
   	<div class="container-fluid">
-	  	<div class="fs-4"><span class="material-symbols-outlined">local_florist</span><span>${BOARD_TITLE}</span></div>
+	  	<div class="fs-4"><span class="material-symbols-outlined">local_florist</span><span>홈페이지 메인 관리</span></div>
 		<a class="btn btn-sm btn-secondary" href="/admin/board/write.do">작성</a>
+		<a href="/admin/main.do">관리자 메인</a>
 	</div>
 	<jsp:include page="/WEB-INF/jspf/boardList.jsp" flush="false" />
 	
