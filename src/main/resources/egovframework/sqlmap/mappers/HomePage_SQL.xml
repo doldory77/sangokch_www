@@ -3,6 +3,7 @@
 <mapper namespace="sangok.service.impl.WebMapper">
 
 	<select id="selectCodeGroup" parameterType="map" resultType="map">
+		/*WebMapper.selectCodeGroup*/
 		{ CALL SP_GET_CODE_GROUP() }
     </select>
     
@@ -11,6 +12,7 @@
     		#{RTN_MSG, mode=INOUT, jdbcType=VARCHAR}
     		, #{GROUP_ID, mode=IN, jdbcType=VARCHAR}
     		, #{GROUP_NM, mode=IN, jdbcType=VARCHAR}) }
+    	/*WebMapper.updateCodeGroup*/	
     </update>
     
     <update id="updateCode" statementType="CALLABLE" parameterType="map">
@@ -20,13 +22,16 @@
     		, #{CODE, mode=IN, jdbcType=VARCHAR}
     		, #{CODE_NM, mode=IN, jdbcType=VARCHAR}
     		, #{USE_YN, mode=IN, jdbcType=VARCHAR}) }
+    	/*WebMapper.updateCode*/	
     </update>
 
     <select id="selectCode" parameterType="map" resultType="map">
+    	/*WebMapper.selectCode*/
 		{ CALL SP_GET_CODE(#{GROUP_ID}, NULL, NULL) }
     </select>
     
     <select id="selectMenuByParentId" parameterType="map" resultType="map">
+    	/*WebMapper.selectMenuByParentId*/
         <![CDATA[
 		SELECT MENU_ID
 			 , MENU_NM
@@ -42,10 +47,12 @@
     </select>
     
     <select id="selectMenuBySP" statementType="CALLABLE" parameterType="map" resultType="map">
+    	/*WebMapper.selectMenuBySP*/
     	{ CALL SP_GET_MENU(#{P_MENU_GROUP}, #{P_DEPTH_CHAR}) }
     </select>
     
 	<select id="selectUser" statementType="CALLABLE" parameterType="map" resultType="map">
+		/*WebMapper.selectUser*/
 		{ CALL SP_GET_USER(#{ID}, #{PW}, #{USE_YN}) } 
 	</select>
 	
@@ -61,6 +68,7 @@
 	    		, #{ATTR01, mode=IN, jdbcType=VARCHAR}
 	    	) 
     	}
+    	/*WebMapper.updateUser*/
     </update>	    
     
 	<select id="updateBoard" statementType="CALLABLE" parameterType="map">
@@ -80,7 +88,8 @@
 				, #{TAG_CD, mode=IN, jdbcType=VARCHAR}
 				, #{ATTR01, mode=IN, jdbcType=VARCHAR}
 			) 
-		} 
+		}
+		/*WebMapper.updateBoard*/ 
 	</select>
 	
 	<select id="selectBoardList" statementType="CALLABLE" parameterType="map" resultType="map">
@@ -97,13 +106,16 @@
 				, #{SCREEN_YN, mode=IN, jdbcType=VARCHAR}
 			)
 		}
+		/*WebMapper.selectBoardList*/
 	</select>
 	
 	<select id="selectBoardDtl" statementType="CALLABLE" parameterType="map" resultType="map">
+		/*WebMapper.selectBoardDtl*/
 		{ CALL SP_GET_BOARD_DTL(#{GROUP_ID}, #{SEQ_NO}, #{TAG_CD}) }
 	</select>
 	
 	<select id="selectBoardDtlByTag" statementType="CALLABLE" parameterType="map" resultType="map">
+		/*WebMapper.selectBoardDtlByTag*/
 		{ CALL SP_GET_BOARD_DTL_BYTAG(#{TAG_CD}) }
 	</select>
 	
@@ -112,6 +124,7 @@
 			#{RTN_MSG, mode=OUT, jdbcType=VARCHAR}
 			, #{SEARCH_KEYWORD, mode=IN, jdbcType=VARCHAR}
 		) }
+		/*WebMapper.selectBible*/
 	</select>
 	
 	<select id="selectHymn" statementType="CALLABLE" parameterType="map" resultType="map">
@@ -119,6 +132,7 @@
 			#{RTN_MSG, mode=OUT, jdbcType=VARCHAR}
 			, #{SEARCH_KEYWORD, mode=IN, jdbcType=VARCHAR}
 		) }
+		/*WebMapper.selectHymn*/
 	</select>
 	
 </mapper>

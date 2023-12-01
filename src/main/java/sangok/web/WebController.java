@@ -8,7 +8,6 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
@@ -18,8 +17,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -328,6 +329,7 @@ public class WebController {
 	@RequestMapping(value = "/bibleAndHymn.do")
 	public String bibleAndHymn(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		params.put("RTN_MSG", "SUCCESS");
+		LOGGER.debug("========= " + params.toString());
 		List<Map<String, Object>> list = webService.selectBibleAndHymn(params);
 		model.put("dvsn", params.get("DVSN"));
 		model.put("title", params.get("SEARCH_KEYWORD"));
@@ -335,6 +337,18 @@ public class WebController {
 		model.put("content", list);
 		
 		return "jsonView";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/jsonTest.do")
+	public Map<String, Object> jsonTest(@RequestBody Map<String, Object> params, ModelMap model) throws Exception {
+		
+		LOGGER.debug(params.toString());
+		model.put("dvsn", "A");
+		model.put("title", "B");
+		model.put("cnt", 0);
+		
+		return JMap.instance("dvsn", "A").put("title", "B").put("cnt", 0).build();
 	}
 	
 	@RequestMapping(value = "/ckeditor5/imageUpload.do")
