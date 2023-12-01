@@ -15,7 +15,7 @@
 	<div class="container-md">
 		<form method="POST" action="/admin/user/saveUser.do">
 			<fieldset>
-				<legend>사용자 등록</legend>
+				<legend>사용자 등록<a href="/admin/main.do">관리자 메인</a></legend>
 				<div class="mb-3">
 					<label for="userId" class="form-label">사용자 ID</label>
 					<input type="text" name="ID" class="form-control" id="userId">

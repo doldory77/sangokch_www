@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sangok.service.WebService;
 import sangok.utils.JList;
@@ -55,6 +57,9 @@ public class WebController {
 	
 	List<Map<String, Object>> menuList = null; 
 
+	/*
+	 * 사용자 홈페이지 접속
+	 */
 	@RequestMapping(value = "/home.do")
 	public String home(HttpSession session, ModelMap model) throws Exception {
 		
@@ -64,7 +69,14 @@ public class WebController {
 		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").build());
 		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").build());
 		
+		/*관리자메뉴는 제외*/
 		model.addAttribute("MENU_LIST", menuList);
+		for (int i=menuList.size()-1; i>=0; i--) {
+			if ("G0000000".equals(menuList.get(i).get("MENU_ID"))) {
+				menuList.remove(i);
+				break;
+			}
+		}
 		model.addAttribute("MAIN01", JMap.replaceFirst(MAIN01, "CONTENT", "<h1>.+</h1>", "").get(0));
 		model.addAttribute("MAIN02_LIST", JMap.replaceFirst(MAIN02, "CONTENT", "<h1>.+</h1>", ""));
 		
@@ -75,22 +87,48 @@ public class WebController {
 		return "home/main";
 	}
 	
+	/*
+	 * 관리자 로그인 접속
+	 */
 	@RequestMapping(value = "/admin/login.do")
-	public String adminLogin(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+	public String adminLogin(@RequestParam(required = false, name = "LOGIN_YN") String loginYn, ModelMap model, HttpServletRequest request) throws Exception {
+		HttpSession session = request.getSession(false);
+		if (session != null && session.getAttribute("USER_INFO") != null) {
+			return "redirect:/admin/main.do";
+		}
 		
-//		List<Map<String, Object>> menuList = webService.selectMenuByTree();
-//		model.addAttribute("MENU_LIST", menuList);
+		model.addAttribute("LOGIN_YN", loginYn);
 		
 		return "admin/adminLogin";
 	}
 	
+	/*
+	 * 관리자 로그인 처리
+	 */
 	@RequestMapping(value = "/admin/login/loginCheck.do")
-	public String adminLoginCheck(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {
-		request.getSession().setAttribute("USER_INFO", new UserInfo());
+	public String adminLoginCheck(@RequestParam(required = true, name = "USER_ID") String userId
+			, @RequestParam(required = true, name = "USER_PW") String userPw
+			, ModelMap model, HttpServletRequest request, RedirectAttributes re) throws Exception {
+		List<Map<String, Object>> userList = webService.selectUser(JMap.instance("ID", userId).put("PW", userPw).put("USE_YN", "Y").build());
+		if (userList == null || userList.size() == 0) {
+			re.addAttribute("LOGIN_YN", "N");
+			return "redirect:/admin/login.do";
+		} else {
+			UserInfo userInfo = new UserInfo();
+			userInfo.setId(userList.get(0).get("ID").toString());
+			userInfo.setAdmYn(userList.get(0).get("ADM_YN").toString());
+			userInfo.setUseYn(userList.get(0).get("USE_YN").toString());
+			userInfo.setAttr01(userList.get(0).get("ATTR01").toString());
+			request.getSession().setAttribute("USER_INFO", userInfo);
+			//re.addAttribute("LOGIN_YN", "Y");
+			return "redirect:/admin/main.do";
+		}
 		
-		return "redirect:/admin/main.do";
 	}
 	
+	/*
+	 * 관리자 로그아웃
+	 */
 	@RequestMapping(value = "/admin/login/logout.do")
 	public String adminLoginOut(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {
 		request.getSession().invalidate();
@@ -98,6 +136,9 @@ public class WebController {
 		return "redirect:/admin/login.do";
 	}
 	
+	/*
+	 * 관리자 메인페이지 접속
+	 */
 	@RequestMapping(value = "/admin/main.do")
 	public String adminMain(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
@@ -107,6 +148,9 @@ public class WebController {
 		return "admin/adminMain";
 	}
 	
+	/*
+	 * 사용자 조회
+	 */
 	@RequestMapping(value = "/admin/user/userMng.do")
 	public String userMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
@@ -116,6 +160,9 @@ public class WebController {
 		return "admin/user/userMng";
 	}
 	
+	/*
+	 * 사용자 저장
+	 */
 	@RequestMapping(value = "/admin/user/saveUser.do")
 	public String saveUser(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
@@ -126,6 +173,9 @@ public class WebController {
 		return "redirect:/admin/user/userMng.do";
 	}	
 	
+	/*
+	 * 코드그룹 조회
+	 */
 	@RequestMapping(value = "/admin/code/groupMng.do")
 	public String groupMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
@@ -135,6 +185,9 @@ public class WebController {
 		return "admin/code/groupMng";
 	}
 	
+	/*
+	 * 해당 코드그룹의 코드조회
+	 */
 	@RequestMapping(value = "/admin/code/codeMng.do")
 	public String codeMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
@@ -146,6 +199,9 @@ public class WebController {
 		return "admin/code/codeMng";
 	}
 	
+	/*
+	 * 코드그룹 저장
+	 */
 	@RequestMapping(value = "/admin/code/saveCodeGroup.do")
 	public String saveGroup(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
@@ -156,6 +212,9 @@ public class WebController {
 		return "redirect:/admin/code/groupMng.do";
 	}
 	
+	/*
+	 * 해당 코드그룹의 코드 저장
+	 */
 	@RequestMapping(value = "/admin/code/saveCode.do")
 	public String saveCode(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
@@ -165,6 +224,32 @@ public class WebController {
 		
 		return "redirect:/admin/code/codeMng.do?GROUP_ID="+params.get("GROUP_ID");
 	}
+	
+	/*
+	 * 메인메뉴 조회
+	 */
+	@RequestMapping(value = "/admin/menu/mainMenuMng.do")
+	public String mainMenuMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		List<Map<String, Object>> mainMenuList = webService.selectMenuByTree();
+		model.addAttribute("MAIN_MENU", mainMenuList);
+		
+		return "admin/menu/mainMenuMng";
+	}
+	
+	/*
+	 * 해당 메뉴그룹의 서브메뉴 조회
+	 */
+	@RequestMapping(value = "/admin/menu/subMenuMng.do")
+	public String subMenuMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		List<Map<String, Object>> subMenuList = webService.selectMenu(params);
+		
+		model.addAttribute("PARENT_MENU_ID", params.get("PARENT_MENU_ID"));
+		model.addAttribute("SUB_MENU", subMenuList);
+		
+		return "admin/menu/subMenuMng";
+	}	
 	
 	@RequestMapping(value = "/admin/board/write.do")
 	public String boardWrite(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {

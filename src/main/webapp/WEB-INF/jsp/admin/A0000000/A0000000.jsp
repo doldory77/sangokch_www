@@ -17,7 +17,7 @@
   </head>
   <body>
   	<div class="container-fluid">
-	  	<div class="fs-4"><span class="material-symbols-outlined">local_florist</span><span>홈페이지 메인 관리</span></div>
+	  	<div class="fs-4"><span>홈페이지 메인 관리</span></div>
 		<a class="btn btn-sm btn-secondary" href="/admin/board/write.do">작성</a>
 		<a href="/admin/main.do">관리자 메인</a>
 	</div>

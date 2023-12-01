@@ -33,6 +33,7 @@
 			 , MENU_LEVEL
 			 , ORD_NO
 			 , URL
+			 , MNG_URL
 			 , PARENT_MENU_ID
 		 FROM H_MENU 
 		WHERE PARENT_MENU_ID = #{PARENT_MENU_ID}
@@ -119,4 +120,5 @@
 			, #{SEARCH_KEYWORD, mode=IN, jdbcType=VARCHAR}
 		) }
 	</select>
+	
 </mapper>

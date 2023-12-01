@@ -34,6 +34,9 @@
 					<div class="mb-3">
 						<label for="userId" class="form-label">사용자 ID</label>
 						<input type="text" class="form-control" name="USER_ID" id="userId">
+						<c:if test="${not empty LOGIN_YN and LOGIN_YN eq 'N'}">
+						<div class="form-text text-danger">사용자ID 또는 패스워드가 일치하지 안습니다.</div>
+						</c:if>
 					</div>
 					<div class="mb-3">
 						<label for="userPW" class="form-label">사용자 PW</label>

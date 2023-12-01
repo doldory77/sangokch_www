@@ -43,12 +43,12 @@
 			width: 120px;
 			
 		}
-		.group-main-menu:hover {
+		/*.group-main-menu:hover {
 			color: white;
 		}
 		.group-main-menu+span {
 			color: white;
-		}
+		}*/
 		.menu-nm {
 			display: inline-block;
 			width: 120px;
@@ -65,15 +65,25 @@
 			<div class="col">
 				<div class="group-menu-wrapper">
 					<div class="group-menu d-flex justify-content-between align-items-center bg-primary px-1">
-						<span><a class="group-main-menu" href="/admin/adminPage.do?GROUP_ID=A0000000&SCREEN_YN=Y&PAGE=A0000000">${mainMenu.MENU_NM}</a><span style="font-size:0.8rem;">${mainMenu.MENU_ID}</span></span>
+					<c:choose>
+						<c:when test="${not empty mainMenu.MNG_URL}">
+						<a href="${mainMenu.MNG_URL}">
+						</c:when>
+						<c:otherwise>
+						<a>
+						</c:otherwise>
+					</c:choose>	
+							<span class="group-main-menu">${mainMenu.MENU_NM}</span>
+							<span style="font-size:0.8rem;">${mainMenu.MENU_ID}</span>
+						</a>
 						<span>
 							<input class="d-none" id="menu${status.count}" type="checkbox">
-							<label style="cursor: pointer;" for="menu${status.count}"><span class="material-symbols-outlined">expand_more</span></label>
+							<label style="color: white; cursor: pointer;" for="menu${status.count}"><span class="material-symbols-outlined">expand_more</span></label>
 						</span>
 					</div>
 					<ul>
 						<c:forEach var="sumMenu" items="${mainMenu.SUB_MENU}">
-						<li style="cursor: pointer;"><span class="menu-nm">${sumMenu.MENU_NM}</span><span style="font-size:0.8rem;">${sumMenu.MENU_ID}</span></li>
+						<li style="cursor: pointer;"><a href="${sumMenu.MNG_URL}"><span class="menu-nm">${sumMenu.MENU_NM}</span><span style="font-size:0.8rem;">${sumMenu.MENU_ID}</span></a></li>
 						</c:forEach>
 					</ul>
 				</div>

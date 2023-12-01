@@ -15,7 +15,7 @@
 	<div class="container-md">
 		<form method="POST" action="/admin/code/saveCodeGroup.do">
 			<fieldset>
-				<legend>그룹코드 등록</legend>
+				<legend>그룹코드 등록<a href="/admin/main.do">관리자 메인</a></legend>
 				<div class="mb-3">
 					<label for="groupId" class="form-label">그룹코드</label>
 					<input type="text" name="GROUP_ID" class="form-control" id="groupId">
