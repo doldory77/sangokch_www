@@ -74,7 +74,7 @@ public class WebController {
 		model.addAttribute("MENU_LIST", menuList);
 		for (int i=menuList.size()-1; i>=0; i--) {
 			if ("G0000000".equals(menuList.get(i).get("MENU_ID"))) {
-				menuList.remove(i);
+				menuList.get(i).put("SUB_MENU", null);
 				break;
 			}
 		}
