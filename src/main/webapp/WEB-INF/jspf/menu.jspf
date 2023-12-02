@@ -31,7 +31,7 @@
 	      <c:forEach var="mMenu" items="${MENU_LIST}" varStatus="statusM">
 	      <div class="main_menu">
 	        <input type="radio" name="main_menu_btn" id="main_id${statusM.count}">
-	        <label for="main_id${statusM.count}">${mMenu.MENU_NM}</label>
+	        <label for="main_id${statusM.count}" onclick="mainMenuClick('${mMenu.URL}');">${mMenu.MENU_NM}</label>
 	        <nav class="sub_menu_wrapper">
 	          <c:forEach var="sMenu" items="${mMenu.SUB_MENU}" varStatus="statusS">
 	          <div class="sub_menu">
@@ -154,5 +154,9 @@
 	  function clearPopContent() {
 		  $('#popupTitle').html('');
 		  $('#popupContent').html('');
+	  }
+	  
+	  function mainMenuClick(url) {
+		  if (url) location.href = url; 
 	  }
 	  </script>

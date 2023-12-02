@@ -108,6 +108,7 @@
 			  	<input type="hidden" name="DEL_YN" value="N">
 			  	<input type="hidden" name="SEQ_NO" value="${not empty BOARD_DTL ? BOARD_DTL.SEQ_NO : '0'}">
 			  	<input type="hidden" name="DEPTH_NO" value="${not empty BOARD_DTL ? BOARD_DTL.DEPTH_NO : '0.0'}">
+			  	<input type="hidden" name="PAGE" value="${not empty PAGE ? PAGE : ''}">
 		  	
 		  	</fieldset>
 	  	</form>

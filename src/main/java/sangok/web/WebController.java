@@ -265,6 +265,8 @@ public class WebController {
 		model.addAttribute("TagCodeList", TagCodeList);
 		model.addAttribute("BOARD_DTL", JList.get(boardDtlList, 0));
 		model.addAttribute("CURR_PAGE", request.getParameter("CURR_PAGE"));
+		model.addAttribute("PAGE", params.get("PAGE"));
+		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
 		return "admin/board/write";
 	}
 	
@@ -281,7 +283,11 @@ public class WebController {
 		
 		
 		//return this.boardWrite(params, model, request);
-		return "redirect:/admin/board/list.do?CURR_PAGE=" + params.get("CURR_PAGE") + "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
+		//return "redirect:/admin/board/list.do?CURR_PAGE=" + params.get("CURR_PAGE") + "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
+		return "redirect:/admin/adminPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
+			+ "&PAGE=" + params.get("PAGE")
+			+ "&SCREEN_YN=" + params.get("SCREEN_YN")
+			+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
 	}
 	
 	private List<Map<String, Object>> setBoardListInitParams(Map<String, Object> params, ModelMap model) throws Exception {
