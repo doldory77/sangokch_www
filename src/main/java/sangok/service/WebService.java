@@ -3,7 +3,11 @@ package sangok.service;
 import java.util.List;
 import java.util.Map;
 
+import sangok.service.impl.WebMapper;
+
 public interface WebService {
+	
+	WebMapper getMapper();
 
 	List<Map<String, Object>> selectMenu(Map<String, Object> params) throws Exception;
 	

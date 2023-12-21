@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -56,36 +58,111 @@ public class WebController {
 	@Resource(name = "webService")
 	private WebService webService;
 	
-	List<Map<String, Object>> menuList = null; 
-
+	private List<Map<String, Object>> menuList = null;
+	
+	private Pattern p = Pattern.compile("^/([A-Z]{1,2}[0]{2,3}0{3}[1-9]{1})[.]do$");
+	
+	/*
+	 * 페이지 요청시 메뉴 공통처리
+	 */
+	private void commProcessSetMenu(boolean excludeAdmMenuYn, ModelMap model) throws Exception {
+		if (menuList == null) {
+			menuList = webService.selectMenuByTree();
+		}
+		if (excludeAdmMenuYn) {
+			/*관리자메뉴는 제외*/
+			model.addAttribute("MENU_LIST", menuList);
+			for (int i=menuList.size()-1; i>=0; i--) {
+				if ("G0000000".equals(menuList.get(i).get("MENU_ID"))) {
+					menuList.get(i).put("SUB_MENU", null);
+					break;
+				}
+			}
+		}
+	}
+	
+	/*
+	 * 페이지 요청시 메뉴 하이라이트
+	 */
+	private void commProcessMenuHighlight(HttpServletRequest request, ModelMap model) throws Exception {
+		String serveltPath = request.getServletPath();
+		Matcher m = p.matcher(serveltPath);
+		if (m.find()) {
+			String S_MENU = m.group(1);
+			model.addAttribute("M_MENU", S_MENU.substring(0, 2) + "000000");
+			model.addAttribute("S_MENU", S_MENU);
+			Map<String, Object> map = webService.getMapper().selectMenuNm(S_MENU);
+			model.addAttribute("TITLE", map.get("TITLE"));
+		}
+		
+	}
+	
+	/*
+	 * 게시판 내용중 <h1></h1> 이스케이프 처리
+	 */
+	@SuppressWarnings("unchecked")
+	private void commProcessEscapeBoard(String[] boardNameList
+			, Boolean[] boardListYn
+			, ModelMap model) throws Exception {
+		if (boardNameList != null && boardListYn != null && boardNameList.length == boardListYn.length) {			
+			for (int i=0; i<boardNameList.length; i++) {
+				if (boardListYn[i] == true) {
+					if (model.get(boardNameList[i]) != null) { model.addAttribute(boardNameList[i], JMap.replaceFirst((List<Map<String, Object>>) model.get(boardNameList[i]), "CONTENT", "<h1>.+</h1>", "")); }
+				} else {
+					if (model.get(boardNameList[i]) != null) { model.addAttribute(boardNameList[i], JMap.replaceFirst((List<Map<String, Object>>) model.get(boardNameList[i]), "CONTENT", "<h1>.+</h1>", "").get(0)); }
+				}
+			}
+		}
+	}
+	
 	/*
 	 * 사용자 홈페이지 접속
 	 */
 	@RequestMapping(value = "/home.do")
 	public String home(HttpSession session, ModelMap model) throws Exception {
 		
-		if (menuList == null) {
-			menuList = webService.selectMenuByTree();
-		}
+//		if (menuList == null) {
+//			menuList = webService.selectMenuByTree();
+//		}
+		/*관리자메뉴는 제외*/
+//		model.addAttribute("MENU_LIST", menuList);
+//		for (int i=menuList.size()-1; i>=0; i--) {
+//			if ("G0000000".equals(menuList.get(i).get("MENU_ID"))) {
+//				menuList.get(i).put("SUB_MENU", null);
+//				break;
+//			}
+//		}
+		
+		commProcessSetMenu(true, model);
+		
 		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").build());
 		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").build());
 		
-		/*관리자메뉴는 제외*/
-		model.addAttribute("MENU_LIST", menuList);
-		for (int i=menuList.size()-1; i>=0; i--) {
-			if ("G0000000".equals(menuList.get(i).get("MENU_ID"))) {
-				menuList.get(i).put("SUB_MENU", null);
-				break;
-			}
-		}
-		model.addAttribute("MAIN01", JMap.replaceFirst(MAIN01, "CONTENT", "<h1>.+</h1>", "").get(0));
-		model.addAttribute("MAIN02_LIST", JMap.replaceFirst(MAIN02, "CONTENT", "<h1>.+</h1>", ""));
+		model.addAttribute("MAIN01", MAIN01);
+		model.addAttribute("MAIN02_LIST", MAIN02);
+		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
+		
+//		model.addAttribute("MAIN01", JMap.replaceFirst(MAIN01, "CONTENT", "<h1>.+</h1>", "").get(0));
+//		model.addAttribute("MAIN02_LIST", JMap.replaceFirst(MAIN02, "CONTENT", "<h1>.+</h1>", ""));
 		
 //		for (String beanName : beanFactory.getBeanDefinitionNames()) {
 //			LOGGER.debug("class : " + beanFactory.getBean(beanName).getClass().getName());
 //		}
 		
 		return "home/main";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/B0000001.do")
+	public String b0000001(HttpServletRequest request, ModelMap model) throws Exception {		
+		//LOGGER.debug("servlet path : " + request.getServletPath());
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+//		model.addAttribute("M_MENU", "B0000000");
+//		model.addAttribute("S_MENU", "B0000001");
+		return "home/B0000000/B0000001";
 	}
 	
 	/*

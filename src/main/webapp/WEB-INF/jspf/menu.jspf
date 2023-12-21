@@ -26,17 +26,18 @@
 	  
 	  <!-- Header Menu -->
 	  <nav class="menu_bar" id="menu_bar">
-	    <div>Navbar</div>
+	    <div>산곡교회</div>
 	    <div class="main_menu_wrapper d-none d-lg-flex">
 	      <c:forEach var="mMenu" items="${MENU_LIST}" varStatus="statusM">
 	      <div class="main_menu">
-	        <input type="radio" name="main_menu_btn" id="main_id${statusM.count}">
+	        <input type="radio" name="main_menu_btn" id="main_id${statusM.count}" <c:if test="${M_MENU eq mMenu.MENU_ID}">checked</c:if> >
 	        <label for="main_id${statusM.count}" onclick="mainMenuClick('${mMenu.URL}');">${mMenu.MENU_NM}</label>
+	        <!-- Sub Menu -->
 	        <nav class="sub_menu_wrapper">
 	          <c:forEach var="sMenu" items="${mMenu.SUB_MENU}" varStatus="statusS">
 	          <div class="sub_menu">
-	            <input type="radio" name="sub_menu_btn" id="main_id${statusM.count}_sub_id${statusM.count}">
-	            <label for="main_id${statusM.count}_sub_id${statusM.count}">${sMenu.MENU_NM}</label>
+	            <input type="radio" name="sub_menu_btn" id="main_id${statusM.count}_sub_id${statusM.count}" <c:if test="${S_MENU eq sMenu.MENU_ID}">checked</c:if> >
+	            <label for="main_id${statusM.count}_sub_id${statusM.count}" onclick="mainMenuClick('${sMenu.URL}');">${sMenu.MENU_NM}</label>
 	          </div>
 	          </c:forEach>
 	        </nav>

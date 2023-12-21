@@ -19,7 +19,12 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 	Pattern imgPattern = Pattern.compile("\"(/images/board/img_.*[.].{3})\"");
 	
 	@Autowired
-	WebMapper webMapper;
+	private WebMapper webMapper;
+	
+	@Override
+	public WebMapper getMapper() {
+		return webMapper;
+	}
 	
 	@Override
 	public List<Map<String, Object>> selectMenu(Map<String, Object> params) throws Exception {

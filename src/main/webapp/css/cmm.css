@@ -34,3 +34,20 @@ a, a:hover, a:visited, a:link, a:active {
     background-position: center;
     background-repeat: no-repeat;
 }
+.pageBodyW {
+	padding-top: 100px;
+}
+.pageBodyM {
+	padding-top: 0px;
+}
+.readyDiv {
+	width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+.readyImg {
+	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

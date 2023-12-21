@@ -7,6 +7,11 @@
 		{ CALL SP_GET_CODE_GROUP() }
     </select>
     
+	<select id="selectMenuNm" parameterType="string" resultType="map">
+		/*WebMapper.selectMenuNm*/
+		SELECT FN_GET_MENU_NM(#{MENU_ID}) AS TITLE
+    </select>    
+    
     <update id="updateCodeGroup" statementType="CALLABLE" parameterType="map">
     	{ CALL SP_MERGE_CODE_GROUP(
     		#{RTN_MSG, mode=INOUT, jdbcType=VARCHAR}

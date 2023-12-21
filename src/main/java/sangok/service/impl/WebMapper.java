@@ -37,4 +37,6 @@ public interface WebMapper {
 	List<Map<String, Object>> selectHymn(Map<String, Object> params) throws Exception;
 	
 	Map<String, Object> selectUserByIdPw(Map<String, Object> params) throws Exception;
+	
+	Map<String, Object> selectMenuNm(String menuId) throws Exception;
 }
