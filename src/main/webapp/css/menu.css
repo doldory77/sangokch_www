@@ -15,6 +15,7 @@
     justify-content: right;
     align-items: center;
     padding: 5px;
+    z-index: 100;
     transition: all .35s;
 }
 .search_bar input[type='checkbox'] {
@@ -33,7 +34,8 @@
     position: fixed;
     background: rgba(0,0,0,0.3);
     justify-content: center;
-    align-items: center;	
+    align-items: center;
+    z-index: 999;	
 }
 
 .popup-body {
@@ -65,6 +67,7 @@
   align-items: center;
   padding: 0 10px; 
   height: var(--menu-bar-height);
+  z-index: 10;
   transition: all .35s;
 }
 #menu_bar.active {
@@ -127,8 +130,9 @@ nav.menu_bar:has(input[id="menuicon"]:checked) + div.mbl_side_menu { left: 0px; 
   /*position: relative;*/  
 }
 .mbl_side_menu {
-  position: absolute;
-  top: var(--menu-bar-height);
+  position: fixed;
+  /*top: var(--menu-bar-height);*/
+  padding-top: 20px;
   left: -300px;
   width: 300px;
   height: 100vh;

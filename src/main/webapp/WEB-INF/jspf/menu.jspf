@@ -31,13 +31,13 @@
 	      <c:forEach var="mMenu" items="${MENU_LIST}" varStatus="statusM">
 	      <div class="main_menu">
 	        <input type="radio" name="main_menu_btn" id="main_id${statusM.count}" <c:if test="${M_MENU eq mMenu.MENU_ID}">checked</c:if> >
-	        <label for="main_id${statusM.count}" onclick="mainMenuClick('${mMenu.URL}');">${mMenu.MENU_NM}</label>
+	        <label for="main_id${statusM.count}" onclick="menuClick('${mMenu.URL}');">${mMenu.MENU_NM}</label>
 	        <!-- Sub Menu -->
 	        <nav class="sub_menu_wrapper">
 	          <c:forEach var="sMenu" items="${mMenu.SUB_MENU}" varStatus="statusS">
 	          <div class="sub_menu">
 	            <input type="radio" name="sub_menu_btn" id="main_id${statusM.count}_sub_id${statusM.count}" <c:if test="${S_MENU eq sMenu.MENU_ID}">checked</c:if> >
-	            <label for="main_id${statusM.count}_sub_id${statusM.count}" onclick="mainMenuClick('${sMenu.URL}');">${sMenu.MENU_NM}</label>
+	            <label for="main_id${statusM.count}_sub_id${statusM.count}" onclick="menuClick('${sMenu.URL}');">${sMenu.MENU_NM}</label>
 	          </div>
 	          </c:forEach>
 	        </nav>
@@ -59,11 +59,14 @@
 	  
 	  <!-- Side Menu -->
 	  <div class="mbl_side_menu">
-	  
+	  	<!-- Side Menu Off Button -->
+	    <div class="text-end px-2">
+	      <span class="material-symbols-outlined" onclick="menuClose();" style="font-size:32px; cursor:pointer;">close</span>
+	    </div>
 	  	<c:forEach var="mmMenu" items="${MENU_LIST}" varStatus="statusM">
 	    <div>
 	      <input type="radio" name="mbl_main_menu_btn" id="mbl_side_main_menu${statusM.count}">
-	      <label for="mbl_side_main_menu${statusM.count}">
+	      <label for="mbl_side_main_menu${statusM.count}" onclick="menuClick('${mmMenu.URL}');">
 	      	<span>${mmMenu.MENU_NM}</span>
 	      	<span class="material-symbols-outlined">chevron_right</span>
 	      </label>
@@ -71,7 +74,7 @@
 	      <c:forEach var="msMenu" items="${mmMenu.SUB_MENU}" varStatus="statusS">
 	          <div class="mbl_sub_menu">
 	            <input type="checkbox" name="mbl_sub_menu_btn" id="mbl_main_id${statusM.count}_sub_id${statusS.count}">
-	            <label for="mbl_main_id1_sub_id${statusS.count}">${msMenu.MENU_NM}</label>
+	            <label for="mbl_main_id1_sub_id${statusS.count}" onclick="menuClick('${msMenu.URL}');">${msMenu.MENU_NM}</label>
 	          </div>
 	      </c:forEach>
 	      </div>      
@@ -157,7 +160,11 @@
 		  $('#popupContent').html('');
 	  }
 	  
-	  function mainMenuClick(url) {
+	  function menuClick(url) {
 		  if (url) location.href = url; 
+	  }
+	  
+	  function menuClose() {
+		  $('#menuicon').prop('checked',false);
 	  }
 	  </script>
