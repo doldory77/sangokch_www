@@ -11,16 +11,28 @@
 	<title>코드관리</title>
 </head>
 <body>
-	<div class="container-md">
-		
+  	<div>
+		<div class="admin-header fs-3 d-flex justify-content-between align-content-end p-2">
+		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/home.do'">산곡교회</span>
+		    <span class="py-1 align-self-baseline">코드관리</span>
+		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/admin/login/logout.do'">LOG-OUT</span>
+		</div>
+		<div class="mb-2 ps-2 py-1">
+			<span onclick="javascript:location.href='/admin/main.do'">홈페이지 관리 홈</span>
+			<span>&nbsp;&gt;&nbsp;</span>
+			<span onclick="javascript:location.href='/admin/code/groupMng.do'">그룹코드관리</span>
+			<span>&nbsp;&gt;&nbsp;</span>
+			<span>세부코드관리</span>
+		</div>
+	</div>
+	<div class="container-fluid">
 		<form method="POST" action="/admin/code/saveCode.do">
 			<fieldset>
-				<legend>세부코드 등록</legend>
+				<legend></legend>
 				<div class="mb-3">
 					<label for="groupId" class="form-label">그룹코드</label>
 					<div>
 						<input style="display:inline-block; width:auto" type="text" name="GROUP_ID" readonly class="form-control-plaintext" id="groupId" value="${GROUP_ID}">
-						<a href="/admin/code/groupMng.do" class="btn-sm btn-secondary">코드그룹으로 이동</a>
 					</div>
 					<div class="form-text">세부코드를 구분하는 그룹코드입니다.(예: )</div>
 				</div>

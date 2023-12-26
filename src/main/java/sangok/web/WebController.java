@@ -139,13 +139,14 @@ public class WebController implements InitializingBean {
 		return list;
 	}
 	
+	@SuppressWarnings("unused")
 	private boolean isDebug = true;
 	
 	/*
 	 * 디버그 출력
 	 */
-	private void debug(String str) {
-		if (isDebug = true) LOGGER.debug("==========> " + str);
+	private void debug(Object obj) {
+		if (isDebug = true && obj != null) LOGGER.debug("==========> " + obj);
 	}
 	
 /***************************************************************************************************************************/	
@@ -217,11 +218,12 @@ public class WebController implements InitializingBean {
 			re.addAttribute("LOGIN_YN", "N");
 			return "redirect:/admin/login.do";
 		} else {
+			Map<String, Object> map = userList.get(0); 
 			UserInfo userInfo = new UserInfo();
-			userInfo.setId(userList.get(0).get("ID").toString());
-			userInfo.setAdmYn(userList.get(0).get("ADM_YN").toString());
-			userInfo.setUseYn(userList.get(0).get("USE_YN").toString());
-			userInfo.setAttr01(userList.get(0).get("ATTR01").toString());
+			userInfo.setId(map.get("ID").toString());
+			userInfo.setAdmYn(map.get("ADM_YN").toString());
+			userInfo.setUseYn(map.get("USE_YN").toString());
+			userInfo.setAttr01(map.get("ATTR01").toString());
 			request.getSession().setAttribute("USER_INFO", userInfo);
 			//re.addAttribute("LOGIN_YN", "Y");
 			return "redirect:/admin/main.do";
@@ -236,7 +238,8 @@ public class WebController implements InitializingBean {
 	public String adminLoginOut(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {
 		request.getSession().invalidate();
 		
-		return "redirect:/admin/login.do";
+		//return "redirect:/admin/login.do";
+		return "redirect:/home.do";
 	}
 	
 	/*
@@ -356,19 +359,27 @@ public class WebController implements InitializingBean {
 	 */
 	@RequestMapping(value = "/admin/board/write.do")
 	public String boardWrite(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {
-		LOGGER.debug(params + "");
+		debug("[BAORD WRITE PARAMETERS] " + params);
 		List<Map<String, Object>> groupIdList = webService.selectMenu(JMap.instance("P_MENU_GROUP", null).put("P_DEPTH_CHAR", "--").build());
 		List<Map<String, Object>> YNCodeList = webService.selectCode(JMap.instance("GROUP_ID", "CD0000").put("USE_YN", "Y").build());
 		List<Map<String, Object>> TagCodeList = webService.selectCode(JMap.instance("GROUP_ID", "CD0001").put("USE_YN", "Y").build());
-		List<Map<String, Object>> boardDtlList = webService.selectBoardDtl(params);
-		LOGGER.debug("BOARD_DTL === " + boardDtlList);
+		List<Map<String, Object>> boardDtlList = null;
+		model.addAttribute("BOARD_DTL", null);
+		if (params.get("SEQ_NO") != null) {			
+			boardDtlList = webService.selectBoardDtl(params);
+			debug("[BOARD_DTL] " + boardDtlList);
+			model.addAttribute("BOARD_DTL", JList.get(boardDtlList, 0));
+		}
 		model.addAttribute("groupIdList", groupIdList);
 		model.addAttribute("YNCodeList", YNCodeList);
 		model.addAttribute("TagCodeList", TagCodeList);
-		model.addAttribute("BOARD_DTL", JList.get(boardDtlList, 0));
 		model.addAttribute("CURR_PAGE", request.getParameter("CURR_PAGE"));
 		model.addAttribute("PAGE", params.get("PAGE"));
 		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
+		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
+		if (params.get("GROUP_ID") != null) {
+			model.addAttribute("TITLE", webService.getMapper().selectMenuNm(params.get("GROUP_ID").toString()).get("TITLE"));
+		}
 		return "admin/board/write";
 	}
 	
@@ -381,10 +392,10 @@ public class WebController implements InitializingBean {
 		params.put("RTN_MSG", "");
 		params.put("USER_ID", "SYS_TEST");
 		
-		LOGGER.debug("==========> " + params);
+		debug(params);
 		webService.updateBoard(params);
-		LOGGER.debug("==========> " + JStr.toStr(params.get("SEQ_NO")));
-		LOGGER.debug("==========> " + JStr.toStr(params.get("RTN_MSG")));
+		debug(JStr.toStr(params.get("SEQ_NO")));
+		debug(JStr.toStr(params.get("RTN_MSG")));
 		
 		return "redirect:/admin/adminPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
 			+ "&PAGE=" + params.get("PAGE")
@@ -412,6 +423,10 @@ public class WebController implements InitializingBean {
 	 */
 	@RequestMapping(value = "/admin/adminPage.do")
 	public String adminPage(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		debug("[ADMIN PAGE PARAMS] " + params);
+		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
+		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
+		model.addAttribute("PAGE", params.get("PAGE"));
 		String jspAdminPage = params.get("PAGE").toString();
 		this.setBoardListInitParams(params, model);
 		
@@ -424,7 +439,7 @@ public class WebController implements InitializingBean {
 	@RequestMapping(value = "/bibleAndHymn.do")
 	public String bibleAndHymn(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		params.put("RTN_MSG", "SUCCESS");
-		LOGGER.debug("========= " + params.toString());
+		debug(params);
 		List<Map<String, Object>> list = webService.selectBibleAndHymn(params);
 		model.put("dvsn", params.get("DVSN"));
 		model.put("title", params.get("SEARCH_KEYWORD"));
@@ -441,7 +456,7 @@ public class WebController implements InitializingBean {
 	@RequestMapping(value = "/jsonTest.do")
 	public Map<String, Object> jsonTest(@RequestBody Map<String, Object> params, ModelMap model) throws Exception {
 		
-		LOGGER.debug(params.toString());
+		debug(params);
 		model.put("dvsn", "A");
 		model.put("title", "B");
 		model.put("cnt", 0);
@@ -464,7 +479,7 @@ public class WebController implements InitializingBean {
 			for (MultipartFile mf : fileList) {
 				if (fileList.get(0).getSize() > 0) {
 					String originFileName = mf.getOriginalFilename();
-					LOGGER.debug("originFileName == " + originFileName);
+					debug("[originFileName] " + originFileName);
 					String ext = FilenameUtils.getExtension(originFileName);
 					String newlnfImgFileName = "img_" + UUID.randomUUID() + "." + ext;
 					imgPath = imgUrlPath + newlnfImgFileName;

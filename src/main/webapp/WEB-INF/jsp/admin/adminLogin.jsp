@@ -50,13 +50,6 @@
 	</div>
 </body>
 	<script>
-		var selectCode = function(that) {
-			var v_code = $(that).text();
-			var $tr = $(that).closest('tr');
-			//alert(v_groupId + '/' + $tr.children('td:eq(1)').text());
-			$('#code').val(v_code);
-			$('#codeNm').val($tr.children('td:eq(3)').text());
-			$('#useYn').val($tr.children('td:eq(4)').text()).prop('selected', true);
-		}
+		
 	</script>
 </html>

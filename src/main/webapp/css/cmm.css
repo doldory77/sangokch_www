@@ -52,3 +52,21 @@ a, a:hover, a:visited, a:link, a:active {
     transform: translate(-50%, -50%);
     z-index: -10;
 }
+.admin-header {
+	color: white;
+	background-color: #BF3131;
+}
+.admin-header span:first-child {
+	cursor: pointer;
+}
+.admin-header span:last-child {
+	cursor: pointer;
+}
+.admin-header + div {
+	color: #7D0A0A;
+	font-size: 0.8rem;
+	background-color: #EAD196;
+}
+.admin-header + div > span {
+	cursor: pointer;
+}

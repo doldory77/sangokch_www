@@ -58,8 +58,18 @@
   	
   </head>
   <body>
+  	<div>
+		<div class="admin-header fs-3 d-flex justify-content-between align-content-end p-2">
+		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/home.do'">산곡교회</span>
+		    <span class="py-1 align-self-baseline">홈페이지 관리 홈</span>
+		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/admin/login/logout.do'">LOG-OUT</span>
+		</div>
+		<div class="mb-2 ps-2 py-1">
+			<span>홈페이지 관리 홈</span>
+		</div>
+	</div>  
 	<div class="container-fluid">
-		<div class="fs-4"><span>메뉴별 페이지 관리</span></div>
+
 		<div class="row g-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3">
 			<c:forEach var="mainMenu" items="${MENU_LIST}" varStatus="status">
 			<div class="col">

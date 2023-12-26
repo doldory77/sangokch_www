@@ -22,11 +22,25 @@
   	
 </head>
 <body>
+  	<div>
+		<div class="admin-header fs-3 d-flex justify-content-between align-content-end p-2">
+		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/home.do'">산곡교회</span>
+		    <span class="py-1 align-self-baseline">${not empty SEQ_NO ? '게시판(상세)' : '게시판(작성)'}</span>
+		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/admin/login/logout.do'">LOG-OUT</span>
+		</div>
+		<div class="mb-2 ps-2 py-1">
+			<span onclick="javascript:location.href='/admin/main.do'">홈페이지 관리 홈</span>
+			<c:if test="${not empty TITLE}">
+			<span>&nbsp;&gt;&nbsp;</span>
+			<span onclick="javascript:location.href='/admin/adminPage.do?GROUP_ID=${GROUP_ID}&SCREEN_YN=${SCREEN_YN}&PAGE=${PAGE}'">${TITLE eq 'HOME' ? '메인화면 관리' : TITLE}</span>	
+			</c:if>
+		</div>
+	</div>
 	<div class="container-md">
   		
 		<form name="frm" method="POST" id="frm" action="/admin/board/save.do">
 			<fieldset>
-				<legend>게시판(작성)</legend>
+				<legend></legend>
 			
 			  	<div class="row align-items-center mb-2">
 			  		<div class="col-md-1">
