@@ -24,7 +24,7 @@
 			<span>그룹코드관리</span>
 		</div>
 	</div>  
-	<div class="container-fluid">
+	<div class="container-md">
 		<form method="POST" action="/admin/code/saveCodeGroup.do">
 			<fieldset>
 				<div class="mb-3">

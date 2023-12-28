@@ -12,10 +12,22 @@
 	
 </head>
 <body>
+  	<div>
+		<div class="admin-header fs-3 d-flex justify-content-between align-content-end p-2">
+		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/home.do'">산곡교회</span>
+		    <span class="py-1 align-self-baseline">사용자관리</span>
+		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/admin/login/logout.do'">LOG-OUT</span>
+		</div>
+		<div class="mb-2 ps-2 py-1">
+			<span onclick="javascript:location.href='/admin/main.do'">홈페이지 관리 홈</span>
+			<span>&nbsp;&gt;&nbsp;</span>
+			<span>사용자관리</span>
+		</div>
+	</div>
 	<div class="container-md">
 		<form method="POST" action="/admin/user/saveUser.do">
 			<fieldset>
-				<legend>사용자 등록<a href="/admin/main.do">관리자 메인</a></legend>
+				<legend></legend>
 				<div class="mb-3">
 					<label for="userId" class="form-label">사용자 ID</label>
 					<input type="text" name="ID" class="form-control" id="userId">

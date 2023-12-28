@@ -25,7 +25,7 @@
 			<span>세부코드관리</span>
 		</div>
 	</div>
-	<div class="container-fluid">
+	<div class="container-md">
 		<form method="POST" action="/admin/code/saveCode.do">
 			<fieldset>
 				<legend></legend>
