@@ -34,7 +34,7 @@
 					<div class="form-text">하위메뉴를 구분하는 상위메뉴입니다.(예: )</div>
 				</div>
 				<div class="mb-3">
-					<label for="menuNm" class="form-label">그룹코드명</label>
+					<label for="menuNm" class="form-label">메뉴명</label>
 					<input type="text" name="MENU_NM" class="form-control" id="menuNm">
 				</div>
 				<div class="text-end"><button type="submit" class="btn btn-primary">수정</button></div>

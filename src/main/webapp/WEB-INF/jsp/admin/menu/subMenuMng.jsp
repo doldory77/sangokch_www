@@ -34,49 +34,44 @@
 					<div>
 						<input style="display:inline-block; width:auto" type="text" name="PARENT_MENU_ID" readonly class="form-control-plaintext" id="parentMenuId" value="${PARENT_MENU_ID}">
 					</div>
-					<div class="form-text">상위메뉴를 구분하는 메뉴ID입니다.(예: )</div>
+					<div class="form-text"></div>
 				</div>
 				<div class="mb-3">
-					<label for="code" class="form-label">코드</label>
-					<input type="text" name="CODE" class="form-control" id="code">
-					<div class="form-text">세부코드</div>
+					<label for="menuId" class="form-label">메뉴ID</label>
+					<input type="text" name="MENU_ID" class="form-control" id="menuId">
+					<div class="form-text">상위메뉴에 소속된 하위메뉴입니다.</div>
 				</div>
 				<div class="mb-3">
-					<label for="codeNm" class="form-label">코드명</label>
-					<input type="text" name="CODE_NM" class="form-control" id="codeNm">
+					<label for="menuNm" class="form-label">메뉴명</label>
+					<input type="text" name="MENU_NM" class="form-control" id="menuNm">
 				</div>
-				<div class="mb-3">
+				<!-- <div class="mb-3">
 					<label for="useYn" class="form-label">사용여부</label>
 					<select class="form-select" name="USE_YN" id="useYn">
 						<option value="Y">Y</option>
 						<option value="N">N</option>
 					</select>
-				</div>
-				<div class="text-end"><button type="submit" class="btn btn-primary">생성(수정)</button></div>
+				</div> -->
+				<div class="text-end"><button type="submit" class="btn btn-primary">수정</button></div>
 			</fieldset>
 		</form>
 		
 		<table class="table caption-top mt-4">
-			<caption>세부코드목록</caption>
+			<caption>서브메뉴목록</caption>
 			<thead>
 				<tr style="background-color:#F3F0CA">
 					<th scope="col">#</th>
-					<th scope="col">그룸코드ID</th>
-					<th scope="col">그룹코드명</th>
-					<th scope="col">세부코드</th>
-					<th scope="col">세부코드명</th>
-					<th scope="col">사용여부</th>
+					<th scope="col">메뉴ID</th>
+					<th scope="col">메뉴명</th>
+					<!-- <th scope="col">사용여부</th> -->
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach var="code" items="${CODE}" varStatus="status">
+				<c:forEach var="menu" items="${SUB_MENU}" varStatus="status">
 				<tr>
-					<th scope="row">${status.count}</th>
-					<td>${code.GROUP_ID}</td>
-					<td>${code.GROUP_NM}</td>
-					<td><a href="javascript:false;" onclick="selectCode(this);">${code.CODE}</a></td>
-					<td>${code.CODE_NM}</td>
-					<td>${code.USE_YN}</td>
+					<th scope="row">${menu.count}</th>
+					<td><a href="javascript:false;" onclick="selectMenu(this);">${menu.MENU_ID}</a></td>
+					<td>${menu.MENU_NM}</td>
 				</tr>
 				</c:forEach>
 			</tbody>
@@ -85,13 +80,12 @@
 	</div>
 </body>
 	<script>
-		var selectCode = function(that) {
-			var v_code = $(that).text();
+		var selectMenu = function(that) {
+			var v_groupId = $(that).text();
 			var $tr = $(that).closest('tr');
 			//alert(v_groupId + '/' + $tr.children('td:eq(1)').text());
-			$('#code').val(v_code);
-			$('#codeNm').val($tr.children('td:eq(3)').text());
-			$('#useYn').val($tr.children('td:eq(4)').text()).prop('selected', true);
+			$('#menuId').val(v_groupId);
+			$('#menuNm').val($tr.children('td:eq(1)').text());
 		}
 	</script>
 </html>
