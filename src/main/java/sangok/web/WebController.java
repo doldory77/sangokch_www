@@ -365,7 +365,7 @@ public class WebController implements InitializingBean {
 		List<Map<String, Object>> TagCodeList = webService.selectCode(JMap.instance("GROUP_ID", "CD0001").put("USE_YN", "Y").build());
 		List<Map<String, Object>> boardDtlList = null;
 		model.addAttribute("BOARD_DTL", null);
-		if (params.get("SEQ_NO") != null) {			
+		if (params.get("SEQ_NO") != null) {
 			boardDtlList = webService.selectBoardDtl(params);
 			debug("[BOARD_DTL] " + boardDtlList);
 			model.addAttribute("BOARD_DTL", JList.get(boardDtlList, 0));
