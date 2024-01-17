@@ -21,6 +21,7 @@
 	<div class="container-fluid pt-5 px-0">
 		<!-- <div class="mainHead">HEAD IMG</div> -->
 		<c:out value="${MAIN01.CONTENT}" escapeXml="false"></c:out>
+		
 	</div>
 	
 	<div class="container-md">
