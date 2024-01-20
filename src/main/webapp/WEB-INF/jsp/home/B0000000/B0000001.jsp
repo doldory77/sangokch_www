@@ -17,11 +17,26 @@
   		<%@ include file="/WEB-INF/jspf/menu.jspf" %>
 	</div>
 	
-	<div class="pageBodyW container-fluid">
+	<div class="container-fluid pt-5 px-0">
+		<c:if test="${not empty MAIN01}">
+		<c:out value="${MAIN01.CONTENT}" escapeXml="false"></c:out>
+		</c:if>
+	</div>
+	
+	<!-- <div class="pageBodyW container-fluid">
 		<div class="readyDiv">
 			<img class="readyImg" src="http://beautifulseodang.1937.co.kr/images/ready.jpg">
 		</div>
+	</div> -->
+	
+	<div class="container-md">
+		<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 mt-4">
+			<c:forEach var="item" items="${MAIN02_LIST}" varStatus="status">
+				<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
+			</c:forEach>
+		</div>
 	</div>
+
     
   	<script>
   		

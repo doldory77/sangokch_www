@@ -107,10 +107,14 @@ public class WebController implements InitializingBean {
 			, ModelMap model) throws Exception {
 		if (boardNameList != null && boardListYn != null && boardNameList.length == boardListYn.length) {			
 			for (int i=0; i<boardNameList.length; i++) {
-				if (boardListYn[i] == true) {
-					if (model.get(boardNameList[i]) != null) { model.addAttribute(boardNameList[i], JMap.replaceFirst((List<Map<String, Object>>) model.get(boardNameList[i]), "CONTENT", "<h1>.+</h1>", "")); }
-				} else {
-					if (model.get(boardNameList[i]) != null) { model.addAttribute(boardNameList[i], JMap.replaceFirst((List<Map<String, Object>>) model.get(boardNameList[i]), "CONTENT", "<h1>.+</h1>", "").get(0)); }
+				if (model.get(boardNameList[i]) != null) {
+					if (model.get(boardNameList[i]) instanceof List && ((List<Map<String, Object>>) model.get(boardNameList[i])).size() > 0) {
+						if (boardListYn[i] == true) {
+							model.addAttribute(boardNameList[i], JMap.replaceFirst((List<Map<String, Object>>) model.get(boardNameList[i]), "CONTENT", "<h1>.+</h1>", ""));
+						} else {
+							if (model.get(boardNameList[i]) != null) { model.addAttribute(boardNameList[i], JMap.replaceFirst((List<Map<String, Object>>) model.get(boardNameList[i]), "CONTENT", "<h1>.+</h1>", "").get(0)); }
+						}
+					}
 				}
 			}
 		}
@@ -170,8 +174,8 @@ public class WebController implements InitializingBean {
 		
 		commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "A0000000").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "A0000000").build());
 		
 		model.addAttribute("MAIN01", MAIN01);
 		model.addAttribute("MAIN02_LIST", MAIN02);
@@ -188,6 +192,15 @@ public class WebController implements InitializingBean {
 	public String b0000001(HttpServletRequest request, ModelMap model) throws Exception {		
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000001").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000001").build());
+		
+		model.addAttribute("MAIN01", MAIN01);
+		model.addAttribute("MAIN02_LIST", MAIN02);
+		model.addAttribute("TITLE", "산곡교회 비전");
+		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
+		
 		return "home/B0000000/B0000001";
 	}
 	

@@ -58,7 +58,10 @@
 			  		<div class="col-md-2 mb-2">
 			  			<select class="form-select" id="groupId" name="GROUP_ID">
 			  				<c:forEach var="item" items="${groupIdList}">
-			  				<option value="${item.MENU_ID}" <c:if test="${not empty BOARD_DTL && item.MENU_ID eq BOARD_DTL.GROUP_ID}">selected="selected"</c:if>>${item.MENU_NM}</option>
+			  				<option value="${item.MENU_ID}" 
+			  					<c:if test="${not empty BOARD_DTL && item.MENU_ID eq BOARD_DTL.GROUP_ID}">selected="selected"</c:if>
+			  					<c:if test="${not empty GROUP_ID && item.MENU_ID eq GROUP_ID}">selected="selected"</c:if>
+			  				>${item.MENU_NM}</option>
 			  				</c:forEach>
 			  			</select>
 			  		</div>
