@@ -51,7 +51,7 @@
 
 .popup-body p {
 	border: 1px solid darkgray;
-    height: 350px;
+    height: 80%;
     padding: 2px;
     overflow-y: auto;
 }
