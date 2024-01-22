@@ -29,11 +29,16 @@
 		</div>
 	</div> -->
 	
-	<div class="container-md">
-		<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 mt-4">
-			<c:forEach var="item" items="${MAIN02_LIST}" varStatus="status">
-				<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
-			</c:forEach>
+	<div class="container-lg">
+		<div class="row ps-sm-2">
+			<div class="col-sm-6 col-lg-0 mt-4" style="background-image:url(https://cdn.pixabay.com/photo/2020/04/09/05/37/resurrection-5019777_640.jpg); background-position: center center;"></div>
+			<div class="col-sm-6 col-lg-12">
+				<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-1 row-cols-lg-3 mt-4">
+					<c:forEach var="item" items="${MAIN02_LIST}" varStatus="status">
+						<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
+					</c:forEach>
+				</div>
+			</div>
 		</div>
 	</div>
 
