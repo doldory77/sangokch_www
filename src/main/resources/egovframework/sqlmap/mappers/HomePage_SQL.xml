@@ -93,6 +93,9 @@
 				, #{TAG_CD, mode=IN, jdbcType=VARCHAR}
 				, #{ATTR01, mode=IN, jdbcType=VARCHAR}
 				, #{ATTR02, mode=IN, jdbcType=VARCHAR}
+				, #{ATTR03, mode=IN, jdbcType=VARCHAR}
+				, #{ATTR04, mode=IN, jdbcType=VARCHAR}
+				, #{ATTR05, mode=IN, jdbcType=VARCHAR}
 			) 
 		}
 		/*WebMapper.updateBoard*/ 
