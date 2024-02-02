@@ -97,12 +97,18 @@
 			  		<div class="col-md-1">
 			  			<label for="title">TAG</label>
 			  		</div>
-			  		<div class="col-md-5">
+			  		<div class="col-md-3">
 			  			<select class="form-select" id="useYn" name="TAG_CD">
 			  				<c:forEach var="item" items="${TagCodeList}">
 			  				<option value="${item.CODE}" <c:if test="${not empty BOARD_DTL && item.CODE eq BOARD_DTL.TAG_CD}">selected="selected"</c:if>>${item.CODE_NM}</option>
 			  				</c:forEach>
 			  			</select>
+			  		</div>
+			  		<div class="col-md-1">
+			  			<label for="attr02">속성2</label>
+			  		</div>
+			  		<div class="col-md-3">
+			  			<input type="text" id="attr02" name="ATTR02" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR02 : ''}">
 			  		</div>
 			  	</div>
 
