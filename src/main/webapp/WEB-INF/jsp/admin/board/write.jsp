@@ -94,21 +94,42 @@
 			  	</div>
 			  	
 			  	<div class="row align-items-center mb-2">
-			  		<div class="col-md-1">
+			  		<div class="col-md-1 mb-md-2">
 			  			<label for="title">TAG</label>
 			  		</div>
-			  		<div class="col-md-3">
+			  		<div class="col-md-3 mb-2">
 			  			<select class="form-select" id="useYn" name="TAG_CD">
 			  				<c:forEach var="item" items="${TagCodeList}">
 			  				<option value="${item.CODE}" <c:if test="${not empty BOARD_DTL && item.CODE eq BOARD_DTL.TAG_CD}">selected="selected"</c:if>>${item.CODE_NM}</option>
 			  				</c:forEach>
 			  			</select>
 			  		</div>
-			  		<div class="col-md-1">
+			  		<div class="col-md-1 mb-md-2">
 			  			<label for="attr02">속성2</label>
 			  		</div>
-			  		<div class="col-md-3">
+			  		<div class="col-md-3 mb-2">
 			  			<input type="text" id="attr02" name="ATTR02" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR02 : ''}">
+			  		</div>
+			  		<div class="col-md-1 mb-md-2">
+			  			<label for="attr03">속성3</label>
+			  		</div>
+			  		<div class="col-md-3 mb-2">
+			  			<input type="text" id="attr03" name="ATTR03" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR03 : ''}">
+			  		</div>
+			  		
+			  	</div>
+			  	<div class="row align-items-center mb-2">
+			  		<div class="col-md-1 mb-md-2">
+			  			<label for="attr04">속성4</label>
+			  		</div>
+			  		<div class="col-md-5 mb-2">
+			  			<input type="text" id="attr04" name="ATTR04" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR04 : ''}">
+			  		</div>
+			  		<div class="col-md-1 mb-md-2">
+			  			<label for="attr05">속성5</label>
+			  		</div>
+			  		<div class="col-md-5 mb-2">
+			  			<input type="text" id="attr05" name="ATTR05" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR05 : ''}">
 			  		</div>
 			  	</div>
 

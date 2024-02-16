@@ -243,6 +243,25 @@ public class WebController implements InitializingBean {
 	}	
 	
 	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/B0000004.do")
+	public String b0000004(HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000004").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000004").build());
+		
+		model.addAttribute("MAIN01", MAIN01);
+		model.addAttribute("MAIN02_LIST", MAIN02);
+		model.addAttribute("TITLE", "산곡교회 연혁");
+		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
+		
+		return "home/B0000000/B0000004";
+	}	
+	
+	/*
 	 * 관리자 로그인 접속
 	 */
 	@RequestMapping(value = "/admin/login.do")
