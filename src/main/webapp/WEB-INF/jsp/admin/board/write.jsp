@@ -3,6 +3,10 @@
 <%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%
+	String isAdminIfrmPage = request.getHeader("referer").contains("adminIfrmPage.do") ? "Y" : "N";
+%>
+<c:set var="isAdminIfrmPage" value="<%=isAdminIfrmPage%>"/>
 
 <!doctype html>
 <html lang="ko">
@@ -23,11 +27,13 @@
 </head>
 <body>
   	<div>
+  	<c:if test="${isAdminIfrmPage ne 'Y'}">
 		<div class="admin-header fs-3 d-flex justify-content-between align-content-end p-2">
 		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/home.do'">산곡교회</span>
 		    <span class="py-1 align-self-baseline">${not empty SEQ_NO ? '게시판(상세)' : '게시판(작성)'}</span>
 		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/admin/login/logout.do'">LOG-OUT</span>
 		</div>
+		
 		<div class="mb-2 ps-2 py-1">
 			<span onclick="javascript:location.href='/admin/main.do'">홈페이지 관리 홈</span>
 			<c:if test="${not empty TITLE}">
@@ -35,6 +41,7 @@
 			<span onclick="javascript:location.href='/admin/adminPage.do?GROUP_ID=${GROUP_ID}&SCREEN_YN=${SCREEN_YN}&PAGE=${PAGE}'">${TITLE eq 'HOME' ? '메인화면 관리' : TITLE}</span>	
 			</c:if>
 		</div>
+	</c:if>
 	</div>
 	<div class="container-md">
   		
@@ -153,7 +160,8 @@
 			  	<input type="hidden" name="SEQ_NO" value="${not empty BOARD_DTL ? BOARD_DTL.SEQ_NO : '0'}">
 			  	<input type="hidden" name="DEPTH_NO" value="${not empty BOARD_DTL ? BOARD_DTL.DEPTH_NO : '0.0'}">
 			  	<input type="hidden" name="PAGE" value="${not empty PAGE ? PAGE : ''}">
-		  	
+			  	<input type="hidden" name="IS_ADMIN_IFRM_PAGE" value="${isAdminIfrmPage}">
+		  		
 		  	</fieldset>
 	  	</form>
 	  	

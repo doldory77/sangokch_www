@@ -467,10 +467,19 @@ public class WebController implements InitializingBean {
 		debug(JStr.toStr(params.get("SEQ_NO")));
 		debug(JStr.toStr(params.get("RTN_MSG")));
 		
-		return "redirect:/admin/adminPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
-			+ "&PAGE=" + params.get("PAGE")
-			+ "&SCREEN_YN=" + params.get("SCREEN_YN")
-			+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
+		String isAdminIfrmPage = params.get("IS_ADMIN_IFRM_PAGE").toString();
+		if ("N".equalsIgnoreCase(isAdminIfrmPage)) {
+			return "redirect:/admin/adminPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
+				+ "&PAGE=" + params.get("PAGE")
+				+ "&SCREEN_YN=" + params.get("SCREEN_YN")
+				+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
+		} else {
+			return "redirect:/admin/adminIfrmPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
+				+ "&PAGE=" + params.get("PAGE")
+				+ "&SCREEN_YN=" + params.get("SCREEN_YN")
+				+ "&TAG_CD=" + params.get("TAG_CD")
+				+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");			
+		}
 	}
 	
 	/*
@@ -502,6 +511,21 @@ public class WebController implements InitializingBean {
 		
 		return "admin/" + jspAdminPage.substring(0, 1) + "0000000/" + jspAdminPage;
 	}
+	
+	/*
+	 * 관리자 기능별 페이지 조회
+	 */
+	@RequestMapping(value = "/admin/adminIfrmPage.do")
+	public String adminIfrmPage(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		debug("[ADMIN IFRM PAGE PARAMS] " + params);
+		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
+		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
+		model.addAttribute("PAGE", params.get("PAGE"));
+		String jspAdminPage = params.get("PAGE").toString();
+		this.setBoardListInitParams(params, model);
+		
+		return "admin/" + jspAdminPage.substring(0, 1) + "0000000/" + jspAdminPage + "F";
+	}	
 	
 	/*
 	 * 성경구정 또는 찬송가 조회
