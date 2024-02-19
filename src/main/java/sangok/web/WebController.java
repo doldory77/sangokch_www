@@ -99,6 +99,20 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
+	 * 페이지 요청시 메뉴 하이라이트
+	 */
+	private void commProcessMenuHighlightByBoardDtlView(HttpServletRequest request, ModelMap model) throws Exception {
+		String S_MENU = request.getParameter("GROUP_ID");
+		if (S_MENU != null && S_MENU.length() > 7) {
+			model.addAttribute("M_MENU", S_MENU.substring(0, 2) + "000000");
+			model.addAttribute("S_MENU", S_MENU);
+			Map<String, Object> map = webService.getMapper().selectMenuNm(S_MENU);
+			model.addAttribute("TITLE", map.get("TITLE"));
+		}
+		
+	}	
+	
+	/*
 	 * 게시판 내용중 <h1></h1> 이스케이프 처리
 	 */
 	@SuppressWarnings("unchecked")
@@ -190,7 +204,7 @@ public class WebController implements InitializingBean {
 	 */
 	@RequestMapping(value = "/boardDtlView.do")
 	public String boardDtlView(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
-		this.commProcessMenuHighlight(request, model);
+		this.commProcessMenuHighlightByBoardDtlView(request, model);
 		this.commProcessSetMenu(true, model);
 		
 		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("SEQ_NO", params.get("SEQ_NO")).put("GROUP_ID", params.get("GROUP_ID")).build());
