@@ -28,18 +28,17 @@
 			<img class="readyImg" src="http://beautifulseodang.1937.co.kr/images/ready.jpg">
 		</div>
 	</div> -->
-	
 	<div class="container-lg">
-		<div class="row ps-sm-2">
-			<div class="col-sm-6 col-lg-0 mt-4" style="background-image:url(https://cdn.pixabay.com/photo/2020/04/09/05/37/resurrection-5019777_640.jpg); background-position: center center;"></div>
-			<div class="col-sm-6 col-lg-12">
-				<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-1 row-cols-lg-3 mt-4">
-					<c:forEach var="item" items="${MAIN02_LIST}" varStatus="status">
-						<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
-					</c:forEach>
+		<c:forEach var="item" items="${MAIN02_LIST}" varStatus="status">
+			<div class="row gy-0">
+				<div class="col-2"><div class="fs-1">${item.ATTR02}</div></div>
+				<div class="col-4 border-start border-5">
+					<div class="fs-5">${fn:substring(item.ATTR03,4,8)}월</div>
+					<div class="fs-4">${item.SUBJECT}</div>
 				</div>
+				<div class="col-6 p-1"><img class="rounded" width="200" src="${item.ATTR04}"></div>
 			</div>
-		</div>
+		</c:forEach>
 	</div>
 
     

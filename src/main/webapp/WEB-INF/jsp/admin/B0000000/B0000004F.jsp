@@ -18,12 +18,12 @@
   <body>
  
   	<div class="container-fluid">
-		<a class="btn btn-sm px-4 my-2" style="background-color: #B80000; color: white;" href="/admin/board/write.do?PAGE=${PAGE}&SCREEN_YN=${SCREEN_YN}&GROUP_ID=${GROUP_ID}&TAG_CD=${TAG_CD}">작성</a>
+		<a class="btn btn-sm px-4 my-2" style="background-color: #EAD196; color: black;" href="/admin/board/write.do?PAGE=${PAGE}&SCREEN_YN=${SCREEN_YN}&GROUP_ID=${GROUP_ID}&TAG_CD=${TAG_CD}">작성</a>
 	</div>
 	<jsp:include page="/WEB-INF/jspf/adminBoardList.jsp" flush="false">
 		<jsp:param name="IS_SUB_BOARD" value="Y" />
 	</jsp:include>
-	<script>
+	<script>#EAD196
 		/*스크립트 작성*/
 	</script>
 	

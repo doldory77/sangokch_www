@@ -16,7 +16,7 @@ import sangok.utils.JStr;
 @Service("webService")
 public class WebServiceImpl extends EgovAbstractServiceImpl implements WebService {
 	
-	Pattern imgPattern = Pattern.compile("\"(/images/board/img_.*[.].{3})\"");
+	Pattern imgPattern = Pattern.compile("\"(/images/board/img_.{36}[.].{3})\"");
 	
 	@Autowired
 	private WebMapper webMapper;
@@ -131,6 +131,7 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 			if (JStr.isStr(params.get("GROUP_ID")) == false) params.put("GROUP_ID", null);
 			if (JNum.isInteger(params.get("SEQ_NO")) == false) params.put("SEQ_NO", 0);
 			if (JStr.isStr(params.get("TAG_CD")) == false) params.put("TAG_CD", null);
+			if (JStr.isStr(params.get("ORDER_BY")) == false) params.put("ORDER_BY", null);
 			return webMapper.selectBoardDtl(params);
 		} catch (Exception e) {
 			e.printStackTrace();

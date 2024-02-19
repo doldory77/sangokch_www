@@ -120,7 +120,7 @@
 	
 	<select id="selectBoardDtl" statementType="CALLABLE" parameterType="map" resultType="map">
 		/*WebMapper.selectBoardDtl*/
-		{ CALL SP_GET_BOARD_DTL(#{GROUP_ID}, #{SEQ_NO}, #{TAG_CD}) }
+		{ CALL SP_GET_BOARD_DTL(#{GROUP_ID}, #{SEQ_NO}, #{TAG_CD}, #{ORDER_BY}) }
 	</select>
 	
 	<select id="selectBoardDtlByTag" statementType="CALLABLE" parameterType="map" resultType="map">
