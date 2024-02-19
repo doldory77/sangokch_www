@@ -11,6 +11,9 @@
 	<%@ include file="/WEB-INF/jspf/head.jspf" %>
 	<link rel="stylesheet" href="/css/font.css">
     <title>${TITLE}</title>
+    <style>
+
+    </style>
   </head>
   <body>
 	<div class="wrapper">
@@ -28,21 +31,6 @@
 			<img class="readyImg" src="http://beautifulseodang.1937.co.kr/images/ready.jpg">
 		</div>
 	</div> -->
-	<div class="container-lg">
-		<c:forEach var="item" items="${MAIN02_LIST}" varStatus="status">
-			<div class="row gy-0">
-				<div class="col-2"><div class="fs-1">${item.ATTR02}</div></div>
-				<div class="col-4 border-start border-5">
-					<div class="fs-5">${fn:substring(item.ATTR03,4,8)}월</div>
-					<div class="fs-4">
-						<a href="/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}">${item.SUBJECT}</a>
-					</div>
-				</div>
-				<div class="col-6 p-1"><img class="rounded" width="200" src="${item.ATTR04}"></div>
-			</div>
-		</c:forEach>
-	</div>
-
     
   	<script>
   		

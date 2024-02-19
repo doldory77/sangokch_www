@@ -188,6 +188,25 @@ public class WebController implements InitializingBean {
 	/*
 	 * 사용자 홈페이지 접속
 	 */
+	@RequestMapping(value = "/boardDtlView.do")
+	public String boardDtlView(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("SEQ_NO", params.get("SEQ_NO")).put("GROUP_ID", params.get("GROUP_ID")).build());
+		
+		model.addAttribute("MAIN01", MAIN01);
+		model.addAttribute("TITLE", "상세");
+		commProcessEscapeBoard(new String[] {"MAIN01"}, new Boolean[] {false}, model);
+		if (MAIN01 != null && MAIN01.size() > 0) {
+			model.addAttribute("TITLE", MAIN01.get(0).get("SUBJECT"));
+		}
+		return "home/boardDtlView";
+	}	
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
 	@RequestMapping(value = "/B0000001.do")
 	public String b0000001(HttpServletRequest request, ModelMap model) throws Exception {		
 		this.commProcessMenuHighlight(request, model);
