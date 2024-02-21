@@ -26,7 +26,7 @@
 	  
 	  <!-- Header Menu -->
 	  <nav class="menu_bar" id="menu_bar">
-	    <div>산곡교회</div>
+	    <div><img src="/images/mark.png" width="34"></div>
 	    <div class="main_menu_wrapper d-none d-lg-flex">
 	      <c:forEach var="mMenu" items="${MENU_LIST}" varStatus="statusM">
 	      <div class="main_menu">
