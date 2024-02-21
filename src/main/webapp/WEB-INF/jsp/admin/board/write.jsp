@@ -43,7 +43,7 @@
 		</div>
 	</c:if>
 	</div>
-	<div class="container-md">
+	<div class="container-fluid">
   		
 		<form name="frm" method="POST" id="frm" action="/admin/board/save.do">
 			<fieldset>

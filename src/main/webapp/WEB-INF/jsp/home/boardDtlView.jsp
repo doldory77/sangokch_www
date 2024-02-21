@@ -21,9 +21,12 @@
 	</div>
 	
 	<div class="container-fluid pt-5 px-0">
-		<c:if test="${not empty MAIN01}">
-			<c:out value="${MAIN01.CONTENT}" escapeXml="false"></c:out>
-		</c:if>
+		<div style="padding:50px 10px 10px 10px;">
+			<div id="editor"></div>
+			<!--<c:if test="${not empty MAIN01}">
+				<c:out value="${MAIN01.CONTENT}" escapeXml="false"></c:out>
+			</c:if>-->
+		</div>
 	</div>
 	
 	<!-- <div class="pageBodyW container-fluid">
@@ -32,8 +35,27 @@
 		</div>
 	</div> -->
     
-  	<script>
-  		
-  	</script>
+  	<script src="/js/ckeditor.js"></script>
+  	<script src="/js/imgUpAdapter.js"></script>
+	<script>
+		
+		ClassicEditor
+		    .create( document.querySelector( '#editor' ), {
+		    	
+		    } )
+		    .then( editor => {
+		    	console.log('Editor was initialized');
+		    	editor.ui.view.toolbar.element.style.display = 'none';
+		    	window.editor = editor;
+		    	
+		    	<c:if test="${not empty MAIN01}">
+		    		editor.setData(<c:out value="'${MAIN01.CONTENT}'" escapeXml="false"></c:out>);
+		    	</c:if>
+		    	editor.enableReadOnlyMode('xxx');
+		    } )
+		    .catch( error => {
+		        console.error( error );
+		    } );
+	</script>
   </body>
 </html>

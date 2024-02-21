@@ -87,8 +87,8 @@
 	  	<div class="popup-body">
 	  		<h3 id="popupTitle">TITLE</h3>
 	  		<p id="popupContent">전직대통령의 신분과 예우에 관하여는 법률로 정한다. 모든 국민은 종교의 자유를 가진다. 국회의원은 법률이 정하는 직을 겸할 수 없다. 혼인과 가족생활은 개인의 존엄과 양성의 평등을 기초로 성립되고 유지되어야 하며, 국가는 이를 보장한다.</p>
-	  		<div class="">
-		  		<a href="javascript: togglePopup();" class="btn btn-primary position-absolute bottom-0 start-50 translate-middle-x mb-3">닫기</a>
+	  		<div class="" style="position:absolute; top:60px; right:40px;">
+		  		<a href="javascript: togglePopup();" class="btn btn-primary position-absolute bottom-0 start-50 translate-middle-x mb-3" style="display:inline-block; width:60px;">닫기</a>
 	  		</div>
 	  	</div>
 	  </div>
