@@ -69,6 +69,12 @@ public class WebController implements InitializingBean {
 	private void commProcessSetMenu(boolean excludeAdmMenuYn, ModelMap model) throws Exception {
 		if (menuList == null) {
 			menuList = webService.selectMenuByTree();
+			for (int i=menuList.size()-1; i>=0; i--) {
+				if ("A0000000".equals(menuList.get(i).get("MENU_ID"))) {
+					menuList.remove(i);
+					break;
+				}
+			}
 		}
 		if (excludeAdmMenuYn) {
 			/*관리자메뉴는 제외*/
