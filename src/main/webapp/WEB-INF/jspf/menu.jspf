@@ -8,7 +8,7 @@
 	  		<input type="checkbox" id="search_btn">
 	  		<label for="search_btn" class="d-flex justify-content-center align-items-center">
 	  			<!-- <span style="font-size:32px; cursor:pointer;" class="material-symbols-outlined">frame_inspect</span> -->
-	  			<img src="/images/bible_book.png" style="width:32px; cursor:pointer;">
+	  			<img src="/images/bible_book.png" style="width:32px; cursor:pointer; margin-top: 3px;">
 	  		</label>
 	  	</div>
 	  	<div style="position: relative;">
@@ -41,7 +41,7 @@
 	        <nav class="sub_menu_wrapper">
 	          <c:forEach var="sMenu" items="${mMenu.SUB_MENU}" varStatus="statusS">
 	          <div class="sub_menu">
-	            <input type="radio" name="sub_menu_btn" id="main_id${statusM.count}_sub_id${statusS.count}" data-page="${sMenu.URL}" <c:if test="${S_MENU eq sMenu.MENU_ID}">checked</c:if> >
+	            <input type="radio" name="sub_menu_btn" id="main_id${statusM.count}_sub_id${statusS.count}" data-page="${sMenu.MENU_ID}" <c:if test="${S_MENU eq sMenu.MENU_ID}">checked</c:if> >
 	            <label for="main_id${statusM.count}_sub_id${statusS.count}" onclick="menuClick('${sMenu.URL}');">${sMenu.MENU_NM}</label>
 	          </div>
 	          </c:forEach>
@@ -105,7 +105,15 @@
 		if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
 		    // Back Forward Cache로 브라우저가 로딩될 경우 혹은 브라우저 뒤로가기 했을 경우
 		    // 이벤트 추가하는 곳
-		    console.log(location.href);
+		    // console.log(location.href);
+		    var strtIdx = location.href.lastIndexOf('/')+1;
+		    var endIdx = location.href.lastIndexOf('.');
+		    var menuId = location.href.substr(strtIdx, endIdx-strtIdx);
+		    if ((new RegExp("^[A-Z]{1}[0-9]{7}","g")).test(menuId)) {	    	
+			    $("input[data-page='" + menuId + "']").prop("checked", true);
+		    } else {
+		    	$("input[name='main_menu_btn']").prop('checked', false);
+		    }
 		}
 	}
 	  $(function() {
