@@ -76,9 +76,9 @@
 .main_menu_wrapper {
 
 }
-.main_menu_wrapper input[type='radio'] {
+/*.main_menu_wrapper input[type='radio'] {
   display: none;
-}
+}*/
 .main_menu_wrapper input[type='radio'] + label {
   padding: 0 var(--menu-btn-gap);
   cursor: pointer;
