@@ -101,21 +101,23 @@
 	  </div>
 	  
 	  <script>
-	window.onpageshow = function(event) {
-		if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
-		    // Back Forward Cache로 브라우저가 로딩될 경우 혹은 브라우저 뒤로가기 했을 경우
-		    // 이벤트 추가하는 곳
-		    // console.log(location.href);
-		    var strtIdx = location.href.lastIndexOf('/')+1;
-		    var endIdx = location.href.lastIndexOf('.');
-		    var menuId = location.href.substr(strtIdx, endIdx-strtIdx);
-		    if ((new RegExp("^[A-Z]{1}[0-9]{7}","g")).test(menuId)) {	    	
-			    $("input[data-page='" + menuId + "']").prop("checked", true);
-		    } else {
-		    	$("input[name='main_menu_btn']").prop('checked', false);
-		    }
+		window.onpageshow = function(event) {
+			if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+			    // Back Forward Cache로 브라우저가 로딩될 경우 혹은 브라우저 뒤로가기 했을 경우
+			    // 이벤트 추가하는 곳
+			    // console.log(location.href);
+			    var strtIdx = location.href.lastIndexOf('/')+1;
+			    var endIdx = location.href.lastIndexOf('.');
+			    var menuId = location.href.substr(strtIdx, endIdx-strtIdx);
+			    if ((new RegExp("^[A-Z]{1}[0-9]{7}","g")).test(menuId)) {
+				    $("input[data-page='" + menuId + "']").prop("checked", true);
+			    } else {
+			    	$("input[name='main_menu_btn']").prop('checked', false);
+			    }
+			    if ($('#menuicon').prop('checked')) $('#menuicon').prop('checked', false);
+			}
 		}
-	}
+		
 	  $(function() {
 		  var prevScrollTop = 0;
 		  var delta = 5;

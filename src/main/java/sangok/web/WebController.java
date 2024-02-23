@@ -298,6 +298,25 @@ public class WebController implements InitializingBean {
 		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
 		
 		return "home/B0000000/B0000004";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/B0000005.do")
+	public String b0000005(HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000005").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000005").build());
+		
+		model.addAttribute("MAIN01", MAIN01);
+		model.addAttribute("MAIN02", MAIN02);
+		model.addAttribute("TITLE", "예배시간");
+		commProcessEscapeBoard(new String[] {"MAIN01", "MAIN02"}, new Boolean[] {false, false}, model);
+		
+		return "home/B0000000/B0000005";
 	}	
 	
 	/*

@@ -15,11 +15,11 @@
 	<title>게시판</title>
 	
   	<style>
-  		.ck-editor__editable {
+  		.ck.ck-editor__editable {
   			min-height: 250px; 
   		}
-  		.ck-editor__editable > .ck-placeholder::before {
-  			color: #d21714;
+  		.ck.ck-editor__editable > .ck-placeholder::before {
+  			color: red;
   			font-family: Georgia;
   		}
   	</style>
@@ -147,6 +147,7 @@
 		  				<span>/ 일련번호 : [${not empty BOARD_DTL ? BOARD_DTL.SEQ_NO : ''}]</span>
 	  				</span>
 		  		</div>
+		  		
 		  		<textarea id="editor" name="CONTENT" class="form-control"></textarea>
 		  	
 			  	<div class="row align-items-center">
@@ -168,9 +169,11 @@
 	  </div>
 	
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  	<!-- <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/decoupled-document/ckeditor.js"></script> -->
   	<script src="/js/ckeditor.js"></script>
   	<script src="/js/imgUpAdapter.js"></script>
 	<script>
+	
 		function MyCustomUploadAdapterPlugin( editor ) {
 		    editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
 		        // Configure the URL to the upload script in your back-end here!
@@ -203,7 +206,8 @@
 		    } )
 		    .catch( error => {
 		        console.error( error );
-		    } );
+		    } );	
+		
 	</script>
 	
 </body>
