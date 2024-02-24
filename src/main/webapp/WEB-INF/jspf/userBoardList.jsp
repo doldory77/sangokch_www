@@ -1,11 +1,12 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c"      uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" 	   uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
-	<div class="container-fluid">
-		<div class="d-flex flex-wrap justify-content-start">
+	<div class="container-lg">
+		<!-- <div class="d-flex flex-wrap justify-content-start">
 		<c:forEach var="item" items="${BOARD_LIST}">  
 			<div class="board-frame p-1" onclick="location.href='/admin/board/write.do?PAGE=${PAGE_CTL.PAGE}&SCREEN_YN=${PAGE_CTL.SCREEN_YN}&CURR_PAGE=${PAGE_CTL.CURR_PAGE}&GROUP_ID=${item.GROUP_ID}&SEQ_NO=${item.SEQ_NO}'">
 				<div class="board-frame-background" style='background-image: url(${item.ATTR01});'></div>
@@ -14,8 +15,20 @@
 				<div class="text-end"><span class="sub1">${item.REG_DT}</span></div>
 			</div>
 		</c:forEach>
-		</div>
-		<div class="d-flex">
+		</div> -->
+		<c:forEach var="item" items="${BOARD_LIST}">
+			<div class="row border-bottom py-2">
+				<div class="col-md-3 text-center"><img src=${item.ATTR01} style="width:180px;"></div>
+				<div class="col-md-7 col-sm-9" onclick="javascript: location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'" style="cursor:pointer;">
+					<div class="border-bottom"><span class="fs-4" style="font-family:HSWinter;">${item.SUBJECT}</span><span class="fs-6"> (${fn:substring(item.ATTR02,0,4)}-${fn:substring(item.ATTR02,4,6)}-${fn:substring(item.ATTR02,6,8)})</span></div>
+					<div class="fs-5 text-md-end pt-2">${item.ATTR03}</div>
+				</div>
+				<div class="col-md-2 col-sm-3 d-flex justify-content-center align-items-center" onclick="javascript: location.href='${item.ATTR04}'" style="cursor:pointer;">
+					<span class="material-symbols-outlined">smart_display</span>
+				</div>
+			</div>
+		</c:forEach>
+		<div class="d-flex justify-content-center">
 			<c:if test="${1 lt PAGE_CTL.CURR_PAGE}">
 			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/admin/adminPage.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=1&SCREEN_YN=${PAGE_CTL.SCREEN_YN}&GROUP_ID=${PAGE_CTL.GROUP_ID}">
 				<span class="material-symbols-outlined">first_page</span>

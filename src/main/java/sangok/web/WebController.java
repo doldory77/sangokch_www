@@ -156,6 +156,10 @@ public class WebController implements InitializingBean {
 		if (JStr.isStr(params.get("SCREEN_YN")) == false) {
 			params.put("SCREEN_YN", null);
 		}
+		if (JStr.isStr(params.get("ORDER_BY")) == false) {
+			params.put("ORDER_BY", null);
+		}
+		
 		List<Map<String, Object>> list = webService.selectBoardList(params);
 		
 		model.addAttribute("BOARD_LIST", list);
@@ -330,6 +334,7 @@ public class WebController implements InitializingBean {
 		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "C0000001").build());
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
+		params.put("ORDER_BY", "ATTR02 DESC");
 		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
 		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
 		model.addAttribute("TAG_CD", params.get("TAG_CD"));

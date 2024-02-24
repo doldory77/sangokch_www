@@ -8,7 +8,7 @@
 	  		<input type="checkbox" id="search_btn">
 	  		<label for="search_btn" class="d-flex justify-content-center align-items-center">
 	  			<!-- <span style="font-size:32px; cursor:pointer;" class="material-symbols-outlined">frame_inspect</span> -->
-	  			<img src="/images/bible_book.png" style="width:32px; cursor:pointer; margin-top: 3px;">
+	  			<img src="/images/bible_book.png" style="width:28px; cursor:pointer; margin-top: 3px;">
 	  		</label>
 	  	</div>
 	  	<div style="position: relative;">
