@@ -113,6 +113,7 @@
 				, #{GROUP_ID, mode=IN, jdbcType=VARCHAR}
 				, #{TAG_CD, mode=IN, jdbcType=VARCHAR}
 				, #{SCREEN_YN, mode=IN, jdbcType=VARCHAR}
+				, #{ORDER_BY, mode=IN, jdbcType=VARCHAR}
 			)
 		}
 		/*WebMapper.selectBoardList*/

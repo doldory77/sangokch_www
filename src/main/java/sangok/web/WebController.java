@@ -317,6 +317,34 @@ public class WebController implements InitializingBean {
 		commProcessEscapeBoard(new String[] {"MAIN01", "MAIN02"}, new Boolean[] {false, false}, model);
 		
 		return "home/B0000000/B0000005";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/C0000001.do")
+	public String c0000001(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "C0000001").build());
+		
+		debug("[ADMIN PAGE PARAMS] " + params);
+		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
+		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
+		model.addAttribute("TAG_CD", params.get("TAG_CD"));
+		model.addAttribute("PAGE", params.get("PAGE"));
+		//String jspUserPage = params.get("PAGE").toString();
+		this.setBoardListInitParams(params, model);
+		
+		//List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "C0000001").build());
+		
+		model.addAttribute("MAIN01", MAIN01);
+		//model.addAttribute("MAIN02_LIST", MAIN02);
+		model.addAttribute("TITLE", "산곡교회 비전");
+		commProcessEscapeBoard(new String[] {"MAIN01"}, new Boolean[] {false}, model);
+		
+		return "home/C0000000/C0000001";
 	}	
 	
 	/*
