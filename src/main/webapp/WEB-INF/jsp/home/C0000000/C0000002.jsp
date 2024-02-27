@@ -37,15 +37,6 @@
 	
 	<jsp:include page="/WEB-INF/jspf/userBoardList.jsp" flush="false" />
 	
-	<!-- <div class="container-fluid">
-		<div class="row gy-4 justify-content-center row-cols-1 row-cols-md-2 mt-4">
-			<c:forEach var="item" items="${MAIN02_LIST}" varStatus="status">
-				<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
-			</c:forEach>
-		</div>
-	</div> -->
-
-    
   	<script>
   		
   	</script>

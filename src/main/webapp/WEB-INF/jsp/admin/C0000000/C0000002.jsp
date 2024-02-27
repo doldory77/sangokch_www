@@ -19,7 +19,7 @@
   	<div>
 		<div class="admin-header fs-3 d-flex justify-content-between align-content-end p-2">
 		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/home.do'">산곡교회</span>
-		    <span class="py-1 align-self-baseline">예배시간</span>
+		    <span class="py-1 align-self-baseline">경배찬양</span>
 		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/admin/login/logout.do'">로그아웃</span>
 		</div>
 		<div class="mb-2 ps-2 py-1">

@@ -342,14 +342,93 @@ public class WebController implements InitializingBean {
 		//String jspUserPage = params.get("PAGE").toString();
 		this.setBoardListInitParams(params, model);
 		
-		//List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "C0000001").build());
-		
 		model.addAttribute("MAIN01", MAIN01);
 		//model.addAttribute("MAIN02_LIST", MAIN02);
 		model.addAttribute("TITLE", "산곡교회 비전");
 		commProcessEscapeBoard(new String[] {"MAIN01"}, new Boolean[] {false}, model);
 		
 		return "home/C0000000/C0000001";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/C0000002.do")
+	public String c0000002(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "C0000002").build());
+		
+		debug("[ADMIN PAGE PARAMS] " + params);
+		params.put("ORDER_BY", "ATTR02 DESC");
+		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
+		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
+		model.addAttribute("TAG_CD", params.get("TAG_CD"));
+		model.addAttribute("PAGE", params.get("PAGE"));
+		//String jspUserPage = params.get("PAGE").toString();
+		this.setBoardListInitParams(params, model);
+		
+		model.addAttribute("MAIN01", MAIN01);
+		//model.addAttribute("MAIN02_LIST", MAIN02);
+		model.addAttribute("TITLE", "경배찬양");
+		commProcessEscapeBoard(new String[] {"MAIN01"}, new Boolean[] {false}, model);
+		
+		return "home/C0000000/C0000001";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/D0000001.do")
+	public String d0000001(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000001").build());
+		
+		debug("[ADMIN PAGE PARAMS] " + params);
+		params.put("ORDER_BY", "ATTR02 DESC");
+		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
+		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
+		model.addAttribute("TAG_CD", params.get("TAG_CD"));
+		model.addAttribute("PAGE", params.get("PAGE"));
+		//String jspUserPage = params.get("PAGE").toString();
+		this.setBoardListInitParams(params, model);
+		
+		model.addAttribute("MAIN01", MAIN01);
+		//model.addAttribute("MAIN02_LIST", MAIN02);
+		model.addAttribute("TITLE", "교회학교");
+		commProcessEscapeBoard(new String[] {"MAIN01"}, new Boolean[] {false}, model);
+		
+		return "home/D0000000/D0000001";
+	}	
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/F0000001.do")
+	public String f0000001(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "F0000001").build());
+		
+		debug("[ADMIN PAGE PARAMS] " + params);
+		params.put("ORDER_BY", "ATTR02 DESC");
+		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
+		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
+		model.addAttribute("TAG_CD", params.get("TAG_CD"));
+		model.addAttribute("PAGE", params.get("PAGE"));
+		//String jspUserPage = params.get("PAGE").toString();
+		this.setBoardListInitParams(params, model);
+		
+		model.addAttribute("MAIN01", MAIN01);
+		//model.addAttribute("MAIN02_LIST", MAIN02);
+		model.addAttribute("TITLE", "세미나");
+		commProcessEscapeBoard(new String[] {"MAIN01"}, new Boolean[] {false}, model);
+		
+		return "home/F0000000/F0000001";
 	}	
 	
 	/*
@@ -509,7 +588,7 @@ public class WebController implements InitializingBean {
 		
 		List<Map<String, Object>> subMenuList = webService.selectMenu(params);
 		
-		model.addAttribute("PARENT_MENU_ID", params.get("PARENT_MENU_ID"));
+		model.addAttribute("PARENT_MENU_ID", params.get("P_MENU_GROUP"));
 		model.addAttribute("SUB_MENU", subMenuList);
 		
 		return "admin/menu/subMenuMng";

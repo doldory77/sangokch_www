@@ -8,7 +8,7 @@
 <html lang="ko">
   <head>
   	<%@ include file="/WEB-INF/jspf/head.jspf" %>
-	<title>예배찬양(주일예배)</title>
+	<title>훈련사역(세미나)</title>
 	
   	<style>
 
@@ -19,11 +19,11 @@
   	<div>
 		<div class="admin-header fs-3 d-flex justify-content-between align-content-end p-2">
 		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/home.do'">산곡교회</span>
-		    <span class="py-1 align-self-baseline">주일예배</span>
+		    <span class="py-1 align-self-baseline">세미나</span>
 		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/admin/login/logout.do'">로그아웃</span>
 		</div>
 		<div class="mb-2 ps-2 py-1">
-			<span onclick="javascript:location.href='/admin/main.do'">홈페이지 관리 홈</span><span>&nbsp;&gt;&nbsp;</span><span>예배찬양(주일예배)</span>
+			<span onclick="javascript:location.href='/admin/main.do'">홈페이지 관리 홈</span><span>&nbsp;&gt;&nbsp;</span><span>훈련사역(세미나)</span>
 		</div>
 	</div>   
   	<div class="container-fluid">

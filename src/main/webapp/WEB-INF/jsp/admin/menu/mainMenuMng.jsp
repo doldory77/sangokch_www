@@ -57,7 +57,7 @@
 					<th scope="row">${menu.count}</th>
 					<td><a href="javascript:false;" onclick="selectMenu(this);">${menu.MENU_ID}</a></td>
 					<td>${menu.MENU_NM}</td>
-					<td><a class="btn btn-secondary btn-sm" href="/admin/menu/subMenuMng.do?PARENT_MENU_ID=${menu.MENU_ID}">하위메뉴</a></td>
+					<td><a class="btn btn-secondary btn-sm" href="/admin/menu/subMenuMng.do?P_MENU_GROUP=${menu.MENU_ID}">하위메뉴</a></td>
 				</tr>
 				</c:forEach>
 			</tbody>
