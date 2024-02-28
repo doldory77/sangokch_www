@@ -35,7 +35,9 @@
 		</div>
 	</div> -->
 	
-	<jsp:include page="/WEB-INF/jspf/userBoardList.jsp" flush="false" />
+	<jsp:include page="/WEB-INF/jspf/userBoardList.jsp" flush="false">
+		<jsp:param name="W_SIZE" value="1024px" />
+	</jsp:include>
 	
 	<!-- <div class="container-fluid">
 		<div class="row gy-4 justify-content-center row-cols-1 row-cols-md-2 mt-4">

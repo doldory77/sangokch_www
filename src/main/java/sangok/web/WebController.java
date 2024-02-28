@@ -221,6 +221,7 @@ public class WebController implements InitializingBean {
 		
 		model.addAttribute("MAIN01", MAIN01);
 		model.addAttribute("TITLE", "상세");
+		model.addAttribute("W_SIZE", params.get("W_SIZE"));
 		commProcessEscapeBoard(new String[] {"MAIN01"}, new Boolean[] {false}, model);
 		if (MAIN01 != null && MAIN01.size() > 0) {
 			model.addAttribute("TITLE", MAIN01.get(0).get("SUBJECT"));

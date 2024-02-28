@@ -4,6 +4,10 @@
 <%@ taglib prefix="fn" 	   uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%
+	String W_SIZE = request.getParameter("W_SIZE");
+%>
+<c:set var="W_SIZE" value="<%=W_SIZE%>"/>
 
 	<div class="container-lg">
 		<!-- <div class="d-flex flex-wrap justify-content-start">
@@ -19,7 +23,7 @@
 		<c:forEach var="item" items="${BOARD_LIST}">
 			<div class="row border-bottom py-2">
 				<div class="col-md-3 text-center"><img src=${item.ATTR01} style="width:180px;"></div>
-				<div class="col-md-7 col-sm-9" onclick="javascript: location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'" style="cursor:pointer;">
+				<div class="col-md-7 col-sm-9" onclick="javascript: location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}<c:if test="${not empty W_SIZE}">&W_SIZE=${W_SIZE}</c:if>'" style="cursor:pointer;">
 					<div class="border-bottom"><span class="fs-4" style="font-family:HSWinter;">${item.SUBJECT}</span><span class="fs-6"> (${fn:substring(item.ATTR02,0,4)}-${fn:substring(item.ATTR02,4,6)}-${fn:substring(item.ATTR02,6,8)})</span></div>
 					<div class="fs-5 text-md-end pt-2">${item.ATTR03}</div>
 				</div>

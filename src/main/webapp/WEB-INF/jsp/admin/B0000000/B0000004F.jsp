@@ -23,9 +23,6 @@
 	<jsp:include page="/WEB-INF/jspf/adminBoardList.jsp" flush="false">
 		<jsp:param name="IS_SUB_BOARD" value="Y" />
 	</jsp:include>
-	<script>#EAD196
-		/*스크립트 작성*/
-	</script>
 	
   </body>
 </html>

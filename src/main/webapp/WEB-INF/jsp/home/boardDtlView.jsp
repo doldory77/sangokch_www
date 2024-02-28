@@ -21,9 +21,9 @@
 	<div class="wrapper">
   		<%@ include file="/WEB-INF/jspf/menu.jspf" %>
 	</div>
-	
+
 	<div class="container-fluid pt-5 px-0">
-		<div style="padding:50px 10px 10px 10px;">
+		<div style='padding:50px 10px 10px 10px; margin:auto; <c:if test="${not empty W_SIZE}">max-width:${W_SIZE};</c:if>'>
 			<div id="editor"></div>
 			<!--<c:if test="${not empty MAIN01}">
 				<c:out value="${MAIN01.CONTENT}" escapeXml="false"></c:out>
