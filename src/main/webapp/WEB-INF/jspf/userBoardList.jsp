@@ -9,7 +9,7 @@
 %>
 <c:set var="W_SIZE" value="<%=W_SIZE%>"/>
 
-	<div class="container-lg">
+	<div class="container-lg mt-4">
 		<!-- <div class="d-flex flex-wrap justify-content-start">
 		<c:forEach var="item" items="${BOARD_LIST}">  
 			<div class="board-frame p-1" onclick="location.href='/admin/board/write.do?PAGE=${PAGE_CTL.PAGE}&SCREEN_YN=${PAGE_CTL.SCREEN_YN}&CURR_PAGE=${PAGE_CTL.CURR_PAGE}&GROUP_ID=${item.GROUP_ID}&SEQ_NO=${item.SEQ_NO}'">
@@ -22,13 +22,13 @@
 		</div> -->
 		<c:forEach var="item" items="${BOARD_LIST}">
 			<div class="row border-bottom py-2">
-				<div class="col-md-3 text-center"><img src=${item.ATTR01} style="width:180px;"></div>
+				<div class="col-md-3 text-center"><img src=${item.ATTR05} style="width:180px;"></div>
 				<div class="col-md-7 col-sm-9" onclick="javascript: location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}<c:if test="${not empty W_SIZE}">&W_SIZE=${W_SIZE}</c:if>'" style="cursor:pointer;">
 					<div class="border-bottom"><span class="fs-4" style="font-family:HSWinter;">${item.SUBJECT}</span><span class="fs-6"> (${fn:substring(item.ATTR02,0,4)}-${fn:substring(item.ATTR02,4,6)}-${fn:substring(item.ATTR02,6,8)})</span></div>
 					<div class="fs-5 text-md-end pt-2">${item.ATTR03}</div>
 				</div>
-				<div class="col-md-2 col-sm-3 d-flex justify-content-center align-items-center" onclick="javascript: location.href='${item.ATTR04}'" style="cursor:pointer;">
-					<span class="material-symbols-outlined">smart_display</span>
+				<div class="col-md-2 col-sm-3 d-flex justify-content-center align-items-center">
+					<a href="${item.ATTR04}" target="blank"><span class="material-symbols-outlined">smart_display</span></a>
 				</div>
 			</div>
 		</c:forEach>
