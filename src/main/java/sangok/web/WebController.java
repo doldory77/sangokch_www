@@ -403,6 +403,25 @@ public class WebController implements InitializingBean {
 		commProcessEscapeBoard(new String[] {"MAIN01"}, new Boolean[] {false}, model);
 		
 		return "home/D0000000/D0000001";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/D0000002.do")
+	public String d0000002(HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000002").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "06").put("GROUP_ID", "D0000002").put("ORDER_BY", "ATTR03 DESC").build());
+		
+		model.addAttribute("MAIN01", MAIN01);
+		model.addAttribute("MAIN02_LIST", MAIN02);
+		model.addAttribute("TITLE", "다음세대(어린이부)");
+		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
+		
+		return "home/D0000000/D0000002";
 	}	
 	
 	/*
@@ -593,6 +612,20 @@ public class WebController implements InitializingBean {
 		model.addAttribute("SUB_MENU", subMenuList);
 		
 		return "admin/menu/subMenuMng";
+	}
+	
+	/*
+	 * 하위메뉴를 저장한다.
+	 */
+	@RequestMapping(value = "/admin/menu/saveSubMenu.do")
+	public String saveSubMenu(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		params.put("RTN_MSG", "SUCCESS");
+		params.put("ORD_NO", null);
+		params.put("MENU_LEVEL", null);
+		webService.updateSubMenu(params);
+		
+		return "redirect:/admin/menu/subMenuMng.do?P_MENU_GROUP="+params.get("PARENT_MENU_ID");
 	}	
 	
 	/*

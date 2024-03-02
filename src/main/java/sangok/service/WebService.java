@@ -11,6 +11,8 @@ public interface WebService {
 
 	List<Map<String, Object>> selectMenu(Map<String, Object> params) throws Exception;
 	
+	void updateSubMenu(Map<String, Object> params) throws Exception;
+	
 	List<Map<String, Object>> selectMenuByTree() throws Exception;
 	
 	List<Map<String, Object>> selectCode(Map<String, Object> params) throws Exception;

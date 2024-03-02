@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<div class="container-md">
-		<form method="POST" action="/admin/code/saveCode.do">
+		<form method="POST" action="/admin/menu/saveSubMenu.do">
 			<fieldset>
 				<legend></legend>
 				<div class="mb-3">
@@ -68,9 +68,14 @@
 			</thead>
 			<tbody>
 				<c:forEach var="menu" items="${SUB_MENU}" varStatus="status">
-				<tr>
+				<tr data-parent-menu-id="${menu.PARENT_MENU_ID}">
 					<th scope="row">${menu.count}</th>
-					<td><a href="javascript:false;" onclick="selectMenu(this);">${menu.MENU_ID}</a></td>
+					<td>
+						<c:choose>
+						<c:when test="${menu.MENU_LEVEL eq 1}">${menu.MENU_ID}</c:when>
+						<c:otherwise><a href="javascript:false;" onclick="selectMenu(this);">${menu.MENU_ID}</a></c:otherwise>
+						</c:choose>
+					</td>
 					<td>${menu.MENU_NM}</td>
 				</tr>
 				</c:forEach>
@@ -84,6 +89,7 @@
 			var v_groupId = $(that).text();
 			var $tr = $(that).closest('tr');
 			//alert(v_groupId + '/' + $tr.children('td:eq(1)').text());
+			$('#parentMenuId').val($tr.data('parentMenuId'));
 			$('#menuId').val(v_groupId);
 			$('#menuNm').val($tr.children('td:eq(1)').text());
 		}

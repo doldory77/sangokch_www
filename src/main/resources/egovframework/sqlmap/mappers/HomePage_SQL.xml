@@ -51,6 +51,20 @@
         ]]>
     </select>
     
+    <update id="updateSubMenu" statementType="CALLABLE" parameterType="map">
+    	{ CALL SP_MERGE_MENU(
+    		#{RTN_MSG, mode=OUT, jdbcType=VARCHAR}
+    		, #{MENU_ID, mode=IN, jdbcType=VARCHAR}
+    		, #{PARENT_MENU_ID, mode=IN, jdbcType=VARCHAR}
+    		, #{MENU_NM, mode=IN, jdbcType=VARCHAR}
+    		, #{URL, mode=IN, jdbcType=VARCHAR}
+    		, #{MNG_URL, mode=IN, jdbcType=VARCHAR}
+    		, #{USE_YN, mode=IN, jdbcType=VARCHAR}
+    		, #{ORD_NO, mode=INOUT, jdbcType=INTEGER}
+    		, #{MENU_LEVEL, mode=INOUT, jdbcType=INTEGER}) }
+    	/*WebMapper.updateSubMenu*/	
+    </update>    
+    
     <select id="selectMenuBySP" statementType="CALLABLE" parameterType="map" resultType="map">
     	/*WebMapper.selectMenuBySP*/
     	{ CALL SP_GET_MENU(#{P_MENU_GROUP}, #{P_DEPTH_CHAR}) }
