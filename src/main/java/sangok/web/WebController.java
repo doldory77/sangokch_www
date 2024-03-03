@@ -745,7 +745,7 @@ public class WebController implements InitializingBean {
 		model.put("content", list);
 		
 		return "jsonView";
-	}
+	}	
 	
 	/*
 	 * JSON 요청 테스트
@@ -760,6 +760,21 @@ public class WebController implements InitializingBean {
 		model.put("cnt", 0);
 		
 		return JMap.instance("dvsn", "A").put("title", "B").put("cnt", 0).build();
+		/*
+		$.ajax({
+			type: 'POST'
+			, url: '/jsonTest.do'
+			, data: JSON.stringify({age:37, name:'doldory'})
+			, dataType: 'JSON'
+			, contentType: 'application/json; charset-utf-8'
+			, success: function(result) {
+				console.log(result);
+			}
+			, error: function(xhr, status, error) {
+				console.log(error);
+			}
+		}) 		
+		*/
 	}
 	
 	/*

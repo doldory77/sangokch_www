@@ -39,7 +39,7 @@
 				</div>
 				<div class="mb-3">
 					<label for="admYn" class="form-label">관리자여부</label>
-					<select id="admYn" name="ADM_YN" class="form-control">
+					<select id="admYn" name="ADM_YN" class="form-control" <c:if test="${sessionScope.USER_INFO.admYn eq 'N'}">disabled</c:if> >
 						<option value="Y">Y</option>
 						<option value="N">N</option>
 					</select>
@@ -69,6 +69,7 @@
 					<th scope="col">관리자여부</th>
 					<th scope="col">사용여부</th>
 					<th scope="col">기타속성</th>
+					<th scope="col"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -79,6 +80,11 @@
 					<td>${user.ADM_YN}</td>
 					<td>${user.USE_YN}</td>
 					<td>${user.ATTR01}</td>
+					<td>
+						<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}">
+						<a class="btn btn-secondary btn-sm" href="/admin/user/userAuthMng.do?ID=${user.ID}">권한관리</a>
+						</c:if>
+					</td>
 				</tr>
 				</c:forEach>
 			</tbody>

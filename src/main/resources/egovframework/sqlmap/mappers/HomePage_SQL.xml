@@ -10,7 +10,7 @@
 	<select id="selectMenuNm" parameterType="string" resultType="map">
 		/*WebMapper.selectMenuNm*/
 		SELECT FN_GET_MENU_NM(#{MENU_ID}) AS TITLE
-    </select>    
+    </select>
     
     <update id="updateCodeGroup" statementType="CALLABLE" parameterType="map">
     	{ CALL SP_MERGE_CODE_GROUP(
@@ -158,5 +158,25 @@
 		) }
 		/*WebMapper.selectHymn*/
 	</select>
+	
+	<select id="selectUserAuth" parameterType="map" resultType="map">
+		/*WebMapper.selectMenuNm*/
+		SELECT AA.USER_ID
+			 , AA.MENU_LEVEL
+			 , AA.MENU_ID
+			 , AA.ORD_NO
+			 , IFNULL(C.USE_YN, 'N') USE_YN
+		FROM (
+			SELECT A.ID USER_ID
+				 , B.MENU_LEVEL
+				 , B.MENU_ID
+				 , B.ORD_NO
+			  FROM H_USER A
+			  JOIN H_MENU B
+			 WHERE A.ID = #{USER_ID}
+		) AA
+		LEFT OUTER JOIN H_USER_AUTH C ON AA.USER_ID = C.USER_ID AND AA.MENU_ID = C.MENU_ID
+		ORDER BY AA.MENU_ID, AA.ORD_NO
+    </select>	
 	
 </mapper>
