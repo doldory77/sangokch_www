@@ -5,8 +5,6 @@
 	id="WebApp_ID" version="2.5">
 	<display-name>egov.sample</display-name>
 	
-    <!-- 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 -->
-    
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
