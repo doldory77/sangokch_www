@@ -82,7 +82,7 @@
 					<td>${user.ATTR01}</td>
 					<td>
 						<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}">
-						<a class="btn btn-secondary btn-sm" href="/admin/user/userAuthMng.do?ID=${user.ID}">권한관리</a>
+						<a class="btn btn-secondary btn-sm" href="/admin/user/userAuthMng.do?USER_ID=${user.ID}">권한관리</a>
 						</c:if>
 					</td>
 				</tr>

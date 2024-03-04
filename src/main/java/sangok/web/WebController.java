@@ -527,6 +527,47 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
+	 * 해당 코드그룹의 코드조회
+	 */
+	@RequestMapping(value = "/admin/user/userAuthMng.do")
+	public String userAuthMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		List<Map<String, Object>> authList = webService.selectUserAuth(params);
+		
+		model.addAttribute("USER_ID", params.get("USER_ID"));
+		model.addAttribute("AUTH", authList);
+		
+		return "admin/user/userAuthMng";
+	}
+	
+	/*
+	 * JSON 요청 테스트
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/admin/user/saveUserAuth.do")
+	public Map<String, Object> saveUserAuth(@RequestBody List<Map<String, Object>> params, ModelMap model) throws Exception {
+		
+		debug(params);
+		webService.updateUserAuth(params);
+		return JMap.instance("result", "SUCCESS").put("count", params.size()).build();
+		/*
+		$.ajax({
+			type: 'POST'
+			, url: '/jsonTest.do'
+			, data: JSON.stringify({age:37, name:'doldory'})
+			, dataType: 'JSON'
+			, contentType: 'application/json; charset-utf-8'
+			, success: function(result) {
+				console.log(result);
+			}
+			, error: function(xhr, status, error) {
+				console.log(error);
+			}
+		}) 		
+		*/
+	}	
+	
+	/*
 	 * 사용자 저장
 	 */
 	@RequestMapping(value = "/admin/user/saveUser.do")
@@ -752,7 +793,7 @@ public class WebController implements InitializingBean {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/jsonTest.do")
-	public Map<String, Object> jsonTest(@RequestBody Map<String, Object> params, ModelMap model) throws Exception {
+	public Map<String, Object> jsonTest(@RequestBody List<Map<String, Object>> params, ModelMap model) throws Exception {
 		
 		debug(params);
 		model.put("dvsn", "A");

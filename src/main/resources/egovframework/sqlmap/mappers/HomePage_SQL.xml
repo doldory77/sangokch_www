@@ -164,12 +164,15 @@
 		SELECT AA.USER_ID
 			 , AA.MENU_LEVEL
 			 , AA.MENU_ID
+			 , AA.MENU_NM
+			 , REPEAT('ㄴ', AA.MENU_LEVEL-1) PRE_STR
 			 , AA.ORD_NO
 			 , IFNULL(C.USE_YN, 'N') USE_YN
 		FROM (
 			SELECT A.ID USER_ID
 				 , B.MENU_LEVEL
 				 , B.MENU_ID
+				 , B.MENU_NM
 				 , B.ORD_NO
 			  FROM H_USER A
 			  JOIN H_MENU B
@@ -177,6 +180,14 @@
 		) AA
 		LEFT OUTER JOIN H_USER_AUTH C ON AA.USER_ID = C.USER_ID AND AA.MENU_ID = C.MENU_ID
 		ORDER BY AA.MENU_ID, AA.ORD_NO
-    </select>	
+    </select>
+    
+    <update id="updateUserAuth" statementType="CALLABLE" parameterType="map">
+    	{ CALL SP_MERGE_AUTH(
+    		#{USER_ID, mode=IN, jdbcType=VARCHAR}
+    		, #{MENU_ID, mode=IN, jdbcType=VARCHAR}
+    		, #{USE_YN, mode=IN, jdbcType=VARCHAR}) }
+    	/*WebMapper.updateUserAuth*/	
+    </update>    	
 	
 </mapper>

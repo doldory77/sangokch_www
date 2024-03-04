@@ -33,6 +33,10 @@ public interface WebService {
 	
 	List<Map<String, Object>> selectUser(Map<String, Object> params) throws Exception;
 	
+	List<Map<String, Object>> selectUserAuth(Map<String, Object> params) throws Exception;
+	
+	void updateUserAuth(List<Map<String, Object>> params) throws Exception;
+	
 	void updateUser(Map<String, Object> params) throws Exception;
 	
 	List<Map<String, Object>> selectBibleAndHymn(Map<String, Object> params) throws Exception;
