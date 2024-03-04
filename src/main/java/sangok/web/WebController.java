@@ -2,6 +2,7 @@ package sangok.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -478,12 +479,18 @@ public class WebController implements InitializingBean {
 			re.addAttribute("LOGIN_YN", "N");
 			return "redirect:/admin/login.do";
 		} else {
+			List<Map<String, Object>> userAuth = webService.selectUserAuth(JMap.instance("USER_ID", userId).build());
+			Map<String, Object> authMap = new HashMap<String, Object>();
+			for (int i=0; i<userAuth.size(); i++) {
+				authMap.put("" + userAuth.get(i).get("MENU_ID"), userAuth.get(i).get("USE_YN"));
+			}
 			Map<String, Object> map = userList.get(0); 
 			UserInfo userInfo = new UserInfo();
 			userInfo.setId(map.get("ID").toString());
 			userInfo.setAdmYn(map.get("ADM_YN").toString());
 			userInfo.setUseYn(map.get("USE_YN").toString());
 			userInfo.setAttr01(map.get("ATTR01").toString());
+			userInfo.setAuthMap(authMap);
 			request.getSession().setAttribute("USER_INFO", userInfo);
 			//re.addAttribute("LOGIN_YN", "Y");
 			return "redirect:/admin/main.do";

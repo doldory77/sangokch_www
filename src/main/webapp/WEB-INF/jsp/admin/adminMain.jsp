@@ -72,6 +72,7 @@
 
 		<div class="row g-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3">
 			<c:forEach var="mainMenu" items="${MENU_LIST}" varStatus="status">
+			<c:if test="${sessionScope.USER_INFO.authMap[mainMenu.MENU_ID] eq 'Y'}">
 			<div class="col">
 				<div class="group-menu-wrapper">
 					<div class="group-menu d-flex justify-content-between align-items-center bg-primary px-1">
@@ -93,13 +94,17 @@
 					</div>
 					<ul>
 						<c:forEach var="sumMenu" items="${mainMenu.SUB_MENU}">
+						<c:if test="${sessionScope.USER_INFO.authMap[sumMenu.MENU_ID] eq 'Y'}">
 						<li style="cursor: pointer;"><a href="${sumMenu.MNG_URL}"><span class="menu-nm">${sumMenu.MENU_NM}</span><span style="font-size:0.8rem;">${sumMenu.MENU_ID}</span></a></li>
+						</c:if>
 						</c:forEach>
 					</ul>
 				</div>
 			</div>
+			</c:if>
 			</c:forEach>
 		</div>
+		
 	</div>
 	
 	<script>
