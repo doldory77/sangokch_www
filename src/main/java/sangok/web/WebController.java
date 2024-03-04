@@ -423,6 +423,63 @@ public class WebController implements InitializingBean {
 		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
 		
 		return "home/D0000000/D0000002";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/D0000003.do")
+	public String d0000003(HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000003").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "07").put("GROUP_ID", "D0000003").put("ORDER_BY", "ATTR03 DESC").build());
+		
+		model.addAttribute("MAIN01", MAIN01);
+		model.addAttribute("MAIN02_LIST", MAIN02);
+		model.addAttribute("TITLE", "다음세대(중고등부)");
+		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
+		
+		return "home/D0000000/D0000003";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/D0000004.do")
+	public String d0000004(HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000004").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "08").put("GROUP_ID", "D0000004").put("ORDER_BY", "ATTR03 DESC").build());
+		
+		model.addAttribute("MAIN01", MAIN01);
+		model.addAttribute("MAIN02_LIST", MAIN02);
+		model.addAttribute("TITLE", "다음세대(청년부)");
+		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
+		
+		return "home/D0000000/D0000004";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/E0000002.do")
+	public String e0000002(HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "E0000002").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "09").put("GROUP_ID", "E0000002").put("ORDER_BY", "ATTR03 DESC").build());
+		
+		model.addAttribute("MAIN01", MAIN01);
+		model.addAttribute("MAIN02_LIST", MAIN02);
+		model.addAttribute("TITLE", "교회소식(새가족)");
+		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
+		
+		return "home/E0000000/E0000002";
 	}	
 	
 	/*
