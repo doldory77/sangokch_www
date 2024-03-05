@@ -26,8 +26,8 @@
     		, #{GROUP_ID, mode=IN, jdbcType=VARCHAR}
     		, #{CODE, mode=IN, jdbcType=VARCHAR}
     		, #{CODE_NM, mode=IN, jdbcType=VARCHAR}
-    		, #{USE_YN, mode=IN, jdbcType=VARCHAR})
-    		, #{ATTR1_NUM, mode=IN, jdbcType=INTEGER})
+    		, #{USE_YN, mode=IN, jdbcType=VARCHAR}
+    		, #{ATTR1_NUM, mode=IN, jdbcType=VARCHAR}
     		, #{ATTR1_CHR, mode=IN, jdbcType=VARCHAR}) }
     	/*WebMapper.updateCode*/	
     </update>
