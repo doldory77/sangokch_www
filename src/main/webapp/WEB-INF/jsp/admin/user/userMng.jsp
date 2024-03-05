@@ -34,19 +34,19 @@
 					<div class="form-text">사용자ID</div>
 				</div>
 				<div class="mb-3">
-					<label for="userPw" class="form-label">사용자 패스워드</label>
-					<input type="password" name="PW" class="form-control" id="userPw">
+					<label for="userPw" class="form-label">사용자 패스워드<small style="color:red;">(관리자만 설정가능)</small></label>
+					<input type="password" name="PW" class="form-control" id="userPw" <c:if test="${sessionScope.USER_INFO.admYn eq 'N'}">disabled</c:if>>
 				</div>
 				<div class="mb-3">
-					<label for="admYn" class="form-label">관리자여부</label>
-					<select id="admYn" name="ADM_YN" class="form-control" <c:if test="${sessionScope.USER_INFO.admYn eq 'N'}">disabled</c:if> >
+					<label for="admYn" class="form-label">관리자여부<small style="color:red;">(관리자만 설정가능)</small></label>
+					<select id="admYn" name="ADM_YN" class="form-control" <c:if test="${sessionScope.USER_INFO.admYn eq 'N'}">disabled</c:if>>
 						<option value="Y">Y</option>
 						<option value="N">N</option>
 					</select>
 				</div>
 				<div class="mb-3">
-					<label for="useYn" class="form-label">사용여부</label>
-					<select id="useYn" name="USE_YN" class="form-control">
+					<label for="useYn" class="form-label">사용여부<small style="color:red;">(관리자만 설정가능)</small></label>
+					<select id="useYn" name="USE_YN" class="form-control" <c:if test="${sessionScope.USER_INFO.admYn eq 'N'}">disabled</c:if>>
 						<option value="Y">Y</option>
 						<option value="N">N</option>
 					</select>
