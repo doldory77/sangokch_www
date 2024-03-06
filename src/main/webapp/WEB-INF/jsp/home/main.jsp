@@ -22,7 +22,7 @@
 		<!-- <div class="mainHead">HEAD IMG</div> -->
 		<c:out value="${MAIN01.CONTENT}" escapeXml="false"></c:out>
 	</div>
-	
+	<!-- <div>${applicationScope.ENV['CD0002_05']['VALUE_STR']}</div> -->
 	<div class="container-md">
 		<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 mt-4">
 			<c:forEach var="item" items="${MAIN02_LIST}" varStatus="status">

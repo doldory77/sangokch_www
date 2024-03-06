@@ -184,6 +184,15 @@
 		ORDER BY AA.MENU_ID, AA.ORD_NO
     </select>
     
+	<select id="selectEnv" parameterType="map" resultType="map">
+		SELECT CONCAT(GROUP_ID, '_', CODE) AS CODE
+			 , ATTR1_NUM AS VALUE_NUM
+			 , ATTR1_CHR AS VALUE_STR
+		  FROM H_CODE 
+		 WHERE GROUP_ID = #{GROUP_ID}
+		   AND USE_YN = 'Y'
+    </select>
+    
     <update id="updateUserAuth" statementType="CALLABLE" parameterType="map">
     	{ CALL SP_MERGE_AUTH(
     		#{USER_ID, mode=IN, jdbcType=VARCHAR}

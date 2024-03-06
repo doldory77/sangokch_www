@@ -10,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -29,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import sangok.scheduler.CacheScheduler;
 import sangok.service.WebService;
 import sangok.utils.JList;
 import sangok.utils.JMap;
@@ -55,7 +57,13 @@ public class WebController implements InitializingBean {
 	DefaultListableBeanFactory beanFactory;
 	
 	@Autowired
+	ServletContext ctx;
+	
+	@Autowired
 	org.springframework.context.support.MessageSourceAccessor messageSourceAccessor;
+	
+	@Resource(name = "cacheScheduler")
+	private CacheScheduler cacheScheduler;
 	
 	@Resource(name = "webService")
 	private WebService webService;
@@ -188,7 +196,7 @@ public class WebController implements InitializingBean {
 		for (String beanName : beanFactory.getBeanDefinitionNames()) {
 			LOGGER.debug("class : " + beanFactory.getBean(beanName).getClass().getName());
 		}
-		
+		ctx.setAttribute("ENV", cacheScheduler.envMap);		
 	}	
 	
 	/*

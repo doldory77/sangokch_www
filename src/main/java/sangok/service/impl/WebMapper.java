@@ -45,4 +45,6 @@ public interface WebMapper {
 	Map<String, Object> selectUserByIdPw(Map<String, Object> params) throws Exception;
 	
 	Map<String, Object> selectMenuNm(String menuId) throws Exception;
+	
+	List<Map<String, Object>> selectEnv(Map<String, Object> params) throws Exception;
 }
