@@ -12,7 +12,8 @@
 	
   	<style>
   		.group-menu {
-  			height: 34px;
+  			height: 42px;
+  			border-radius: 5px 5px 0px 0px;
   		}
   		.group-menu span:nth-of-type(2) {
   			height: 24px;
@@ -20,6 +21,7 @@
   		}
 		.group-menu + ul {
 			border: 1px solid #c2c2c2;
+			border-radius: 0px 0px 5px 5px;
 			overflow: hidden;
 		}
 		.group-menu + ul li {
@@ -32,6 +34,7 @@
 		}
 		.group-menu:has(input[type="checkbox"]:checked) + ul li {
 			height: 34px;
+			line-height: 34px;
 			opacity: 1;
 		}
 		.group-menu-wrapper:hover {
@@ -51,7 +54,7 @@
 		}*/
 		.menu-nm {
 			display: inline-block;
-			width: 120px;
+			width: 160px;
 		}
 		
 	</style>
@@ -75,27 +78,31 @@
 			<c:if test="${sessionScope.USER_INFO.authMap[mainMenu.MENU_ID] eq 'Y'}">
 			<div class="col">
 				<div class="group-menu-wrapper">
-					<div class="group-menu d-flex justify-content-between align-items-center bg-primary px-1">
+					<div class="group-menu d-flex justify-content-between align-items-center bg-primary px-2">
 					<c:choose>
 						<c:when test="${not empty mainMenu.MNG_URL}">
 						<a href="${mainMenu.MNG_URL}">
-							<span class="group-main-menu">${mainMenu.MENU_NM}<small>(${mainMenu.MENU_ID})</small></span>
+							<span class="group-main-menu">${mainMenu.MENU_NM}<small class="ms-2">(${mainMenu.MENU_ID})</small></span>
 						</a>
 						</c:when>
 						<c:otherwise>
-							<span class="group-main-menu">${mainMenu.MENU_NM}<small>(${mainMenu.MENU_ID})</small></span>
+							<span class="group-main-menu">${mainMenu.MENU_NM}<small class="ms-2">(${mainMenu.MENU_ID})</small></span>
 						</c:otherwise>
-					</c:choose>	
-							
-						<span>
+					</c:choose>
+					<c:if test="${empty mainMenu.MNG_URL}">
+						<span style="border: 1px solid white;">
 							<input class="d-none" id="menu${status.count}" type="checkbox">
 							<label style="color: white; cursor: pointer;" for="menu${status.count}"><span class="material-symbols-outlined">expand_more</span></label>
 						</span>
+					</c:if>
 					</div>
+					
 					<ul>
 						<c:forEach var="sumMenu" items="${mainMenu.SUB_MENU}">
 						<c:if test="${sessionScope.USER_INFO.authMap[sumMenu.MENU_ID] eq 'Y'}">
-						<li style="cursor: pointer;"><a href="${sumMenu.MNG_URL}"><span class="menu-nm">${sumMenu.MENU_NM}</span><span style="font-size:0.8rem;">${sumMenu.MENU_ID}</span></a></li>
+						<li>
+							<a href="${sumMenu.MNG_URL}"><span class="menu-nm">ㄴ ${sumMenu.MENU_NM}</span><span style="font-size:0.8rem;">${sumMenu.MENU_ID}</span></a>
+						</li>
 						</c:if>
 						</c:forEach>
 					</ul>
