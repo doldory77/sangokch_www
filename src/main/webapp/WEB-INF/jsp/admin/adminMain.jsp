@@ -40,7 +40,7 @@
 		.group-main-menu {
 			color: white;
 			display: inline-block;
-			width: 120px;
+			/*width: 120px;*/
 			
 		}
 		/*.group-main-menu:hover {
@@ -79,14 +79,14 @@
 					<c:choose>
 						<c:when test="${not empty mainMenu.MNG_URL}">
 						<a href="${mainMenu.MNG_URL}">
+							<span class="group-main-menu">${mainMenu.MENU_NM}<small>(${mainMenu.MENU_ID})</small></span>
+						</a>
 						</c:when>
 						<c:otherwise>
-						<a>
+							<span class="group-main-menu">${mainMenu.MENU_NM}<small>(${mainMenu.MENU_ID})</small></span>
 						</c:otherwise>
 					</c:choose>	
-							<span class="group-main-menu">${mainMenu.MENU_NM}</span>
-							<span style="font-size:0.8rem;">${mainMenu.MENU_ID}</span>
-						</a>
+							
 						<span>
 							<input class="d-none" id="menu${status.count}" type="checkbox">
 							<label style="color: white; cursor: pointer;" for="menu${status.count}"><span class="material-symbols-outlined">expand_more</span></label>
