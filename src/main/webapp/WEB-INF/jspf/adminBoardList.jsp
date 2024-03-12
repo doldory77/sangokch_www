@@ -15,7 +15,10 @@
 				<div class="board-frame-background" style='background-image: url(${item.ATTR01});'></div>
 				<div><span class="sub1">${item.GROUP_NM}</span></div>
 				<div><span class="title ps-2">${item.SUBJECT}</span></div>
-				<div class="text-end"><span class="sub1">${item.REG_DT}</span></div>
+				<div class="d-flex justify-content-between align-items-center">
+					<span class="sub2">${item.TAG_NM}</span>
+					<span class="sub1">${item.REG_DT}</span>
+				</div>
 			</div>
 		</c:forEach>
 		</div>

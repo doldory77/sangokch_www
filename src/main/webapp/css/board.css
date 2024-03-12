@@ -12,6 +12,10 @@
 .board-frame .sub1 {
 	font-size: 0.8rem;
 }
+
+.board-frame .sub2 {
+	font-size: 0.6rem;
+}
 .paging-btn {
 	border:1px dotted #c2c2c2;
 	width:48px;
