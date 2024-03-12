@@ -22,6 +22,8 @@
   			color: red;
   			font-family: Georgia;
   		}
+  		.require {color:red; font-weight:bold;}
+  		.sub1 {font-size: 0.7rem;}
   	</style>
   	
 </head>
@@ -50,32 +52,33 @@
 				<legend></legend>
 			
 			  	<div class="row align-items-center mb-2">
-			  		<div class="col-md-1">
-			  			<label for="title">제목</label>
+			  		<div class="col-md-1 mb-md-2">
+			  			<label for="groupId">그룹ID<small class="require sub1 d-lg-none d-xxl-inline">(분류)</small></label>
 			  		</div>
-			  		<div class="col">
+			  		<div class="col-md-3 mb-2">
+			  			<select class="form-select" id="groupId" name="GROUP_ID">
+			  				<c:forEach var="item" items="${groupIdList}">
+			  				<option value="${item.MENU_ID}" 
+			  					<c:if test="${not empty BOARD_DTL && item.MENU_ID eq BOARD_DTL.GROUP_ID}">selected="selected"</c:if>
+			  					<c:if test="${not empty GROUP_ID && item.MENU_ID eq GROUP_ID}">selected="selected"</c:if>
+			  				><c:choose><c:when test="${item.MENU_LEVEL eq '2'}">&nbsp;&nbsp;</c:when><c:otherwise></c:otherwise></c:choose>${item.MENU_NM}</option>
+			  				</c:forEach>
+			  			</select>
+			  		</div>
+			  		
+			  		<div class="col-md-1  mb-md-2">
+			  			<label for="title"><span class="require sub1">*</span>제목</label>
+			  		</div>
+			  		<div class="col mb-2">
 			  			<input type="text" id="title" name="SUBJECT" class="form-control" placeholder="제목을 입력하세요" value="${not empty BOARD_DTL ? BOARD_DTL.SUBJECT : ''}">
 			  		</div>
 			  	</div>
 		  	
 			  	<div class="row align-items-center mb-2">
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="groupId">그룹ID</label>
+			  			<label for="groupId">화면표시<small class="require sub1 d-lg-none d-xxl-inline">(꾸밈요소)</small></label>
 			  		</div>
-			  		<div class="col-md-2 mb-2">
-			  			<select class="form-select" id="groupId" name="GROUP_ID">
-			  				<c:forEach var="item" items="${groupIdList}">
-			  				<option value="${item.MENU_ID}" 
-			  					<c:if test="${not empty BOARD_DTL && item.MENU_ID eq BOARD_DTL.GROUP_ID}">selected="selected"</c:if>
-			  					<c:if test="${not empty GROUP_ID && item.MENU_ID eq GROUP_ID}">selected="selected"</c:if>
-			  				>${item.MENU_NM}</option>
-			  				</c:forEach>
-			  			</select>
-			  		</div>
-			  		<div class="col-md-1 mb-md-2">
-			  			<label for="groupId">화면표시</label>
-			  		</div>
-				  	<div class="col-md-2 mb-2">
+				  	<div class="col-md-3 mb-2">
 			  			<select class="form-select" id="screenYn" name="SCREEN_YN">
 			  				<c:forEach var="item" items="${YNCodeList}">
 			  				<option value="${item.CODE}" <c:if test="${not empty BOARD_DTL && item.CODE eq BOARD_DTL.SCREEN_YN}">selected="selected"</c:if>>${item.CODE_NM}</option>
@@ -83,15 +86,15 @@
 			  			</select>
 				  	</div>
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="groupId">순번</label>
+			  			<label for="groupId">순번<small class="require sub1 d-lg-none d-xxl-inline">(정렬순서)</small></label>
 			  		</div>
-			  		<div class="col-md-2 mb-2">
+			  		<div class="col-md-3 mb-2">
 			  			<input type="text" id="ordNo" name="ORD_NO" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ORD_NO : ''}">
 			  		</div>
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="groupId">사용여부</label>
+			  			<label for="groupId">사용여부<small class="require sub1 d-lg-none d-xxl-inline">(노출여부)</small></label>
 			  		</div>
-			  		<div class="col-md-2 mb-2">
+			  		<div class="col-md-3 mb-2">
 			  			<select class="form-select" id="useYn" name="USE_YN">
 			  				<c:forEach var="item" items="${YNCodeList}">
 			  				<option value="${item.CODE}" <c:if test="${not empty BOARD_DTL && item.CODE eq BOARD_DTL.USE_YN}">selected="selected"</c:if>>${item.CODE_NM}</option>
@@ -102,7 +105,7 @@
 			  	
 			  	<div class="row align-items-center mb-2">
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="title">TAG</label>
+			  			<label for="title">TAG<small class="require sub1 d-lg-none d-xxl-inline">(요소성격)</small></label>
 			  		</div>
 			  		<div class="col-md-3 mb-2">
 			  			<select class="form-select" id="useYn" name="TAG_CD">
@@ -112,30 +115,36 @@
 			  			</select>
 			  		</div>
 			  		<div class="col-md-1 mb-md-2">
+			  			<label for="attr01">속성1<small class="require sub1 d-lg-none d-xxl-inline">(읽기전용)</small></label>
+			  		</div>
+			  		<div class="col-md-3 mb-2">
+			  			<input disabled type="text" id="attr01" name="ATTR01" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR01 : ''}">
+			  		</div>
+			  		<div class="col-md-1 mb-md-2">
 			  			<label for="attr02">속성2</label>
 			  		</div>
 			  		<div class="col-md-3 mb-2">
 			  			<input type="text" id="attr02" name="ATTR02" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR02 : ''}">
 			  		</div>
+			  	</div>
+			  	
+			  	<div class="row align-items-center mb-2">
 			  		<div class="col-md-1 mb-md-2">
 			  			<label for="attr03">속성3</label>
 			  		</div>
 			  		<div class="col-md-3 mb-2">
 			  			<input type="text" id="attr03" name="ATTR03" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR03 : ''}">
 			  		</div>
-			  		
-			  	</div>
-			  	<div class="row align-items-center mb-2">
 			  		<div class="col-md-1 mb-md-2">
 			  			<label for="attr04">속성4</label>
 			  		</div>
-			  		<div class="col-md-5 mb-2">
+			  		<div class="col-md-3 mb-2">
 			  			<input type="text" id="attr04" name="ATTR04" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR04 : ''}">
 			  		</div>
 			  		<div class="col-md-1 mb-md-2">
 			  			<label for="attr05">속성5</label>
 			  		</div>
-			  		<div class="col-md-5 mb-2">
+			  		<div class="col-md-3 mb-2">
 			  			<input type="text" id="attr05" name="ATTR05" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR05 : ''}">
 			  		</div>
 			  	</div>

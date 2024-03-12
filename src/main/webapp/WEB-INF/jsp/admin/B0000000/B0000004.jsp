@@ -31,7 +31,7 @@
 	</div>
 	<jsp:include page="/WEB-INF/jspf/adminBoardList.jsp" flush="false" />
 	
-	<iframe style="border-top:1px dotted darkgray; margin-top:20px; display:block; width:100vw; height:59vh" src="/admin/adminIfrmPage.do?GROUP_ID=B0000004&SCREEN_YN=N&PAGE=B0000004&TAG_CD=04"></iframe>
+	<!-- <iframe style="border-top:1px dotted darkgray; margin-top:20px; display:block; width:100vw; height:59vh" src="/admin/adminIfrmPage.do?GROUP_ID=B0000004&SCREEN_YN=N&PAGE=B0000004&TAG_CD=04"></iframe> -->
 	
 	<script>
 		/*스크립트 작성*/

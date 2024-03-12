@@ -207,8 +207,8 @@ public class WebController implements InitializingBean {
 		
 		commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "A0000000").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "A0000000").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
 		
 		model.addAttribute("MAIN01", MAIN01);
 		model.addAttribute("MAIN02_LIST", MAIN02);
@@ -246,8 +246,8 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000001").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000001").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000001").put("USE_YN", "Y").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000001").put("USE_YN", "Y").build());
 		
 		model.addAttribute("MAIN01", MAIN01);
 		model.addAttribute("MAIN02_LIST", MAIN02);
@@ -265,8 +265,8 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000002").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000002").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000002").put("USE_YN", "Y").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000002").put("USE_YN", "Y").build());
 		
 		model.addAttribute("MAIN01", MAIN01);
 		model.addAttribute("MAIN02_LIST", MAIN02);
@@ -284,8 +284,8 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000003").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000003").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000003").put("USE_YN", "Y").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000003").put("USE_YN", "Y").build());
 		
 		model.addAttribute("MAIN01", MAIN01);
 		model.addAttribute("MAIN02_LIST", MAIN02);
@@ -303,8 +303,8 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000004").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "04").put("GROUP_ID", "B0000004").put("ORDER_BY", "ATTR03 DESC").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000004").put("USE_YN", "Y").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "04").put("GROUP_ID", "B0000004").put("ORDER_BY", "ATTR03 DESC").put("USE_YN", "Y").build());
 		
 		model.addAttribute("MAIN01", MAIN01);
 		model.addAttribute("MAIN02_LIST", MAIN02);
@@ -322,8 +322,8 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000005").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000005").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000005").put("USE_YN", "Y").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000005").put("USE_YN", "Y").build());
 		
 		model.addAttribute("MAIN01", MAIN01);
 		model.addAttribute("MAIN02", MAIN02);
@@ -341,12 +341,12 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "C0000001").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "C0000001").put("USE_YN", "Y").build());
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
 		params.put("ORDER_BY", "ATTR02 DESC");
 		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
-		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
+//		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
 		model.addAttribute("TAG_CD", params.get("TAG_CD"));
 		model.addAttribute("PAGE", params.get("PAGE"));
 		//String jspUserPage = params.get("PAGE").toString();
@@ -368,7 +368,7 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "C0000002").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "C0000002").put("USE_YN", "Y").build());
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
 		params.put("ORDER_BY", "ATTR02 DESC");
@@ -395,7 +395,7 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000001").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000001").put("USE_YN", "Y").build());
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
 		params.put("ORDER_BY", "ATTR02 DESC");
@@ -422,8 +422,8 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000002").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "06").put("GROUP_ID", "D0000002").put("ORDER_BY", "ATTR03 DESC").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000002").put("USE_YN", "Y").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "06").put("GROUP_ID", "D0000002").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
 		
 		model.addAttribute("MAIN01", MAIN01);
 		model.addAttribute("MAIN02_LIST", MAIN02);
@@ -441,8 +441,8 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000003").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "07").put("GROUP_ID", "D0000003").put("ORDER_BY", "ATTR03 DESC").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000003").put("USE_YN", "Y").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "07").put("GROUP_ID", "D0000003").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
 		
 		model.addAttribute("MAIN01", MAIN01);
 		model.addAttribute("MAIN02_LIST", MAIN02);
@@ -460,8 +460,8 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000004").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "08").put("GROUP_ID", "D0000004").put("ORDER_BY", "ATTR03 DESC").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000004").put("USE_YN", "Y").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "08").put("GROUP_ID", "D0000004").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
 		
 		model.addAttribute("MAIN01", MAIN01);
 		model.addAttribute("MAIN02_LIST", MAIN02);
@@ -479,8 +479,8 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "E0000002").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "09").put("GROUP_ID", "E0000002").put("ORDER_BY", "ATTR03 DESC").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "E0000002").put("USE_YN", "Y").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "09").put("GROUP_ID", "E0000002").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
 		
 		model.addAttribute("MAIN01", MAIN01);
 		model.addAttribute("MAIN02_LIST", MAIN02);
@@ -498,7 +498,7 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "F0000001").build());
+		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "F0000001").put("USE_YN", "Y").build());
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
 		params.put("ORDER_BY", "ATTR02 DESC");
@@ -747,7 +747,7 @@ public class WebController implements InitializingBean {
 	@RequestMapping(value = "/admin/board/write.do")
 	public String boardWrite(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {
 		debug("[BAORD WRITE PARAMETERS] " + params);
-		List<Map<String, Object>> groupIdList = webService.selectMenu(JMap.instance("P_MENU_GROUP", null).put("P_DEPTH_CHAR", "--").build());
+		List<Map<String, Object>> groupIdList = webService.selectMenu(JMap.instance("P_MENU_GROUP", null).put("P_DEPTH_CHAR", "ㄴ").build());
 		List<Map<String, Object>> YNCodeList = webService.selectCode(JMap.instance("GROUP_ID", "CD0000").put("USE_YN", "Y").build());
 		List<Map<String, Object>> TagCodeList = webService.selectCode(JMap.instance("GROUP_ID", "CD0001").put("USE_YN", "Y").build());
 		List<Map<String, Object>> boardDtlList = null;
@@ -788,12 +788,12 @@ public class WebController implements InitializingBean {
 		if ("N".equalsIgnoreCase(isAdminIfrmPage)) {
 			return "redirect:/admin/adminPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
 				+ "&PAGE=" + params.get("PAGE")
-				+ "&SCREEN_YN=" + params.get("SCREEN_YN")
+				//+ "&SCREEN_YN=" + params.get("SCREEN_YN")
 				+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
 		} else {
 			return "redirect:/admin/adminIfrmPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
 				+ "&PAGE=" + params.get("PAGE")
-				+ "&SCREEN_YN=" + params.get("SCREEN_YN")
+				//+ "&SCREEN_YN=" + params.get("SCREEN_YN")
 				+ "&TAG_CD=" + params.get("TAG_CD")
 				+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");			
 		}
@@ -820,6 +820,7 @@ public class WebController implements InitializingBean {
 	@RequestMapping(value = "/admin/adminPage.do")
 	public String adminPage(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		debug("[ADMIN PAGE PARAMS] " + params);
+		params.put("ORDER_BY", "SCREEN_YN DESC, ORD_NO ASC");
 		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
 		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
 		model.addAttribute("PAGE", params.get("PAGE"));
