@@ -304,7 +304,7 @@ public class WebController implements InitializingBean {
 		this.commProcessSetMenu(true, model);
 		
 		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000004").put("USE_YN", "Y").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "04").put("GROUP_ID", "B0000004").put("ORDER_BY", "ATTR03 DESC").put("USE_YN", "Y").build());
+		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "00").put("GROUP_ID", "B0000004").put("ORDER_BY", "ATTR03 DESC").put("USE_YN", "Y").build());
 		
 		model.addAttribute("MAIN01", MAIN01);
 		model.addAttribute("MAIN02_LIST", MAIN02);

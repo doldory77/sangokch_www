@@ -53,7 +53,7 @@
 			
 			  	<div class="row align-items-center mb-2">
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="groupId">그룹ID<small class="require sub1 d-lg-none d-xxl-inline">(분류)</small></label>
+			  			<label for="groupId">그룹ID<small class="require sub1 d-none d-xxl-inline"><br/>(분류)</small></label>
 			  		</div>
 			  		<div class="col-md-3 mb-2">
 			  			<select class="form-select" id="groupId" name="GROUP_ID">
@@ -76,7 +76,7 @@
 		  	
 			  	<div class="row align-items-center mb-2">
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="groupId">화면표시<small class="require sub1 d-lg-none d-xxl-inline">(꾸밈요소)</small></label>
+			  			<label for="groupId">화면표시<small class="require sub1 d-none d-xxl-inline"><br/>(꾸밈요소)</small></label>
 			  		</div>
 				  	<div class="col-md-3 mb-2">
 			  			<select class="form-select" id="screenYn" name="SCREEN_YN">
@@ -86,13 +86,13 @@
 			  			</select>
 				  	</div>
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="groupId">순번<small class="require sub1 d-lg-none d-xxl-inline">(정렬순서)</small></label>
+			  			<label for="groupId">순번<small class="require sub1 d-none d-xxl-inline"><br/>(정렬순서)</small></label>
 			  		</div>
 			  		<div class="col-md-3 mb-2">
 			  			<input type="text" id="ordNo" name="ORD_NO" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ORD_NO : ''}">
 			  		</div>
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="groupId">사용여부<small class="require sub1 d-lg-none d-xxl-inline">(노출여부)</small></label>
+			  			<label for="groupId">사용여부<small class="require sub1 d-none d-xxl-inline"><br/>(노출여부)</small></label>
 			  		</div>
 			  		<div class="col-md-3 mb-2">
 			  			<select class="form-select" id="useYn" name="USE_YN">
@@ -105,7 +105,7 @@
 			  	
 			  	<div class="row align-items-center mb-2">
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="title">TAG<small class="require sub1 d-lg-none d-xxl-inline">(요소성격)</small></label>
+			  			<label for="title">TAG<small class="require sub1 d-none d-xxl-inline"><br/>(요소성격)</small></label>
 			  		</div>
 			  		<div class="col-md-3 mb-2">
 			  			<select class="form-select" id="useYn" name="TAG_CD">
@@ -115,7 +115,7 @@
 			  			</select>
 			  		</div>
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="attr01">속성1<small class="require sub1 d-lg-none d-xxl-inline">(읽기전용)</small></label>
+			  			<label for="attr01">속성1<small class="require sub1 d-none d-xxl-inline"><br/>(읽기전용)</small></label>
 			  		</div>
 			  		<div class="col-md-3 mb-2">
 			  			<input disabled type="text" id="attr01" name="ATTR01" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR01 : ''}">
