@@ -136,13 +136,13 @@
 			  			<input type="text" id="attr03" name="ATTR03" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR03 : ''}">
 			  		</div>
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="attr04">속성4<small class="require sub1 d-none d-xl-inline"><br/>(youtube링크)</small></label>
+			  			<label for="attr04">속성4<small class="require sub1 d-none d-xl-inline"><br/>(youtube 링크)</small></label>
 			  		</div>
 			  		<div class="col-md-3 mb-2">
 			  			<input type="text" id="attr04" name="ATTR04" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR04 : ''}">
 			  		</div>
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="attr05">속성5</label>
+			  			<label for="attr05">속성5<small class="require sub1 d-none d-xl-inline"><br/>(게시판 링크)</small></label>
 			  		</div>
 			  		<div class="col-md-3 mb-2">
 			  			<input type="text" id="attr05" name="ATTR05" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR05 : ''}">
