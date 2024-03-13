@@ -24,8 +24,8 @@
 	</div>
 	
 	<div class="container-fluid pt-5 px-0">
-		<c:if test="${not empty MAIN01}">
-			<c:out value="${MAIN01.CONTENT}" escapeXml="false"></c:out>
+		<c:if test="${not empty HEADER_IMG}">
+			<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
 		</c:if>
 	</div>
 	
@@ -37,10 +37,16 @@
 	
 	<div class="container-lg">
 		<div class="row gy-4 justify-content-center row-cols-1 row-cols-md-2 mt-4">
-			<c:forEach var="item" items="${MAIN02_LIST}" varStatus="status">
+			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
 				<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
 			</c:forEach>
 		</div>
+	</div>
+	
+	<div class="container-fluid pt-5 px-0">
+		<c:if test="${not empty FOOTER_IMG}">
+			<c:out value="${FOOTER_IMG.CONTENT}" escapeXml="false"></c:out>
+		</c:if>
 	</div>
 
     

@@ -199,6 +199,10 @@
     		, #{MENU_ID, mode=IN, jdbcType=VARCHAR}
     		, #{USE_YN, mode=IN, jdbcType=VARCHAR}) }
     	/*WebMapper.updateUserAuth*/	
-    </update>    	
+    </update>
+    
+	<select id="selectTitle" parameterType="map" resultType="map">
+		SELECT MENU_NM FROM H_MENU WHERE MENU_ID = #{MENU_ID}
+    </select>        	
 	
 </mapper>

@@ -18,8 +18,8 @@
 	</div>
 	
 	<div class="container-fluid pt-5 px-0">
-		<c:if test="${not empty MAIN01}">
-			<c:out value="${MAIN01.CONTENT}" escapeXml="false"></c:out>
+		<c:if test="${not empty HEADER_IMG}">
+			<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
 		</c:if>
 	</div>
 	
@@ -29,12 +29,13 @@
 		</div>
 	</div> -->
 	
+	<!-- col-lg-0 col-lg-12 -->
 	<div class="container-lg">
 		<div class="row ps-sm-2">
-			<div class="col-sm-6 col-lg-0 mt-4" style="background-image:url(https://cdn.pixabay.com/photo/2020/04/09/05/37/resurrection-5019777_640.jpg); background-position: center center;"></div>
-			<div class="col-sm-6 col-lg-12">
+			<c:out value="${BODY_IMG.CONTENT}" escapeXml="false"></c:out>
+			<div class="col-sm-8">
 				<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-1 row-cols-lg-3 mt-4">
-					<c:forEach var="item" items="${MAIN02_LIST}" varStatus="status">
+					<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
 						<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
 					</c:forEach>
 				</div>
