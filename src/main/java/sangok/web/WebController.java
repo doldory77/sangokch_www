@@ -171,6 +171,10 @@ public class WebController implements InitializingBean {
 		
 		List<Map<String, Object>> list = webService.selectBoardList(params);
 		
+		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
+		model.addAttribute("TAG_CD", params.get("TAG_CD"));
+		model.addAttribute("PAGE", params.get("PAGE"));
+		
 		model.addAttribute("BOARD_LIST", list);
 		model.addAttribute("PAGE_CTL", params);
 		return list;
@@ -345,15 +349,10 @@ public class WebController implements InitializingBean {
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
 		params.put("ORDER_BY", "ATTR02 DESC");
-		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
-//		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
-		model.addAttribute("TAG_CD", params.get("TAG_CD"));
-		model.addAttribute("PAGE", params.get("PAGE"));
-		//String jspUserPage = params.get("PAGE").toString();
+
 		this.setBoardListInitParams(params, model);
 		
 		model.addAttribute("MAIN01", MAIN01);
-		//model.addAttribute("MAIN02_LIST", MAIN02);
 		model.addAttribute("TITLE", "산곡교회 비전");
 		commProcessEscapeBoard(new String[] {"MAIN01"}, new Boolean[] {false}, model);
 		
