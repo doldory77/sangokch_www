@@ -27,11 +27,11 @@
 		</div>
 	</div>   
   	<div class="container-fluid">
-		<a class="btn btn-sm px-4 my-2" style="background-color: #B80000; color: white;" href="/admin/board/write.do?PAGE=${PAGE}&SCREEN_YN=${SCREEN_YN}&GROUP_ID=${GROUP_ID}">작성</a>
+		<a class="btn btn-sm px-4 my-2" style="background-color: #B80000; color: white;" href="/admin/board/write.do?PAGE=${PAGE}&GROUP_ID=${GROUP_ID}">작성</a>
 	</div>
 	<jsp:include page="/WEB-INF/jspf/adminBoardList.jsp" flush="false" />
 	
-	<iframe style="border-top:1px dotted darkgray; margin-top:20px; display:block; width:100vw; height:59vh" src="/admin/adminIfrmPage.do?GROUP_ID=E0000002&SCREEN_YN=N&PAGE=E0000002&TAG_CD=09"></iframe>
+	<!-- <iframe style="border-top:1px dotted darkgray; margin-top:20px; display:block; width:100vw; height:59vh" src="/admin/adminIfrmPage.do?GROUP_ID=E0000002&SCREEN_YN=N&PAGE=E0000002&TAG_CD=09"></iframe> -->
 	
 	<script>
 		/*스크립트 작성*/
