@@ -11,64 +11,20 @@
 	<title>화면구성</title>
 	
   	<style>
-  		.group-menu {
-  			height: 42px;
-  			border-radius: 5px 5px 0px 0px;
-  		}
-  		.group-menu span:nth-of-type(2) {
-  			height: 24px;
-  			color: white;
-  		}
-		.group-menu + ul {
-			border: 1px solid #c2c2c2;
-			border-radius: 0px 0px 5px 5px;
-			overflow: hidden;
-		}
-		.group-menu + ul li {
-			height: 0px;
-			opacity: 0;
-			transition: all .35s;
-		}
-		.group-menu input[type="checkbox"]:checked + label span:nth-child(1) {
-			transform: rotate( 180deg );
-		}
-		.group-menu:has(input[type="checkbox"]:checked) + ul li {
-			height: 34px;
-			line-height: 34px;
-			opacity: 1;
-		}
-		.group-menu-wrapper:hover {
-			box-shadow: 3px 3px 3px gray;
-		}
-		.group-main-menu {
-			color: white;
-			display: inline-block;
-			/*width: 120px;*/
-			
-		}
-		/*.group-main-menu:hover {
-			color: white;
-		}
-		.group-main-menu+span {
-			color: white;
-		}*/
-		.menu-nm {
-			display: inline-block;
-			width: 160px;
-		}
-		
+
 	</style>
   	
   </head>
   <body>
   	<div>
-		<div class="admin-header fs-3 d-flex justify-content-between align-content-end p-2">
-		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/home.do'">산곡교회</span>
-		    <span class="py-1 align-self-baseline">홈페이지 관리 홈</span>
-		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/admin/login/logout.do'">로그아웃</span>
+		<div class="admin-header fs-3 d-flex justify-content-between align-items-center p-2">
+		    <span class="material-symbols-outlined hbtn" onclick="javascript:location.href='/home.do'">home</span>	
+		    <span class="py-1 align-self-baseline">홈페이지 관리</span>
+	    	<span class="material-symbols-outlined hbtn" onclick="javascript:location.href='/admin/login/logout.do'">logout</span>
 		</div>
 		<div class="mb-2 ps-2 py-1">
-			<span>홈페이지 관리 홈</span>
+			<img src="${applicationScope.ENV['CD0002_05']['VALUE_STR']}" width="22">
+			<span class="pth">홈페이지 관리</span>
 		</div>
 	</div>  
 	<div class="container-fluid">

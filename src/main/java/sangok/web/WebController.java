@@ -125,7 +125,19 @@ public class WebController implements InitializingBean {
 			model.addAttribute("TITLE", map.get("TITLE"));
 		}
 		
-	}	
+	}
+	
+	/*
+	 * 페이지 title, 경로 표시
+	 */	
+	private void commSetTitle(String menuId, ModelMap model) {
+		try {
+			String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", menuId).build()).get("MENU_NM").toString();
+			model.addAttribute("TITLE", title);
+		} catch (Exception e) {
+			
+		}
+	}
 	
 	/*
 	 * 게시판 내용중 <h1></h1> 이스케이프 처리
@@ -294,13 +306,14 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000003").put("USE_YN", "Y").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000003").put("USE_YN", "Y").build());
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000003").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000003").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "B0000003").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("MAIN01", MAIN01);
-		model.addAttribute("MAIN02_LIST", MAIN02);
-		model.addAttribute("TITLE", "산곡교회 비전");
-		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
+		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("TITLE", title);
+		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST"}, new Boolean[] {false, true}, model);
 		
 		return "home/B0000000/B0000003";
 	}	
@@ -313,13 +326,14 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000004").put("USE_YN", "Y").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "00").put("GROUP_ID", "B0000004").put("ORDER_BY", "ATTR03 DESC").put("USE_YN", "Y").build());
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000004").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "00").put("GROUP_ID", "B0000004").put("ORDER_BY", "ATTR03 DESC").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "B0000004").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("MAIN01", MAIN01);
-		model.addAttribute("MAIN02_LIST", MAIN02);
-		model.addAttribute("TITLE", "산곡교회 연혁");
-		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
+		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("TITLE", title);
+		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST"}, new Boolean[] {false, true}, model);
 		
 		return "home/B0000000/B0000004";
 	}
@@ -332,13 +346,14 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000005").put("USE_YN", "Y").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000005").put("USE_YN", "Y").build());
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000005").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000005").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "B0000005").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("MAIN01", MAIN01);
-		model.addAttribute("MAIN02", MAIN02);
-		model.addAttribute("TITLE", "예배시간");
-		commProcessEscapeBoard(new String[] {"MAIN01", "MAIN02"}, new Boolean[] {false, false}, model);
+		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("BODY", BODY_LIST);
+		model.addAttribute("TITLE", title);
+		commProcessEscapeBoard(new String[] {"HEADER_IMG", "BODY"}, new Boolean[] {false, false}, model);
 		
 		return "home/B0000000/B0000005";
 	}
@@ -351,16 +366,17 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "C0000001").put("USE_YN", "Y").build());
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "C0000001").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "C0000001").build()).get("MENU_NM").toString();
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
 		params.put("ORDER_BY", "ATTR02 DESC");
 
 		this.setBoardListInitParams(params, model);
 		
-		model.addAttribute("MAIN01", MAIN01);
-		model.addAttribute("TITLE", "산곡교회 비전");
-		commProcessEscapeBoard(new String[] {"MAIN01"}, new Boolean[] {false}, model);
+		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("TITLE", title);
+		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
 		
 		return "home/C0000000/C0000001";
 	}
@@ -373,23 +389,19 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "C0000002").put("USE_YN", "Y").build());
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "C0000002").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "C0000002").build()).get("MENU_NM").toString();
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
 		params.put("ORDER_BY", "ATTR02 DESC");
-		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
-		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
-		model.addAttribute("TAG_CD", params.get("TAG_CD"));
-		model.addAttribute("PAGE", params.get("PAGE"));
-		//String jspUserPage = params.get("PAGE").toString();
+
 		this.setBoardListInitParams(params, model);
 		
-		model.addAttribute("MAIN01", MAIN01);
-		//model.addAttribute("MAIN02_LIST", MAIN02);
-		model.addAttribute("TITLE", "경배찬양");
-		commProcessEscapeBoard(new String[] {"MAIN01"}, new Boolean[] {false}, model);
+		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("TITLE", title);
+		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
 		
-		return "home/C0000000/C0000001";
+		return "home/C0000000/C0000002";
 	}
 	
 	/*
@@ -400,21 +412,17 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000001").put("USE_YN", "Y").build());
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000001").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000001").build()).get("MENU_NM").toString();
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
 		params.put("ORDER_BY", "ATTR02 DESC");
-		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
-		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
-		model.addAttribute("TAG_CD", params.get("TAG_CD"));
-		model.addAttribute("PAGE", params.get("PAGE"));
-		//String jspUserPage = params.get("PAGE").toString();
+		
 		this.setBoardListInitParams(params, model);
 		
-		model.addAttribute("MAIN01", MAIN01);
-		//model.addAttribute("MAIN02_LIST", MAIN02);
-		model.addAttribute("TITLE", "교회학교");
-		commProcessEscapeBoard(new String[] {"MAIN01"}, new Boolean[] {false}, model);
+		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("TITLE", title);
+		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
 		
 		return "home/D0000000/D0000001";
 	}
@@ -427,13 +435,14 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000002").put("USE_YN", "Y").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "D0000002").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000002").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "D0000002").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000002").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("MAIN01", MAIN01);
-		model.addAttribute("MAIN02_LIST", MAIN02);
-		model.addAttribute("TITLE", "다음세대(어린이부)");
-		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
+		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("TITLE", title);
+		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST"}, new Boolean[] {false, true}, model);
 		
 		return "home/D0000000/D0000002";
 	}
@@ -446,13 +455,14 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000003").put("USE_YN", "Y").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "D0000003").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000003").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "D0000003").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000003").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("MAIN01", MAIN01);
-		model.addAttribute("MAIN02_LIST", MAIN02);
-		model.addAttribute("TITLE", "다음세대(중고등부)");
-		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
+		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("TITLE", title);
+		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST"}, new Boolean[] {false, true}, model);
 		
 		return "home/D0000000/D0000003";
 	}
@@ -465,13 +475,14 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000004").put("USE_YN", "Y").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "D0000004").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000004").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "D0000004").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000004").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("MAIN01", MAIN01);
-		model.addAttribute("MAIN02_LIST", MAIN02);
-		model.addAttribute("TITLE", "다음세대(청년부)");
-		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
+		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("TITLE", title);
+		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST"}, new Boolean[] {false, true}, model);
 		
 		return "home/D0000000/D0000004";
 	}
@@ -484,13 +495,14 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "E0000002").put("USE_YN", "Y").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "E0000002").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "E0000002").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "E0000002").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "E0000002").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("MAIN01", MAIN01);
-		model.addAttribute("MAIN02_LIST", MAIN02);
-		model.addAttribute("TITLE", "교회소식(새가족)");
-		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
+		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("TITLE", title);
+		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST"}, new Boolean[] {false, true}, model);
 		
 		return "home/E0000000/E0000002";
 	}	
@@ -503,21 +515,17 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "F0000001").put("USE_YN", "Y").build());
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "F0000001").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "F0000001").build()).get("MENU_NM").toString();
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
 		params.put("ORDER_BY", "ATTR02 DESC");
-		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
-		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
-		model.addAttribute("TAG_CD", params.get("TAG_CD"));
-		model.addAttribute("PAGE", params.get("PAGE"));
-		//String jspUserPage = params.get("PAGE").toString();
+		
 		this.setBoardListInitParams(params, model);
 		
-		model.addAttribute("MAIN01", MAIN01);
-		//model.addAttribute("MAIN02_LIST", MAIN02);
-		model.addAttribute("TITLE", "세미나");
-		commProcessEscapeBoard(new String[] {"MAIN01"}, new Boolean[] {false}, model);
+		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("TITLE", title);
+		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
 		
 		return "home/F0000000/F0000001";
 	}	
@@ -562,7 +570,6 @@ public class WebController implements InitializingBean {
 			userInfo.setAttr01(map.get("ATTR01").toString());
 			userInfo.setAuthMap(authMap);
 			request.getSession().setAttribute("USER_INFO", userInfo);
-			//re.addAttribute("LOGIN_YN", "Y");
 			return "redirect:/admin/main.do";
 		}
 		
@@ -575,7 +582,6 @@ public class WebController implements InitializingBean {
 	public String adminLoginOut(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {
 		request.getSession().invalidate();
 		
-		//return "redirect:/admin/login.do";
 		return "redirect:/home.do";
 	}
 	
@@ -829,6 +835,7 @@ public class WebController implements InitializingBean {
 		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
 		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
 		model.addAttribute("PAGE", params.get("PAGE"));
+		this.commSetTitle(params.get("PAGE").toString(), model);
 		String jspAdminPage = params.get("PAGE").toString();
 		this.setBoardListInitParams(params, model);
 		

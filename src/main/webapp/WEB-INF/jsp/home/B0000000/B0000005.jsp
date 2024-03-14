@@ -23,8 +23,8 @@
 	</div>
 	
 	<div class="container-fluid pt-5 px-0">
-		<c:if test="${not empty MAIN01}">
-			<c:out value="${MAIN01.CONTENT}" escapeXml="false"></c:out>
+		<c:if test="${not empty HEADER_IMG}">
+			<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
 		</c:if>
 	</div>
 	
@@ -54,8 +54,8 @@
 		    	editor.ui.view.toolbar.element.style.display = 'none';
 		    	window.editor = editor;
 		    	
-		    	<c:if test="${not empty MAIN02}">
-		    		editor.setData(<c:out value="'${MAIN02.CONTENT}'" escapeXml="false"></c:out>);
+		    	<c:if test="${not empty BODY}">
+		    		editor.setData(<c:out value="'${BODY.CONTENT}'" escapeXml="false"></c:out>);
 		    	</c:if>
 		    	editor.enableReadOnlyMode('xxx');
 		    } )

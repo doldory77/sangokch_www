@@ -24,8 +24,8 @@
 	</div>
 	
 	<div class="container-fluid pt-5 px-0">
-		<c:if test="${not empty MAIN01}">
-			<c:out value="${MAIN01.CONTENT}" escapeXml="false"></c:out>
+		<c:if test="${not empty HEADER_IMG}">
+			<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
 		</c:if>
 	</div>
 	

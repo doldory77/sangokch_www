@@ -21,13 +21,11 @@ public class CacheScheduler {
 	
 	public CacheScheduler() {
 		envMap = new HashMap<String, Object>();
-		envMap.put("AGE", 23);
 	}
 	
 	/*5분마다*/
 	@Scheduled(fixedDelay = 300000)
 	public void routin() {
-		//System.out.println(envMap.get("AGE"));
 		try {
 			List<Map<String, Object>> envMapList = webMapper.selectEnv(JMap.instance("GROUP_ID", "CD0002").build());
 			for (int i=0, max=envMapList.size(); i<max; i++) {

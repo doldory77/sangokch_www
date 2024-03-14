@@ -16,6 +16,9 @@
   	<!-- Menu CSS -->
   	<link rel="stylesheet" href="/css/board.css">
   	
+  	<!-- Admin CSS -->
+  	<link rel="stylesheet" href="/css/adm.css">
+  	
   	<!-- Jquery -->
   	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
   	
