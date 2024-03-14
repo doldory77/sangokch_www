@@ -12,17 +12,18 @@
 </head>
 <body>
   	<div>
-		<div class="admin-header fs-3 d-flex justify-content-between align-content-end p-2">
-		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/home.do'">산곡교회</span>
+		<div class="admin-header fs-3 d-flex justify-content-between align-items-center p-2">
+		    <span class="material-symbols-outlined hbtn" onclick="javascript:location.href='/home.do'">home</span>	
 		    <span class="py-1 align-self-baseline">권한관리</span>
-		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/admin/login/logout.do'">LOG-OUT</span>
+	    	<span class="material-symbols-outlined hbtn" onclick="javascript:location.href='/admin/login/logout.do'">logout</span>
 		</div>
 		<div class="mb-2 ps-2 py-1">
-			<span onclick="javascript:location.href='/admin/main.do'">홈페이지 관리 홈</span>
-			<span>&nbsp;&gt;&nbsp;</span>
-			<span onclick="javascript:location.href='/admin/user/userMng.do'">사용자관리</span>
-			<span>&nbsp;&gt;&nbsp;</span>
-			<span>권한관리</span>
+			<img src="${applicationScope.ENV['CD0002_05']['VALUE_STR']}" width="22">
+			<span class="pth" onclick="javascript:location.href='/admin/main.do'">홈페이지 관리</span>
+			<span class="pth">&nbsp;&gt;&nbsp;</span>
+			<span class="pth" onclick="javascript:location.href='/admin/user/userMng.do'">사용자관리</span>
+			<span class="pth">&nbsp;&gt;&nbsp;</span>
+			<span class="pth">권한관리</span>
 		</div>
 	</div>
 	<div class="container-md">
