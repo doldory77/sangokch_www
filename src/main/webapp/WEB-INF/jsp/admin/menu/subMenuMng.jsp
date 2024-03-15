@@ -74,7 +74,7 @@
 					<td>
 						<c:choose>
 						<c:when test="${menu.MENU_LEVEL eq 1}">${menu.MENU_ID}</c:when>
-						<c:otherwise><a href="javascript:false;" onclick="selectMenu(this);">${menu.MENU_ID}</a></c:otherwise>
+						<c:otherwise><a href="javascript:false;" onclick="selectMenu(this);">&nbsp;&nbsp;ㄴ&nbsp;<span>${menu.MENU_ID}</span></a></c:otherwise>
 						</c:choose>
 					</td>
 					<td>${menu.MENU_NM}</td>
@@ -87,7 +87,7 @@
 </body>
 	<script>
 		var selectMenu = function(that) {
-			var v_groupId = $(that).text();
+			var v_groupId = $(that).find('span:eq(0)').text();
 			var $tr = $(that).closest('tr');
 			//alert(v_groupId + '/' + $tr.children('td:eq(1)').text());
 			$('#parentMenuId').val($tr.data('parentMenuId'));

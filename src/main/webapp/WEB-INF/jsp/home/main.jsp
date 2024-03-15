@@ -11,6 +11,15 @@
 	<%@ include file="/WEB-INF/jspf/head.jspf" %>
 	<link rel="stylesheet" href="/css/font.css">
     <title>${TITLE}</title>
+    <style>
+    	.footer {
+    		background-color:#071952; 
+    		color:#F2F7A1;
+    		position: fixed;
+    		bottom: 0px;
+    		width: 100%;
+    	}
+    </style>
   </head>
   <body>
   
@@ -30,7 +39,11 @@
 			</c:forEach>
 		</div>
 	</div>
-    
+	
+	<div class="footer d-flex justify-content-center align-items-center py-3">
+		<div>인천광역시 부평구 길주로326번길 13</div>
+		<div class="ps-2">032-512-2504</div>
+	</div>
   	<script>
   		var words = ["홈페이지를", "새롭게", "단장하고 있습니다.", " 빠를 시간내에", "선보이겠습니다."],
 		    part,

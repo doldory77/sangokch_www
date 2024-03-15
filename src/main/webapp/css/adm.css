@@ -25,7 +25,7 @@
 	opacity: 1;
 }
 .group-menu-wrapper:hover {
-	box-shadow: 3px 3px 3px gray;
+	box-shadow: 3px 3px 12px gray;
 }
 .group-main-menu {
 	color: white;
