@@ -42,11 +42,13 @@
 	</div>
 	
 	<div class="footer d-flex justify-content-center align-items-center">
-		<div>인천광역시 부평구 길주로326번길 13</div>
-		<div class="ps-2">032-512-2504</div>
+		<span class="material-symbols-outlined">map</span>
+		<div class="ps-1">인천광역시 부평구 길주로326번길 13</div>
+		<span class="material-symbols-outlined ps-3">call</span>
+		<div class="ps-1">032-512-2504</div>
 	</div>
   	<script>
-  		var words = ["홈페이지를", "새롭게", "단장하고 있습니다.", " 빠를 시간내에", "선보이겠습니다."],
+  		var words = ["홈페이지를", "새롭게", "단장하고 있습니다.", " 빠른 시간내에", "선보이겠습니다."],
 		    part,
 		    i = 0,
 		    offset = 0,

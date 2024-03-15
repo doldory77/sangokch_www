@@ -139,6 +139,7 @@ nav.menu_bar:has(input[id="menuicon"]:checked) + div.mbl_side_menu { left: 0px; 
   background-color: #F8F0E5;
   transition: all .35s;
   box-shadow: 8px 0 8px -8px;
+  z-index: 9;
 }
 
 .mbl_side_menu input[type='radio'] {
