@@ -18,6 +18,7 @@
     		position: fixed;
     		bottom: 0px;
     		width: 100%;
+    		height: 56px;
     	}
     </style>
   </head>
@@ -32,7 +33,7 @@
 		<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
 	</div>
 	<!-- <div>${applicationScope.ENV['CD0002_05']['VALUE_STR']}</div> -->
-	<div class="container-md">
+	<div class="container-md" style="margin-bottom: 80px;">
 		<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 mt-4">
 			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
 				<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
@@ -40,7 +41,7 @@
 		</div>
 	</div>
 	
-	<div class="footer d-flex justify-content-center align-items-center py-3">
+	<div class="footer d-flex justify-content-center align-items-center">
 		<div>인천광역시 부평구 길주로326번길 13</div>
 		<div class="ps-2">032-512-2504</div>
 	</div>

@@ -30,17 +30,18 @@
 <body>
   	<div>
   	<c:if test="${isAdminIfrmPage ne 'Y'}">
-		<div class="admin-header fs-3 d-flex justify-content-between align-content-end p-2">
-		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/home.do'">산곡교회</span>
+		<div class="admin-header fs-3 d-flex justify-content-between align-items-center p-2">
+		    <span class="material-symbols-outlined hbtn" onclick="javascript:location.href='/home.do'">home</span>
 		    <span class="py-1 align-self-baseline">${not empty SEQ_NO ? '게시판(상세)' : '게시판(작성)'}</span>
-		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/admin/login/logout.do'">LOG-OUT</span>
+		    <span class="material-symbols-outlined hbtn" onclick="javascript:location.href='/admin/login/logout.do'">logout</span>
 		</div>
 		
 		<div class="mb-2 ps-2 py-1">
-			<span onclick="javascript:location.href='/admin/main.do'">홈페이지 관리 홈</span>
+			<img src="${applicationScope.ENV['CD0002_05']['VALUE_STR']}" width="22">
+			<span class="pth" onclick="javascript:location.href='/admin/main.do'">홈페이지 관리 홈</span>
 			<c:if test="${not empty TITLE}">
 			<span>&nbsp;&gt;&nbsp;</span>
-			<span onclick="javascript:location.href='/admin/adminPage.do?GROUP_ID=${GROUP_ID}&SCREEN_YN=${SCREEN_YN}&PAGE=${PAGE}'">${TITLE eq 'HOME' ? '메인화면 관리' : TITLE}</span>	
+			<span class="pth" onclick="javascript:location.href='/admin/adminPage.do?GROUP_ID=${GROUP_ID}&SCREEN_YN=${SCREEN_YN}&PAGE=${PAGE}'">${TITLE eq 'HOME' ? '메인화면 관리' : TITLE}</span>	
 			</c:if>
 		</div>
 	</c:if>
