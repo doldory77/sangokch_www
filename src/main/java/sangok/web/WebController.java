@@ -223,13 +223,13 @@ public class WebController implements InitializingBean {
 		
 		commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
 		
-		model.addAttribute("MAIN01", MAIN01);
-		model.addAttribute("MAIN02_LIST", MAIN02);
+		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("BODY_LIST", BODY_LIST);
 		model.addAttribute("TITLE", "산곡교회 홈페이지");
-		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
+		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST"}, new Boolean[] {false, true}, model);
 		
 		return "home/main";
 	}
@@ -242,14 +242,14 @@ public class WebController implements InitializingBean {
 		this.commProcessMenuHighlightByBoardDtlView(request, model);
 		this.commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("SEQ_NO", params.get("SEQ_NO")).put("GROUP_ID", params.get("GROUP_ID")).build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("SEQ_NO", params.get("SEQ_NO")).put("GROUP_ID", params.get("GROUP_ID")).build());
 		
-		model.addAttribute("MAIN01", MAIN01);
+		model.addAttribute("BODY", BODY_LIST);
 		model.addAttribute("TITLE", "상세");
 		model.addAttribute("W_SIZE", params.get("W_SIZE"));
-		commProcessEscapeBoard(new String[] {"MAIN01"}, new Boolean[] {false}, model);
-		if (MAIN01 != null && MAIN01.size() > 0) {
-			model.addAttribute("TITLE", MAIN01.get(0).get("SUBJECT"));
+		commProcessEscapeBoard(new String[] {"BODY"}, new Boolean[] {false}, model);
+		if (BODY_LIST != null && BODY_LIST.size() > 0) {
+			model.addAttribute("TITLE", BODY_LIST.get(0).get("SUBJECT"));
 		}
 		return "home/boardDtlView";
 	}	
@@ -832,9 +832,7 @@ public class WebController implements InitializingBean {
 	public String adminPage(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		debug("[ADMIN PAGE PARAMS] " + params);
 		params.put("ORDER_BY", "SCREEN_YN DESC, ORD_NO ASC");
-		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
-		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
-		model.addAttribute("PAGE", params.get("PAGE"));
+		
 		this.commSetTitle(params.get("PAGE").toString(), model);
 		String jspAdminPage = params.get("PAGE").toString();
 		this.setBoardListInitParams(params, model);
@@ -848,9 +846,7 @@ public class WebController implements InitializingBean {
 	@RequestMapping(value = "/admin/adminIfrmPage.do")
 	public String adminIfrmPage(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		debug("[ADMIN IFRM PAGE PARAMS] " + params);
-		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
-		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
-		model.addAttribute("PAGE", params.get("PAGE"));
+		
 		String jspAdminPage = params.get("PAGE").toString();
 		this.setBoardListInitParams(params, model);
 		

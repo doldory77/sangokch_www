@@ -50,8 +50,8 @@
 		    	editor.ui.view.toolbar.element.style.display = 'none';
 		    	window.editor = editor;
 		    	
-		    	<c:if test="${not empty MAIN01}">
-		    		editor.setData(<c:out value="'${MAIN01.CONTENT}'" escapeXml="false"></c:out>);
+		    	<c:if test="${not empty BODY}">
+		    		editor.setData(<c:out value="'${BODY.CONTENT}'" escapeXml="false"></c:out>);
 		    	</c:if>
 		    	editor.enableReadOnlyMode('xxx');
 		    } )
