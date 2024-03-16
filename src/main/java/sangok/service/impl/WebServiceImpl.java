@@ -87,8 +87,8 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 			if (JStr.isStr(params.get("ORD_NO")) == false) {
 				params.put("ORD_NO", "0");
 			}
-			String stdImgPath = JStr.extractStr(imgPattern, JStr.toStr(params.get("CONTENT")));
-			params.put("ATTR01", JStr.isStr(stdImgPath) ? stdImgPath.replaceAll("\"", "") : stdImgPath);
+			/*String stdImgPath = JStr.extractStr(imgPattern, JStr.toStr(params.get("CONTENT")));
+			params.put("ATTR01", JStr.isStr(stdImgPath) ? stdImgPath.replaceAll("\"", "") : stdImgPath);*/
 			
 			webMapper.updateBoard(params);
 		} catch (Exception e) {

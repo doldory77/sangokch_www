@@ -490,6 +490,27 @@ public class WebController implements InitializingBean {
 	/*
 	 * 사용자 홈페이지 접속
 	 */
+	@RequestMapping(value = "/E0000001.do")
+	public String e0000001(HttpServletRequest request, @RequestParam Map<String, Object> params, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "E0000001").put("USE_YN", "Y").build());
+		params.put("ORDER_BY", "ATTR02 DESC");
+		
+		this.setBoardListInitParams(params, model);
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "E0000001").build()).get("MENU_NM").toString();
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("TITLE", title);
+		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
+		
+		return "home/E0000000/E0000001";
+	}	
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
 	@RequestMapping(value = "/E0000002.do")
 	public String e0000002(HttpServletRequest request, ModelMap model) throws Exception {		
 		this.commProcessMenuHighlight(request, model);

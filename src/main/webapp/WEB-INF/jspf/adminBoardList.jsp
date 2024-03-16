@@ -11,7 +11,7 @@
 	<div class="container-fluid">
 		<div class="d-flex flex-wrap justify-content-start">
 		<c:forEach var="item" items="${BOARD_LIST}">  
-			<div class="board-frame p-1" onclick="location.href='/admin/board/write.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${PAGE_CTL.CURR_PAGE}&GROUP_ID=${item.GROUP_ID}&SEQ_NO=${item.SEQ_NO}'">
+			<div class="d-flex flex-column justify-content-between board-frame p-1" onclick="location.href='/admin/board/write.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${PAGE_CTL.CURR_PAGE}&GROUP_ID=${item.GROUP_ID}&SEQ_NO=${item.SEQ_NO}'">
 				<div class="board-frame-background" style='background-image: url(${item.ATTR01});'></div>
 				<div class="d-flex justify-content-between align-items-center">
 					<span class="sub1">${item.GROUP_NM}</span>
@@ -26,7 +26,7 @@
 			</div>
 		</c:forEach>
 		</div>
-		<div class="d-flex">
+		<div class="mt-2 py-2 d-flex justify-content-center border-top">
 		<c:choose>
 			<c:when test="${not empty IS_SUB_BOARD && IS_SUB_BOARD eq 'Y'}">
 				<c:if test="${1 lt PAGE_CTL.CURR_PAGE}">
