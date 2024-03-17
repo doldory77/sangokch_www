@@ -98,6 +98,17 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 	}
 	
 	@Override
+	public void deleteBoard(Map<String, Object> params) throws Exception {
+		try {
+			
+			webMapper.deleteBoard(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw processException("fail.common.sql", new String[]{"deleteBoard",e.getMessage()});
+		}
+	}
+	
+	@Override
 	public void updateCodeGroup(Map<String, Object> params) throws Exception {
 		try {
 			webMapper.updateCodeGroup(params);

@@ -11,13 +11,16 @@
 	<div class="container-fluid">
 		<div class="d-flex flex-wrap justify-content-start">
 		<c:forEach var="item" items="${BOARD_LIST}">  
-			<div class="d-flex flex-column justify-content-between board-frame p-1" onclick="location.href='/admin/board/write.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${PAGE_CTL.CURR_PAGE}&GROUP_ID=${item.GROUP_ID}&SEQ_NO=${item.SEQ_NO}'">
+			<div class="d-flex flex-column justify-content-between board-frame p-1" >
 				<div class="board-frame-background" style='background-image: url(${item.ATTR01});'></div>
 				<div class="d-flex justify-content-between align-items-center">
 					<span class="sub1">${item.GROUP_NM}</span>
 					<span class="sub2 text-danger"><c:choose><c:when test="${item.USE_YN eq 'Y'}">(사용)</c:when><c:otherwise>(미사용)</c:otherwise></c:choose></span>
 				</div>
-				<div><span class="title ps-2">${item.SUBJECT}</span></div>
+				<div>
+					<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}"><a href="/admin/board/delete.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${PAGE_CTL.CURR_PAGE}&GROUP_ID=${item.GROUP_ID}&SEQ_NO=${item.SEQ_NO}" class="btn btn-sm" style="background-color: #B80000; color: white;">삭제</a></c:if>
+					<span class="title ps-2" onclick="location.href='/admin/board/write.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${PAGE_CTL.CURR_PAGE}&GROUP_ID=${item.GROUP_ID}&SEQ_NO=${item.SEQ_NO}'">${item.SUBJECT}</span>
+				</div>
 				<div class="d-flex justify-content-between align-items-center">
 					<span class="sub2">${item.TAG_NM}</span>
 					<span class="sub2 text-danger"><c:choose><c:when test="${item.SCREEN_YN eq 'Y'}">(꾸밈요소)</c:when><c:otherwise></c:otherwise></c:choose></span>

@@ -117,6 +117,10 @@
 		/*WebMapper.updateBoard*/ 
 	</select>
 	
+	<delete id="deleteBoard" parameterType="map">
+		DELETE FROM H_BOARD WHERE GROUP_ID = #{GROUP_ID} AND SEQ_NO = #{SEQ_NO}
+	</delete>
+	
 	<select id="selectBoardList" statementType="CALLABLE" parameterType="map" resultType="map">
 		{
 			CALL SP_GET_BOARD_LIST(

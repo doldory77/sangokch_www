@@ -832,6 +832,28 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
+	 * 게시판 삭제
+	 */
+	@RequestMapping(value = "/admin/board/delete.do")
+	public String deleteBoard(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		debug(params);
+		webService.deleteBoard(params);
+		
+//		String isAdminIfrmPage = params.get("IS_ADMIN_IFRM_PAGE").toString();
+//		if ("N".equalsIgnoreCase(isAdminIfrmPage)) {
+			return "redirect:/admin/adminPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
+				+ "&PAGE=" + params.get("PAGE")
+				+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
+//		} else {
+//			return "redirect:/admin/adminIfrmPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
+//				+ "&PAGE=" + params.get("PAGE")
+//				+ "&TAG_CD=" + params.get("TAG_CD")
+//				+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");			
+//		}
+	}	
+	
+	/*
 	 * 게시판 목록 조회
 	 */
 	@RequestMapping(value = "/admin/board/list.do")

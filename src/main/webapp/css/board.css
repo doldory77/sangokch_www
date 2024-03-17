@@ -2,12 +2,15 @@
 	width:260px;
 	border:1px dotted #c2c2c2;
 	margin:2px;
-	cursor:pointer;
+	/*cursor:pointer;*/
 	position:relative;
 }
 .board-frame .title {
 	font-size: 1.4rem;
 	font-weight: bold;
+	cursor:pointer;
+	display: inline-block;
+	width: 79%;
 }
 .board-frame .sub1 {
 	font-size: 0.8rem;

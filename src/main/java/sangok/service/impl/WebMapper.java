@@ -20,6 +20,8 @@ public interface WebMapper {
 	
 	void updateBoard(Map<String, Object> params) throws Exception;
 	
+	void deleteBoard(Map<String, Object> params) throws Exception;
+	
 	void updateCodeGroup(Map<String, Object> params) throws Exception;
 	
 	void updateCode(Map<String, Object> params) throws Exception;
