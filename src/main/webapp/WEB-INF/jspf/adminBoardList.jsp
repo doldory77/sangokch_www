@@ -12,7 +12,7 @@
 		<div class="d-flex flex-wrap justify-content-start">
 		<c:forEach var="item" items="${BOARD_LIST}">  
 			<div class="d-flex flex-column justify-content-between board-frame p-1" >
-				<div class="board-frame-background" style='background-image: url(${item.ATTR01});'></div>
+				<!-- <div class="board-frame-background" style='background-image: url(${item.ATTR01});'></div> -->
 				<div class="d-flex justify-content-between align-items-center">
 					<span class="sub1">${item.GROUP_NM}</span>
 					<span class="sub2 text-danger"><c:choose><c:when test="${item.USE_YN eq 'Y'}">(사용)</c:when><c:otherwise>(미사용)</c:otherwise></c:choose></span>
