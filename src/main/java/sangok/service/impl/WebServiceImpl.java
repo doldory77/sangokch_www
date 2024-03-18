@@ -16,7 +16,7 @@ import sangok.utils.JStr;
 @Service("webService")
 public class WebServiceImpl extends EgovAbstractServiceImpl implements WebService {
 	
-	Pattern imgPattern = Pattern.compile("\"(/images/board/img_.{36}[.].{3})\"");
+	public static Pattern imgPattern = Pattern.compile("\"(/images/board/img_.{36}[.].{3})\"");
 	
 	@Autowired
 	private WebMapper webMapper;

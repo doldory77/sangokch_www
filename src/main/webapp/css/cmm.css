@@ -4,7 +4,7 @@ a, a:hover, a:visited, a:link, a:active {
 .mainItem {
 	overflow: hidden;
 	border: 1px solid #c2c2c2;
-	border-radius: 5px;
+	/*border-radius: 5px;*/
 }
 .mainItem > div {
 	min-width: 280px;

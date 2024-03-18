@@ -28,13 +28,32 @@
   		<%@ include file="/WEB-INF/jspf/menu.jspf" %>
 	</div>
 	
+	<c:if test="${not empty HEADER_IMG}">
 	<div class="container-fluid pt-5 px-0">
-		<!-- <div class="mainHead">HEAD IMG</div> -->
 		<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
 	</div>
+	</c:if>
+	
+	<c:if test="${not empty ROLL_IMG_LIST}">
+	<div id="carouselSlides" class="carousel slide" data-bs-ride="carousel">
+	  <div class="carousel-indicators">
+	  <c:forEach var="item" items="${ROLL_IMG_LIST}" varStatus="status">
+	    <button type="button" data-bs-target="#carouselSlides" data-bs-slide-to="${status.index}" <c:if test="${status.index eq 0}">class="active" aria-current="true"</c:if> aria-label="Slide ${status.count}"></button>
+	  </c:forEach>
+	  </div>		
+	  <div class="carousel-inner">
+	  	<c:forEach var="item" items="${ROLL_IMG_LIST}" varStatus="status">
+	    <div class='carousel-item <c:if test="${status.index eq 0}">active</c:if>'>
+	      <img src="${item.CONTENT}" class="d-block w-100" alt="...">
+	    </div>
+	    </c:forEach>
+	  </div>
+	</div>	
+	</c:if>
+	
 	<!-- <div>${applicationScope.ENV['CD0002_05']['VALUE_STR']}</div> -->
 	<div class="container-md" style="margin-bottom: 80px;">
-		<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 mt-4">
+		<div class="row gy-0 gx-0 justify-content-center row-cols-1 row-cols-sm-2 mt-4">
 			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
 				<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
 			</c:forEach>

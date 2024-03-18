@@ -17,8 +17,8 @@
 					<span class="sub1">${item.GROUP_NM}</span>
 					<span class="sub2 text-danger"><c:choose><c:when test="${item.USE_YN eq 'Y'}">(사용)</c:when><c:otherwise>(미사용)</c:otherwise></c:choose></span>
 				</div>
-				<div>
-					<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}"><a href="/admin/board/delete.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${PAGE_CTL.CURR_PAGE}&GROUP_ID=${item.GROUP_ID}&SEQ_NO=${item.SEQ_NO}" class="btn btn-sm" style="background-color: #B80000; color: white;">삭제</a></c:if>
+				<div class="d-flex align-items-center">
+					<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}"><a href="#" onclick="delBoard('${PAGE_CTL.PAGE}','${PAGE_CTL.CURR_PAGE}','${item.GROUP_ID}','${item.SEQ_NO}','${item.SUBJECT}'); return false;" class="btn btn-sm" style="background-color: #B80000; color: white;">삭제</a></c:if>
 					<span class="title ps-2" onclick="location.href='/admin/board/write.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${PAGE_CTL.CURR_PAGE}&GROUP_ID=${item.GROUP_ID}&SEQ_NO=${item.SEQ_NO}'">${item.SUBJECT}</span>
 				</div>
 				<div class="d-flex justify-content-between align-items-center">
@@ -84,3 +84,10 @@
 		</c:choose>	
 		</div>
 	</div>
+	<script>
+	function delBoard(page, currPage, groupId, seqNo, subject){
+		if (confirm('[' + subject + ']을(를) 완전히 삭제하시겠습니까?')) {
+			location.href="/admin/board/delete.do?PAGE="+page+"&CURR_PAGE="+currPage+"&GROUP_ID="+groupId+"&SEQ_NO="+seqNo;
+		}
+	}	
+	</script>
