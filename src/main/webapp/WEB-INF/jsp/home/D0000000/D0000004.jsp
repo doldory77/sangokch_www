@@ -19,7 +19,7 @@
 	
 	<div class="container-fluid pt-5 px-0">
 		<c:if test="${not empty HEADER_IMG}">
-			<c:out value="${BODY_LIST.CONTENT}" escapeXml="false"></c:out>
+			<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
 		</c:if>
 	</div>
 	

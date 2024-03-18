@@ -45,6 +45,9 @@
 	  	<c:forEach var="item" items="${ROLL_IMG_LIST}" varStatus="status">
 	    <div class='carousel-item <c:if test="${status.index eq 0}">active</c:if>'>
 	      <img src="${item.CONTENT}" class="d-block w-100" alt="...">
+	      <div class="carousel-caption d-none d-md-block">
+	        <h4 style="color:#fff;font-family:HSWinter;">빠른시간에 홈페이지 오픈 예정입니다.</h4>
+	      </div>
 	    </div>
 	    </c:forEach>
 	  </div>
