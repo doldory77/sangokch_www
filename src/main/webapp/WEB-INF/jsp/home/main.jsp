@@ -12,13 +12,14 @@
 	<link rel="stylesheet" href="/css/font.css">
     <title>${TITLE}</title>
     <style>
-    	.footer {
+    	#footer {
     		background-color:#071952; 
     		color:#F2F7A1;
     		position: fixed;
     		bottom: 0px;
     		width: 100%;
     		height: 56px;
+    		transition: all .35s;
     	}
     </style>
   </head>
@@ -63,7 +64,7 @@
 		</div>
 	</div>
 	
-	<div class="footer d-flex justify-content-center align-items-center">
+	<div id="footer" class="d-flex justify-content-center align-items-center">
 		<span class="material-symbols-outlined">map</span>
 		<div class="ps-1">인천광역시 부평구 길주로326번길 13</div>
 		<span class="material-symbols-outlined ps-3">call</span>
@@ -117,6 +118,21 @@
 		$(document).ready(function () {
 		  wordflick();
 		});
+		
+		  $(function() {
+			  var prevScrollTop = 0;
+			  var delta = 5;
+			  document.addEventListener("scroll", function(){
+				  var nowScrollTop = $(window).scrollTop();
+				  if (Math.abs(prevScrollTop - nowScrollTop) <= delta) return;
+				  if (nowScrollTop > prevScrollTop) {
+					  $('#footer').addClass('active');
+				  } else {
+					  $('#footer').removeClass('active');
+				  }
+				  prevScrollTop = nowScrollTop;
+			  })
+		  })		
   	</script>
   </body>
 </html>
