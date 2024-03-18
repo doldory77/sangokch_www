@@ -21,6 +21,9 @@
     		height: 56px;
     		transition: all .35s;
     	}
+    	#footer.active {
+			transform: translateY(100%);
+		}
     </style>
   </head>
   <body>
@@ -126,9 +129,11 @@
 				  var nowScrollTop = $(window).scrollTop();
 				  if (Math.abs(prevScrollTop - nowScrollTop) <= delta) return;
 				  if (nowScrollTop > prevScrollTop) {
-					  $('#footer').addClass('active');
-				  } else {
+					  //$('#footer').addClass('active');
 					  $('#footer').removeClass('active');
+				  } else {
+					  //$('#footer').removeClass('active');
+					  $('#footer').addClass('active');
 				  }
 				  prevScrollTop = nowScrollTop;
 			  })
