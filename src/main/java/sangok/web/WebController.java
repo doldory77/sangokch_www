@@ -225,6 +225,7 @@ public class WebController implements InitializingBean {
 		
 		commProcessSetMenu(true, model);
 		
+		List<Map<String, Object>> HEADER_TEXT_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "07").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
 		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
 		List<Map<String, Object>> ROLL_IMG_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "06").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
 		List<Map<String, Object>> DISP_Y_LIST = webService.getMapper().selectDispYnBoard(null);
@@ -235,12 +236,13 @@ public class WebController implements InitializingBean {
 		}
 		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
 		
+		model.addAttribute("HEADER_TEXT_LIST", HEADER_TEXT_LIST);
 		model.addAttribute("HEADER_IMG", HEADER_IMG);
 		model.addAttribute("ROLL_IMG_LIST", ROLL_IMG_LIST);
 		model.addAttribute("BODY_LIST", BODY_LIST);
 		model.addAttribute("DISP_Y_LIST", DISP_Y_LIST);
 		model.addAttribute("TITLE", "산곡교회 홈페이지");
-		commProcessEscapeBoard(new String[] {"HEADER_IMG","ROLL_IMG_LIST","BODY_LIST"}, new Boolean[] {false, true, true}, model);
+		commProcessEscapeBoard(new String[] {"HEADER_TEXT_LIST","HEADER_IMG","ROLL_IMG_LIST","BODY_LIST"}, new Boolean[] {true, false, true, true}, model);
 		
 		return "home/main";
 	}

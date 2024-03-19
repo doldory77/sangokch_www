@@ -54,7 +54,7 @@
 			
 			  	<div class="row align-items-center mb-2">
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="groupId">그룹ID<small class="require sub1 d-none d-xl-inline"><br/>(분류)</small></label>
+			  			<label for="groupId">그룹ID<small class="require sub1 d-md-none d-xl-inline"><br class="d-none d-xl-inline"/>(분류)</small></label>
 			  		</div>
 			  		<div class="col-md-3 mb-2">
 			  			<select class="form-select" id="groupId" name="GROUP_ID">
@@ -116,16 +116,30 @@
 			  			</select>
 			  		</div>
 			  		<div class="col-md-1 mb-md-2">
+			  			<label for="mainDispYn">메인노출<small class="require sub1 d-md-none d-xl-inline"><br class="d-none d-xl-inline"/>(HOME 노출여부)</small></label>
+			  		</div>
+			  		<div class="col-md-3 mb-2">
+			  			<select class="form-select" id="mainDispYn" name="MAIN_DISP_YN">
+			  				<c:forEach var="item" items="${YNCodeList}">
+			  				<option value="${item.CODE}" <c:if test="${not empty BOARD_DTL && item.CODE eq BOARD_DTL.MAIN_DISP_YN}">selected="selected"</c:if>>${item.CODE_NM}</option>
+			  				</c:forEach>
+			  			</select>
+			  		</div>
+			  		<div class="col-md-1 mb-md-2">
 			  			<label for="attr01">속성1<small class="require sub1 d-md-none d-xl-inline"><br class="d-none d-xl-inline"/>(썸네일이미지)</small></label>
 			  		</div>
 			  		<div class="col-md-3 mb-2">
 			  			<input type="text" id="attr01" name="ATTR01" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR01 : ''}">
 			  		</div>
+			  	</div>
+			  	
+			  	<div class="row align-items-center mb-2">
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="attr02">속성2<small class="require sub1 d-md-none d-xl-inline"><br class="d-none d-xl-inline"/>(날짜)</small></label>
+			  			<label for="attr02">속성2<small class="require sub1 d-md-none d-xl-inline"><br class="d-none d-xl-inline"/>(조금긴문장)</small></label>
 			  		</div>
-			  		<div class="col-md-3 mb-2">
-			  			<input type="text" id="attr02" name="ATTR02" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR02 : ''}">
+			  		<div class="col mb-2">
+			  			
+			  			<textarea name="ATTR02" id="attr02" style="width:100%">${not empty BOARD_DTL ? BOARD_DTL.ATTR02 : ''}</textarea>
 			  		</div>
 			  	</div>
 			  	
@@ -152,14 +166,7 @@
 
 		  		<div class="d-flex justify-content-between align-items-center mb-2">
 	  				<span>내용</span>
-	  				<div>
-	  				<span>메인화면 노출 여부</span>
-	  				<select id="mainDispYn" name="MAIN_DISP_YN" style="width:48px;">
-		  				<c:forEach var="item" items="${YNCodeList}">
-		  				<option value="${item.CODE}" <c:if test="${not empty BOARD_DTL && item.CODE eq BOARD_DTL.MAIN_DISP_YN}">selected="selected"</c:if>>${item.CODE_NM}</option>
-		  				</c:forEach>
-		  			</select>
-		  			</div>
+	  				
 	  				<span style="font-size:0.6rem;">
 		  				<span>그룹ID : [${not empty BOARD_DTL ? BOARD_DTL.GROUP_ID : ''}]</span>
 		  				<span>/ 일련번호 : [${not empty BOARD_DTL ? BOARD_DTL.SEQ_NO : ''}]</span>

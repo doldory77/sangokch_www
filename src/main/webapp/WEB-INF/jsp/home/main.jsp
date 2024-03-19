@@ -5,6 +5,8 @@
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<% pageContext.setAttribute("newLine", "\n"); %>
+
 <!doctype html>
 <html lang="ko">
   <head>
@@ -39,6 +41,12 @@
 	</c:if>
 	
 	<c:if test="${not empty ROLL_IMG_LIST}">
+	<div style="position:relative;">
+	
+	<c:forEach var="item" items="${HEADER_TEXT_LIST}" varStatus="status">
+		<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
+	</c:forEach>
+	
 	<div id="carouselSlides" class="carousel slide" data-bs-ride="carousel">
 	  <div class="carousel-indicators">
 	  <c:forEach var="item" items="${ROLL_IMG_LIST}" varStatus="status">
@@ -55,6 +63,7 @@
 	    </div>
 	    </c:forEach>
 	  </div>
+	</div>
 	</div>	
 	</c:if>
 	
@@ -67,10 +76,10 @@
 			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
 			<div class="col">
 			    <div class="mainItem">
-			        <div style='background-image:url(${item.ATTR01});'>
-			            IMG2
+			        <div style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
+			            ${item.SUBJECT}
 			        </div>
-			        <p style="color:#000;font-family:HSWinter;">${item.SUBJECT}<br/>${item.ATTR02}</p>
+			        <p style="color:#000;font-family:HSWinter;">${fn:replace(item.ATTR02, newLine, '<br>')}</p>
 			    </div>
 			</div>			
 			</c:forEach>
@@ -79,7 +88,7 @@
 	
 	<div id="footer" class="d-flex justify-content-center align-items-center">
 		<span class="material-symbols-outlined">map</span>
-		<div class="ps-1">인천광역시 부평구 길주로326번길 13</div>
+		<div class="ps-1" onclick="location.href='/B0000003.do'" style="cursor:pointer;">인천광역시 부평구 길주로326번길 13</div>
 		<span class="material-symbols-outlined ps-3">call</span>
 		<div class="ps-1">032-512-2504</div>
 	</div>
