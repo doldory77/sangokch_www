@@ -93,7 +93,7 @@
 			  			<input type="text" id="ordNo" name="ORD_NO" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ORD_NO : ''}">
 			  		</div>
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="groupId">사용여부<small class="require sub1 d-md-none d-xl-inline"><br class="d-none d-xl-inline"/>(노출여부)</small></label>
+			  			<label for="groupId">사용여부<small class="require sub1 d-md-none d-xl-inline"><br class="d-none d-xl-inline"/>(조회여부)</small></label>
 			  		</div>
 			  		<div class="col-md-3 mb-2">
 			  			<select class="form-select" id="useYn" name="USE_YN">
@@ -152,11 +152,14 @@
 
 		  		<div class="d-flex justify-content-between align-items-center mb-2">
 	  				<span>내용</span>
-	  				<select class="form-select" id="mainDispYn" name="MAIN_DISP_YN">
-		  				<c:forEach var="mainDispYn" items="${YNCodeList}">
+	  				<div>
+	  				<span>메인화면 노출 여부</span>
+	  				<select id="mainDispYn" name="MAIN_DISP_YN" style="width:48px;">
+		  				<c:forEach var="item" items="${YNCodeList}">
 		  				<option value="${item.CODE}" <c:if test="${not empty BOARD_DTL && item.CODE eq BOARD_DTL.MAIN_DISP_YN}">selected="selected"</c:if>>${item.CODE_NM}</option>
 		  				</c:forEach>
 		  			</select>
+		  			</div>
 	  				<span style="font-size:0.6rem;">
 		  				<span>그룹ID : [${not empty BOARD_DTL ? BOARD_DTL.GROUP_ID : ''}]</span>
 		  				<span>/ 일련번호 : [${not empty BOARD_DTL ? BOARD_DTL.SEQ_NO : ''}]</span>

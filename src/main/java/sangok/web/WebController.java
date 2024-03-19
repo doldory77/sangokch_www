@@ -32,6 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sangok.scheduler.CacheScheduler;
 import sangok.service.WebService;
+import sangok.service.impl.WebMapper;
 import sangok.service.impl.WebServiceImpl;
 import sangok.utils.JList;
 import sangok.utils.JMap;
@@ -226,6 +227,7 @@ public class WebController implements InitializingBean {
 		
 		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
 		List<Map<String, Object>> ROLL_IMG_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "06").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
+		List<Map<String, Object>> DISP_Y_LIST = webService.getMapper().selectDispYnBoard(null);
 		String stdImgPath = null;
 		for (int i=0; i<ROLL_IMG_LIST.size(); i++) {
 			stdImgPath = JStr.extractStr(WebServiceImpl.imgPattern, JStr.toStr(ROLL_IMG_LIST.get(i).get("CONTENT")));
@@ -236,6 +238,7 @@ public class WebController implements InitializingBean {
 		model.addAttribute("HEADER_IMG", HEADER_IMG);
 		model.addAttribute("ROLL_IMG_LIST", ROLL_IMG_LIST);
 		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("DISP_Y_LIST", DISP_Y_LIST);
 		model.addAttribute("TITLE", "산곡교회 홈페이지");
 		commProcessEscapeBoard(new String[] {"HEADER_IMG","ROLL_IMG_LIST","BODY_LIST"}, new Boolean[] {false, true, true}, model);
 		

@@ -51,4 +51,6 @@ public interface WebMapper {
 	List<Map<String, Object>> selectEnv(Map<String, Object> params) throws Exception;
 	
 	Map<String, Object> selectTitle(Map<String, Object> params) throws Exception;
+	
+	List<Map<String, Object>> selectDispYnBoard(Map<String, Object> params) throws Exception;
 }

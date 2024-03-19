@@ -107,6 +107,7 @@
 				, #{USE_YN, mode=IN, jdbcType=VARCHAR}
 				, #{USER_ID, mode=IN, jdbcType=VARCHAR}
 				, #{TAG_CD, mode=IN, jdbcType=VARCHAR}
+				, #{MAIN_DISP_YN, mode=IN, jdbcType=VARCHAR}
 				, #{ATTR01, mode=IN, jdbcType=VARCHAR}
 				, #{ATTR02, mode=IN, jdbcType=VARCHAR}
 				, #{ATTR03, mode=IN, jdbcType=VARCHAR}
@@ -207,6 +208,18 @@
     
 	<select id="selectTitle" parameterType="map" resultType="map">
 		SELECT MENU_NM FROM H_MENU WHERE MENU_ID = #{MENU_ID}
+    </select>
+    
+    <select id="selectDispYnBoard" parameterType="map" resultType="map">
+		SELECT GROUP_ID
+			 , SEQ_NO
+			 , SUBJECT
+			 , ATTR01
+			 , ATTR02
+			 , ORD_NO
+		  FROM H_BOARD
+		 WHERE MAIN_DISP_YN = 'Y'
+		 ORDER BY ORD_NO    
     </select>        	
 	
 </mapper>

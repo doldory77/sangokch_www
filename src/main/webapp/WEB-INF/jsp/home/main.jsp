@@ -64,6 +64,16 @@
 			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
 				<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
 			</c:forEach>
+			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
+			<div class="col">
+			    <div class="mainItem">
+			        <div style='background-image:url(${item.ATTR01});'>
+			            IMG2
+			        </div>
+			        <p style="color:#000;font-family:HSWinter;">${item.SUBJECT}<br/>${item.ATTR02}</p>
+			    </div>
+			</div>			
+			</c:forEach>
 		</div>
 	</div>
 	
