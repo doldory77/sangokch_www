@@ -218,7 +218,13 @@
 			 , ATTR02
 			 , ORD_NO
 		  FROM H_BOARD
-		 WHERE MAIN_DISP_YN = 'Y'
+		 WHERE TAG_CD = '00'
+		 <if test="GROUP_ID != null and !GROUP_ID.equals('')">
+		   AND GROUP_ID = #{GROUP_ID}
+		 </if>
+		 <if test="MAIN_DISP_YN != null and !MAIN_DISP_YN.equals('')">
+		   AND MAIN_DISP_YN = #{MAIN_DISP_YN}
+		 </if>
 		 ORDER BY ORD_NO    
     </select>        	
 	
