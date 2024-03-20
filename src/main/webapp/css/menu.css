@@ -49,7 +49,7 @@
     box-shadow: 4.0px 8.0px 8.0px hsl(0deg 0% 0% / 0.38);	
 }
 
-.popup-body p {
+.popup-body > p {
 	border: 1px solid darkgray;
     height: 88%;
     padding: 2px;

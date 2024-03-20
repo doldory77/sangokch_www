@@ -95,7 +95,7 @@
 	  		<p id="popupContent">전직대통령의 신분과 예우에 관하여는 법률로 정한다. 모든 국민은 종교의 자유를 가진다. 국회의원은 법률이 정하는 직을 겸할 수 없다. 혼인과 가족생활은 개인의 존엄과 양성의 평등을 기초로 성립되고 유지되어야 하며, 국가는 이를 보장한다.</p>
 	  		<div class="" style="position:absolute; top:4px; right:10px;">
 		  		<!-- <a href="javascript: togglePopup();" class="btn btn-primary position-absolute bottom-0 start-50 translate-middle-x mb-3" style="display:inline-block; width:60px;">닫기</a> -->
-		  		<a href="javascript: togglePopup();"><img src="/images/close_light.png" width="42"></a>
+		  		<a href="javascript: togglePopup();"><img src="/images/close_light.png" width="38" style="padding:1px;"></a>
 	  		</div>
 	  	</div>
 	  </div>
@@ -168,7 +168,16 @@
 		  })
 	  })
 	  
-	  function togglePopup(title, msg) {
+	  function togglePopup(title, msg, wp, hp) {
+		  
+		  if (wp && hp) {
+			  $('.popup-body:eq(0)').css('width', wp);
+			  $('.popup-body:eq(0)').css('height', hp);
+		  } else {
+			  $('.popup-body:eq(0)').css('width', '50%');
+			  $('.popup-body:eq(0)').css('height', '50%');
+		  }
+		  
 		  var $pop = $('#popup');
 		  if ($pop.css('display') == 'flex') {
 			  $pop.css('display', 'none');
@@ -177,6 +186,28 @@
 			  if (msg) $('#popupContent').html(msg);
 			  $pop.css('display', 'flex');
 		  }
+	  }
+	  
+	  function getPopupMsg(groupId, seqNo, wp, hp) {
+		  $.ajax({
+			  type: 'POST'
+			  , url: '/popMsg.do'
+			  , dataType: 'JSON'
+			  , data: {GROUP_ID:groupId, SEQ_NO:seqNo}
+			  , success: function(json) {
+				  console.log(json);
+				  if (json) {
+					  var title = json.title;
+					  var content = json.content;
+					  togglePopup(title, '<div>'+content+'</div>', wp, hp);
+				  }
+				  
+			  }
+		  	  , error: function(xhr, status, error) {
+		  		togglePopup('error', error);
+		  	  }
+			  
+		  });
 	  }
 	  
 	  function clearPopContent() {

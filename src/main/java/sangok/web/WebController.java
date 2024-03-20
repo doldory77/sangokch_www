@@ -910,7 +910,7 @@ public class WebController implements InitializingBean {
 	}	
 	
 	/*
-	 * 성경구정 또는 찬송가 조회
+	 * 성경구절 또는 찬송가 조회
 	 */
 	@RequestMapping(value = "/bibleAndHymn.do")
 	public String bibleAndHymn(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
@@ -921,6 +921,23 @@ public class WebController implements InitializingBean {
 		model.put("title", params.get("SEARCH_KEYWORD"));
 		model.put("cnt", list == null ? 0 : list.size());
 		model.put("content", list);
+		
+		return "jsonView";
+	}
+	
+	/*
+	 * 성경구절 또는 찬송가 조회
+	 */
+	@RequestMapping(value = "/popMsg.do")
+	public String popMsg(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		params.put("TAG_CD", "00");
+		params.put("USE_YN", "Y");
+		debug(params);
+		List<Map<String, Object>> POP_MSG = webService.selectBoardDtl(params);
+		if (POP_MSG != null && POP_MSG.size() > 0) {
+			model.addAttribute("title", POP_MSG.get(0).get("SUBJECT"));
+			model.addAttribute("content", POP_MSG.get(0).get("CONTENT").toString().replaceFirst("<h1>.+</h1>", ""));
+		}
 		
 		return "jsonView";
 	}	

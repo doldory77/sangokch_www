@@ -48,7 +48,7 @@
 	</div>
 	<div class="container-fluid">
   		
-		<form name="frm" method="POST" id="frm" action="/admin/board/save.do">
+		<form name="frm" method="POST" id="frm" action="/admin/board/save.do" onsubmit="return false;">
 			<fieldset>
 				<legend></legend>
 			
@@ -177,7 +177,7 @@
 		  	
 			  	<div class="row align-items-center">
 				  	<div class="col text-center">
-				  		<input type="submit" class="btn btn-primary mt-3 mx-2" value="작성완료" />
+				  		<button class="btn btn-primary mt-3 mx-2" onclick="goSubmit()">작성완료</button>
 				  	</div>
 			  	</div>
 		  	
@@ -198,7 +198,16 @@
   	<script src="/js/ckeditor.js"></script>
   	<script src="/js/imgUpAdapter.js"></script>
 	<script>
-	
+		function goSubmit() {
+			var frm = document.frm;
+			if (!frm.SUBJECT.value) {
+				alert('제목은 필수 입력값 입니다.');
+				return;
+			} else {
+				frm.submit();
+			}
+		}
+		
 		function MyCustomUploadAdapterPlugin( editor ) {
 		    editor.plugins.get( 'FileRepository' ).createUploadAdapter = ( loader ) => {
 		        // Configure the URL to the upload script in your back-end here!
