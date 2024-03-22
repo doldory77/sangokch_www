@@ -5,12 +5,39 @@
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<% pageContext.setAttribute("newLine", "\n"); %>
+
 <!doctype html>
 <html lang="ko">
   <head>
 	<%@ include file="/WEB-INF/jspf/head.jspf" %>
 	<link rel="stylesheet" href="/css/font.css">
     <title>${TITLE}</title>
+    <style>
+		/*img {
+		  width: 50vw;
+		  vertical-align: middle;
+		}*/
+		
+		img.is-rwd {
+		  width: 100%;
+		  height: auto;
+		}
+		
+		.is-wood {
+		  width: 100%;
+		  border: 20px solid #dca56b;
+		  border-image: url("/images/wood_frame.png") 50 64;
+		  box-shadow: 3px 3px 3px #6a5858;
+		  cursor:pointer;
+		}
+		
+		.is-gradient {
+		  width: 100%;
+		  border: 20px solid #f98b14;
+		  border-image: linear-gradient(-45deg, #00b9e9, #f98b14, #503370) 20;
+		}    
+    </style>
   </head>
   <body style="background: url('https://cdn.pixabay.com/photo/2017/02/15/11/05/texture-2068283_1280.jpg')">
 	<div class="wrapper">
@@ -36,16 +63,26 @@
 			
 			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
 			<div class="col">
-			    <div class="mainItem" style="background-color: white; border-radius: 10px; box-shadow: 5px 6px 3px #737373;">
+			    <!-- <div class="mainItem" style="background-color: white; border-radius: 10px; box-shadow: 5px 6px 3px #737373;">
 			        <div style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
 			            ${item.SUBJECT}
 			        </div>
 			        <p style="color:#000;font-family:HSWinter;">${fn:replace(item.ATTR02, newLine, '<br>')}</p>
-			    </div>
-			</div>			
+			    </div>-->
+				<figure>
+				  <figcaption class="fs-5 text-center">${item.SUBJECT}</figcaption>
+				  <div>			    
+				    <div class="is-wood" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
+				      <img class="is-rwd" src="${item.ATTR01}">
+				    </div>
+				    <p style="margin-top:20px; color:#000;font-family:HSWinter;">${fn:replace(item.ATTR02, newLine, '<br>')}</p>
+				  </div>
+				</figure>			    
+			</div>		
 			</c:forEach>
 						
 		</div>
+		
 	</div>
 
     
