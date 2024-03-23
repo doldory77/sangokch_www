@@ -39,7 +39,8 @@
 		}    
     </style>
   </head>
-  <body style="background: url('https://cdn.pixabay.com/photo/2017/02/15/11/05/texture-2068283_1280.jpg')">
+  <!-- <body style="background: url('https://cdn.pixabay.com/photo/2017/02/15/11/05/texture-2068283_1280.jpg')"> -->
+  <body <c:if test="${not empty BODY_IMG}">style="background: url('${BODY_IMG.ATTR01}')"</c:if>>
 	<div class="wrapper">
   		<%@ include file="/WEB-INF/jspf/menu.jspf" %>
 	</div>
