@@ -22,8 +22,8 @@
 		</div> -->
 		<c:forEach var="item" items="${BOARD_LIST}">
 			<div class="row border-bottom py-2">
-				<div class="col-sm-4 text-center"><img src=${item.ATTR01} style="width:180px;"></div>
-				<div class='<c:if test="${not empty item.ATTR04}">col-sm-6 col-9</c:if><c:if test="${empty item.ATTR04}">col</c:if>' onclick="javascript: location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}<c:if test="${not empty W_SIZE}">&W_SIZE=${W_SIZE}</c:if>'" style="cursor:pointer;">
+				<div class="col-sm-4 text-center"><img src=${item.ATTR01} style="max-width:180px; max-height:142px;"></div>
+				<div class='<c:if test="${not empty item.ATTR04}">col-sm-6 col-9</c:if><c:if test="${empty item.ATTR04}">col</c:if>' onclick="goUrl('${item.SEQ_NO}','${item.GROUP_ID}', '${item.W_SIZE}', '${item.ATTR05}')" style="cursor:pointer;">
 					<div><span class="fs-4" style="font-family:HSWinter;">${item.SUBJECT}</span><c:if test="${not empty item.ATTR02}"><span class="fs-6"> (${fn:substring(item.ATTR02,0,4)}-${fn:substring(item.ATTR02,4,6)}-${fn:substring(item.ATTR02,6,8)})</span></c:if></div>
 					<c:if test="${not empty item.ATTR03}"><div class="border-top fs-5 text-md-end pt-2">${item.ATTR03}</div></c:if>
 				</div>
@@ -60,3 +60,21 @@
 			</c:if>	
 		</div>
 	</div>
+	
+	<script>
+		// javascript: location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}<c:if test="${not empty W_SIZE}">&W_SIZE=${W_SIZE}</c:if>'
+		function goUrl(seqNo, groupId, wSize, link) {
+			var urlStr = '';
+			if (link) {
+				urlStr = link;
+			} else {
+				urlStr = '/boardDtlView.do?SEQ_NO='+seqNo+'&GROUP_ID='+groupId;
+				if (wSize) {
+					urlStr = urlStr + ('&W_SIZE=' + wSize);
+				}
+				
+			}
+			location.href=urlStr;
+			//window.open(urlStr);
+		}
+	</script>

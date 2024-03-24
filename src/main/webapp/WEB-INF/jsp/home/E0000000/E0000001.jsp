@@ -27,7 +27,13 @@
 		<c:if test="${not empty HEADER_IMG}">
 			<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
 		</c:if>
+		
+		<p align="middle">
+			<iframe src="/weekly/20240317.html" style="margin:0 auto; width:1454px; height:803px;"></iframe>
+		</p>
 	</div>
+	
+	
 	
 	<jsp:include page="/WEB-INF/jspf/userBoardList.jsp" flush="false">
 		<jsp:param name="W_SIZE" value="1024px" />

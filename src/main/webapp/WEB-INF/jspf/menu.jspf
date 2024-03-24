@@ -221,5 +221,6 @@
 	  
 	  function menuClose() {
 		  $('#menuicon').prop('checked',false);
-	  }
+	  }	  
+	  
 	  </script>
