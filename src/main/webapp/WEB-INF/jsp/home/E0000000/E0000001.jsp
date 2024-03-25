@@ -28,9 +28,9 @@
 			<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
 		</c:if>
 		
-		<p align="middle">
-			<iframe src="/weekly/20240317.html" style="margin:0 auto; width:1454px; height:803px;"></iframe>
-		</p>
+		<div class="row">
+			<iframe src="/weekly/20240317.html" style="margin:0 auto; width:1494px; height:804px;"></iframe>
+		</div>
 	</div>
 	
 	
