@@ -31,14 +31,15 @@
 	<div class="container-lg mt-2">
 		<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
 			<div class="row gy-0">
-				<div class="col-2"><div class="fs-1 text-end">${item.ATTR02}</div></div>
+				<div class="col-2"><div class="fs-1 text-end">${item.ATTR04}</div></div>
 				<div class="col-4 border-start border-5">
 					<div class="fs-5">${fn:substring(item.ATTR03,4,8)}월</div>
 					<div class="fs-4">
 						<a href="/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}">${item.SUBJECT}</a>
 					</div>
+					<div class="ps-2"><pre>${item.ATTR02}</pre></div>
 				</div>
-				<div class="col-6 p-1"><img class="rounded" width="200" src="${item.ATTR04}"></div>
+				<div class="col-6 p-1"><img class="rounded" width="200" src="${item.ATTR01}"></div>
 			</div>
 		</c:forEach>
 	</div>
