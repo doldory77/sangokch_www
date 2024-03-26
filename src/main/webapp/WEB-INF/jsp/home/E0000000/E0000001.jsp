@@ -28,9 +28,11 @@
 			<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
 		</c:if>
 		
+		<c:if test="${not empty BOARD_LIST}">
 		<div class="row">
-			<iframe src="/weekly/20240317.html" style="margin:0 auto; width:1494px; height:804px;"></iframe>
+			<iframe src="${BOARD_LIST[0].ATTR05}" style="margin:0 auto; width:1494px; height:804px;"></iframe>
 		</div>
+		</c:if>
 	</div>
 	
 	

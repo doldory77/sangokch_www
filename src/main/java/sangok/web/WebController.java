@@ -32,7 +32,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sangok.scheduler.CacheScheduler;
 import sangok.service.WebService;
-import sangok.service.impl.WebMapper;
 import sangok.service.impl.WebServiceImpl;
 import sangok.utils.JList;
 import sangok.utils.JMap;
@@ -509,7 +508,7 @@ public class WebController implements InitializingBean {
 		this.commProcessSetMenu(true, model);
 		
 		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "E0000001").put("USE_YN", "Y").build());
-		params.put("ORDER_BY", "ATTR02 DESC");
+		params.put("ORDER_BY", "ATTR05 DESC");
 		
 		this.setBoardListInitParams(params, model);
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "E0000001").build()).get("MENU_NM").toString();
@@ -1013,6 +1012,50 @@ public class WebController implements InitializingBean {
 		model.put("url", imgPath);
 		
 		return "jsonView";
+	}
+	
+	/*
+	 * 주보파일 저장
+	 */
+	@RequestMapping(value = "/admin/weekly/save.do")
+	public String weeklySave(@RequestParam("W_FILE_NM") MultipartFile file1
+			, @RequestParam("W_STYL_NM") MultipartFile file2
+			, @RequestParam("GROUP_ID") String groupId
+			, @RequestParam("PAGE") String page
+			, ModelMap model) throws Exception {
+		
+		final String weeklyRealPath = messageSourceAccessor.getMessage("path.file.weekly");
+		String originalFileName1 = file1.getOriginalFilename();
+		String originalFileName2 = file2.getOriginalFilename();
+		
+		webService.getMapper().updateBoard(
+				JMap.instance("RTN_MSG", "")
+				.put("DEL_YN", null)
+				.put("SUBJECT", JStr.formatDateStr(originalFileName1, "-") + " 주보")
+				.put("CONTENT", "")
+				.put("GROUP_ID", groupId)
+				.put("SEQ_NO", null)
+				.put("SCREEN_YN", "N")
+				.put("DEPTH_NO", null)
+				.put("ORD_NO", null)
+				.put("USE_YN", "Y")
+				.put("USER_ID", "SYSTEM")
+				.put("TAG_CD", "00")
+				.put("MAIN_DISP_YN", "N")
+				.put("ATTR01", "/images/weekly_sign.webp")
+				.put("ATTR02", null)
+				.put("ATTR03", null)
+				.put("ATTR04", null)
+				.put("ATTR05", "/weekly/"+originalFileName1)
+				.build());
+		
+		File newFile1 = new File(weeklyRealPath + originalFileName1);
+		File newFile2 = new File(weeklyRealPath + originalFileName2);
+		
+		file1.transferTo(newFile1);
+		file2.transferTo(newFile2);
+		
+		return "redirect:/admin/adminPage.do"+"?PAGE="+page+"&GROUP_ID="+groupId;
 	}
 	
 }

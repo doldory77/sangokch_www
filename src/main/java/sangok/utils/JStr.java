@@ -37,4 +37,11 @@ public class JStr {
 			return defStr;
 		}
 	}
+	
+	public static String formatDateStr(String yyyymmdd, String div) {
+		if (yyyymmdd != null && yyyymmdd.length() >= 8) {
+			return yyyymmdd.substring(0, 4) + div + yyyymmdd.substring(4, 6) + div + yyyymmdd.substring(6, 8);
+		}
+		return yyyymmdd;
+	}
 }

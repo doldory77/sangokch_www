@@ -30,10 +30,56 @@
   	<div class="container-fluid">
 		<a class="btn btn-sm px-4 my-2" style="background-color: #B80000; color: white;" href="/admin/board/write.do?PAGE=${PAGE}&SCREEN_YN=${SCREEN_YN}&GROUP_ID=${GROUP_ID}">작성</a>
 	</div>
+	
 	<jsp:include page="/WEB-INF/jspf/adminBoardList.jsp" flush="false" />
 	
+	<div class="container-fluid mt-3">
+		<form name="frm" method="POST" action="/admin/weekly/save.do" enctype="multipart/form-data" onsubmit="return false;">
+		<div class="row align-items-center mt-1">
+			<div class="col-2">
+				<label for="wFileNm">주보파일(html)</label>
+			</div>
+			<div class="col">
+				<input type="file" name="W_FILE_NM" id="wFileNm">
+			</div>
+		</div>	
+		<div class="row align-items-center mt-1">
+			<div class="col-2">
+				<label for="">주보 스타일시트(css)</label>
+			</div>
+			<div class="col">
+				<input type="file" name="W_STYL_NM" id="wStylNm">
+			</div>
+		</div>
+		<div class="row  align-items-center mt-1">
+			<div class="col">
+				<button class="btn btn-primary" onclick="goSubmit()">전송</button>
+			</div>
+		</div>
+		<input type="hidden" name="GROUP_ID" value="${GROUP_ID}">	
+		<input type="hidden" name="PAGE" value="${PAGE}">	
+		</form>
+	</div>
+	
 	<script>
-		/*스크립트 작성*/
+		function goSubmit() {
+			var ptn = /.*[0-9]{8}[.]html$/;
+			var frm = document.frm;
+			if (!document.frm.W_FILE_NM.value) {
+				alert('주보파일(html)은 필수입니다.');
+				return;
+			}
+			if (!ptn.test(document.frm.W_FILE_NM.value)) {
+				console.log(document.frm.W_FILE_NM.value);
+				alert('주포파일(html) 파일명 형식이 일치하지 않습니다.\n형식:예)20240317.html');
+				return;
+			}
+			if (!document.frm.W_STYL_NM.value) {
+				alert('주보 스타일시트(css) 파일은 필수입니다.');
+				return;
+			}
+			frm.submit();
+		}
 	</script>
 	
   </body>
