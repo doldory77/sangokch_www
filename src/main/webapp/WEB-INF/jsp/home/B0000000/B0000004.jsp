@@ -30,15 +30,15 @@
 	</div> -->
 	<div class="container-lg mt-2">
 		<div class="row gy-0">
-			<div class="col-2" style="background:url('/images/tree_top_left.webp'); height:210px; background-repeat: no-repeat;"></div>
+			<div class="col-2" style="background:url('/images/tree_top_left.webp'); height:210px; background-repeat: no-repeat; background-position: right;"></div>
 			<div class="col"  style="background:url('/images/tree_top_right.webp'); height:210px; background-repeat: no-repeat;"></div>
 		</div>
 		<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
 			<div class="row gy-0">
 				<div class="col-2">
-					<div class="fs-2 text-start">${item.ATTR04}</div>
+					<div class="fs-2 text-end">${item.ATTR04}</div>
 				</div>
-				<div class="col-5 ps-5" style="background:url('/images/tree_body.webp'); background-repeat: y-repeat;">
+				<div class="col-4 ps-5" style="background:url('/images/tree_body.webp'); background-repeat: y-repeat;">
 					<div class="fs-5">${fn:substring(item.ATTR03,4,8)}월</div>
 					<div class="fs-4">
 						<a href="/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}">${item.SUBJECT}</a>
