@@ -29,7 +29,10 @@
 				</div>
 				<c:if test="${not empty item.ATTR04}">
 				<div class="col-sm-2 col-3 d-flex justify-content-center align-items-center">
-					<a href="${item.ATTR04}" target="blank"><span class="material-symbols-outlined">smart_display</span></a>
+					<a href="${item.ATTR04}" target="blank">
+						<span class="material-symbols-outlined" style="vertical-align: middle;">smart_display</span>
+						<span style="vertical-align: middle; margin-left: 3px;">YouTube</span>
+					</a>
 				</div>
 				</c:if>
 			</div>

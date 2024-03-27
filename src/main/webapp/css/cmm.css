@@ -4,6 +4,7 @@ a, a:hover, a:visited, a:link, a:active {
 .mainItem {
 	overflow: hidden;
 	border: 1px solid #c2c2c2;
+	background-color: white;
 	/*border-radius: 5px;*/
 }
 .mainItem > div {
@@ -26,6 +27,7 @@ a, a:hover, a:visited, a:link, a:active {
 .mainHead {
 	width: 100%;
 	height: 300px;
+	max-height: 620px;
 	/*background-color: #c2c2c2;*/
     color: white;
     display: flex;

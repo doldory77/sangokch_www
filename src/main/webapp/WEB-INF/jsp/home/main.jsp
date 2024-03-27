@@ -70,9 +70,11 @@
 	<!-- <div>${applicationScope.ENV['CD0002_05']['VALUE_STR']}</div> -->
 	<div class="container-md" style="margin-bottom: 80px;">
 		<div class="row gy-0 gx-0 justify-content-center row-cols-1 row-cols-sm-2 mt-4">
+			
 			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
 				<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
 			</c:forEach>
+			
 			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
 			<div class="col">
 			    <div class="mainItem">

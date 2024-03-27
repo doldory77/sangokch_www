@@ -218,7 +218,7 @@
 			 , ATTR02
 			 , ORD_NO
 		  FROM H_BOARD
-		 WHERE TAG_CD = '00'
+		 WHERE 1=1
 		 <if test="GROUP_ID != null and !GROUP_ID.equals('')">
 		   AND GROUP_ID = #{GROUP_ID}
 		 </if>

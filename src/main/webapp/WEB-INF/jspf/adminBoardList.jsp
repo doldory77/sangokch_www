@@ -3,6 +3,7 @@
 <%@ taglib prefix="form"   uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="ui"     uri="http://egovframework.gov/ctl/ui"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fn"	   uri="http://java.sun.com/jsp/jstl/functions" %>
 <%
 	String IS_SUB_BOARD = request.getParameter("IS_SUB_BOARD");
 %>
@@ -15,6 +16,7 @@
 				<!-- <div class="board-frame-background" style='background-image: url(${item.ATTR01});'></div> -->
 				<div class="d-flex justify-content-between align-items-center">
 					<span class="sub1">${item.GROUP_NM}</span>
+					<c:if test="${fn:length(item.ATTR02) eq 8}"><span class="sub1">${item.ATTR02}</span></c:if>
 					<span class="sub2 text-danger"><c:choose><c:when test="${item.USE_YN eq 'Y'}">(사용)</c:when><c:otherwise>(미사용)</c:otherwise></c:choose></span>
 				</div>
 				<div class="d-flex align-items-center">
