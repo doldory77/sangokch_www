@@ -218,7 +218,10 @@
 			 , ATTR02
 			 , ORD_NO
 		  FROM H_BOARD
-		 WHERE 1=1
+		 WHERE USE_YN = 'Y'
+		 <if test="TAG_CD != null and !TAG_CD.equals('')">
+		   AND TAG_CD = #{TAG_CD}
+		 </if>
 		 <if test="GROUP_ID != null and !GROUP_ID.equals('')">
 		   AND GROUP_ID = #{GROUP_ID}
 		 </if>

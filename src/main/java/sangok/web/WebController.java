@@ -535,7 +535,7 @@ public class WebController implements InitializingBean {
 		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "E0000002").put("USE_YN", "Y").build());
 		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "E0000002").put("USE_YN", "Y").build());
 		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "E0000002").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
-		List<Map<String, Object>> DISP_Y_LIST = webService.getMapper().selectDispYnBoard(JMap.instance("GROUP_ID", "E0000002").build());
+		List<Map<String, Object>> DISP_Y_LIST = webService.getMapper().selectDispYnBoard(JMap.instance("GROUP_ID", "E0000002").put("TAG_CD", "00").build());
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "E0000002").build()).get("MENU_NM").toString();
 		
 		model.addAttribute("HEADER_IMG", HEADER_IMG);
