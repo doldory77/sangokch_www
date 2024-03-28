@@ -17,16 +17,17 @@
   		<%@ include file="/WEB-INF/jspf/menu.jspf" %>
 	</div>
 	
+	<c:if test="${not empty HEADER_IMG}">
 	<div class="container-fluid pt-5 px-0">
-		<!--<c:if test="${not empty HEADER_IMG}">
-			<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
-		</c:if>-->
-		<div class="mainHead" style='background-image:url(${HEADER_IMG.ATTR01}); <c:if test="${not empty HEADER_IMG.ATTR03}">height:${HEADER_IMG.ATTR03};</c:if>'>
-		    <p class="word fs-1" style="color:#000; font-family:HSWinter;">
+			
+		<div class="mainHead" style='position:relative; background-image:url(${HEADER_IMG.ATTR01}); <c:if test="${not empty HEADER_IMG.ATTR03}">height:${HEADER_IMG.ATTR03};</c:if>'>
+		    <p class="word fs-1" style='color:${empty HEADER_IMG.ATTR04 ? "#fff" : HEADER_IMG.ATTR04}; font-family:HSWinter;'>
 		        ${HEADER_IMG.ATTR02}
 		    </p>
 		</div>
+		
 	</div>
+	</c:if>
 	
 	<!-- <div class="pageBodyW container-fluid">
 		<div class="readyDiv">
