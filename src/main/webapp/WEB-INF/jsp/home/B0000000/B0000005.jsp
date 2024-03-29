@@ -36,7 +36,7 @@
 	
 	<div class="container-fluid px-0">
 		<div style="padding:10px 10px 10px 10px;">
-			<div id="editor"></div>
+			<div class="ck-content" id="editor"><c:out value="${BODY.CONTENT}" escapeXml="false"></c:out></div>
 		</div>
 	</div>
 
@@ -45,7 +45,7 @@
   	<script src="/js/imgUpAdapter.js"></script>
 	<script>
 		
-		ClassicEditor
+		/*ClassicEditor
 		    .create( document.querySelector( '#editor' ), {
 		    	
 		    } )
@@ -61,7 +61,7 @@
 		    } )
 		    .catch( error => {
 		        console.error( error );
-		    } );
+		    } );*/
 	</script>
   </body>
 </html>

@@ -24,10 +24,9 @@
 
 	<div class="container-fluid pt-5 px-0">
 		<div style='padding:50px 10px 10px 10px; margin:auto; <c:if test="${not empty W_SIZE}">max-width:${W_SIZE};</c:if>'>
-			<div id="editor"></div>
-			<!--<c:if test="${not empty MAIN01}">
-				<c:out value="${MAIN01.CONTENT}" escapeXml="false"></c:out>
-			</c:if>-->
+			<div class="ck-content" id="editor">
+				<c:out value="${BODY.CONTENT}" escapeXml="false"></c:out>
+			</div>
 		</div>
 	</div>
 	
@@ -41,7 +40,7 @@
   	<script src="/js/imgUpAdapter.js"></script>
 	<script>
 		
-		ClassicEditor
+		/*ClassicEditor
 		    .create( document.querySelector( '#editor' ), {
 		    	
 		    } )
@@ -57,7 +56,8 @@
 		    } )
 		    .catch( error => {
 		        console.error( error );
-		    } );
+		    } );*/
+		    
 	</script>
   </body>
 </html>
