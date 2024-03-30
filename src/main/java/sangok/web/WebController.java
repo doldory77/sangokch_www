@@ -473,12 +473,16 @@ public class WebController implements InitializingBean {
 		
 		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000003").put("USE_YN", "Y").build());
 		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "D0000003").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+		List<Map<String, Object>> FOOTER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "03").put("GROUP_ID", "D0000003").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "D0000003").put("USE_YN", "Y").build());
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000003").build()).get("MENU_NM").toString();
 		
 		model.addAttribute("HEADER_IMG", HEADER_IMG);
 		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("FOOTER_IMG", FOOTER_IMG);
+		model.addAttribute("BODY_IMG", BODY_IMG);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST"}, new Boolean[] {false, true}, model);
+		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST","FOOTER_IMG","BODY_IMG"}, new Boolean[] {false, true, false, false}, model);
 		
 		return "home/D0000000/D0000003";
 	}
@@ -493,12 +497,16 @@ public class WebController implements InitializingBean {
 		
 		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000004").put("USE_YN", "Y").build());
 		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "D0000004").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+		List<Map<String, Object>> FOOTER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "03").put("GROUP_ID", "D0000004").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "D0000004").put("USE_YN", "Y").build());
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000004").build()).get("MENU_NM").toString();
 		
 		model.addAttribute("HEADER_IMG", HEADER_IMG);
 		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("FOOTER_IMG", FOOTER_IMG);
+		model.addAttribute("BODY_IMG", BODY_IMG);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST"}, new Boolean[] {false, true}, model);
+		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST","FOOTER_IMG","BODY_IMG"}, new Boolean[] {false, true, false, false}, model);
 		
 		return "home/D0000000/D0000004";
 	}
