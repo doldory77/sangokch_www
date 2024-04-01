@@ -23,10 +23,15 @@
 	</div>
 
 	<div class="container-fluid pt-5 px-0">
-		<div style='padding:50px 10px 10px 10px; margin:auto; <c:if test="${not empty W_SIZE}">max-width:${W_SIZE};</c:if>'>
+		<div style='padding:40px 10px 10px 10px; margin:auto; <c:if test="${not empty W_SIZE}">max-width:${W_SIZE};</c:if>'>
+			<c:if test="${BODY.TAG_CD ne '04'}">
 			<div class="ck-content" id="editor">
 				<c:out value="${BODY.CONTENT}" escapeXml="false"></c:out>
 			</div>
+			</c:if>
+			<c:if test="${BODY.TAG_CD eq '04'}">
+				<div id="editor"></div>
+			</c:if>
 		</div>
 	</div>
 	
@@ -39,8 +44,8 @@
   	<script src="/js/ckeditor.js"></script>
   	<script src="/js/imgUpAdapter.js"></script>
 	<script>
-		
-		/*ClassicEditor
+		<c:if test="${BODY.TAG_CD eq '04'}">
+		ClassicEditor
 		    .create( document.querySelector( '#editor' ), {
 		    	
 		    } )
@@ -56,8 +61,8 @@
 		    } )
 		    .catch( error => {
 		        console.error( error );
-		    } );*/
-		    
+		    } );
+		</c:if>    
 	</script>
   </body>
 </html>

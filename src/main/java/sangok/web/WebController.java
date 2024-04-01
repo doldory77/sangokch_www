@@ -228,11 +228,11 @@ public class WebController implements InitializingBean {
 		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
 		List<Map<String, Object>> ROLL_IMG_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "06").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
 		List<Map<String, Object>> DISP_Y_LIST = webService.getMapper().selectDispYnBoard(JMap.instance("MAIN_DISP_YN", "Y").build());
-		String stdImgPath = null;
-		for (int i=0; i<ROLL_IMG_LIST.size(); i++) {
-			stdImgPath = JStr.extractStr(WebServiceImpl.imgPattern, JStr.toStr(ROLL_IMG_LIST.get(i).get("CONTENT")));
-			ROLL_IMG_LIST.get(i).put("CONTENT", JStr.isStr(stdImgPath) ? stdImgPath.replaceAll("\"", "") : stdImgPath);
-		}
+//		String stdImgPath = null;
+//		for (int i=0; i<ROLL_IMG_LIST.size(); i++) {
+//			stdImgPath = JStr.extractStr(WebServiceImpl.imgPattern, JStr.toStr(ROLL_IMG_LIST.get(i).get("CONTENT")));
+//			ROLL_IMG_LIST.get(i).put("CONTENT", JStr.isStr(stdImgPath) ? stdImgPath.replaceAll("\"", "") : stdImgPath);
+//		}
 		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
 		
 		model.addAttribute("HEADER_TEXT_LIST", HEADER_TEXT_LIST);

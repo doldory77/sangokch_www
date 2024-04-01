@@ -36,34 +36,40 @@
 	
 	<c:if test="${not empty HEADER_IMG}">
 	<div class="container-fluid pt-5 px-0">
-		<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
+			
+		<div class="mainHead" style='position:relative; background-image:url(${HEADER_IMG.ATTR01}); <c:if test="${not empty HEADER_IMG.ATTR03}">height:${HEADER_IMG.ATTR03};</c:if>'>
+		    <p class="word fs-1" style='color:${empty HEADER_IMG.ATTR04 ? "#fff" : HEADER_IMG.ATTR04}; font-family:HSWinter;'>
+		        ${HEADER_IMG.ATTR02}
+		    </p>
+		</div>
+		
 	</div>
 	</c:if>
 	
 	<c:if test="${not empty ROLL_IMG_LIST}">
 	<div style="position:relative;">
 	
-	<c:forEach var="item" items="${HEADER_TEXT_LIST}" varStatus="status">
-		<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
-	</c:forEach>
+		<c:forEach var="item" items="${HEADER_TEXT_LIST}" varStatus="status">
+			<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
+		</c:forEach>
 	
-	<div id="carouselSlides" class="carousel slide" data-bs-ride="carousel">
-	  <div class="carousel-indicators">
-	  <c:forEach var="item" items="${ROLL_IMG_LIST}" varStatus="status">
-	    <button type="button" data-bs-target="#carouselSlides" data-bs-slide-to="${status.index}" <c:if test="${status.index eq 0}">class="active" aria-current="true"</c:if> aria-label="Slide ${status.count}"></button>
-	  </c:forEach>
-	  </div>		
-	  <div class="carousel-inner">
-	  	<c:forEach var="item" items="${ROLL_IMG_LIST}" varStatus="status">
-	    <div class='carousel-item <c:if test="${status.index eq 0}">active</c:if>'>
-	      <img src="${item.CONTENT}" class="d-block w-100" alt="...">
-	      <div class="carousel-caption d-none d-md-block">
-	        <h4 style="color:#fff;font-family:HSWinter;">빠른시간에 홈페이지 오픈 예정입니다.</h4>
-	      </div>
-	    </div>
-	    </c:forEach>
-	  </div>
-	</div>
+		<div id="carouselSlides" class="carousel slide" data-bs-ride="carousel">
+		  <div class="carousel-indicators">
+		  <c:forEach var="item" items="${ROLL_IMG_LIST}" varStatus="status">
+		    <button type="button" data-bs-target="#carouselSlides" data-bs-slide-to="${status.index}" <c:if test="${status.index eq 0}">class="active" aria-current="true"</c:if> aria-label="Slide ${status.count}"></button>
+		  </c:forEach>
+		  </div>		
+		  <div class="carousel-inner">
+		  	<c:forEach var="item" items="${ROLL_IMG_LIST}" varStatus="status">
+		    <div class='carousel-item <c:if test="${status.index eq 0}">active</c:if>'>
+		      <img src="${item.ATTR01}" class="d-block w-100" alt="...">
+		      <div class="carousel-caption d-none d-md-block">
+		        <h4 style="color:#fff;font-family:HSWinter;">빠른시간에 홈페이지 오픈 예정입니다.</h4>
+		      </div>
+		    </div>
+		    </c:forEach>
+		  </div>
+		</div>
 	</div>	
 	</c:if>
 	
@@ -72,19 +78,30 @@
 		<div class="row gy-0 gx-0 justify-content-center row-cols-1 row-cols-sm-2 mt-4">
 			
 			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
-				<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
+				<!--<c:out value="${item.CONTENT}" escapeXml="false"></c:out>-->
+				<div class="col">
+				    <div class="mainItem">
+				        <div style="background-image:url('${item.ATTR01}'); background-size:cover; cursor:pointer;" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
+							${item.ATTR03}
+				        </div>
+				        <p style="color:#000;font-family:HSWinter;">
+							${item.ATTR02}
+				        </p>
+				    </div>
+				</div>
 			</c:forEach>
 			
 			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
 			<div class="col">
 			    <div class="mainItem">
-			        <div style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
+			        <div style='background-image:url(${item.ATTR01}); background-size:cover; cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
 			            ${item.SUBJECT}
 			        </div>
 			        <p style="color:#000;font-family:HSWinter;">${fn:replace(item.ATTR02, newLine, '<br>')}</p>
 			    </div>
 			</div>			
 			</c:forEach>
+			
 		</div>
 	</div>
 	
@@ -96,6 +113,7 @@
 		<div class="ps-1" onclick="getPopupMsg('G0000004','1','80%','70%')" style="cursor:pointer;">개인정보처리방침 |</div>
 		<div class="ps-1" onclick="getPopupMsg('G0000004','2','80%','70%')" style="cursor:pointer;">이용약관</div>
 	</div>
+	
   	<script>
 
   		var words = ["홈페이지를", "새롭게", "단장하고 있습니다.", " 빠른 시간내에", "선보이겠습니다."],
@@ -163,5 +181,6 @@
 			  })
 		  })		
   	</script>
+  	
   </body>
 </html>
