@@ -31,7 +31,6 @@
 		        ${HEADER_IMG.ATTR02}
 		    </p>
 		</div>
-		
 	</div>
 	</c:if>
 		

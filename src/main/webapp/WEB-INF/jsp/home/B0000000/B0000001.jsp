@@ -17,11 +17,16 @@
   		<%@ include file="/WEB-INF/jspf/menu.jspf" %>
 	</div>
 	
+	<c:if test="${not empty HEADER_IMG}">
 	<div class="container-fluid pt-5 px-0">
-		<c:if test="${not empty HEADER_IMG}">
-			<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
-		</c:if>
+			
+		<div class="mainHead" style='position:relative; background-image:url(${HEADER_IMG.ATTR01}); <c:if test="${not empty HEADER_IMG.ATTR03}">height:${HEADER_IMG.ATTR03};</c:if>'>
+		    <p class="word fs-1" style='color:${empty HEADER_IMG.ATTR04 ? "#fff" : HEADER_IMG.ATTR04}; font-family:HSWinter;'>
+		        ${HEADER_IMG.ATTR02}
+		    </p>
+		</div>
 	</div>
+	</c:if>
 	
 	<!-- <div class="pageBodyW container-fluid">
 		<div class="readyDiv">
@@ -31,10 +36,10 @@
 	
 	<!-- col-lg-0 col-lg-12 -->
 	<div class="container-lg">
-		<div class="row ps-sm-2">
+		<div class="row ps-sm-2 mt-5">
 			<c:out value="${BODY_IMG.CONTENT}" escapeXml="false"></c:out>
-			<div class="col-sm-8">
-				<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-1 row-cols-lg-3 mt-4">
+			<div class="col col-sm-7 col-lg-8">
+				<div class="row h-100 gy-4 justify-content-center align-items-center row-cols-1 row-cols-lg-3">
 					<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
 						<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
 					</c:forEach>
