@@ -32,7 +32,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sangok.scheduler.CacheScheduler;
 import sangok.service.WebService;
-import sangok.service.impl.WebServiceImpl;
 import sangok.utils.JList;
 import sangok.utils.JMap;
 import sangok.utils.JNum;
@@ -236,12 +235,12 @@ public class WebController implements InitializingBean {
 		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
 		
 		model.addAttribute("HEADER_TEXT_LIST", HEADER_TEXT_LIST);
-		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("ROLL_IMG_LIST", ROLL_IMG_LIST);
 		model.addAttribute("BODY_LIST", BODY_LIST);
 		model.addAttribute("DISP_Y_LIST", DISP_Y_LIST);
 		model.addAttribute("TITLE", "산곡교회 홈페이지");
-		commProcessEscapeBoard(new String[] {"HEADER_TEXT_LIST","HEADER_IMG","ROLL_IMG_LIST","BODY_LIST"}, new Boolean[] {true, false, true, true}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_TEXT_LIST","HEADER_IMG","ROLL_IMG_LIST","BODY_LIST"}, new Boolean[] {true, false, true, true}, model);
 		
 		return "home/main";
 	}
@@ -256,10 +255,10 @@ public class WebController implements InitializingBean {
 		
 		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("SEQ_NO", params.get("SEQ_NO")).put("GROUP_ID", params.get("GROUP_ID")).build());
 		
-		model.addAttribute("BODY", BODY_LIST);
+		model.addAttribute("BODY", BODY_LIST.size() > 0 ? BODY_LIST.get(0) : null);
 		model.addAttribute("TITLE", "상세");
 		model.addAttribute("W_SIZE", params.get("W_SIZE"));
-		commProcessEscapeBoard(new String[] {"BODY"}, new Boolean[] {false}, model);
+//		commProcessEscapeBoard(new String[] {"BODY"}, new Boolean[] {false}, model);
 		if (BODY_LIST != null && BODY_LIST.size() > 0) {
 			model.addAttribute("TITLE", BODY_LIST.get(0).get("SUBJECT"));
 		}
@@ -279,11 +278,11 @@ public class WebController implements InitializingBean {
 		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "B0000001").put("USE_YN", "Y").build());
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "B0000001").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("HEADER_IMG", HEADER_IMG);
-		model.addAttribute("BODY_IMG", BODY_IMG);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
 		model.addAttribute("BODY_LIST", BODY_LIST);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG", "BODY_IMG", "BODY_LIST"}, new Boolean[] {false, false, true}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG", "BODY_IMG", "BODY_LIST"}, new Boolean[] {false, false, true}, model);
 		
 		return "home/B0000000/B0000001";
 	}
@@ -301,11 +300,11 @@ public class WebController implements InitializingBean {
 		List<Map<String, Object>> FOOTER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "03").put("GROUP_ID", "B0000002").put("USE_YN", "Y").build());
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "B0000002").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("BODY_LIST", BODY_LIST);
-		model.addAttribute("FOOTER_IMG", FOOTER_IMG);
+		model.addAttribute("FOOTER_IMG", FOOTER_IMG.size() > 0 ? FOOTER_IMG.get(0) : null);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG", "FOOTER_IMG", "BODY_LIST"}, new Boolean[] {false, false, true}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG", "FOOTER_IMG", "BODY_LIST"}, new Boolean[] {false, false, true}, model);
 		
 		return "home/B0000000/B0000002";
 	}
@@ -322,10 +321,10 @@ public class WebController implements InitializingBean {
 		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000003").put("USE_YN", "Y").build());
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "B0000003").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("BODY_LIST", BODY_LIST);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST"}, new Boolean[] {false, true}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST"}, new Boolean[] {false, true}, model);
 		
 		return "home/B0000000/B0000003";
 	}	
@@ -342,10 +341,10 @@ public class WebController implements InitializingBean {
 		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "00").put("GROUP_ID", "B0000004").put("ORDER_BY", "ATTR03 DESC").put("USE_YN", "Y").build());
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "B0000004").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("BODY_LIST", BODY_LIST);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST"}, new Boolean[] {false, true}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST"}, new Boolean[] {false, true}, model);
 		
 		return "home/B0000000/B0000004";
 	}
@@ -362,10 +361,10 @@ public class WebController implements InitializingBean {
 		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000005").put("USE_YN", "Y").build());
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "B0000005").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("HEADER_IMG", HEADER_IMG);
-		model.addAttribute("BODY", BODY_LIST);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("BODY", BODY_LIST.size() > 0 ? BODY_LIST.get(0) : null);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG", "BODY"}, new Boolean[] {false, false}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG", "BODY"}, new Boolean[] {false, false}, model);
 		
 		return "home/B0000000/B0000005";
 	}
@@ -386,9 +385,9 @@ public class WebController implements InitializingBean {
 
 		this.setBoardListInitParams(params, model);
 		
-		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
 		
 		return "home/C0000000/C0000001";
 	}
@@ -409,9 +408,9 @@ public class WebController implements InitializingBean {
 
 		this.setBoardListInitParams(params, model);
 		
-		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
 		
 		return "home/C0000000/C0000002";
 	}
@@ -432,9 +431,9 @@ public class WebController implements InitializingBean {
 		
 		this.setBoardListInitParams(params, model);
 		
-		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
 		
 		return "home/D0000000/D0000001";
 	}
@@ -453,12 +452,12 @@ public class WebController implements InitializingBean {
 		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "D0000002").put("USE_YN", "Y").build());
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000002").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("BODY_LIST", BODY_LIST);
-		model.addAttribute("FOOTER_IMG", FOOTER_IMG);
-		model.addAttribute("BODY_IMG", BODY_IMG);
+		model.addAttribute("FOOTER_IMG", FOOTER_IMG.size() > 0 ? FOOTER_IMG.get(0) : null);
+		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST","FOOTER_IMG","BODY_IMG"}, new Boolean[] {false, true, false, false}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST","FOOTER_IMG","BODY_IMG"}, new Boolean[] {false, true, false, false}, model);
 		
 		return "home/D0000000/D0000002";
 	}
@@ -477,12 +476,12 @@ public class WebController implements InitializingBean {
 		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "D0000003").put("USE_YN", "Y").build());
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000003").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("BODY_LIST", BODY_LIST);
-		model.addAttribute("FOOTER_IMG", FOOTER_IMG);
-		model.addAttribute("BODY_IMG", BODY_IMG);
+		model.addAttribute("FOOTER_IMG", FOOTER_IMG.size() > 0 ? FOOTER_IMG.get(0) : null);
+		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST","FOOTER_IMG","BODY_IMG"}, new Boolean[] {false, true, false, false}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST","FOOTER_IMG","BODY_IMG"}, new Boolean[] {false, true, false, false}, model);
 		
 		return "home/D0000000/D0000003";
 	}
@@ -501,12 +500,12 @@ public class WebController implements InitializingBean {
 		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "D0000004").put("USE_YN", "Y").build());
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000004").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("BODY_LIST", BODY_LIST);
-		model.addAttribute("FOOTER_IMG", FOOTER_IMG);
-		model.addAttribute("BODY_IMG", BODY_IMG);
+		model.addAttribute("FOOTER_IMG", FOOTER_IMG.size() > 0 ? FOOTER_IMG.get(0) : null);
+		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST","FOOTER_IMG","BODY_IMG"}, new Boolean[] {false, true, false, false}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST","FOOTER_IMG","BODY_IMG"}, new Boolean[] {false, true, false, false}, model);
 		
 		return "home/D0000000/D0000004";
 	}
@@ -525,9 +524,9 @@ public class WebController implements InitializingBean {
 		this.setBoardListInitParams(params, model);
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "E0000001").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
 		
 		return "home/E0000000/E0000001";
 	}	
@@ -546,12 +545,12 @@ public class WebController implements InitializingBean {
 		List<Map<String, Object>> DISP_Y_LIST = webService.getMapper().selectDispYnBoard(JMap.instance("GROUP_ID", "E0000002").put("TAG_CD", "00").build());
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "E0000002").build()).get("MENU_NM").toString();
 		
-		model.addAttribute("HEADER_IMG", HEADER_IMG);
-		model.addAttribute("BODY_IMG", BODY_IMG);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
 		model.addAttribute("BODY_LIST", BODY_LIST);
 		model.addAttribute("DISP_Y_LIST", DISP_Y_LIST);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_IMG","BODY_LIST"}, new Boolean[] {false, false, true}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_IMG","BODY_LIST"}, new Boolean[] {false, false, true}, model);
 		
 		return "home/E0000000/E0000002";
 	}	
@@ -572,9 +571,9 @@ public class WebController implements InitializingBean {
 		
 		this.setBoardListInitParams(params, model);
 		
-		model.addAttribute("HEADER_IMG", HEADER_IMG);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("TITLE", title);
-		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
 		
 		return "home/F0000000/F0000001";
 	}	
