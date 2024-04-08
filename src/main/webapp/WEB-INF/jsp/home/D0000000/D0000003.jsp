@@ -43,12 +43,27 @@
 				        <div style="background-image:url('${item.ATTR01}'); cursor:pointer;" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
 							${item.ATTR03}
 				        </div>
-				        <p style="color:#000;font-family:HSWinter;">
-							${item.ATTR02}
-				        </p>
+				        <div style="color:#000;font-family:HSWinter;">
+							<c:out value="${item.ATTR02}" escapeXml="false"></c:out>
+				        </div>
 				    </div>
 				</div>
 			</c:forEach>
+			
+			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
+			<div class="col">
+			    <div class="mainItem">
+			        <div style='background-image:url(${item.ATTR01}); background-size:cover; cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
+			            ${item.SUBJECT}
+			        </div>
+			        <div style="color:#000;font-family:HSWinter;">
+						<c:out value="${item.ATTR02}" escapeXml="false"></c:out>
+			        </div>
+			        <!-- <p style="color:#000;font-family:HSWinter;">${fn:replace(item.ATTR02, newLine, '<br>')}</p> -->
+			    </div>
+			</div>			
+			</c:forEach>
+			
 		</div>
 	</div>
 
@@ -56,7 +71,7 @@
 	<div class="container-fluid pt-5 px-0">
 		<div class="mainHead" style='background-image:url(${FOOTER_IMG.ATTR01}); <c:if test="${not empty FOOTER_IMG.ATTR03}">height:${FOOTER_IMG.ATTR03};</c:if>'>
 		    <p class="word fs-1" style="color:#fff; font-family:HSWinter;">
-		        ${FOOTER_IMG.ATTR02}
+		        <c:out value="${FOOTER_IMG.ATTR02}" escapeXml="false"></c:out>
 		    </p>
 		</div>
 	</div>

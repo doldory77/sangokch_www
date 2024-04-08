@@ -166,20 +166,22 @@
 
 		  		<div class="d-flex justify-content-between align-items-center mb-2">
 	  				<span>내용</span>
-	  				
-	  				<span style="font-size:0.6rem;">
-		  				<span>그룹ID : [${not empty BOARD_DTL ? BOARD_DTL.GROUP_ID : ''}]</span>
-		  				<span>/ 일련번호 : [${not empty BOARD_DTL ? BOARD_DTL.SEQ_NO : ''}]</span>
-	  				</span>
+	  				<div>
+		  				<span style="font-size:0.6rem;">
+			  				<span>그룹ID : [${not empty BOARD_DTL ? BOARD_DTL.GROUP_ID : ''}]</span>
+			  				<span>/ 일련번호 : [${not empty BOARD_DTL ? BOARD_DTL.SEQ_NO : ''}]</span>
+		  				</span>
+		  				<button class="btn btn-primary mx-2" onclick="goSubmit()">작성완료</button>
+	  				</div>
 		  		</div>
 		  		
 		  		<textarea id="editor" name="CONTENT" class="form-control"></textarea>
 		  	
-			  	<div class="row align-items-center">
+			  	<!-- <div class="row align-items-center">
 				  	<div class="col text-center">
 				  		<button class="btn btn-primary mt-3 mx-2" onclick="goSubmit()">작성완료</button>
 				  	</div>
-			  	</div>
+			  	</div> -->
 		  	
 			  	<input type="hidden" name="CURR_PAGE" value="${not empty CURR_PAGE ? CURR_PAGE : ''}">
 			  	<input type="hidden" name="DEL_YN" value="N">

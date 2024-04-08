@@ -37,7 +37,7 @@
 		</div>
 	</div> -->
 	
-	<div class="container-lg">
+	<div class="container-lg m">
 		<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
 			<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
 		</c:forEach>
