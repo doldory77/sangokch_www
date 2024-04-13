@@ -903,9 +903,11 @@ public class WebController implements InitializingBean {
 		debug("[ADMIN PAGE PARAMS] " + params);
 		
 		switch ((String)params.get("GROUP_ID")) {
+		case "B0000004" :
 		case "C0000001" :
 		case "C0000002" :
-			params.put("ORDER_BY", "SCREEN_YN DESC, ATTR02 DESC");
+		case "E0000001" :
+			params.put("ORDER_BY", "SCREEN_YN DESC, ATTR03 DESC");
 			break;
 		default:
 			params.put("ORDER_BY", "SCREEN_YN DESC, ORD_NO ASC");

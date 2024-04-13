@@ -135,7 +135,7 @@
 			  	
 			  	<div class="row align-items-center mb-2">
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="attr02">속성2<small class="require sub1 d-md-none d-xl-inline"><br class="d-none d-xl-inline"/>(날짜|조금긴문장)</small></label>
+			  			<label for="attr02">속성2<small class="require sub1 d-md-none d-xl-inline"><br class="d-none d-xl-inline"/>(조금긴문장)</small></label>
 			  		</div>
 			  		<div class="col mb-2">
 			  			
@@ -145,7 +145,7 @@
 			  	
 			  	<div class="row align-items-center mb-2">
 			  		<div class="col-md-1 mb-md-2">
-			  			<label for="attr03">속성3<small class="require sub1 d-md-none d-xl-inline"><br class="d-none d-xl-inline"/>(날짜|성경구절)</small></label>
+			  			<label for="attr03">속성3<small class="require sub1 d-md-none d-xl-inline"><br class="d-none d-xl-inline"/>(날짜)</small></label>
 			  		</div>
 			  		<div class="col-md-3 mb-2">
 			  			<input type="text" id="attr03" name="ATTR03" class="form-control" value="${not empty BOARD_DTL ? BOARD_DTL.ATTR03 : ''}">
