@@ -133,7 +133,7 @@
 				, #{CURR_PAGE, mode=IN, jdbcType=INTEGER}
 				, #{GROUP_ID, mode=IN, jdbcType=VARCHAR}
 				, #{TAG_CD, mode=IN, jdbcType=VARCHAR}
-				, #{SCREEN_YN, mode=IN, jdbcType=VARCHAR}
+				, #{USE_YN, mode=IN, jdbcType=VARCHAR}
 				, #{ORDER_BY, mode=IN, jdbcType=VARCHAR}
 			)
 		}

@@ -381,6 +381,7 @@ public class WebController implements InitializingBean {
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "C0000001").build()).get("MENU_NM").toString();
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
+		params.put("USE_YN", "Y");
 		params.put("ORDER_BY", "ATTR02 DESC");
 
 		this.setBoardListInitParams(params, model);
@@ -404,6 +405,7 @@ public class WebController implements InitializingBean {
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "C0000002").build()).get("MENU_NM").toString();
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
+		params.put("USE_YN", "Y");
 		params.put("ORDER_BY", "ATTR02 DESC");
 
 		this.setBoardListInitParams(params, model);
@@ -427,6 +429,7 @@ public class WebController implements InitializingBean {
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000001").build()).get("MENU_NM").toString();
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
+		params.put("USE_YN", "Y");
 		params.put("ORDER_BY", "ATTR02 DESC");
 		
 		this.setBoardListInitParams(params, model);
@@ -520,6 +523,7 @@ public class WebController implements InitializingBean {
 		
 		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "E0000001").put("USE_YN", "Y").build());
 		params.put("ORDER_BY", "ATTR05 DESC");
+		params.put("USE_YN", "Y");
 		
 		this.setBoardListInitParams(params, model);
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "E0000001").build()).get("MENU_NM").toString();
@@ -567,6 +571,7 @@ public class WebController implements InitializingBean {
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "F0000001").build()).get("MENU_NM").toString();
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
+		params.put("USE_YN", "Y");
 		params.put("ORDER_BY", "ATTR02 DESC");
 		
 		this.setBoardListInitParams(params, model);
@@ -969,7 +974,7 @@ public class WebController implements InitializingBean {
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/jsonTest.do")
-	public Map<String, Object> jsonTest(@RequestBody List<Map<String, Object>> params, ModelMap model) throws Exception {
+	public Map<String, Object> jsonTest(@RequestBody Map<String, Object> params, ModelMap model) throws Exception {
 		
 		debug(params);
 		model.put("dvsn", "A");
