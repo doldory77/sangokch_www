@@ -171,9 +171,9 @@
 			  var prevScrollTop = 0;
 			  var delta = 5;
 			  document.addEventListener("scroll", function(){
-				  var nowScrollTop = $(window).scrollTop();
+				  var nowScrollTop = window.scrollY || window.pageYOffset; /*$(window).scrollTop();*/
 				  if (Math.abs(prevScrollTop - nowScrollTop) <= delta) return;
-				  if (nowScrollTop > prevScrollTop) {
+				  if (nowScrollTop >= prevScrollTop) {
 					  //$('#footer').addClass('active');
 					  $('#footer').removeClass('active');
 				  } else {

@@ -10,6 +10,7 @@
   <head>
 	<%@ include file="/WEB-INF/jspf/head.jspf" %>
 	<link rel="stylesheet" href="/css/font.css">
+	<link rel="stylesheet" href="/css/ckcontent.css">
     <title>${TITLE}</title>
     <style>
 		.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {  
@@ -41,8 +42,8 @@
 	</div>
 
     
-  	<script src="/js/ckeditor.js"></script>
-  	<script src="/js/imgUpAdapter.js"></script>
+  	<!-- <script src="/js/ckeditor.js"></script>
+  	<script src="/js/imgUpAdapter.js"></script> -->
 	<script>
 		
 		/*ClassicEditor

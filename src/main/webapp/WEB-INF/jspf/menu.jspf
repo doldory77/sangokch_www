@@ -3,6 +3,7 @@
 <%@ taglib prefix="fn" 	   uri="http://java.sun.com/jsp/jstl/functions" %>
 
 	  <!-- Search Bar -->
+	  <div style="position:fixed; left:20px; top: 200px; z-index:999; background-color:white;" id="test"></div>
 	  <div class="search_bar">
 	  	<div class="me-1">
 	  		<input type="checkbox" id="search_btn">
@@ -122,9 +123,10 @@
 		  var prevScrollTop = 0;
 		  var delta = 5;
 		  document.addEventListener("scroll", function(){
-			  var nowScrollTop = $(window).scrollTop();
+			  var nowScrollTop = window.scrollY || window.pageYOffset; /*$(window).scrollTop();*/
+			  $('#test').text(nowScrollTop + ' - ' + prevScrollTop + ' = ' + (Math.abs(prevScrollTop - nowScrollTop)));
 			  if (Math.abs(prevScrollTop - nowScrollTop) <= delta) return;
-			  if (nowScrollTop > prevScrollTop) {
+			  if (nowScrollTop >= prevScrollTop) {
 				  $('#menu_bar').addClass('active');
 			  } else {
 				  $('#menu_bar').removeClass('active');

@@ -10,6 +10,7 @@
   <head>
 	<%@ include file="/WEB-INF/jspf/head.jspf" %>
 	<link rel="stylesheet" href="/css/font.css">
+	<link rel="stylesheet" href="/css/ckcontent.css">
     <title>${TITLE}</title>
     <style>
 		.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {  
@@ -53,9 +54,8 @@
 		    	console.log('Editor was initialized');
 		    	editor.ui.view.toolbar.element.style.display = 'none';
 		    	window.editor = editor;
-		    	
 		    	<c:if test="${not empty BODY}">
-		    		editor.setData(<c:out value="'${BODY.CONTENT}'" escapeXml="false"></c:out>);
+		    		editor.setData(`<c:out value="${BODY.CONTENT}" escapeXml="false"></c:out>`);
 		    	</c:if>
 		    	editor.enableReadOnlyMode('xxx');
 		    } )
