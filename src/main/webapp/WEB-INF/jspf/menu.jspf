@@ -129,7 +129,9 @@
 			  if (nowScrollTop >= prevScrollTop) {
 				  $('#menu_bar').addClass('active');
 			  } else {
-				  $('#menu_bar').removeClass('active');
+				  if (nowScrollTop > 0) {					  
+					  $('#menu_bar').removeClass('active');
+				  }
 			  }
 			  prevScrollTop = nowScrollTop;
 		  })
