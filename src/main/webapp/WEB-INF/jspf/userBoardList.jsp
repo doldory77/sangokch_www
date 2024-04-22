@@ -28,8 +28,8 @@
 			<div class="row border-bottom py-2">
 				<div class="col-md-3 text-center d-none d-md-block"><img src=${item.ATTR01} style="max-width:180px; max-height:142px;"></div>
 				<div class='<c:if test="${not empty item.ATTR04}">col-md-7 col-9</c:if><c:if test="${empty item.ATTR04}">col</c:if>' onclick="goUrl('${item.SEQ_NO}','${item.GROUP_ID}', '${item.W_SIZE}', '${item.ATTR05}')" style="cursor:pointer;">
-					<div><span class="fs-4" style="font-family:HSWinter;">${item.SUBJECT}</span><c:if test="${not empty item.ATTR02}"><span class="fs-6"> (${fn:substring(item.ATTR02,0,4)}-${fn:substring(item.ATTR02,4,6)}-${fn:substring(item.ATTR02,6,8)})</span></c:if></div>
-					<c:if test="${not empty item.ATTR03}"><div class="border-top fs-5 text-md-end pt-2">${item.ATTR03}</div></c:if>
+					<div><span class="fs-4" style="font-family:HSWinter;">${item.SUBJECT}</span><c:if test="${not empty item.ATTR03}"><span class="fs-6"> (${fn:substring(item.ATTR03,0,4)}-${fn:substring(item.ATTR03,4,6)}-${fn:substring(item.ATTR03,6,8)})</span></c:if></div>
+					<c:if test="${not empty item.ATTR02}"><div class="border-top fs-5 text-md-end pt-2">${item.ATTR02}</div></c:if>
 				</div>
 				<c:if test="${not empty item.ATTR04}">
 				<div class="col-md-2 col-3 d-flex justify-content-center align-items-center">
