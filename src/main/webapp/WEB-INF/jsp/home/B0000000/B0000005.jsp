@@ -56,7 +56,7 @@
 		    	window.editor = editor;
 		    	
 		    	<c:if test="${not empty BODY}">
-		    		editor.setData(<c:out value="'${BODY.CONTENT}'" escapeXml="false"></c:out>);
+		    		editor.setData(<c:out value="`${BODY.CONTENT}`" escapeXml="false"></c:out>);
 		    	</c:if>
 		    	editor.enableReadOnlyMode('xxx');
 		    } )
