@@ -41,6 +41,7 @@ a, a:hover, a:visited, a:link, a:active {
     align-items: center;
     background-position: center;
     background-repeat: no-repeat;
+    margin-top: -48px;
 }
 .pageBodyW {
 	padding-top: 100px;
