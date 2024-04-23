@@ -180,7 +180,7 @@
 					  //$('#footer').removeClass('active');
 					  $('#footer').addClass('active');
 				  }
-				  prevScrollTop = nowScrollTop;
+				  prevScrollTop = nowScrollTop < 0 ? 0 : nowScrollTop;
 			  })
 		  })		
   	</script>
