@@ -11,6 +11,7 @@
 	<%@ include file="/WEB-INF/jspf/head.jspf" %>
 	<link rel="stylesheet" href="/css/font.css">
 	<link rel="stylesheet" href="/css/ckcontent.css">
+	<script async charset="utf-8" src="//cdn.embedly.com/widgets/platform.js"></script>
     <title>${TITLE}</title>
     <style>
 		.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {  
@@ -25,14 +26,14 @@
 
 	<div class="container-fluid pt-5 px-0">
 		<div style='padding:40px 10px 10px 10px; margin:auto; <c:if test="${not empty W_SIZE}">max-width:${W_SIZE};</c:if>'>
-			<c:if test="${BODY.TAG_CD ne '04'}">
 			<div class="ck-content" id="editor">
 				<c:out value="${BODY.CONTENT}" escapeXml="false"></c:out>
 			</div>
+			<!--<c:if test="${BODY.TAG_CD ne '04'}">
 			</c:if>
 			<c:if test="${BODY.TAG_CD eq '04'}">
 				<div id="editor"></div>
-			</c:if>
+			</c:if>-->
 		</div>
 	</div>
 	
@@ -42,7 +43,7 @@
 		</div>
 	</div> -->
     
-  	<script src="/js/ckeditor.js"></script>
+  	<!-- <script src="/js/ckeditor.js"></script>
   	<script src="/js/imgUpAdapter.js"></script>
 	<script>
 		<c:if test="${BODY.TAG_CD eq '04'}">
@@ -63,6 +64,21 @@
 		        console.error( error );
 		    } );
 		</c:if>    
+	</script> -->
+	
+	<script>
+	    document.querySelectorAll( 'oembed[url]' ).forEach( element => {
+	        // Create the <a href="..." class="embedly-card"></a> element that Embedly uses
+	        // to discover the media.
+	        const anchor = document.createElement( 'a' );
+	
+	        anchor.setAttribute( 'href', element.getAttribute( 'url' ) );
+	        anchor.className = 'embedly-card';
+	
+	        element.appendChild( anchor );
+	    } );
 	</script>
+	
+	
   </body>
 </html>
