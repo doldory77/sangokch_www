@@ -56,8 +56,8 @@
 			<img class="readyImg" src="http://beautifulseodang.1937.co.kr/images/ready.jpg">
 		</div>
 	</div> -->
-	<div class="container-fluid">
-		<div class="row gy-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 mt-4">
+	<div class="container-lg">
+		<div class="row g-5 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 mt-4">
 			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
 				<!--<c:out value="${item.CONTENT}" escapeXml="false"></c:out>-->
 				<div class="col">
@@ -75,7 +75,7 @@
 			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
 			<div class="col">
 				<figure>
-				  <figcaption class="fs-5 text-center">${item.SUBJECT}</figcaption>
+				  <figcaption class="fs-5 text-center" style="font-family:HSWinter;">${item.SUBJECT}</figcaption>
 				  <div>			    
 				    <div class="is-wood" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
 				      <img class="is-rwd" src="${item.ATTR01}">
