@@ -228,7 +228,7 @@
 		 <if test="MAIN_DISP_YN != null and !MAIN_DISP_YN.equals('')">
 		   AND MAIN_DISP_YN = #{MAIN_DISP_YN}
 		 </if>
-		 ORDER BY ORD_NO    
+		 ORDER BY ATTR03 DESC
     </select>        	
 	
 </mapper>
