@@ -12,21 +12,22 @@
 </head>
 <body>
   	<div>
-		<div class="admin-header fs-3 d-flex justify-content-between align-content-end p-2">
-		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/home.do'">산곡교회</span>
-		    <span class="py-1 align-self-baseline">코드관리</span>
-		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/admin/login/logout.do'">LOG-OUT</span>
+		<div class="admin-header fs-3 d-flex justify-content-between align-items-center p-2">
+		    <span class="material-symbols-outlined hbtn" onclick="javascript:location.href='/home.do'">home</span>	
+		    <span class="py-1 align-self-baseline">하위메뉴관리</span>
+	    	<span class="material-symbols-outlined hbtn" onclick="javascript:location.href='/admin/login/logout.do'">logout</span>
 		</div>
 		<div class="mb-2 ps-2 py-1">
-			<span onclick="javascript:location.href='/admin/main.do'">홈페이지 관리 홈</span>
-			<span>&nbsp;&gt;&nbsp;</span>
-			<span onclick="javascript:location.href='/admin/menu/mainMenuMng.do'">메인메뉴관리</span>
-			<span>&nbsp;&gt;&nbsp;</span>
-			<span>서브메뉴관리</span>
+			<img src="${applicationScope.ENV['CD0002_05']['VALUE_STR']}" width="22">
+			<span class="pth" onclick="javascript:location.href='/admin/main.do'">홈페이지 관리</span>
+			<span class="pth">&nbsp;&gt;&nbsp;</span>
+			<span class="pth" onclick="javascript:location.href='/admin/menu/mainMenuMng.do'">메인메뉴관리</span>
+			<span class="pth">&nbsp;&gt;&nbsp;</span>
+			<span class="pth">서브메뉴관리</span>
 		</div>
 	</div>
 	<div class="container-md">
-		<form method="POST" action="/admin/code/saveCode.do">
+		<form method="POST" action="/admin/menu/saveSubMenu.do">
 			<fieldset>
 				<legend></legend>
 				<div class="mb-3">
@@ -68,9 +69,14 @@
 			</thead>
 			<tbody>
 				<c:forEach var="menu" items="${SUB_MENU}" varStatus="status">
-				<tr>
+				<tr data-parent-menu-id="${menu.PARENT_MENU_ID}">
 					<th scope="row">${menu.count}</th>
-					<td><a href="javascript:false;" onclick="selectMenu(this);">${menu.MENU_ID}</a></td>
+					<td>
+						<c:choose>
+						<c:when test="${menu.MENU_LEVEL eq 1}">${menu.MENU_ID}</c:when>
+						<c:otherwise><a href="javascript:false;" onclick="selectMenu(this);">&nbsp;&nbsp;ㄴ&nbsp;<span>${menu.MENU_ID}</span></a></c:otherwise>
+						</c:choose>
+					</td>
 					<td>${menu.MENU_NM}</td>
 				</tr>
 				</c:forEach>
@@ -81,9 +87,10 @@
 </body>
 	<script>
 		var selectMenu = function(that) {
-			var v_groupId = $(that).text();
+			var v_groupId = $(that).find('span:eq(0)').text();
 			var $tr = $(that).closest('tr');
 			//alert(v_groupId + '/' + $tr.children('td:eq(1)').text());
+			$('#parentMenuId').val($tr.data('parentMenuId'));
 			$('#menuId').val(v_groupId);
 			$('#menuNm').val($tr.children('td:eq(1)').text());
 		}

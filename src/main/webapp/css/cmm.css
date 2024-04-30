@@ -4,11 +4,12 @@ a, a:hover, a:visited, a:link, a:active {
 .mainItem {
 	overflow: hidden;
 	border: 1px solid #c2c2c2;
-	border-radius: 5px;
+	background-color: white;
+	/*border-radius: 5px;*/
 }
-.mainItem > div {
+.mainItem > div:first-child {
 	min-width: 280px;
-    min-height: calc(280px * 3 / 5);
+    min-height: calc(280px * 7 / 8);
     background-color: #c2c2c2;
     color: white;
     display: flex;
@@ -16,6 +17,12 @@ a, a:hover, a:visited, a:link, a:active {
     align-items: center;
     background-position: center;
     background-repeat: no-repeat;    
+}
+.mainItem > div:last-child {
+	margin-top: 5px;
+	padding: 5px;
+	min-height: 120px;
+	max-height: 120px;
 }
 .mainItem > div + p {
 	margin-top: 5px;
@@ -26,6 +33,7 @@ a, a:hover, a:visited, a:link, a:active {
 .mainHead {
 	width: 100%;
 	height: 300px;
+	max-height: 620px;
 	/*background-color: #c2c2c2;*/
     color: white;
     display: flex;
@@ -33,6 +41,7 @@ a, a:hover, a:visited, a:link, a:active {
     align-items: center;
     background-position: center;
     background-repeat: no-repeat;
+    margin-top: -48px;
 }
 .pageBodyW {
 	padding-top: 100px;

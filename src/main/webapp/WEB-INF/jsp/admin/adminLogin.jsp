@@ -16,7 +16,7 @@
 			top:50%;
 			left:50%;
 			transform:translate(-50%, -50%);
-			width: 320px;
+			width: 360px;
 			padding: 20px;
 			background-color: #ebebeb;
 			border-radius: 5px;
@@ -30,7 +30,7 @@
 			<div class="login-form">
 			<form method="POST" action="/admin/login/loginCheck.do">
 				<fieldset>
-					<legend>로그인</legend>
+					<legend><div class="d-flex justify-content-center align-items-center mb-3"><img src='<spring:message code="path.image.mark"/>' width="62"><span class="ps-2">관리자 로그인</span></div></legend>
 					<div class="mb-3">
 						<label for="userId" class="form-label">사용자 ID</label>
 						<input type="text" class="form-control" name="USER_ID" id="userId">

@@ -12,17 +12,18 @@
 </head>
 <body>
   	<div>
-		<div class="admin-header fs-3 d-flex justify-content-between align-content-end p-2">
-		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/home.do'">산곡교회</span>
+		<div class="admin-header fs-3 d-flex justify-content-between align-items-center p-2">
+		    <span class="material-symbols-outlined hbtn" onclick="javascript:location.href='/home.do'">home</span>	
 		    <span class="py-1 align-self-baseline">코드관리</span>
-		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/admin/login/logout.do'">LOG-OUT</span>
+	    	<span class="material-symbols-outlined hbtn" onclick="javascript:location.href='/admin/login/logout.do'">logout</span>
 		</div>
 		<div class="mb-2 ps-2 py-1">
-			<span onclick="javascript:location.href='/admin/main.do'">홈페이지 관리 홈</span>
-			<span>&nbsp;&gt;&nbsp;</span>
-			<span onclick="javascript:location.href='/admin/code/groupMng.do'">그룹코드관리</span>
-			<span>&nbsp;&gt;&nbsp;</span>
-			<span>세부코드관리</span>
+			<img src="${applicationScope.ENV['CD0002_05']['VALUE_STR']}" width="22">
+			<span class="pth" onclick="javascript:location.href='/admin/main.do'">홈페이지 관리</span>
+			<span class="pth">&nbsp;&gt;&nbsp;</span>
+			<span class="pth" onclick="javascript:location.href='/admin/code/groupMng.do'">그룹코드관리</span>
+			<span class="pth">&nbsp;&gt;&nbsp;</span>
+			<span class="pth">세부코드관리</span>
 		</div>
 	</div>
 	<div class="container-md">
@@ -44,6 +45,14 @@
 				<div class="mb-3">
 					<label for="codeNm" class="form-label">코드명</label>
 					<input type="text" name="CODE_NM" class="form-control" id="codeNm">
+				</div>
+				<div class="mb-3">
+					<label for="attr1Num" class="form-label">부가정보<small style="color:red">(숫자형)</small></label>
+					<input type="text" name="ATTR1_NUM" class="form-control" id="attr1Num">
+				</div>
+				<div class="mb-3">
+					<label for="attr1Chr" class="form-label">부가정보<small style="color:red">(문자형)</small></label>
+					<input type="text" name="ATTR1_CHR" class="form-control" id="attr1Chr">
 				</div>
 				<div class="mb-3">
 					<label for="useYn" class="form-label">사용여부</label>
@@ -74,7 +83,7 @@
 					<th scope="row">${status.count}</th>
 					<td>${code.GROUP_ID}</td>
 					<td>${code.GROUP_NM}</td>
-					<td><a href="javascript:false;" onclick="selectCode(this);">${code.CODE}</a></td>
+					<td><a data-attr1-num="${code.ATTR1_NUM}" data-attr1-chr="${code.ATTR1_CHR}" href="javascript:false;" onclick="selectCode(this);">${code.CODE}</a></td>
 					<td>${code.CODE_NM}</td>
 					<td>${code.USE_YN}</td>
 				</tr>
@@ -92,6 +101,8 @@
 			$('#code').val(v_code);
 			$('#codeNm').val($tr.children('td:eq(3)').text());
 			$('#useYn').val($tr.children('td:eq(4)').text()).prop('selected', true);
+			$('#attr1Num').val($(that).data('attr1Num'));
+			$('#attr1Chr').val($(that).data('attr1Chr'));
 		}
 	</script>
 </html>

@@ -1,6 +1,10 @@
 <%@ page contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>  	
   	<script src="https://code.jquery.com/jquery-latest.min.js"></script>
   	
+  	<!-- Favicon -->
+  	<link rel="icon" href="/images/mark_favicon.png"/>
+	<link rel="apple-touch-icon" href="/images/mark_favicon.png"/>
+	
   	<!-- Reset CSS -->
   	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.2/reset.min.css">
   	
@@ -15,6 +19,9 @@
   	
   	<!-- Menu CSS -->
   	<link rel="stylesheet" href="/css/board.css">
+  	
+  	<!-- Admin CSS -->
+  	<link rel="stylesheet" href="/css/adm.css">
   	
   	<!-- Jquery -->
   	<script src="https://code.jquery.com/jquery-latest.min.js"></script>

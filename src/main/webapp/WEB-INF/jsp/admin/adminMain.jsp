@@ -11,95 +11,63 @@
 	<title>화면구성</title>
 	
   	<style>
-  		.group-menu {
-  			height: 34px;
-  		}
-  		.group-menu span:nth-of-type(2) {
-  			height: 24px;
-  			color: white;
-  		}
-		.group-menu + ul {
-			border: 1px solid #c2c2c2;
-			overflow: hidden;
-		}
-		.group-menu + ul li {
-			height: 0px;
-			opacity: 0;
-			transition: all .35s;
-		}
-		.group-menu input[type="checkbox"]:checked + label span:nth-child(1) {
-			transform: rotate( 180deg );
-		}
-		.group-menu:has(input[type="checkbox"]:checked) + ul li {
-			height: 34px;
-			opacity: 1;
-		}
-		.group-menu-wrapper:hover {
-			box-shadow: 3px 3px 3px gray;
-		}
-		.group-main-menu {
-			color: white;
-			display: inline-block;
-			width: 120px;
-			
-		}
-		/*.group-main-menu:hover {
-			color: white;
-		}
-		.group-main-menu+span {
-			color: white;
-		}*/
-		.menu-nm {
-			display: inline-block;
-			width: 120px;
-		}
-		
+
 	</style>
   	
   </head>
   <body>
   	<div>
-		<div class="admin-header fs-3 d-flex justify-content-between align-content-end p-2">
-		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/home.do'">산곡교회</span>
-		    <span class="py-1 align-self-baseline">홈페이지 관리 홈</span>
-		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/admin/login/logout.do'">LOG-OUT</span>
+		<div class="admin-header fs-3 d-flex justify-content-between align-items-center p-2">
+		    <span class="material-symbols-outlined hbtn" onclick="javascript:location.href='/home.do'">home</span>	
+		    <span class="py-1 align-self-baseline">홈페이지 관리</span>
+	    	<span class="material-symbols-outlined hbtn" onclick="javascript:location.href='/admin/login/logout.do'">logout</span>
 		</div>
 		<div class="mb-2 ps-2 py-1">
-			<span>홈페이지 관리 홈</span>
+			<img src="${applicationScope.ENV['CD0002_05']['VALUE_STR']}" width="22">
+			<span class="pth">홈페이지 관리</span>
 		</div>
 	</div>  
 	<div class="container-fluid">
 
 		<div class="row g-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3">
 			<c:forEach var="mainMenu" items="${MENU_LIST}" varStatus="status">
+			<c:if test="${sessionScope.USER_INFO.authMap[mainMenu.MENU_ID] eq 'Y'}">
 			<div class="col">
 				<div class="group-menu-wrapper">
-					<div class="group-menu d-flex justify-content-between align-items-center bg-primary px-1">
+					<div class="group-menu d-flex justify-content-between align-items-center bg-primary px-2">
 					<c:choose>
 						<c:when test="${not empty mainMenu.MNG_URL}">
 						<a href="${mainMenu.MNG_URL}">
+							<span class="group-main-menu">${mainMenu.MENU_NM}<small class="ms-2">(${mainMenu.MENU_ID})</small></span>
+						</a>
 						</c:when>
 						<c:otherwise>
-						<a>
+							<span class="group-main-menu">${mainMenu.MENU_NM}<small class="ms-2">(${mainMenu.MENU_ID})</small></span>
 						</c:otherwise>
-					</c:choose>	
-							<span class="group-main-menu">${mainMenu.MENU_NM}</span>
-							<span style="font-size:0.8rem;">${mainMenu.MENU_ID}</span>
-						</a>
-						<span>
+					</c:choose>
+					<c:if test="${empty mainMenu.MNG_URL}">
+						<span style="border: 1px solid white;">
 							<input class="d-none" id="menu${status.count}" type="checkbox">
 							<label style="color: white; cursor: pointer;" for="menu${status.count}"><span class="material-symbols-outlined">expand_more</span></label>
 						</span>
+					</c:if>
 					</div>
+					
 					<ul>
 						<c:forEach var="sumMenu" items="${mainMenu.SUB_MENU}">
-						<li style="cursor: pointer;"><a href="${sumMenu.MNG_URL}"><span class="menu-nm">${sumMenu.MENU_NM}</span><span style="font-size:0.8rem;">${sumMenu.MENU_ID}</span></a></li>
+						<c:if test="${sessionScope.USER_INFO.authMap[sumMenu.MENU_ID] eq 'Y'}">
+						<li>
+							<a href="${sumMenu.MNG_URL}"><span class="menu-nm">ㄴ ${sumMenu.MENU_NM}</span><span style="font-size:0.8rem;">${sumMenu.MENU_ID}</span></a>
+						</li>
+						</c:if>
 						</c:forEach>
 					</ul>
 				</div>
 			</div>
+			</c:if>
 			</c:forEach>
 		</div>
+		
 	</div>
 	
 	<script>

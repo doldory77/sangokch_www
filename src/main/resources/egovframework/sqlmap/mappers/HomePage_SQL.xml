@@ -10,7 +10,7 @@
 	<select id="selectMenuNm" parameterType="string" resultType="map">
 		/*WebMapper.selectMenuNm*/
 		SELECT FN_GET_MENU_NM(#{MENU_ID}) AS TITLE
-    </select>    
+    </select>
     
     <update id="updateCodeGroup" statementType="CALLABLE" parameterType="map">
     	{ CALL SP_MERGE_CODE_GROUP(
@@ -26,7 +26,9 @@
     		, #{GROUP_ID, mode=IN, jdbcType=VARCHAR}
     		, #{CODE, mode=IN, jdbcType=VARCHAR}
     		, #{CODE_NM, mode=IN, jdbcType=VARCHAR}
-    		, #{USE_YN, mode=IN, jdbcType=VARCHAR}) }
+    		, #{USE_YN, mode=IN, jdbcType=VARCHAR}
+    		, #{ATTR1_NUM, mode=IN, jdbcType=VARCHAR}
+    		, #{ATTR1_CHR, mode=IN, jdbcType=VARCHAR}) }
     	/*WebMapper.updateCode*/	
     </update>
 
@@ -50,6 +52,20 @@
 		ORDER BY ORD_NO
         ]]>
     </select>
+    
+    <update id="updateSubMenu" statementType="CALLABLE" parameterType="map">
+    	{ CALL SP_MERGE_MENU(
+    		#{RTN_MSG, mode=OUT, jdbcType=VARCHAR}
+    		, #{MENU_ID, mode=IN, jdbcType=VARCHAR}
+    		, #{PARENT_MENU_ID, mode=IN, jdbcType=VARCHAR}
+    		, #{MENU_NM, mode=IN, jdbcType=VARCHAR}
+    		, #{URL, mode=IN, jdbcType=VARCHAR}
+    		, #{MNG_URL, mode=IN, jdbcType=VARCHAR}
+    		, #{USE_YN, mode=IN, jdbcType=VARCHAR}
+    		, #{ORD_NO, mode=INOUT, jdbcType=INTEGER}
+    		, #{MENU_LEVEL, mode=INOUT, jdbcType=INTEGER}) }
+    	/*WebMapper.updateSubMenu*/	
+    </update>    
     
     <select id="selectMenuBySP" statementType="CALLABLE" parameterType="map" resultType="map">
     	/*WebMapper.selectMenuBySP*/
@@ -91,11 +107,20 @@
 				, #{USE_YN, mode=IN, jdbcType=VARCHAR}
 				, #{USER_ID, mode=IN, jdbcType=VARCHAR}
 				, #{TAG_CD, mode=IN, jdbcType=VARCHAR}
+				, #{MAIN_DISP_YN, mode=IN, jdbcType=VARCHAR}
 				, #{ATTR01, mode=IN, jdbcType=VARCHAR}
+				, #{ATTR02, mode=IN, jdbcType=VARCHAR}
+				, #{ATTR03, mode=IN, jdbcType=VARCHAR}
+				, #{ATTR04, mode=IN, jdbcType=VARCHAR}
+				, #{ATTR05, mode=IN, jdbcType=VARCHAR}
 			) 
 		}
 		/*WebMapper.updateBoard*/ 
 	</select>
+	
+	<delete id="deleteBoard" parameterType="map">
+		DELETE FROM H_BOARD WHERE GROUP_ID = #{GROUP_ID} AND SEQ_NO = #{SEQ_NO}
+	</delete>
 	
 	<select id="selectBoardList" statementType="CALLABLE" parameterType="map" resultType="map">
 		{
@@ -108,7 +133,8 @@
 				, #{CURR_PAGE, mode=IN, jdbcType=INTEGER}
 				, #{GROUP_ID, mode=IN, jdbcType=VARCHAR}
 				, #{TAG_CD, mode=IN, jdbcType=VARCHAR}
-				, #{SCREEN_YN, mode=IN, jdbcType=VARCHAR}
+				, #{USE_YN, mode=IN, jdbcType=VARCHAR}
+				, #{ORDER_BY, mode=IN, jdbcType=VARCHAR}
 			)
 		}
 		/*WebMapper.selectBoardList*/
@@ -116,7 +142,7 @@
 	
 	<select id="selectBoardDtl" statementType="CALLABLE" parameterType="map" resultType="map">
 		/*WebMapper.selectBoardDtl*/
-		{ CALL SP_GET_BOARD_DTL(#{GROUP_ID}, #{SEQ_NO}, #{TAG_CD}) }
+		{ CALL SP_GET_BOARD_DTL(#{GROUP_ID}, #{SEQ_NO}, #{TAG_CD}, #{USE_YN}, #{ORDER_BY}) }
 	</select>
 	
 	<select id="selectBoardDtlByTag" statementType="CALLABLE" parameterType="map" resultType="map">
@@ -139,5 +165,70 @@
 		) }
 		/*WebMapper.selectHymn*/
 	</select>
+	
+	<select id="selectUserAuth" parameterType="map" resultType="map">
+		/*WebMapper.selectMenuNm*/
+		SELECT AA.USER_ID
+			 , AA.MENU_LEVEL
+			 , AA.MENU_ID
+			 , AA.MENU_NM
+			 , REPEAT('ㄴ', AA.MENU_LEVEL-1) PRE_STR
+			 , AA.ORD_NO
+			 , IFNULL(C.USE_YN, 'N') USE_YN
+		FROM (
+			SELECT A.ID USER_ID
+				 , B.MENU_LEVEL
+				 , B.MENU_ID
+				 , B.MENU_NM
+				 , B.ORD_NO
+			  FROM H_USER A
+			  JOIN H_MENU B
+			 WHERE A.ID = #{USER_ID}
+		) AA
+		LEFT OUTER JOIN H_USER_AUTH C ON AA.USER_ID = C.USER_ID AND AA.MENU_ID = C.MENU_ID
+		ORDER BY AA.MENU_ID, AA.ORD_NO
+    </select>
+    
+	<select id="selectEnv" parameterType="map" resultType="map">
+		SELECT CONCAT(GROUP_ID, '_', CODE) AS CODE
+			 , ATTR1_NUM AS VALUE_NUM
+			 , ATTR1_CHR AS VALUE_STR
+		  FROM H_CODE 
+		 WHERE GROUP_ID = #{GROUP_ID}
+		   AND USE_YN = 'Y'
+    </select>
+    
+    <update id="updateUserAuth" statementType="CALLABLE" parameterType="map">
+    	{ CALL SP_MERGE_AUTH(
+    		#{USER_ID, mode=IN, jdbcType=VARCHAR}
+    		, #{MENU_ID, mode=IN, jdbcType=VARCHAR}
+    		, #{USE_YN, mode=IN, jdbcType=VARCHAR}) }
+    	/*WebMapper.updateUserAuth*/	
+    </update>
+    
+	<select id="selectTitle" parameterType="map" resultType="map">
+		SELECT MENU_NM FROM H_MENU WHERE MENU_ID = #{MENU_ID}
+    </select>
+    
+    <select id="selectDispYnBoard" parameterType="map" resultType="map">
+		SELECT GROUP_ID
+			 , SEQ_NO
+			 , SUBJECT
+			 , ATTR01
+			 , ATTR02
+			 , ORD_NO
+		  FROM H_BOARD
+		 WHERE USE_YN = 'Y'
+		 <if test="TAG_CD != null and !TAG_CD.equals('')">
+		   AND TAG_CD = #{TAG_CD}
+		 </if>
+		 <if test="GROUP_ID != null and !GROUP_ID.equals('')">
+		   AND GROUP_ID = #{GROUP_ID}
+		 </if>
+		 <if test="MAIN_DISP_YN != null and !MAIN_DISP_YN.equals('')">
+		   AND MAIN_DISP_YN = #{MAIN_DISP_YN}
+		 </if>
+		 ORDER BY ATTR03 DESC
+    </select>        	
 	
 </mapper>

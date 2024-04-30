@@ -2,6 +2,7 @@ package sangok.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -9,6 +10,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -28,6 +30,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import sangok.scheduler.CacheScheduler;
 import sangok.service.WebService;
 import sangok.utils.JList;
 import sangok.utils.JMap;
@@ -54,7 +57,13 @@ public class WebController implements InitializingBean {
 	DefaultListableBeanFactory beanFactory;
 	
 	@Autowired
+	ServletContext ctx;
+	
+	@Autowired
 	org.springframework.context.support.MessageSourceAccessor messageSourceAccessor;
+	
+	@Resource(name = "cacheScheduler")
+	private CacheScheduler cacheScheduler;
 	
 	@Resource(name = "webService")
 	private WebService webService;
@@ -69,6 +78,12 @@ public class WebController implements InitializingBean {
 	private void commProcessSetMenu(boolean excludeAdmMenuYn, ModelMap model) throws Exception {
 		if (menuList == null) {
 			menuList = webService.selectMenuByTree();
+			for (int i=menuList.size()-1; i>=0; i--) {
+				if ("A0000000".equals(menuList.get(i).get("MENU_ID"))) {
+					menuList.remove(i);
+					break;
+				}
+			}
 		}
 		if (excludeAdmMenuYn) {
 			/*관리자메뉴는 제외*/
@@ -99,6 +114,32 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
+	 * 페이지 요청시 메뉴 하이라이트
+	 */
+	private void commProcessMenuHighlightByBoardDtlView(HttpServletRequest request, ModelMap model) throws Exception {
+		String S_MENU = request.getParameter("GROUP_ID");
+		if (S_MENU != null && S_MENU.length() > 7) {
+			model.addAttribute("M_MENU", S_MENU.substring(0, 2) + "000000");
+			model.addAttribute("S_MENU", S_MENU);
+			Map<String, Object> map = webService.getMapper().selectMenuNm(S_MENU);
+			model.addAttribute("TITLE", map.get("TITLE"));
+		}
+		
+	}
+	
+	/*
+	 * 페이지 title, 경로 표시
+	 */	
+	private void commSetTitle(String menuId, ModelMap model) {
+		try {
+			String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", menuId).build()).get("MENU_NM").toString();
+			model.addAttribute("TITLE", title);
+		} catch (Exception e) {
+			
+		}
+	}
+	
+	/*
 	 * 게시판 내용중 <h1></h1> 이스케이프 처리
 	 */
 	@SuppressWarnings("unchecked")
@@ -107,10 +148,14 @@ public class WebController implements InitializingBean {
 			, ModelMap model) throws Exception {
 		if (boardNameList != null && boardListYn != null && boardNameList.length == boardListYn.length) {			
 			for (int i=0; i<boardNameList.length; i++) {
-				if (boardListYn[i] == true) {
-					if (model.get(boardNameList[i]) != null) { model.addAttribute(boardNameList[i], JMap.replaceFirst((List<Map<String, Object>>) model.get(boardNameList[i]), "CONTENT", "<h1>.+</h1>", "")); }
-				} else {
-					if (model.get(boardNameList[i]) != null) { model.addAttribute(boardNameList[i], JMap.replaceFirst((List<Map<String, Object>>) model.get(boardNameList[i]), "CONTENT", "<h1>.+</h1>", "").get(0)); }
+				if (model.get(boardNameList[i]) != null) {
+					if (model.get(boardNameList[i]) instanceof List && ((List<Map<String, Object>>) model.get(boardNameList[i])).size() > 0) {
+						if (boardListYn[i] == true) {
+							model.addAttribute(boardNameList[i], JMap.replaceFirst((List<Map<String, Object>>) model.get(boardNameList[i]), "CONTENT", "<h1>.+</h1>", ""));
+						} else {
+							if (model.get(boardNameList[i]) != null) { model.addAttribute(boardNameList[i], JMap.replaceFirst((List<Map<String, Object>>) model.get(boardNameList[i]), "CONTENT", "<h1>.+</h1>", "").get(0)); }
+						}
+					}
 				}
 			}
 		}
@@ -132,7 +177,15 @@ public class WebController implements InitializingBean {
 		if (JStr.isStr(params.get("SCREEN_YN")) == false) {
 			params.put("SCREEN_YN", null);
 		}
+		if (JStr.isStr(params.get("ORDER_BY")) == false) {
+			params.put("ORDER_BY", null);
+		}
+		
 		List<Map<String, Object>> list = webService.selectBoardList(params);
+		
+		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
+		model.addAttribute("TAG_CD", params.get("TAG_CD"));
+		model.addAttribute("PAGE", params.get("PAGE"));
 		
 		model.addAttribute("BOARD_LIST", list);
 		model.addAttribute("PAGE_CTL", params);
@@ -159,7 +212,7 @@ public class WebController implements InitializingBean {
 		for (String beanName : beanFactory.getBeanDefinitionNames()) {
 			LOGGER.debug("class : " + beanFactory.getBean(beanName).getClass().getName());
 		}
-		
+		ctx.setAttribute("ENV", cacheScheduler.envMap);		
 	}	
 	
 	/*
@@ -170,16 +223,47 @@ public class WebController implements InitializingBean {
 		
 		commProcessSetMenu(true, model);
 		
-		List<Map<String, Object>> MAIN01 = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").build());
-		List<Map<String, Object>> MAIN02 = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").build());
+		List<Map<String, Object>> HEADER_TEXT_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "07").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
+		List<Map<String, Object>> ROLL_IMG_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "06").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
+		List<Map<String, Object>> DISP_Y_LIST = webService.getMapper().selectDispYnBoard(JMap.instance("MAIN_DISP_YN", "Y").build());
+//		String stdImgPath = null;
+//		for (int i=0; i<ROLL_IMG_LIST.size(); i++) {
+//			stdImgPath = JStr.extractStr(WebServiceImpl.imgPattern, JStr.toStr(ROLL_IMG_LIST.get(i).get("CONTENT")));
+//			ROLL_IMG_LIST.get(i).put("CONTENT", JStr.isStr(stdImgPath) ? stdImgPath.replaceAll("\"", "") : stdImgPath);
+//		}
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
 		
-		model.addAttribute("MAIN01", MAIN01);
-		model.addAttribute("MAIN02_LIST", MAIN02);
+		model.addAttribute("HEADER_TEXT_LIST", HEADER_TEXT_LIST);
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("ROLL_IMG_LIST", ROLL_IMG_LIST);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("DISP_Y_LIST", DISP_Y_LIST);
 		model.addAttribute("TITLE", "산곡교회 홈페이지");
-		commProcessEscapeBoard(new String[] {"MAIN01","MAIN02_LIST"}, new Boolean[] {false, true}, model);
+//		commProcessEscapeBoard(new String[] {"HEADER_TEXT_LIST","HEADER_IMG","ROLL_IMG_LIST","BODY_LIST"}, new Boolean[] {true, false, true, true}, model);
 		
 		return "home/main";
 	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/boardDtlView.do")
+	public String boardDtlView(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlightByBoardDtlView(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("SEQ_NO", params.get("SEQ_NO")).put("GROUP_ID", params.get("GROUP_ID")).build());
+		
+		model.addAttribute("BODY", BODY_LIST.size() > 0 ? BODY_LIST.get(0) : null);
+		model.addAttribute("TITLE", "상세");
+		model.addAttribute("W_SIZE", params.get("W_SIZE"));
+//		commProcessEscapeBoard(new String[] {"BODY"}, new Boolean[] {false}, model);
+		if (BODY_LIST != null && BODY_LIST.size() > 0) {
+			model.addAttribute("TITLE", BODY_LIST.get(0).get("SUBJECT"));
+		}
+		return "home/boardDtlView";
+	}	
 	
 	/*
 	 * 사용자 홈페이지 접속
@@ -188,8 +272,316 @@ public class WebController implements InitializingBean {
 	public String b0000001(HttpServletRequest request, ModelMap model) throws Exception {		
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000001").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000001").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "B0000001").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "B0000001").build()).get("MENU_NM").toString();
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("TITLE", title);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG", "BODY_IMG", "BODY_LIST"}, new Boolean[] {false, false, true}, model);
+		
 		return "home/B0000000/B0000001";
 	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/B0000002.do")
+	public String b0000002(HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000002").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000002").put("USE_YN", "Y").build());
+		List<Map<String, Object>> FOOTER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "03").put("GROUP_ID", "B0000002").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "B0000002").build()).get("MENU_NM").toString();
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("FOOTER_IMG", FOOTER_IMG.size() > 0 ? FOOTER_IMG.get(0) : null);
+		model.addAttribute("TITLE", title);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG", "FOOTER_IMG", "BODY_LIST"}, new Boolean[] {false, false, true}, model);
+		
+		return "home/B0000000/B0000002";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/B0000003.do")
+	public String b0000003(HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000003").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000003").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "B0000003").build()).get("MENU_NM").toString();
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("TITLE", title);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST"}, new Boolean[] {false, true}, model);
+		
+		return "home/B0000000/B0000003";
+	}	
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/B0000004.do")
+	public String b0000004(HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000004").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "00").put("GROUP_ID", "B0000004").put("ORDER_BY", "ATTR03 DESC").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "B0000004").build()).get("MENU_NM").toString();
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("TITLE", title);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST"}, new Boolean[] {false, true}, model);
+		
+		return "home/B0000000/B0000004";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/B0000005.do")
+	public String b0000005(HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "B0000005").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "B0000005").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "B0000005").build()).get("MENU_NM").toString();
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("BODY", BODY_LIST.size() > 0 ? BODY_LIST.get(0) : null);
+		model.addAttribute("TITLE", title);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG", "BODY"}, new Boolean[] {false, false}, model);
+		
+		return "home/B0000000/B0000005";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/C0000001.do")
+	public String c0000001(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "C0000001").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "C0000001").build()).get("MENU_NM").toString();
+		
+		debug("[ADMIN PAGE PARAMS] " + params);
+		params.put("USE_YN", "Y");
+		params.put("ORDER_BY", "ATTR02 DESC");
+
+		this.setBoardListInitParams(params, model);
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("TITLE", title);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
+		
+		return "home/C0000000/C0000001";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/C0000002.do")
+	public String c0000002(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "C0000002").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "C0000002").build()).get("MENU_NM").toString();
+		
+		debug("[ADMIN PAGE PARAMS] " + params);
+		params.put("USE_YN", "Y");
+		params.put("ORDER_BY", "ATTR02 DESC");
+
+		this.setBoardListInitParams(params, model);
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("TITLE", title);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
+		
+		return "home/C0000000/C0000002";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/D0000001.do")
+	public String d0000001(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000001").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000001").build()).get("MENU_NM").toString();
+		
+		debug("[ADMIN PAGE PARAMS] " + params);
+		params.put("USE_YN", "Y");
+		params.put("ORDER_BY", "ATTR02 DESC");
+		
+		this.setBoardListInitParams(params, model);
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("TITLE", title);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
+		
+		return "home/D0000000/D0000001";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/D0000002.do")
+	public String d0000002(HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000002").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "D0000002").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+		List<Map<String, Object>> FOOTER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "03").put("GROUP_ID", "D0000002").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "D0000002").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000002").build()).get("MENU_NM").toString();
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("FOOTER_IMG", FOOTER_IMG.size() > 0 ? FOOTER_IMG.get(0) : null);
+		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
+		model.addAttribute("TITLE", title);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST","FOOTER_IMG","BODY_IMG"}, new Boolean[] {false, true, false, false}, model);
+		
+		return "home/D0000000/D0000002";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/D0000003.do")
+	public String d0000003(HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000003").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "D0000003").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+		List<Map<String, Object>> FOOTER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "03").put("GROUP_ID", "D0000003").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "D0000003").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000003").build()).get("MENU_NM").toString();
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("FOOTER_IMG", FOOTER_IMG.size() > 0 ? FOOTER_IMG.get(0) : null);
+		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
+		model.addAttribute("TITLE", title);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST","FOOTER_IMG","BODY_IMG"}, new Boolean[] {false, true, false, false}, model);
+		
+		return "home/D0000000/D0000003";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/D0000004.do")
+	public String d0000004(HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000004").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "D0000004").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+		List<Map<String, Object>> FOOTER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "03").put("GROUP_ID", "D0000004").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "D0000004").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000004").build()).get("MENU_NM").toString();
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("FOOTER_IMG", FOOTER_IMG.size() > 0 ? FOOTER_IMG.get(0) : null);
+		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
+		model.addAttribute("TITLE", title);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST","FOOTER_IMG","BODY_IMG"}, new Boolean[] {false, true, false, false}, model);
+		
+		return "home/D0000000/D0000004";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/E0000001.do")
+	public String e0000001(HttpServletRequest request, @RequestParam Map<String, Object> params, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "E0000001").put("USE_YN", "Y").build());
+		params.put("ORDER_BY", "ATTR05 DESC");
+		params.put("USE_YN", "Y");
+		
+		this.setBoardListInitParams(params, model);
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "E0000001").build()).get("MENU_NM").toString();
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("TITLE", title);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
+		
+		return "home/E0000000/E0000001";
+	}	
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/E0000002.do")
+	public String e0000002(HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "E0000002").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "E0000002").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "E0000002").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+		List<Map<String, Object>> DISP_Y_LIST = webService.getMapper().selectDispYnBoard(JMap.instance("GROUP_ID", "E0000002").put("TAG_CD", "00").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "E0000002").build()).get("MENU_NM").toString();
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+		model.addAttribute("DISP_Y_LIST", DISP_Y_LIST);
+		model.addAttribute("TITLE", title);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_IMG","BODY_LIST"}, new Boolean[] {false, false, true}, model);
+		
+		return "home/E0000000/E0000002";
+	}	
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/F0000001.do")
+	public String f0000001(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "F0000001").put("USE_YN", "Y").build());
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "F0000001").build()).get("MENU_NM").toString();
+		
+		debug("[ADMIN PAGE PARAMS] " + params);
+		params.put("USE_YN", "Y");
+		params.put("ORDER_BY", "ATTR02 DESC");
+		
+		this.setBoardListInitParams(params, model);
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("TITLE", title);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
+		
+		return "home/F0000000/F0000001";
+	}	
 	
 	/*
 	 * 관리자 로그인 접속
@@ -218,14 +610,19 @@ public class WebController implements InitializingBean {
 			re.addAttribute("LOGIN_YN", "N");
 			return "redirect:/admin/login.do";
 		} else {
+			List<Map<String, Object>> userAuth = webService.selectUserAuth(JMap.instance("USER_ID", userId).build());
+			Map<String, Object> authMap = new HashMap<String, Object>();
+			for (int i=0; i<userAuth.size(); i++) {
+				authMap.put("" + userAuth.get(i).get("MENU_ID"), userAuth.get(i).get("USE_YN"));
+			}
 			Map<String, Object> map = userList.get(0); 
 			UserInfo userInfo = new UserInfo();
 			userInfo.setId(map.get("ID").toString());
 			userInfo.setAdmYn(map.get("ADM_YN").toString());
 			userInfo.setUseYn(map.get("USE_YN").toString());
 			userInfo.setAttr01(map.get("ATTR01").toString());
+			userInfo.setAuthMap(authMap);
 			request.getSession().setAttribute("USER_INFO", userInfo);
-			//re.addAttribute("LOGIN_YN", "Y");
 			return "redirect:/admin/main.do";
 		}
 		
@@ -238,7 +635,6 @@ public class WebController implements InitializingBean {
 	public String adminLoginOut(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {
 		request.getSession().invalidate();
 		
-		//return "redirect:/admin/login.do";
 		return "redirect:/home.do";
 	}
 	
@@ -265,6 +661,47 @@ public class WebController implements InitializingBean {
 		
 		return "admin/user/userMng";
 	}
+	
+	/*
+	 * 해당 코드그룹의 코드조회
+	 */
+	@RequestMapping(value = "/admin/user/userAuthMng.do")
+	public String userAuthMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		List<Map<String, Object>> authList = webService.selectUserAuth(params);
+		
+		model.addAttribute("USER_ID", params.get("USER_ID"));
+		model.addAttribute("AUTH", authList);
+		
+		return "admin/user/userAuthMng";
+	}
+	
+	/*
+	 * JSON 요청 테스트
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/admin/user/saveUserAuth.do")
+	public Map<String, Object> saveUserAuth(@RequestBody List<Map<String, Object>> params, ModelMap model) throws Exception {
+		
+		debug(params);
+		webService.updateUserAuth(params);
+		return JMap.instance("result", "SUCCESS").put("count", params.size()).build();
+		/*
+		$.ajax({
+			type: 'POST'
+			, url: '/jsonTest.do'
+			, data: JSON.stringify({age:37, name:'doldory'})
+			, dataType: 'JSON'
+			, contentType: 'application/json; charset-utf-8'
+			, success: function(result) {
+				console.log(result);
+			}
+			, error: function(xhr, status, error) {
+				console.log(error);
+			}
+		}) 		
+		*/
+	}	
 	
 	/*
 	 * 사용자 저장
@@ -348,10 +785,24 @@ public class WebController implements InitializingBean {
 		
 		List<Map<String, Object>> subMenuList = webService.selectMenu(params);
 		
-		model.addAttribute("PARENT_MENU_ID", params.get("PARENT_MENU_ID"));
+		model.addAttribute("PARENT_MENU_ID", params.get("P_MENU_GROUP"));
 		model.addAttribute("SUB_MENU", subMenuList);
 		
 		return "admin/menu/subMenuMng";
+	}
+	
+	/*
+	 * 하위메뉴를 저장한다.
+	 */
+	@RequestMapping(value = "/admin/menu/saveSubMenu.do")
+	public String saveSubMenu(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		params.put("RTN_MSG", "SUCCESS");
+		params.put("ORD_NO", null);
+		params.put("MENU_LEVEL", null);
+		webService.updateSubMenu(params);
+		
+		return "redirect:/admin/menu/subMenuMng.do?P_MENU_GROUP="+params.get("PARENT_MENU_ID");
 	}	
 	
 	/*
@@ -360,7 +811,7 @@ public class WebController implements InitializingBean {
 	@RequestMapping(value = "/admin/board/write.do")
 	public String boardWrite(@RequestParam Map<String, Object> params, ModelMap model, HttpServletRequest request) throws Exception {
 		debug("[BAORD WRITE PARAMETERS] " + params);
-		List<Map<String, Object>> groupIdList = webService.selectMenu(JMap.instance("P_MENU_GROUP", null).put("P_DEPTH_CHAR", "--").build());
+		List<Map<String, Object>> groupIdList = webService.selectMenu(JMap.instance("P_MENU_GROUP", null).put("P_DEPTH_CHAR", "ㄴ").build());
 		List<Map<String, Object>> YNCodeList = webService.selectCode(JMap.instance("GROUP_ID", "CD0000").put("USE_YN", "Y").build());
 		List<Map<String, Object>> TagCodeList = webService.selectCode(JMap.instance("GROUP_ID", "CD0001").put("USE_YN", "Y").build());
 		List<Map<String, Object>> boardDtlList = null;
@@ -397,11 +848,42 @@ public class WebController implements InitializingBean {
 		debug(JStr.toStr(params.get("SEQ_NO")));
 		debug(JStr.toStr(params.get("RTN_MSG")));
 		
-		return "redirect:/admin/adminPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
-			+ "&PAGE=" + params.get("PAGE")
-			+ "&SCREEN_YN=" + params.get("SCREEN_YN")
-			+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
+		String isAdminIfrmPage = params.get("IS_ADMIN_IFRM_PAGE").toString();
+		if ("N".equalsIgnoreCase(isAdminIfrmPage)) {
+			return "redirect:/admin/adminPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
+				+ "&PAGE=" + params.get("PAGE")
+				//+ "&SCREEN_YN=" + params.get("SCREEN_YN")
+				+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
+		} else {
+			return "redirect:/admin/adminIfrmPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
+				+ "&PAGE=" + params.get("PAGE")
+				//+ "&SCREEN_YN=" + params.get("SCREEN_YN")
+				+ "&TAG_CD=" + params.get("TAG_CD")
+				+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");			
+		}
 	}
+	
+	/*
+	 * 게시판 삭제
+	 */
+	@RequestMapping(value = "/admin/board/delete.do")
+	public String deleteBoard(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		debug(params);
+		webService.deleteBoard(params);
+		
+//		String isAdminIfrmPage = params.get("IS_ADMIN_IFRM_PAGE").toString();
+//		if ("N".equalsIgnoreCase(isAdminIfrmPage)) {
+			return "redirect:/admin/adminPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
+				+ "&PAGE=" + params.get("PAGE")
+				+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
+//		} else {
+//			return "redirect:/admin/adminIfrmPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
+//				+ "&PAGE=" + params.get("PAGE")
+//				+ "&TAG_CD=" + params.get("TAG_CD")
+//				+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");			
+//		}
+	}	
 	
 	/*
 	 * 게시판 목록 조회
@@ -424,9 +906,19 @@ public class WebController implements InitializingBean {
 	@RequestMapping(value = "/admin/adminPage.do")
 	public String adminPage(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		debug("[ADMIN PAGE PARAMS] " + params);
-		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
-		model.addAttribute("SCREEN_YN", params.get("SCREEN_YN"));
-		model.addAttribute("PAGE", params.get("PAGE"));
+		
+		switch ((String)params.get("GROUP_ID")) {
+		case "B0000004" :
+		case "C0000001" :
+		case "C0000002" :
+		case "E0000001" :
+			params.put("ORDER_BY", "SCREEN_YN DESC, ATTR03 DESC");
+			break;
+		default:
+			params.put("ORDER_BY", "SCREEN_YN DESC, ORD_NO ASC");
+		}
+		
+		this.commSetTitle(params.get("PAGE").toString(), model);
 		String jspAdminPage = params.get("PAGE").toString();
 		this.setBoardListInitParams(params, model);
 		
@@ -434,7 +926,20 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 성경구정 또는 찬송가 조회
+	 * 관리자 기능별 페이지 조회
+	 */
+	@RequestMapping(value = "/admin/adminIfrmPage.do")
+	public String adminIfrmPage(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		debug("[ADMIN IFRM PAGE PARAMS] " + params);
+		
+		String jspAdminPage = params.get("PAGE").toString();
+		this.setBoardListInitParams(params, model);
+		
+		return "admin/" + jspAdminPage.substring(0, 1) + "0000000/" + jspAdminPage + "F";
+	}	
+	
+	/*
+	 * 성경구절 또는 찬송가 조회
 	 */
 	@RequestMapping(value = "/bibleAndHymn.do")
 	public String bibleAndHymn(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
@@ -450,6 +955,23 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
+	 * 성경구절 또는 찬송가 조회
+	 */
+	@RequestMapping(value = "/popMsg.do")
+	public String popMsg(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		params.put("TAG_CD", "00");
+		params.put("USE_YN", "Y");
+		debug(params);
+		List<Map<String, Object>> POP_MSG = webService.selectBoardDtl(params);
+		if (POP_MSG != null && POP_MSG.size() > 0) {
+			model.addAttribute("title", POP_MSG.get(0).get("SUBJECT"));
+			model.addAttribute("content", POP_MSG.get(0).get("CONTENT").toString().replaceFirst("<h1>.+</h1>", ""));
+		}
+		
+		return "jsonView";
+	}	
+	
+	/*
 	 * JSON 요청 테스트
 	 */
 	@ResponseBody
@@ -462,6 +984,21 @@ public class WebController implements InitializingBean {
 		model.put("cnt", 0);
 		
 		return JMap.instance("dvsn", "A").put("title", "B").put("cnt", 0).build();
+		/*
+		$.ajax({
+			type: 'POST'
+			, url: '/jsonTest.do'
+			, data: JSON.stringify({age:37, name:'doldory'})
+			, dataType: 'JSON'
+			, contentType: 'application/json; charset-utf-8'
+			, success: function(result) {
+				console.log(result);
+			}
+			, error: function(xhr, status, error) {
+				console.log(error);
+			}
+		}) 		
+		*/
 	}
 	
 	/*
@@ -501,6 +1038,50 @@ public class WebController implements InitializingBean {
 		model.put("url", imgPath);
 		
 		return "jsonView";
+	}
+	
+	/*
+	 * 주보파일 저장
+	 */
+	@RequestMapping(value = "/admin/weekly/save.do")
+	public String weeklySave(@RequestParam("W_FILE_NM") MultipartFile file1
+			, @RequestParam("W_STYL_NM") MultipartFile file2
+			, @RequestParam("GROUP_ID") String groupId
+			, @RequestParam("PAGE") String page
+			, ModelMap model) throws Exception {
+		
+		final String weeklyRealPath = messageSourceAccessor.getMessage("path.file.weekly");
+		String originalFileName1 = file1.getOriginalFilename();
+		String originalFileName2 = file2.getOriginalFilename();
+		
+		webService.getMapper().updateBoard(
+				JMap.instance("RTN_MSG", "")
+				.put("DEL_YN", null)
+				.put("SUBJECT", JStr.formatDateStr(originalFileName1, "-") + " 주보")
+				.put("CONTENT", "")
+				.put("GROUP_ID", groupId)
+				.put("SEQ_NO", null)
+				.put("SCREEN_YN", "N")
+				.put("DEPTH_NO", null)
+				.put("ORD_NO", null)
+				.put("USE_YN", "Y")
+				.put("USER_ID", "SYSTEM")
+				.put("TAG_CD", "00")
+				.put("MAIN_DISP_YN", "N")
+				.put("ATTR01", "/images/weekly_sign.webp")
+				.put("ATTR02", null)
+				.put("ATTR03", null)
+				.put("ATTR04", null)
+				.put("ATTR05", "/weekly/"+originalFileName1)
+				.build());
+		
+		File newFile1 = new File(weeklyRealPath + originalFileName1);
+		File newFile2 = new File(weeklyRealPath + originalFileName2);
+		
+		file1.transferTo(newFile1);
+		file2.transferTo(newFile2);
+		
+		return "redirect:/admin/adminPage.do"+"?PAGE="+page+"&GROUP_ID="+groupId;
 	}
 	
 }

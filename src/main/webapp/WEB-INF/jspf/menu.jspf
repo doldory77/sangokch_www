@@ -3,20 +3,22 @@
 <%@ taglib prefix="fn" 	   uri="http://java.sun.com/jsp/jstl/functions" %>
 
 	  <!-- Search Bar -->
+	  <!-- <div style="position:fixed; left:20px; top: 200px; z-index:999; background-color:white;" id="test"></div> -->
 	  <div class="search_bar">
 	  	<div class="me-1">
 	  		<input type="checkbox" id="search_btn">
 	  		<label for="search_btn" class="d-flex justify-content-center align-items-center">
-	  			<span style="font-size:32px; cursor:pointer;" class="material-symbols-outlined">frame_inspect</span>
+	  			<!-- <span style="font-size:32px; cursor:pointer;" class="material-symbols-outlined">frame_inspect</span> -->
+	  			<img src="/images/bible_book.png" style="width:28px; cursor:pointer; margin-top: 3px;">
 	  		</label>
 	  	</div>
 	  	<div style="position: relative;">
 		  	<form id="searchBibleAndHymnForm">
-		  		<div style="position: absolute; bottom:-22px;">
+		  		<div style="position: absolute; top:32px; left:64px;">
 			  		<input type="radio" id="bible" name="DVSN" value="bible" checked="checked">
-			  		<label for="bible" style="cursor: pointer;">성경구절</label>
+			  		<label for="bible" style="cursor: pointer; font-weight:bold;">성경구절</label>
 			  		<input type="radio" id="hymn" name="DVSN" value="hymn">
-			  		<label for="hymn" style="cursor: pointer;">찬송가</label>
+			  		<label for="hymn" style="cursor: pointer; font-weight:bold;">찬송가</label>
 		  		</div>
 		  		<input type="text" name="SEARCH_KEYWORD">
 		  		<input type="submit" value="검색">
@@ -26,21 +28,26 @@
 	  
 	  <!-- Header Menu -->
 	  <nav class="menu_bar" id="menu_bar">
-	    <div>산곡교회</div>
+	    <div onclick="location.href='/home.do'" style="cursor:pointer;"><img src="/images/mark.png" width="34"><span class="ps-1" style="vertical-align:middle;">산곡교회</span></div>
 	    <div class="main_menu_wrapper d-none d-lg-flex">
+	      
 	      <c:forEach var="mMenu" items="${MENU_LIST}" varStatus="statusM">
 	      <div class="main_menu">
 	        <input type="radio" name="main_menu_btn" id="main_id${statusM.count}" <c:if test="${M_MENU eq mMenu.MENU_ID}">checked</c:if> >
-	        <label for="main_id${statusM.count}" onclick="menuClick('${mMenu.URL}');">${mMenu.MENU_NM}</label>
+	        <label for="main_id${statusM.count}" onclick="menuClick('${mMenu.URL}');">
+	        	<c:choose><c:when test="${mMenu.MENU_ID eq 'G0000000'}"><img src="/images/admin_light.png" style="width:34px; margin-bottom:3px;"></c:when><c:otherwise>${mMenu.MENU_NM}</c:otherwise></c:choose>
+	        </label>
+	        
 	        <!-- Sub Menu -->
 	        <nav class="sub_menu_wrapper">
 	          <c:forEach var="sMenu" items="${mMenu.SUB_MENU}" varStatus="statusS">
 	          <div class="sub_menu">
-	            <input type="radio" name="sub_menu_btn" id="main_id${statusM.count}_sub_id${statusM.count}" <c:if test="${S_MENU eq sMenu.MENU_ID}">checked</c:if> >
-	            <label for="main_id${statusM.count}_sub_id${statusM.count}" onclick="menuClick('${sMenu.URL}');">${sMenu.MENU_NM}</label>
+	            <input type="radio" name="sub_menu_btn" id="main_id${statusM.count}_sub_id${statusS.count}" data-page="${sMenu.MENU_ID}" <c:if test="${S_MENU eq sMenu.MENU_ID}">checked</c:if> >
+	            <label for="main_id${statusM.count}_sub_id${statusS.count}" onclick="menuClick('${sMenu.URL}');">${sMenu.MENU_NM}</label>
 	          </div>
 	          </c:forEach>
 	        </nav>
+	        
 	      </div>
 	      </c:forEach>
 	    </div>
@@ -87,25 +94,44 @@
 	  	<div class="popup-body">
 	  		<h3 id="popupTitle">TITLE</h3>
 	  		<p id="popupContent">전직대통령의 신분과 예우에 관하여는 법률로 정한다. 모든 국민은 종교의 자유를 가진다. 국회의원은 법률이 정하는 직을 겸할 수 없다. 혼인과 가족생활은 개인의 존엄과 양성의 평등을 기초로 성립되고 유지되어야 하며, 국가는 이를 보장한다.</p>
-	  		<div class="">
-		  		<a href="javascript: togglePopup();" class="btn btn-primary position-absolute bottom-0 start-50 translate-middle-x mb-3">닫기</a>
+	  		<div class="" style="position:absolute; top:4px; right:10px;">
+		  		<!-- <a href="javascript: togglePopup();" class="btn btn-primary position-absolute bottom-0 start-50 translate-middle-x mb-3" style="display:inline-block; width:60px;">닫기</a> -->
+		  		<a href="javascript: togglePopup();"><img src="/images/close_light.png" width="38" style="padding:1px;"></a>
 	  		</div>
 	  	</div>
 	  </div>
 	  
 	  <script>
+		window.onpageshow = function(event) {
+			if ( event.persisted || (window.performance && window.performance.navigation.type == 2)) {
+			    // Back Forward Cache로 브라우저가 로딩될 경우 혹은 브라우저 뒤로가기 했을 경우
+			    // 이벤트 추가하는 곳
+			    // console.log(location.href);
+			    var strtIdx = location.href.lastIndexOf('/')+1;
+			    var endIdx = location.href.lastIndexOf('.');
+			    var menuId = location.href.substr(strtIdx, endIdx-strtIdx);
+			    if ((new RegExp("^[A-Z]{1}[0-9]{7}","g")).test(menuId)) {
+				    $("input[data-page='" + menuId + "']").prop("checked", true);
+			    } else {
+			    	$("input[name='main_menu_btn']").prop('checked', false);
+			    }
+			    if ($('#menuicon').prop('checked')) $('#menuicon').prop('checked', false);
+			}
+		}
+		
 	  $(function() {
 		  var prevScrollTop = 0;
 		  var delta = 5;
 		  document.addEventListener("scroll", function(){
-			  var nowScrollTop = $(window).scrollTop();
+			  var nowScrollTop = window.scrollY || window.pageYOffset; /*$(window).scrollTop();*/
+			  //$('#test').text(nowScrollTop + ' - ' + prevScrollTop + ' = ' + (Math.abs(prevScrollTop - nowScrollTop)));
 			  if (Math.abs(prevScrollTop - nowScrollTop) <= delta) return;
-			  if (nowScrollTop > prevScrollTop) {
+			  if (nowScrollTop >= prevScrollTop) {
 				  $('#menu_bar').addClass('active');
 			  } else {
 				  $('#menu_bar').removeClass('active');
 			  }
-			  prevScrollTop = nowScrollTop;
+			  prevScrollTop = nowScrollTop < 0 ? 0 : nowScrollTop;
 		  })
 	  })
 	  
@@ -144,7 +170,16 @@
 		  })
 	  })
 	  
-	  function togglePopup(title, msg) {
+	  function togglePopup(title, msg, wp, hp) {
+		  
+		  if (wp && hp) {
+			  $('.popup-body:eq(0)').css('width', wp);
+			  $('.popup-body:eq(0)').css('height', hp);
+		  } else {
+			  $('.popup-body:eq(0)').css('width', '50%');
+			  $('.popup-body:eq(0)').css('height', '50%');
+		  }
+		  
 		  var $pop = $('#popup');
 		  if ($pop.css('display') == 'flex') {
 			  $pop.css('display', 'none');
@@ -153,6 +188,28 @@
 			  if (msg) $('#popupContent').html(msg);
 			  $pop.css('display', 'flex');
 		  }
+	  }
+	  
+	  function getPopupMsg(groupId, seqNo, wp, hp) {
+		  $.ajax({
+			  type: 'POST'
+			  , url: '/popMsg.do'
+			  , dataType: 'JSON'
+			  , data: {GROUP_ID:groupId, SEQ_NO:seqNo}
+			  , success: function(json) {
+				  console.log(json);
+				  if (json) {
+					  var title = json.title;
+					  var content = json.content;
+					  togglePopup(title, '<div>'+content+'</div>', wp, hp);
+				  }
+				  
+			  }
+		  	  , error: function(xhr, status, error) {
+		  		togglePopup('error', error);
+		  	  }
+			  
+		  });
 	  }
 	  
 	  function clearPopContent() {
@@ -166,5 +223,6 @@
 	  
 	  function menuClose() {
 		  $('#menuicon').prop('checked',false);
-	  }
+	  }	  
+	  
 	  </script>

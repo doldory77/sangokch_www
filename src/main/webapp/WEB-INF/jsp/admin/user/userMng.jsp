@@ -13,15 +13,16 @@
 </head>
 <body>
   	<div>
-		<div class="admin-header fs-3 d-flex justify-content-between align-content-end p-2">
-		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/home.do'">산곡교회</span>
+		<div class="admin-header fs-3 d-flex justify-content-between align-items-center p-2">
+		    <span class="material-symbols-outlined hbtn" onclick="javascript:location.href='/home.do'">home</span>	
 		    <span class="py-1 align-self-baseline">사용자관리</span>
-		    <span class="py-1 fs-5 align-self-baseline" onclick="javascript:location.href='/admin/login/logout.do'">LOG-OUT</span>
+	    	<span class="material-symbols-outlined hbtn" onclick="javascript:location.href='/admin/login/logout.do'">logout</span>
 		</div>
 		<div class="mb-2 ps-2 py-1">
-			<span onclick="javascript:location.href='/admin/main.do'">홈페이지 관리 홈</span>
-			<span>&nbsp;&gt;&nbsp;</span>
-			<span>사용자관리</span>
+			<img src="${applicationScope.ENV['CD0002_05']['VALUE_STR']}" width="22">
+			<span class="pth" onclick="javascript:location.href='/admin/main.do'">홈페이지 관리</span>
+			<span class="pth">&nbsp;&gt;&nbsp;</span>
+			<span class="pth">사용자관리</span>
 		</div>
 	</div>
 	<div class="container-md">
@@ -34,19 +35,19 @@
 					<div class="form-text">사용자ID</div>
 				</div>
 				<div class="mb-3">
-					<label for="userPw" class="form-label">사용자 패스워드</label>
-					<input type="password" name="PW" class="form-control" id="userPw">
+					<label for="userPw" class="form-label">사용자 패스워드<small style="color:red;">(관리자만 설정가능)</small></label>
+					<input type="password" name="PW" class="form-control" id="userPw" <c:if test="${sessionScope.USER_INFO.admYn eq 'N'}">disabled</c:if>>
 				</div>
 				<div class="mb-3">
-					<label for="admYn" class="form-label">관리자여부</label>
-					<select id="admYn" name="ADM_YN" class="form-control">
+					<label for="admYn" class="form-label">관리자여부<small style="color:red;">(관리자만 설정가능)</small></label>
+					<select id="admYn" name="ADM_YN" class="form-control" <c:if test="${sessionScope.USER_INFO.admYn eq 'N'}">disabled</c:if>>
 						<option value="Y">Y</option>
 						<option value="N">N</option>
 					</select>
 				</div>
 				<div class="mb-3">
-					<label for="useYn" class="form-label">사용여부</label>
-					<select id="useYn" name="USE_YN" class="form-control">
+					<label for="useYn" class="form-label">사용여부<small style="color:red;">(관리자만 설정가능)</small></label>
+					<select id="useYn" name="USE_YN" class="form-control" <c:if test="${sessionScope.USER_INFO.admYn eq 'N'}">disabled</c:if>>
 						<option value="Y">Y</option>
 						<option value="N">N</option>
 					</select>
@@ -69,6 +70,7 @@
 					<th scope="col">관리자여부</th>
 					<th scope="col">사용여부</th>
 					<th scope="col">기타속성</th>
+					<th scope="col"></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -79,6 +81,11 @@
 					<td>${user.ADM_YN}</td>
 					<td>${user.USE_YN}</td>
 					<td>${user.ATTR01}</td>
+					<td>
+						<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}">
+						<a class="btn btn-secondary btn-sm" href="/admin/user/userAuthMng.do?USER_ID=${user.ID}">권한관리</a>
+						</c:if>
+					</td>
 				</tr>
 				</c:forEach>
 			</tbody>

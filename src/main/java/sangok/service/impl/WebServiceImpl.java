@@ -16,7 +16,7 @@ import sangok.utils.JStr;
 @Service("webService")
 public class WebServiceImpl extends EgovAbstractServiceImpl implements WebService {
 	
-	Pattern imgPattern = Pattern.compile("\"(/images/board/img_.*[.].{3})\"");
+	public static Pattern imgPattern = Pattern.compile("\"(/images/board/img_.{36}[.].{3})\"");
 	
 	@Autowired
 	private WebMapper webMapper;
@@ -35,6 +35,16 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 			throw processException("fail.common.sql", new String[]{"selectMenu",e.getMessage()});
 		}
 	}
+	
+	@Override
+	public void updateSubMenu(Map<String, Object> params) throws Exception {
+		try {
+			webMapper.updateSubMenu(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw processException("fail.common.sql", new String[]{"updateSubMenu",e.getMessage()});
+		}
+	}	
 	
 	@Override
 	public List<Map<String, Object>> selectMenuByTree() throws Exception {
@@ -77,13 +87,24 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 			if (JStr.isStr(params.get("ORD_NO")) == false) {
 				params.put("ORD_NO", "0");
 			}
-			String stdImgPath = JStr.extractStr(imgPattern, JStr.toStr(params.get("CONTENT")));
-			params.put("ATTR01", stdImgPath);
+			/*String stdImgPath = JStr.extractStr(imgPattern, JStr.toStr(params.get("CONTENT")));
+			params.put("ATTR01", JStr.isStr(stdImgPath) ? stdImgPath.replaceAll("\"", "") : stdImgPath);*/
 			
 			webMapper.updateBoard(params);
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw processException("fail.common.sql", new String[]{"updateBoard",e.getMessage()});
+		}
+	}
+	
+	@Override
+	public void deleteBoard(Map<String, Object> params) throws Exception {
+		try {
+			
+			webMapper.deleteBoard(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw processException("fail.common.sql", new String[]{"deleteBoard",e.getMessage()});
 		}
 	}
 	
@@ -131,6 +152,7 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 			if (JStr.isStr(params.get("GROUP_ID")) == false) params.put("GROUP_ID", null);
 			if (JNum.isInteger(params.get("SEQ_NO")) == false) params.put("SEQ_NO", 0);
 			if (JStr.isStr(params.get("TAG_CD")) == false) params.put("TAG_CD", null);
+			if (JStr.isStr(params.get("ORDER_BY")) == false) params.put("ORDER_BY", null);
 			return webMapper.selectBoardDtl(params);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -155,6 +177,28 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw processException("fail.common.sql", new String[]{"selectUser",e.getMessage()});
+		}
+	}
+	
+	@Override
+	public List<Map<String, Object>> selectUserAuth(Map<String, Object> params) throws Exception {
+		try {
+			return (List<Map<String, Object>>) webMapper.selectUserAuth(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw processException("fail.common.sql", new String[]{"selectUserAuth",e.getMessage()});
+		}
+	}
+	
+	@Override
+	public void updateUserAuth(List<Map<String, Object>> params) throws Exception {
+		try {			
+			for (int i=0; i<params.size(); i++) {
+				webMapper.updateUserAuth(params.get(i));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw processException("fail.common.sql", new String[]{"updateUserAuth",e.getMessage()});
 		}
 	}
 	

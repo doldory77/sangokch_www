@@ -49,9 +49,9 @@
     box-shadow: 4.0px 8.0px 8.0px hsl(0deg 0% 0% / 0.38);	
 }
 
-.popup-body p {
+.popup-body > p {
 	border: 1px solid darkgray;
-    height: 350px;
+    height: 88%;
     padding: 2px;
     overflow-y: auto;
 }
@@ -133,12 +133,13 @@ nav.menu_bar:has(input[id="menuicon"]:checked) + div.mbl_side_menu { left: 0px; 
   position: fixed;
   /*top: var(--menu-bar-height);*/
   padding-top: 20px;
-  left: -300px;
+  left: -310px;
   width: 300px;
   height: 100vh;
   background-color: #F8F0E5;
   transition: all .35s;
   box-shadow: 8px 0 8px -8px;
+  z-index: 9;
 }
 
 .mbl_side_menu input[type='radio'] {

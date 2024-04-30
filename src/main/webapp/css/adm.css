@@ -1,0 +1,40 @@
+.group-menu {
+	height: 42px;
+	border-radius: 5px 5px 0px 0px;
+}
+.group-menu span:nth-of-type(2) {
+	height: 24px;
+	color: white;
+}
+.group-menu + ul {
+	border: 1px solid #c2c2c2;
+	border-radius: 0px 0px 5px 5px;
+	overflow: hidden;
+}
+.group-menu + ul li {
+	height: 0px;
+	opacity: 0;
+	transition: all .35s;
+}
+.group-menu input[type="checkbox"]:checked + label span:nth-child(1) {
+	transform: rotate( 180deg );
+}
+.group-menu:has(input[type="checkbox"]:checked) + ul li {
+	height: 34px;
+	line-height: 34px;
+	opacity: 1;
+}
+.group-menu-wrapper:hover {
+	box-shadow: 3px 3px 12px gray;
+}
+.group-main-menu {
+	color: white;
+	display: inline-block;
+	/*width: 120px;*/
+}
+.menu-nm {
+	display: inline-block;
+	width: 160px;
+}
+.hbtn {font-size:34px;}
+.pth {vertical-align: middle;}
