@@ -37,11 +37,7 @@
 		</div>
 	</div>
 	
-	<!-- <div class="pageBodyW container-fluid">
-		<div class="readyDiv">
-			<img class="readyImg" src="http://beautifulseodang.1937.co.kr/images/ready.jpg">
-		</div>
-	</div> -->
+
     
   	<!-- <script src="/js/ckeditor.js"></script>
   	<script src="/js/imgUpAdapter.js"></script>
