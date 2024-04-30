@@ -57,11 +57,11 @@
 		</div>
 	</div> -->
 	<div class="container-lg">
-		<div class="row g-5 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 mt-4">
+		<div class="row g-5 justify-content-center row-cols-1 row-cols-sm-2 mt-4">
 			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
 				<!--<c:out value="${item.CONTENT}" escapeXml="false"></c:out>-->
 				<div class="col">
-				    <div class="mainItem">
+				    <div class="mainItem" style="border-radius: 10px;">
 				        <div style="background-image:url('${item.ATTR01}'); cursor:pointer;" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
 							${item.ATTR03}
 				        </div>
@@ -71,6 +71,10 @@
 				    </div>
 				</div>
 			</c:forEach>
+		</div>
+			
+		<div class="row g-5 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 mt-4">
+
 			
 			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
 			<div class="col">
