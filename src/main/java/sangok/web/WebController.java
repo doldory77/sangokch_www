@@ -382,7 +382,7 @@ public class WebController implements InitializingBean {
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
 		params.put("USE_YN", "Y");
-		params.put("ORDER_BY", "ATTR02 DESC");
+		params.put("ORDER_BY", "ATTR03 DESC");
 
 		this.setBoardListInitParams(params, model);
 		
@@ -406,7 +406,7 @@ public class WebController implements InitializingBean {
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
 		params.put("USE_YN", "Y");
-		params.put("ORDER_BY", "ATTR02 DESC");
+		params.put("ORDER_BY", "ATTR03 DESC");
 
 		this.setBoardListInitParams(params, model);
 		
@@ -430,7 +430,7 @@ public class WebController implements InitializingBean {
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
 		params.put("USE_YN", "Y");
-		params.put("ORDER_BY", "ATTR02 DESC");
+		params.put("ORDER_BY", "ATTR03 DESC");
 		
 		this.setBoardListInitParams(params, model);
 		
@@ -572,7 +572,7 @@ public class WebController implements InitializingBean {
 		
 		debug("[ADMIN PAGE PARAMS] " + params);
 		params.put("USE_YN", "Y");
-		params.put("ORDER_BY", "ATTR02 DESC");
+		params.put("ORDER_BY", "ATTR03 DESC");
 		
 		this.setBoardListInitParams(params, model);
 		
