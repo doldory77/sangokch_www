@@ -80,25 +80,11 @@
 	<div class="container-md" style="margin-bottom: 80px;">
 		<div class="row gy-0 gx-0 justify-content-center row-cols-1 row-cols-sm-2 mt-4">
 			
-			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
-				<!--<c:out value="${item.CONTENT}" escapeXml="false"></c:out>-->
-				<div class="col">
-				    <div class="mainItem">
-				        <div style="background-image:url('${item.ATTR01}'); background-size:cover; cursor:pointer;" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
-							${item.ATTR03}
-				        </div>
-				        <div style="color:#000;font-family:HSWinter;">
-							<c:out value="${item.ATTR02}" escapeXml="false"></c:out>
-				        </div>
-				    </div>
-				</div>
-			</c:forEach>
-			
 			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
 			<div class="col">
 			    <div class="mainItem">
 			        <div style='background-image:url(${item.ATTR01}); background-size:cover; cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
-			            ${item.SUBJECT}
+			            
 			        </div>
 			        <div style="color:#000;font-family:HSWinter;">
 						<c:out value="${item.ATTR02}" escapeXml="false"></c:out>
@@ -106,6 +92,20 @@
 			        <!-- <p style="color:#000;font-family:HSWinter;">${fn:replace(item.ATTR02, newLine, '<br>')}</p> -->
 			    </div>
 			</div>			
+			</c:forEach>
+			
+			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
+				<!--<c:out value="${item.CONTENT}" escapeXml="false"></c:out>-->
+				<div class="col">
+				    <div class="mainItem">
+				        <div style="background-image:url('${item.ATTR01}'); background-size:cover; cursor:pointer;" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
+							
+				        </div>
+				        <div style="color:#000;font-family:HSWinter;">
+							<c:out value="${item.ATTR02}" escapeXml="false"></c:out>
+				        </div>
+				    </div>
+				</div>
 			</c:forEach>
 			
 		</div>
