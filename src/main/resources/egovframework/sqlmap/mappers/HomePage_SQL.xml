@@ -211,24 +211,34 @@
     </select>
     
     <select id="selectDispYnBoard" parameterType="map" resultType="map">
-		SELECT GROUP_ID
-			 , SEQ_NO
-			 , SUBJECT
-			 , ATTR01
-			 , ATTR02
-			 , ORD_NO
-		  FROM H_BOARD
-		 WHERE USE_YN = 'Y'
-		 <if test="TAG_CD != null and !TAG_CD.equals('')">
-		   AND TAG_CD = #{TAG_CD}
-		 </if>
-		 <if test="GROUP_ID != null and !GROUP_ID.equals('')">
-		   AND GROUP_ID = #{GROUP_ID}
-		 </if>
-		 <if test="MAIN_DISP_YN != null and !MAIN_DISP_YN.equals('')">
-		   AND MAIN_DISP_YN = #{MAIN_DISP_YN}
-		 </if>
-		 ORDER BY ATTR03 DESC
+    	/*selectDispYnBoard*/
+		SELECT M.*
+		FROM (    
+			SELECT GROUP_ID
+				 , SEQ_NO
+				 , SUBJECT
+				 , ATTR01
+				 , ATTR02
+				 , ATTR03
+				 , CASE
+				 	WHEN GROUP_ID = 'C0000001' THEN 1
+				 	WHEN GROUP_ID = 'E0000003' THEN 2
+				 	WHEN GROUP_ID = 'E0000002' THEN 3
+				 	ELSE 4
+				 END FIRST_ORDER
+			  FROM H_BOARD
+			 WHERE USE_YN = 'Y'
+			 <if test="TAG_CD != null and !TAG_CD.equals('')">
+			   AND TAG_CD = #{TAG_CD}
+			 </if>
+			 <if test="GROUP_ID != null and !GROUP_ID.equals('')">
+			   AND GROUP_ID = #{GROUP_ID}
+			 </if>
+			 <if test="MAIN_DISP_YN != null and !MAIN_DISP_YN.equals('')">
+			   AND MAIN_DISP_YN = #{MAIN_DISP_YN}
+			 </if>
+		) M
+		ORDER BY FIRST_ORDER, ATTR03 DESC
     </select>        	
 	
 </mapper>
