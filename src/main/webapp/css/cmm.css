@@ -42,6 +42,13 @@ a, a:hover, a:visited, a:link, a:active {
     background-position: center;
     background-repeat: no-repeat;
     margin-top: -48px;
+    background-repeat: repeat-x;
+    box-shadow: 0px 4px 6px #c2c2c2;
+}
+.mainHead-title {
+	font-family:SokchoBada; 
+	text-shadow:3px 3px 3px gray; 
+	margin-top:60px;
 }
 .pageBodyW {
 	padding-top: 100px;

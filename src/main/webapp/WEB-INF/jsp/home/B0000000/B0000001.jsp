@@ -21,7 +21,7 @@
 	<div class="container-fluid pt-5 px-0">
 			
 		<div class="mainHead" style='position:relative; background-image:url(${HEADER_IMG.ATTR01}); <c:if test="${not empty HEADER_IMG.ATTR03}">height:${HEADER_IMG.ATTR03};</c:if>'>
-		    <p class="word fs-1" style='color:${empty HEADER_IMG.ATTR04 ? "#fff" : HEADER_IMG.ATTR04}; font-family:HSWinter;'>
+		    <p class="mainHead-title word fs-1" style='color:${empty HEADER_IMG.ATTR04 ? "#fff" : HEADER_IMG.ATTR04};'>
 		        ${HEADER_IMG.ATTR02}
 		    </p>
 		</div>

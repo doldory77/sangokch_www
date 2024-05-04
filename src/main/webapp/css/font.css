@@ -2,3 +2,7 @@
 	font-family: 'HSWinter';
 	src: url('/font/HSWinter.woff');
 }
+@font-face {
+	font-family: 'SokchoBada';
+	src: url('/font/SokchoBadaDotum.woff');
+}

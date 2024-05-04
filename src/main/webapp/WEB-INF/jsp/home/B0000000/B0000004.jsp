@@ -47,15 +47,15 @@
         <c:forEach var="item" items="${BODY_LIST}" varStatus="status">
         <div class="row gx-0">
             <div class="col-3 l-year">${item.ATTR04}</div>
-            <div class="col-5 r-month">
+            <div class="col-5 col-lg-3 r-month">
                 <div class='point1 <c:if test="${not empty item.ATTR04}">point2</c:if>'></div>
                 <div>
                 	<div>${fn:substring(item.ATTR03,4,8)}월</div>
-                	<div style="font-size:1.1rem; font-wight:bold;"><a href="/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}">${item.SUBJECT}</a></div>
+                	<div style="font-size:1.1rem; font-wight:bold;"><a href="/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}"><strong>${item.SUBJECT}</strong></a></div>
                 	<div>${item.ATTR02}</div>
                 </div>
             </div>
-            <div class="col-4"><img class="rounded" width="100" src="${item.ATTR01}"></div>
+            <div class="col-4 col-lg-6"><img class="rounded" style="max-height:140px; margin-top:16px; box-shadow: 3px 3px 3px gray;" src="${item.ATTR01}"></div>
         </div>        
         </c:forEach>
         <div class="row gx-0">
