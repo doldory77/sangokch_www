@@ -23,11 +23,15 @@
   		<%@ include file="/WEB-INF/jspf/menu.jspf" %>
 	</div>
 	
+	<c:if test="${not empty HEADER_IMG}">
 	<div class="container-fluid pt-5 px-0">
-		<c:if test="${not empty HEADER_IMG}">
-			<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
-		</c:if>
+		<div class="mainHead" style='position:relative; background-image:url(${HEADER_IMG.ATTR01}); <c:if test="${not empty HEADER_IMG.ATTR04}">background-position-y:${HEADER_IMG.ATTR04}%;</c:if> <c:if test="${not empty HEADER_IMG.ATTR03}">height:${HEADER_IMG.ATTR03}px;</c:if>'>
+		    <p class="mainHead-title word fs-1" style='<c:if test="${not empty HEADER_IMG.ATTR05}">margin-top:${HEADER_IMG.ATTR05}px;</c:if>'>
+		        ${HEADER_IMG.ATTR02}
+		    </p>
+		</div>
 	</div>
+	</c:if>
 	
 	<!-- <div class="pageBodyW container-fluid">
 		<div class="readyDiv">

@@ -6,3 +6,7 @@
 	font-family: 'SokchoBada';
 	src: url('/font/SokchoBadaDotum.woff');
 }
+@font-face {
+	font-family: 'GamtanD';
+	src: url('/font/GamtanD.woff');
+}

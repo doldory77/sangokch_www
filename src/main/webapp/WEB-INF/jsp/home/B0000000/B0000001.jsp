@@ -19,29 +19,32 @@
 	
 	<c:if test="${not empty HEADER_IMG}">
 	<div class="container-fluid pt-5 px-0">
-			
-		<div class="mainHead" style='position:relative; background-image:url(${HEADER_IMG.ATTR01}); <c:if test="${not empty HEADER_IMG.ATTR03}">height:${HEADER_IMG.ATTR03};</c:if>'>
-		    <p class="mainHead-title word fs-1" style='color:${empty HEADER_IMG.ATTR04 ? "#fff" : HEADER_IMG.ATTR04};'>
+		<div class="mainHead mainHead-b" style='position:relative; background-image:url(${HEADER_IMG.ATTR01}); <c:if test="${not empty HEADER_IMG.ATTR04}">background-position-y:${HEADER_IMG.ATTR04}%;</c:if> <c:if test="${not empty HEADER_IMG.ATTR03}">height:${HEADER_IMG.ATTR03}px;</c:if>'>
+		    <p class="mainHead-title word fs-1" style='<c:if test="${not empty HEADER_IMG.ATTR05}">margin-top:${HEADER_IMG.ATTR05}px;</c:if>'>
 		        ${HEADER_IMG.ATTR02}
 		    </p>
 		</div>
 	</div>
 	</c:if>
 	
-	<!-- <div class="pageBodyW container-fluid">
-		<div class="readyDiv">
-			<img class="readyImg" src="http://beautifulseodang.1937.co.kr/images/ready.jpg">
-		</div>
-	</div> -->
-	
-	<!-- col-lg-0 col-lg-12 -->
 	<div class="container-lg">
-		<div class="row ps-sm-2 mt-5">
-			<c:out value="${BODY_IMG.CONTENT}" escapeXml="false"></c:out>
-			<div class="col col-sm-7 col-lg-8">
-				<div class="row h-100 gy-4 justify-content-center align-items-center row-cols-1 row-cols-lg-3">
+
+		<div class="row mt-3">
+			<div class="col-12 col-md-6">
+				<div class="row gy-3 ps-0 ps-md-2">
+					<c:forEach var="item" items="${BODY_IMG}" varStatus="status">
+					<div class="col-12">
+						<img src="${item.ATTR01}" style="width:100%">
+					</div>
+					</c:forEach>
+				</div>
+			</div>
+			<div class="col-12 col-md-6 d-flex align-items-center">
+				<div class="row gy-2 gy-md-5">
 					<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
+					<div class="col-12 pt-3 pt-md-0 text-center">
 						<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
+					</div>
 					</c:forEach>
 				</div>
 			</div>

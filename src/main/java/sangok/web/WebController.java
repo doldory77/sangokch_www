@@ -279,7 +279,7 @@ public class WebController implements InitializingBean {
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "B0000001").build()).get("MENU_NM").toString();
 		
 		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
-		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
+		model.addAttribute("BODY_IMG", BODY_IMG);
 		model.addAttribute("BODY_LIST", BODY_LIST);
 		model.addAttribute("TITLE", title);
 //		commProcessEscapeBoard(new String[] {"HEADER_IMG", "BODY_IMG", "BODY_LIST"}, new Boolean[] {false, false, true}, model);
