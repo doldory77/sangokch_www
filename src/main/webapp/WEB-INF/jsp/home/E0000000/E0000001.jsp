@@ -25,7 +25,11 @@
 	
 	<div class="container-fluid pt-5 px-0">
 		<c:if test="${not empty HEADER_IMG}">
-			<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
+		<div class="mainHead" style='position:relative; background-image:url(${HEADER_IMG.ATTR01}); <c:if test="${not empty HEADER_IMG.ATTR04}">background-position-y:${HEADER_IMG.ATTR04}%;</c:if> <c:if test="${not empty HEADER_IMG.ATTR03}">height:${HEADER_IMG.ATTR03}px;</c:if>'>
+		    <p class="mainHead-title word fs-1" style='<c:if test="${not empty HEADER_IMG.ATTR05}">margin-top:${HEADER_IMG.ATTR05}px;</c:if>'>
+		        ${HEADER_IMG.ATTR02}
+		    </p>
+		</div>
 		</c:if>
 		
 		<c:if test="${not empty BOARD_LIST}">
@@ -34,8 +38,6 @@
 		</div>
 		</c:if>
 	</div>
-	
-	
 	
 	<jsp:include page="/WEB-INF/jspf/userBoardList.jsp" flush="false">
 		<jsp:param name="W_SIZE" value="1024px" />

@@ -45,17 +45,16 @@
   		<%@ include file="/WEB-INF/jspf/menu.jspf" %>
 	</div>
 	
+	<c:if test="${not empty HEADER_IMG}">
 	<div class="container-fluid pt-5 px-0">
-		<c:if test="${not empty HEADER_IMG}">
-			<c:out value="${HEADER_IMG.CONTENT}" escapeXml="false"></c:out>
-		</c:if>
-	</div>
-	
-	<!-- <div class="pageBodyW container-fluid">
-		<div class="readyDiv">
-			<img class="readyImg" src="http://beautifulseodang.1937.co.kr/images/ready.jpg">
+		<div class="mainHead" style='position:relative; background-image:url(${HEADER_IMG.ATTR01}); <c:if test="${not empty HEADER_IMG.ATTR04}">background-position-y:${HEADER_IMG.ATTR04}%;</c:if> <c:if test="${not empty HEADER_IMG.ATTR03}">height:${HEADER_IMG.ATTR03}px;</c:if>'>
+		    <p class="mainHead-title word fs-1" style='<c:if test="${not empty HEADER_IMG.ATTR05}">margin-top:${HEADER_IMG.ATTR05}px;</c:if>'>
+		        ${HEADER_IMG.ATTR02}
+		    </p>
 		</div>
-	</div> -->
+	</div>
+	</c:if>
+	
 	<div class="container-lg">
 		<div class="row g-5 justify-content-center row-cols-1 row-cols-md-2 mt-4">
 			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
@@ -94,11 +93,11 @@
 		
 	</div>
 
-    <c:if test="${not empty FOOTER_IMG}">
+	<c:if test="${not empty FOOTER_IMG}">
 	<div class="container-fluid pt-5 px-0">
-		<div class="mainHead" style='background-image:url(${FOOTER_IMG.ATTR01}); <c:if test="${not empty FOOTER_IMG.ATTR03}">height:${FOOTER_IMG.ATTR03};</c:if>'>
-		    <p class="word fs-1" style="color:#fff; font-family:HSWinter;">
-		        <c:out value="${FOOTER_IMG.ATTR02}" escapeXml="false"></c:out>
+		<div class="mainHead mainHead-b" style='position:relative; background-image:url(${FOOTER_IMG.ATTR01}); <c:if test="${not empty FOOTER_IMG.ATTR04}">background-position-y:${FOOTER_IMG.ATTR04}%;</c:if> <c:if test="${not empty FOOTER_IMG.ATTR03}">height:${FOOTER_IMG.ATTR03}px;</c:if>'>
+		    <p class="mainHead-title word fs-1" style='<c:if test="${not empty FOOTER_IMG.ATTR05}">margin-top:${FOOTER_IMG.ATTR05}px;</c:if>'>
+		        ${FOOTER_IMG.ATTR02}
 		    </p>
 		</div>
 	</div>
