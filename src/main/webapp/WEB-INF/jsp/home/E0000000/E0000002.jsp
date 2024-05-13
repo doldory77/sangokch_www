@@ -60,11 +60,12 @@
 			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
 				<!--<c:out value="${item.CONTENT}" escapeXml="false"></c:out>-->
 				<div class="col">
+					<div class="fs-4 text-center" style="color:#000;font-family:GamtanD;font-weight:bold;">${item.SUBJECT}</div>
 				    <div class="mainItem" style="border-radius: 10px; box-shadow: 3px 3px 3px #6a5858;">
 				        <div style="background-image:url('${item.ATTR01}'); cursor:pointer;" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
 							${item.ATTR03}
 				        </div>
-				        <div style="color:#000;font-family:HSWinter;">
+				        <div style="color:#000;font-family:GamtanD;" class="d-flex flex-column justify-content-center">
 							<c:out value="${item.ATTR02}" escapeXml="false"></c:out>
 				        </div>
 				    </div>
@@ -78,12 +79,19 @@
 			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
 			<div class="col">
 				<figure>
-				  <figcaption class="fs-5 text-center" style="font-family:HSWinter;">${item.SUBJECT}</figcaption>
+				  <figcaption class="fs-5 text-center" style="font-family:GamtanD;">
+				  	<div>${item.SUBJECT}</div>
+				  </figcaption>
 				  <div>			    
 				    <div class="is-wood" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
 				      <img class="is-rwd" src="${item.ATTR01}">
 				    </div>
-				    <p style="margin-top:20px; color:#000;font-family:HSWinter;">${fn:replace(item.ATTR02, newLine, '<br>')}</p>
+				    <c:if test="${not empty item.ATTR02}">
+				    <div style="position: relative; width: 100%; height: 108px; margin-top: 8px;">
+				    	<p style="margin-top:20px; color:#000; font-family:GamtanD; margin-top: 20px; position: absolute; padding-left: 10px;">${fn:replace(item.ATTR02, newLine, '<br>')}</p>
+				    	<div style="width: 100%; height: 108px; background-color: white; opacity: 0.4; border-radius: 3px;"></div>
+				    </div>
+				    </c:if>
 				  </div>
 				</figure>			    
 			</div>		

@@ -106,7 +106,8 @@
 			        	<div style='background-image:url(${item.ATTR01}); background-size:cover; cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
 			    	</c:otherwise>
 			    	</c:choose>
-			        <div style="color:#000;font-family:HSWinter;">
+			        <div style="color:#000;font-family:GamtanD;">
+			        	<div><strong>${item.SUBJECT}</strong></div>
 						<c:out value="${item.ATTR02}" escapeXml="false"></c:out>
 			        </div>
 			        <!-- <p style="color:#000;font-family:HSWinter;">${fn:replace(item.ATTR02, newLine, '<br>')}</p> -->
