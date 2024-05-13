@@ -29,6 +29,20 @@
 		#footer div span {
 			vertical-align:middle;
 		}
+		.item-badge {
+			position: absolute;
+		    background-color: #000;
+		    display: inline-block;
+		    width: 140px;
+		    height: 32px;
+		    opacity: 0.3;
+		    text-align: center;
+		    margin: 5px;
+		}
+		.item-badge > div:first-child {
+			color: white;
+    		line-height: 32px;
+		}
     </style>
   </head>
   <body>
@@ -81,11 +95,17 @@
 		<div class="row gy-0 gx-0 justify-content-center row-cols-1 row-cols-sm-2 mt-4">
 			
 			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
-			<div class="col">
-			    <div class="mainItem">
-			        <div style='background-image:url(${item.ATTR01}); background-size:cover; cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
-			            
-			        </div>
+			<div class="col" style="position:relative;">
+				<div class="item-badge"><div>${item.GROUP_NM}</div></div>
+			    <div class="mainItem mainItem-b">
+			    	<c:choose>
+			    	<c:when test="${not empty item.ATTR05}">
+			    		<div style='background-image:url(${item.ATTR01}); background-size:cover; cursor:pointer;' onclick="location.href='${item.ATTR05}'"></div>
+			    	</c:when>
+			    	<c:otherwise>
+			        	<div style='background-image:url(${item.ATTR01}); background-size:cover; cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
+			    	</c:otherwise>
+			    	</c:choose>
 			        <div style="color:#000;font-family:HSWinter;">
 						<c:out value="${item.ATTR02}" escapeXml="false"></c:out>
 			        </div>
@@ -97,7 +117,7 @@
 			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
 				<!--<c:out value="${item.CONTENT}" escapeXml="false"></c:out>-->
 				<div class="col">
-				    <div class="mainItem">
+				    <div class="mainItem mainItem-b">
 				        <div style="background-image:url('${item.ATTR01}'); background-size:cover; cursor:pointer;" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
 							
 				        </div>

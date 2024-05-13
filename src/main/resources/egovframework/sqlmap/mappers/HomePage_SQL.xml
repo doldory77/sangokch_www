@@ -215,16 +215,22 @@
 		SELECT M.*
 		FROM (    
 			SELECT GROUP_ID
+				 , FN_GET_MENU_NM(GROUP_ID) GROUP_NM
 				 , SEQ_NO
 				 , SUBJECT
 				 , ATTR01
 				 , ATTR02
 				 , ATTR03
+				 , ATTR04
+				 , ATTR05
 				 , CASE
-				 	WHEN GROUP_ID = 'C0000001' THEN 1
-				 	WHEN GROUP_ID = 'E0000003' THEN 2
-				 	WHEN GROUP_ID = 'E0000002' THEN 3
-				 	ELSE 4
+				 	WHEN GROUP_ID = 'C0000001' THEN 1 /*주일예배*/
+				 	WHEN GROUP_ID = 'C0000002' THEN 2 /*주일찬양*/
+				 	WHEN GROUP_ID = 'C0000003' THEN 3 /*기타행사*/
+				 	WHEN GROUP_ID = 'E0000003' THEN 4 /*공지사항*/
+				 	WHEN GROUP_ID = 'E0000002' THEN 5 /*새가족*/
+				 	WHEN GROUP_ID = 'E0000004' THEN 6 /*갤러리*/
+				 	ELSE 7
 				 END FIRST_ORDER
 			  FROM H_BOARD
 			 WHERE USE_YN = 'Y'

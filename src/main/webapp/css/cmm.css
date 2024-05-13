@@ -7,10 +7,14 @@ a, a:hover, a:visited, a:link, a:active {
 	background-color: white;
 	/*border-radius: 5px;*/
 }
+.mainItem-b {
+	border: none;
+	padding: 4px;
+}
 .mainItem > div:first-child {
-	min-width: 280px;
-    min-height: calc(280px * 7 / 8);
-    background-color: #c2c2c2;
+	min-width: 340px;
+    min-height: calc(340px * 7 / 8);
+    background-color: transparent;
     color: white;
     display: flex;
     justify-content: center;
@@ -21,8 +25,8 @@ a, a:hover, a:visited, a:link, a:active {
 .mainItem > div:last-child {
 	margin-top: 5px;
 	padding: 5px;
-	min-height: 120px;
-	max-height: 120px;
+	min-height: 140px;
+	max-height: 140px;
 }
 .mainItem > div + p {
 	margin-top: 5px;
