@@ -32,7 +32,7 @@
 		.item-badge {
 			position: absolute;
 		    background-color: #000;
-		    display: inline-block;
+		    /*display: inline-block;*/
 		    width: 140px;
 		    height: 32px;
 		    opacity: 0.3;
@@ -42,6 +42,26 @@
 		.item-badge > div:first-child {
 			color: white;
     		line-height: 32px;
+		}
+		@media(max-width:420px) {
+			.small-width {
+				background-size: contain;
+			}
+		}
+		@media(min-width:421px) {
+			.large-width {
+				background-size: cover;
+			}
+		}
+		@media(max-width:420px) {
+			.hide {
+				display: none;
+			}
+		}
+		@media(min-width:421px) {
+			.show {
+				display: inline-block;
+			}
 		}
     </style>
   </head>
@@ -70,7 +90,7 @@
 			<c:out value="${item.CONTENT}" escapeXml="false"></c:out>
 		</c:forEach>
 	
-		<div id="carouselSlides" class="carousel slide" data-bs-ride="carousel">
+		<div id="carouselSlides" class="carousel slide" data-bs-ride="carousel" style="padding-top:48px;">
 		  <div class="carousel-indicators">
 		  <c:forEach var="item" items="${ROLL_IMG_LIST}" varStatus="status">
 		    <button type="button" data-bs-target="#carouselSlides" data-bs-slide-to="${status.index}" <c:if test="${status.index eq 0}">class="active" aria-current="true"</c:if> aria-label="Slide ${status.count}"></button>
@@ -80,7 +100,7 @@
 		  	<c:forEach var="item" items="${ROLL_IMG_LIST}" varStatus="status">
 		    <div class='carousel-item <c:if test="${status.index eq 0}">active</c:if>'>
 		      <img src="${item.ATTR01}" class="d-block w-100" alt="...">
-		      <div class="carousel-caption d-none d-md-block">
+		      <div class="carousel-caption d-none d-sm-block">
 		        <h4 style="color:#fff;font-family:HSWinter;">빠른시간에 홈페이지 오픈 예정입니다.</h4>
 		      </div>
 		    </div>
@@ -91,19 +111,19 @@
 	</c:if>
 	
 	<!-- <div>${applicationScope.ENV['CD0002_05']['VALUE_STR']}</div> -->
-	<div class="container-md" style="margin-bottom: 80px;">
-		<div class="row gy-0 gx-0 justify-content-center row-cols-1 row-cols-sm-2 mt-4">
+	<div class="container-lg" style="margin-bottom: 80px;">
+		<div class="row gy-0 gx-0 justify-content-center row-cols-1 row-cols-md-2 mt-4">
 			
 			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
 			<div class="col" style="position:relative;">
-				<div class="item-badge"><div>${item.GROUP_NM}</div></div>
+				<div class="item-badge hide show"><div>${item.GROUP_NM}</div></div>
 			    <div class="mainItem mainItem-b">
 			    	<c:choose>
 			    	<c:when test="${not empty item.ATTR05}">
-			    		<div style='background-image:url(${item.ATTR01}); background-size:cover; cursor:pointer;' onclick="location.href='${item.ATTR05}'"></div>
+			    		<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='${item.ATTR05}'"></div>
 			    	</c:when>
 			    	<c:otherwise>
-			        	<div style='background-image:url(${item.ATTR01}); background-size:cover; cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
+			        	<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
 			    	</c:otherwise>
 			    	</c:choose>
 			        <div style="color:#000;font-family:GamtanD;">
