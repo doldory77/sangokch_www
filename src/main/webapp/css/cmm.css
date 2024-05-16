@@ -57,7 +57,7 @@ a, a:hover, a:visited, a:link, a:active {
 	font-family:SokchoBada;
 	color:#071952; 
 	text-shadow:2px 2px 3px #fff; 
-	margin-top:60px;
+	/*margin-top:60px;*/
 }
 .pageBodyW {
 	padding-top: 100px;
