@@ -22,6 +22,16 @@
         .point1 { position: absolute; background-color:red; height: 5px; width: 10px; margin-left: -16px; margin-top: 10px; }
         .point2 { width:24px; margin-left:-31px; }
         .base { position: absolute; background-color:red; width:20px; height:20px; border-radius: 50%; margin-left: -13px; margin-top: -5px; }
+		@media(max-width:480px) {
+	    	.img-small {
+	    		display:none;
+	    	}
+	    }
+	    @media(min-width:481px) {
+	    	.img-large {
+	    		display:block;
+	    	}
+	    }
     </style>    
     
   </head>
@@ -59,7 +69,7 @@
                 	<div>${item.ATTR02}</div>
                 </div>
             </div>
-            <div class="col-4 col-lg-6"><img class="rounded" style="max-height:140px; margin-top:16px; box-shadow: 3px 3px 3px gray;" src="${item.ATTR01}"></div>
+            <div class="col-4 col-lg-6"><img class="img-small img-large rounded" style="max-height:140px; margin-top:16px; box-shadow: 3px 3px 3px gray;" src="${item.ATTR01}"></div>
         </div>        
         </c:forEach>
         <div class="row gx-0">
