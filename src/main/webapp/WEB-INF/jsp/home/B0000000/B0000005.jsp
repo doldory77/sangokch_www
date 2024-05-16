@@ -15,7 +15,7 @@
     <style>
 		.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {  
 	        border:0px !important;  
-	    }
+	    }	    
     </style>
   </head>
   <body>

@@ -43,17 +43,29 @@
 			color: white;
     		line-height: 32px;
 		}
-		@media(max-width:420px) {
+		@media(max-width:480px) {
 			.small-width {
-				background-size: contain;
+				background-size: cover;
 			}
+			.mainItem > div:last-child {
+				min-height: 100px;
+			}
+			.mainItem > div:first-child {
+				min-height: calc(280px * 7 / 8);
+			}			
 		}
-		@media(min-width:421px) {
+		@media(min-width:481px) {
 			.large-width {
 				background-size: cover;
 			}
+			.mainItem > div:last-child {
+				min-height: 140px;
+			}
+			.mainItem > div:first-child {
+				min-height: calc(340px * 7 / 8);
+			}
 		}
-		@media(max-width:420px) {
+		/*@media(max-width:420px) {
 			.hide {
 				display: none;
 			}
@@ -62,7 +74,7 @@
 			.show {
 				display: inline-block;
 			}
-		}
+		}*/
     </style>
   </head>
   <body>
