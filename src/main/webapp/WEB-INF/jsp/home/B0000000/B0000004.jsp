@@ -53,15 +53,15 @@
 	
 	<div class="container-lg mt-2">
         <div class="row gx-0">
-            <div class="col-3"></div>
-            <div class="col-9 position-relative" style="height:40px;">
+            <div class="col-3 col-sm-3 col-lg-4"></div>
+            <div class="col-9 col-sm-9 col-lg-8 position-relative" style="height:40px;">
                 <div class="triangle triangle-bottom position-absolute" style="margin-left:-23px;"></div>                    
             </div>
         </div>
         <c:forEach var="item" items="${BODY_LIST}" varStatus="status">
         <div class="row gx-0">
-            <div class="col-3 l-year">${item.ATTR04}</div>
-            <div class="col-5 col-lg-3 r-month">
+            <div class="col-3 col-sm-3 col-lg-4 l-year">${item.ATTR04}</div>
+            <div class="col-7 col-sm-5 col-lg-4 r-month">
                 <div class='point1 <c:if test="${not empty item.ATTR04}">point2</c:if>'></div>
                 <div>
                 	<div>${fn:substring(item.ATTR03,4,8)}월</div>
@@ -69,12 +69,14 @@
                 	<div>${item.ATTR02}</div>
                 </div>
             </div>
-            <div class="col-4 col-lg-6"><img class="img-small img-large rounded" style="max-height:140px; margin-top:16px; box-shadow: 3px 3px 3px gray;" src="${item.ATTR01}"></div>
+            <div class="col-2 col-sm-4 col-lg-4">
+            	<img class="img-small img-large rounded" style="height:140px; width:220px; max-height:140px; margin-top:16px; box-shadow: 3px 3px 3px gray;" src="${item.ATTR01}">
+            </div>
         </div>        
         </c:forEach>
         <div class="row gx-0">
-            <div class="col-3"></div>
-            <div class="col-9 position-relative" style="height:40px;">
+            <div class="col-3 col-sm-3 col-lg-4"></div>
+            <div class="col-9 col-sm-9 col-lg-8 position-relative" style="height:40px;">
                 <div class="base"></div>                    
             </div>
         </div>        	
