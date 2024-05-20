@@ -33,7 +33,7 @@
 					</a>
 				</div>
 				
-				<div class='<c:if test="${not empty item.ATTR04}">col-12 col-sm-6</c:if><c:if test="${empty item.ATTR04}">col</c:if>' onclick="goUrl('${item.SEQ_NO}','${item.GROUP_ID}', '${item.W_SIZE}', '${item.ATTR05}')" style="cursor:pointer;">
+				<div class='<c:if test="${not empty item.ATTR04}">col-12 col-sm-8 col-md-6</c:if><c:if test="${empty item.ATTR04}">col</c:if>' onclick="goUrl('${item.SEQ_NO}','${item.GROUP_ID}', '${item.W_SIZE}', '${item.ATTR05}')" style="cursor:pointer;">
 					<div class="pt-1 ps-2">
 						<span class="fs-4" style="font-weight:bold; font-family:GamtanD;">${item.SUBJECT}</span>
 					<c:if test="${not empty item.ATTR03}">
