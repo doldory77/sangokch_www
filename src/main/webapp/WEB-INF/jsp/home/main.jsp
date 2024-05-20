@@ -124,7 +124,22 @@
 	
 	<!-- <div>${applicationScope.ENV['CD0002_05']['VALUE_STR']}</div> -->
 	<div class="container-lg" style="margin-bottom: 80px;">
+		<!-- <div class="d-flex justify-content-center mt-4">
+			<iframe width="728" height="410" src="https://www.youtube.com/embed/EeipKb0bz7E?si=I8S3iv1xoJzxKwAm&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+		</div> -->
 		<div class="row gy-0 gx-0 justify-content-center row-cols-1 row-cols-md-2 mt-4">
+			
+			<div class="col">
+				<div class="mainItem mainItem-b">
+				<div>
+					<iframe width="100%" height="297.5" src="https://www.youtube.com/embed/EeipKb0bz7E?si=I8S3iv1xoJzxKwAm&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+				</div>
+				<div style="color:#000;font-family:GamtanD;">
+		        	<div><strong>홍보영상</strong></div>
+					<div>김동호목사 초청 부흥집회</div>
+		        </div>
+				</div>
+			</div>
 			
 			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
 			<div class="col" style="position:relative;">
