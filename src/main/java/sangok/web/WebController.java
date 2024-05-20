@@ -438,7 +438,7 @@ public class WebController implements InitializingBean {
 		model.addAttribute("TITLE", title);
 //		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
 		
-		return "home/C0000000/C0000001";
+		return "home/C0000000/C0000003";
 	}	
 	
 	/*

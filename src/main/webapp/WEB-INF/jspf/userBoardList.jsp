@@ -26,21 +26,34 @@
 		</div> -->
 		<c:forEach var="item" items="${BOARD_LIST}">
 			<div class="row border-bottom py-2">
-				<div class="col-md-3 text-center d-none d-md-block">
-					<img src=${item.ATTR01} style="max-width:180px; max-height:142px;">
+			
+				<div class="col-12 col-sm-4 text-center" style="min-width:180px;">
+					<a href="${item.ATTR04}" target="blank">
+						<img src=${item.ATTR01} style="max-width:180px; max-height:142px;">
+					</a>
 				</div>
-				<div class='<c:if test="${not empty item.ATTR04}">col-md-7 col-9</c:if><c:if test="${empty item.ATTR04}">col</c:if>' onclick="goUrl('${item.SEQ_NO}','${item.GROUP_ID}', '${item.W_SIZE}', '${item.ATTR05}')" style="cursor:pointer;">
-					<div><span class="fs-4" style="font-family:HSWinter;">${item.SUBJECT}</span><c:if test="${not empty item.ATTR03}"><span class="fs-6"> (${fn:substring(item.ATTR03,0,4)}-${fn:substring(item.ATTR03,4,6)}-${fn:substring(item.ATTR03,6,8)})</span></c:if></div>
-					<c:if test="${not empty item.ATTR02}"><div class="border-top fs-5 text-md-end pt-2">${item.ATTR02}</div></c:if>
+				
+				<div class='<c:if test="${not empty item.ATTR04}">col-12 col-sm-6</c:if><c:if test="${empty item.ATTR04}">col</c:if>' onclick="goUrl('${item.SEQ_NO}','${item.GROUP_ID}', '${item.W_SIZE}', '${item.ATTR05}')" style="cursor:pointer;">
+					<div class="pt-1 ps-2">
+						<span class="fs-4" style="font-weight:bold; font-family:GamtanD;">${item.SUBJECT}</span>
+					<c:if test="${not empty item.ATTR03}">
+						<span class="fs-6"> (${fn:substring(item.ATTR03,0,4)}-${fn:substring(item.ATTR03,4,6)}-${fn:substring(item.ATTR03,6,8)})</span>
+					</c:if>
+					</div>
+					<c:if test="${not empty item.ATTR02}">
+					<div class="border-top fs-6 text-end pt-2 ps-3">${item.ATTR02}</div>
+					</c:if>
 				</div>
+				
 				<c:if test="${not empty item.ATTR04}">
-				<div class="col-md-2 col-3 d-flex justify-content-center align-items-center">
+				<div class="col-sm-2 d-none d-md-flex justify-content-center align-items-center">
 					<a href="${item.ATTR04}" target="blank" class="youtube">
 						<span class="material-symbols-outlined" style="vertical-align: middle;">smart_display</span>
 						<span style="vertical-align: middle; margin-left: 3px;">YouTube</span>
 					</a>
 				</div>
 				</c:if>
+				
 			</div>
 		</c:forEach>
 		<div class="mt-3 d-flex justify-content-center">
