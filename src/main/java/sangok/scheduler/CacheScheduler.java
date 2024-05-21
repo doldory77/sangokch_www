@@ -24,7 +24,7 @@ public class CacheScheduler {
 	}
 	
 	/*5분마다*/
-	@Scheduled(fixedDelay = 300000)
+	@Scheduled(fixedDelay = 3600000)
 	public void routin() {
 		try {
 			List<Map<String, Object>> envMapList = webMapper.selectEnv(JMap.instance("GROUP_ID", "CD0002").build());

@@ -71,27 +71,11 @@
 				</div>
 			</c:forEach>
 		</div>
-			
-		<div class="row g-5 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3 mt-4">
-
-			
-			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
-			<div class="col">
-				<figure>
-				  <figcaption class="fs-5 text-center" style="font-family:HSWinter;">${item.SUBJECT}</figcaption>
-				  <div>			    
-				    <div class="is-gradient" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
-				      <img class="is-rwd" src="${item.ATTR01}">
-				    </div>
-				    <p style="margin-top:20px; color:#000;font-family:HSWinter;">${fn:replace(item.ATTR02, newLine, '<br>')}</p>
-				  </div>
-				</figure>			    
-			</div>		
-			</c:forEach>
-						
-		</div>
-		
 	</div>
+	
+	<jsp:include page="/WEB-INF/jspf/userBoardGalary.jsp" flush="false">
+		<jsp:param name="W_SIZE" value="1024px" />
+	</jsp:include>
 
 	<c:if test="${not empty FOOTER_IMG}">
 	<div class="container-fluid pt-5 px-0">

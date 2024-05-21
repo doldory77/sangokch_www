@@ -140,6 +140,22 @@
 		/*WebMapper.selectBoardList*/
 	</select>
 	
+	<select id="selectBoardGalary" statementType="CALLABLE" parameterType="map" resultType="map">
+		{
+			CALL SP_GET_BOARD_GALARY(
+				#{BLOCK_START, mode=OUT, jdbcType=INTEGER}
+				, #{BLOCK_END, mode=OUT, jdbcType=INTEGER}
+				, #{TOTAL_PAGE, mode=OUT, jdbcType=INTEGER}
+				, #{TOTAL_BLOCK, mode=OUT, jdbcType=INTEGER}
+				, #{START_NUM, mode=OUT, jdbcType=INTEGER}
+				, #{CURR_PAGE, mode=IN, jdbcType=INTEGER}
+				, #{GROUP_ID, mode=IN, jdbcType=VARCHAR}
+				, #{TAG_CD, mode=IN, jdbcType=VARCHAR}
+			)
+		}
+		/*WebMapper.selectBoardGalary*/
+	</select>
+	
 	<select id="selectBoardDtl" statementType="CALLABLE" parameterType="map" resultType="map">
 		/*WebMapper.selectBoardDtl*/
 		{ CALL SP_GET_BOARD_DTL(#{GROUP_ID}, #{SEQ_NO}, #{TAG_CD}, #{USE_YN}, #{ORDER_BY}) }

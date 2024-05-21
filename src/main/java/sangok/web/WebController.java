@@ -192,6 +192,31 @@ public class WebController implements InitializingBean {
 		return list;
 	}
 	
+	/*
+	 * 게시판 겔러리 조회 공통처리
+	 */
+	private List<Map<String, Object>> setBoardGalaryInitParams(Map<String, Object> params, ModelMap model) throws Exception {
+		if (JNum.isInteger(params.get("CURR_PAGE")) == false) {
+			params.put("CURR_PAGE", 1);
+		}
+		if (JStr.isStr(params.get("GROUP_ID")) == false) {
+			params.put("GROUP_ID", null);
+		}
+		if (JStr.isStr(params.get("TAG_CD")) == false) {
+			params.put("TAG_CD", null);
+		}
+		
+		List<Map<String, Object>> DISP_Y_LIST = webService.selectBoardGalary(params);
+		
+		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
+		model.addAttribute("TAG_CD", params.get("TAG_CD"));
+		model.addAttribute("PAGE", params.get("PAGE"));
+		
+		model.addAttribute("DISP_Y_LIST", DISP_Y_LIST);
+		model.addAttribute("PAGE_CTL", params);
+		return DISP_Y_LIST;
+	}
+	
 	@SuppressWarnings("unused")
 	private boolean isDebug = true;
 	
@@ -611,20 +636,21 @@ public class WebController implements InitializingBean {
 	 * 사용자 홈페이지 접속
 	 */
 	@RequestMapping(value = "/E0000004.do")
-	public String e0000004(HttpServletRequest request, ModelMap model) throws Exception {		
+	public String e0000004(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
 		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "E0000004").put("USE_YN", "Y").build());
 		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "E0000004").put("USE_YN", "Y").build());
 		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "E0000004").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
-		List<Map<String, Object>> DISP_Y_LIST = webService.getMapper().selectDispYnBoard(JMap.instance("GROUP_ID", "E0000004").put("TAG_CD", "00").build());
+//		List<Map<String, Object>> DISP_Y_LIST = webService.getMapper().selectDispYnBoard(JMap.instance("GROUP_ID", "E0000004").put("TAG_CD", "00").build());
+		this.setBoardGalaryInitParams(params, model);
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "E0000004").build()).get("MENU_NM").toString();
 		
 		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
 		model.addAttribute("BODY_LIST", BODY_LIST);
-		model.addAttribute("DISP_Y_LIST", DISP_Y_LIST);
+//		model.addAttribute("DISP_Y_LIST", DISP_Y_LIST);
 		model.addAttribute("TITLE", title);
 //		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_IMG","BODY_LIST"}, new Boolean[] {false, false, true}, model);
 		
