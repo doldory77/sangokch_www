@@ -32,6 +32,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import sangok.scheduler.CacheScheduler;
 import sangok.service.WebService;
+import sangok.utils.JIMG;
 import sangok.utils.JList;
 import sangok.utils.JMap;
 import sangok.utils.JNum;
@@ -1119,8 +1120,11 @@ public class WebController implements InitializingBean {
 					String newlnfImgFileName = "img_" + UUID.randomUUID() + "." + ext;
 					imgPath = imgUrlPath + newlnfImgFileName;
 					File file = new File(imgRealPath + newlnfImgFileName);
-					mf.transferTo(file);
 					
+					// 이미지 리싸이즈 처리
+					if (JIMG.saveToResizeImage(mf, 0, 0, 0.5f, file) == false) {
+						mf.transferTo(file);						
+					}
 					//Runtime.getRuntime().exec("chmod 666 " + file);
 				}
 			}

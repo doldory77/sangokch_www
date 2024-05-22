@@ -185,6 +185,13 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.31</version>
         </dependency>
+        
+        <!-- https://mvnrepository.com/artifact/net.coobird/thumbnailator -->
+		<dependency>
+		    <groupId>net.coobird</groupId>
+		    <artifactId>thumbnailator</artifactId>
+		    <version>0.4.20</version>
+		</dependency>
 
         <!-- mysql이나 oracle DB 사용시 아래 설정 추가
         <dependency>
