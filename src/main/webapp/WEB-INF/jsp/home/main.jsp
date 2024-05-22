@@ -10,6 +10,9 @@
 <!doctype html>
 <html lang="ko">
   <head>
+  	
+  	<meta name="naver-site-verification" content="218fcbbbd3b8b29ebbfa4c6ec3ae306ca224de59" />
+  	
 	<%@ include file="/WEB-INF/jspf/head.jspf" %>
 	<link rel="stylesheet" href="/css/font.css">
     <title>${TITLE}</title>

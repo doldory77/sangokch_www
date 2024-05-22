@@ -47,7 +47,7 @@
 	
 	<c:if test="${not empty HEADER_IMG}">
 	<div class="container-fluid pt-5 px-0">
-		<div class="mainHead" style='position:relative; background-image:url(${HEADER_IMG.ATTR01}); <c:if test="${not empty HEADER_IMG.ATTR04}">background-position-y:${HEADER_IMG.ATTR04}%;</c:if> <c:if test="${not empty HEADER_IMG.ATTR03}">height:${HEADER_IMG.ATTR03}px;</c:if>'>
+		<div class="mainHead mainHead-b" style='position:relative; background-image:url(${HEADER_IMG.ATTR01}); <c:if test="${not empty HEADER_IMG.ATTR04}">background-position-y:${HEADER_IMG.ATTR04}%;</c:if> <c:if test="${not empty HEADER_IMG.ATTR03}">height:${HEADER_IMG.ATTR03}px;</c:if>'>
 		    <p class="mainHead-title word fs-1" style='<c:if test="${not empty HEADER_IMG.ATTR05}">margin-top:${HEADER_IMG.ATTR05}px;</c:if>'>
 		        ${HEADER_IMG.ATTR02}
 		    </p>
@@ -79,7 +79,7 @@
 			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
 			<div class="col">
 				<figure>
-				  <figcaption class="fs-5 text-center" style="font-family:GamtanD;">
+				  <figcaption class="fs-5 text-center" style="font-weight:bold; font-family:GamtanD;">
 				  	<div>${item.SUBJECT}</div>
 				  </figcaption>
 				  <div>			    
@@ -88,7 +88,7 @@
 				    </div>
 				    <c:if test="${not empty item.ATTR02}">
 				    <div style="position: relative; width: 100%; height: 108px; margin-top: 8px;">
-				    	<p style="margin-top:20px; color:#000; font-family:GamtanD; margin-top: 20px; position: absolute; padding-left: 10px;">${fn:replace(item.ATTR02, newLine, '<br>')}</p>
+				    	<p style="margin-top:20px; color:#000; font-weight:bold; font-family:GamtanD; margin-top: 20px; position: absolute; padding-left: 10px;">${fn:replace(item.ATTR02, newLine, '<br>')}</p>
 				    	<div style="width: 100%; height: 108px; background-color: white; opacity: 0.4; border-radius: 3px;"></div>
 				    </div>
 				    </c:if>
