@@ -139,7 +139,7 @@
 				</div>
 				<div style="color:#000;font-family:GamtanD;">
 		        	<div><strong>홍보영상</strong></div>
-					<div>김동호목사 초청 부흥집회</div>
+					<div style="padding-left:5px;">김동호목사 초청 부흥집회</div>
 		        </div>
 				</div>
 			</div>
@@ -158,9 +158,8 @@
 			    	</c:choose>
 			        <div style="color:#000;font-family:GamtanD;">
 			        	<div><strong>${item.SUBJECT}</strong></div>
-						<c:out value="${item.ATTR02}" escapeXml="false"></c:out>
+						<p style="padding-left:5px;">${fn:replace(item.ATTR02, newLine, '<br>')}</p>
 			        </div>
-			        <!-- <p style="color:#000;font-family:HSWinter;">${fn:replace(item.ATTR02, newLine, '<br>')}</p> -->
 			    </div>
 			</div>			
 			</c:forEach>
