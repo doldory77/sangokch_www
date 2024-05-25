@@ -1122,7 +1122,7 @@ public class WebController implements InitializingBean {
 					File file = new File(imgRealPath + newlnfImgFileName);
 					
 					// 이미지 리싸이즈 처리
-					if (JIMG.saveToResizeImage(mf, 0, 0, 0.5f, file) == false) {
+					if (JIMG.saveToResizeImage(mf, 0, 0, 0f, file) == false) {
 						mf.transferTo(file);						
 					}
 					//Runtime.getRuntime().exec("chmod 666 " + file);
