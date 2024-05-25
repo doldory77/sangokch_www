@@ -48,7 +48,7 @@
 	</c:if> -->
 	
 	<div class="d-flex justify-content-center align-items-center">
-		<img style="max-width:1280px; max-height:625px; width:100%;" src="https://cdn.pixabay.com/photo/2017/06/20/08/12/maintenance-2422172_1280.jpg">
+		<img style="max-width:1280px; max-height:625px; width:100%; margin-top:49px;" src="https://cdn.pixabay.com/photo/2017/06/20/08/12/maintenance-2422172_1280.jpg">
 	</div>
 	
 	<!-- <div class="container-md">

@@ -47,11 +47,10 @@
 	</div>
 	</c:if> -->
 	
-	<div class="pageBodyW container-fluid">
-		<div class="readyDiv">
-			<img class="readyImg" src="http://beautifulseodang.1937.co.kr/images/ready.jpg">
-		</div>
+	<div class="d-flex justify-content-center align-items-center">
+		<img style="max-width:1280px; max-height:625px; width:100%; margin-top:49px;" src="https://cdn.pixabay.com/photo/2017/06/20/08/12/maintenance-2422172_1280.jpg">
 	</div>
+	
 	<!-- <div class="container-md">
 		<div class="row gy-0 gx-0 justify-content-center row-cols-1 row-cols-sm-2 row-cols-lg-3 mt-4">
 			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
