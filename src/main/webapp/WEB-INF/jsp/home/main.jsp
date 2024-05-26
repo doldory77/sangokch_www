@@ -131,6 +131,34 @@
 			<iframe width="728" height="410" src="https://www.youtube.com/embed/EeipKb0bz7E?si=I8S3iv1xoJzxKwAm&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 		</div> -->
 		<div class="row gy-0 gx-0 justify-content-center row-cols-1 row-cols-md-2 mt-4">
+		
+			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
+			<div class="col">
+			    <div class="mainItem mainItem-b">
+			    	<c:choose>
+			    	<c:when test="${not empty item.ATTR04}">
+				    	<div>
+							<iframe width="100%" height="297.5" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+						</div>
+			    	</c:when>
+			    	<c:otherwise>
+				    	<c:choose>
+				    	<c:when test="${not empty item.ATTR05}">
+				    		<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='${item.ATTR05}'"></div>
+				    	</c:when>
+				    	<c:otherwise>
+				        	<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
+				    	</c:otherwise>
+				    	</c:choose>
+			    	</c:otherwise>
+				    </c:choose>
+			        <div style="color:#000;font-family:GamtanD;">
+			        	<div><strong>${item.SUBJECT}</strong></div>
+						<p style="padding-left:5px;">${fn:replace(item.ATTR02, newLine, '<br>')}</p>
+			        </div>
+			    </div>
+			</div>	
+			</c:forEach>		
 			
 			<div class="col">
 				<div class="mainItem mainItem-b">
@@ -162,20 +190,6 @@
 			        </div>
 			    </div>
 			</div>			
-			</c:forEach>
-			
-			<c:forEach var="item" items="${BODY_LIST}" varStatus="status">
-				<!--<c:out value="${item.CONTENT}" escapeXml="false"></c:out>-->
-				<div class="col">
-				    <div class="mainItem mainItem-b">
-				        <div style="background-image:url('${item.ATTR01}'); background-size:cover; cursor:pointer;" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
-							
-				        </div>
-				        <div style="color:#000;font-family:HSWinter;">
-							<c:out value="${item.ATTR02}" escapeXml="false"></c:out>
-				        </div>
-				    </div>
-				</div>
 			</c:forEach>
 			
 		</div>
