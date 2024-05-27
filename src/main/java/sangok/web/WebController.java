@@ -258,7 +258,7 @@ public class WebController implements InitializingBean {
 //			stdImgPath = JStr.extractStr(WebServiceImpl.imgPattern, JStr.toStr(ROLL_IMG_LIST.get(i).get("CONTENT")));
 //			ROLL_IMG_LIST.get(i).put("CONTENT", JStr.isStr(stdImgPath) ? stdImgPath.replaceAll("\"", "") : stdImgPath);
 //		}
-		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "A0000000").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "A0000000").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
 		
 		model.addAttribute("HEADER_TEXT_LIST", HEADER_TEXT_LIST);
 		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);

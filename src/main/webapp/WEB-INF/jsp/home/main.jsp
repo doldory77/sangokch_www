@@ -160,18 +160,6 @@
 			</div>	
 			</c:forEach>		
 			
-			<div class="col">
-				<div class="mainItem mainItem-b">
-				<div>
-					<iframe width="100%" height="297.5" src="https://www.youtube.com/embed/EeipKb0bz7E?si=I8S3iv1xoJzxKwAm&amp;controls=0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-				</div>
-				<div style="color:#000;font-family:GamtanD;">
-		        	<div><strong>홍보영상</strong></div>
-					<div style="padding-left:5px;">김동호목사 초청 부흥집회</div>
-		        </div>
-				</div>
-			</div>
-			
 			<c:forEach var="item" items="${DISP_Y_LIST}" varStatus="status">
 			<div class="col" style="position:relative;">
 				<div class="item-badge hide show"><div>${item.GROUP_NM}</div></div>
