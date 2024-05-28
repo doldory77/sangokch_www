@@ -274,6 +274,16 @@ public class WebController implements InitializingBean {
 	/*
 	 * 사용자 홈페이지 접속
 	 */
+	@RequestMapping(value = "/sitemap.do")
+	public String sitemap(HttpSession session, ModelMap model) throws Exception {
+		commProcessSetMenu(true, model);
+		
+		return "home/sitemap";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
 	@RequestMapping(value = "/boardDtlView.do")
 	public String boardDtlView(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
 		this.commProcessMenuHighlightByBoardDtlView(request, model);

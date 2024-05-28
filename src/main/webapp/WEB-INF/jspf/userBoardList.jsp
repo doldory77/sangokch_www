@@ -6,6 +6,7 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%
 	String W_SIZE = request.getParameter("W_SIZE");
+	pageContext.setAttribute("newLine", "\n");
 %>
 <c:set var="W_SIZE" value="<%=W_SIZE%>"/>
 	
@@ -41,7 +42,7 @@
 					</c:if>
 					</div>
 					<c:if test="${not empty item.ATTR02}">
-					<div class="border-top fs-6 text-end pt-2 ps-3">${item.ATTR02}</div>
+					<div class="border-top fs-6 text-end pt-2 ps-3">${fn:replace(item.ATTR02, newLine, '<br>')}</div>
 					</c:if>
 				</div>
 				

@@ -1,5 +1,6 @@
 .board-frame {
-	width:260px;
+	width:280px;
+	height:160px;
 	border:1px dotted #c2c2c2;
 	margin:2px;
 	/*cursor:pointer;*/
@@ -42,5 +43,5 @@
     bottom: 0;
     z-index: -1;
     background-size: cover;
-    opacity: 0.4;
+    opacity: 0.2;
 }

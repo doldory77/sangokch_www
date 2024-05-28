@@ -13,7 +13,7 @@
 		<div class="d-flex flex-wrap justify-content-start">
 		<c:forEach var="item" items="${BOARD_LIST}">  
 			<div class="d-flex flex-column justify-content-between board-frame p-1" >
-				<!-- <div class="board-frame-background" style='background-image: url(${item.ATTR01});'></div> -->
+				<c:if test="${not empty item.ATTR01}"><div class="board-frame-background" style='background-image: url(${item.ATTR01});'></div></c:if>
 				<div class="d-flex justify-content-between align-items-center">
 					<span class="sub1">${item.GROUP_NM}</span>
 					<c:if test="${fn:length(item.ATTR03) le 8}"><span class="sub1">${item.ATTR03}</span></c:if>
