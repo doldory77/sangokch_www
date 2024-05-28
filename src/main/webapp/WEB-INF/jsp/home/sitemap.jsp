@@ -29,7 +29,7 @@
 			color: inherit;
 		}
 		.bImg {
-			position: absolute;
+			position: fixed;
 		    display: block;
 		    z-index: -1;
 		    bottom: 0;
