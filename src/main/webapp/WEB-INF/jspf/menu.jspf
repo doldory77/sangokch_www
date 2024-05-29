@@ -4,8 +4,8 @@
 
 	  <!-- Search Bar -->
 	  <!-- <div style="position:fixed; left:20px; top: 200px; z-index:999; background-color:white;" id="test"></div> -->
-	  <div class="search_bar">
-	  	<div class="me-1">
+	  <div class="search_bar" style="background-color: white; width: 365px; height: 63px; align-items: start; justify-content: right;">
+	  	<div class="me-1" style="position: absolute; top: 0px; left: -32px;">
 	  		<input type="checkbox" id="search_btn">
 	  		<label for="search_btn" class="d-flex justify-content-center align-items-center">
 	  			<!-- <span style="font-size:32px; cursor:pointer;" class="material-symbols-outlined">frame_inspect</span> -->
