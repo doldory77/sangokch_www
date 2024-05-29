@@ -265,7 +265,7 @@ public class WebController implements InitializingBean {
 		model.addAttribute("ROLL_IMG_LIST", ROLL_IMG_LIST);
 		model.addAttribute("BODY_LIST", BODY_LIST);
 		model.addAttribute("DISP_Y_LIST", DISP_Y_LIST);
-		model.addAttribute("TITLE", "산곡교회 홈페이지");
+		model.addAttribute("TITLE", "산곡교회");
 //		commProcessEscapeBoard(new String[] {"HEADER_TEXT_LIST","HEADER_IMG","ROLL_IMG_LIST","BODY_LIST"}, new Boolean[] {true, false, true, true}, model);
 		
 		return "home/main";
@@ -279,6 +279,17 @@ public class WebController implements InitializingBean {
 		commProcessSetMenu(true, model);
 		
 		return "home/sitemap";
+	}
+	
+	/*
+	 * 사용자 홈페이지 접속
+	 */
+	@RequestMapping(value = "/sitemapXml.do")
+	public String sitemapXml(HttpSession session, ModelMap model) throws Exception {
+		commProcessSetMenu(true, model);
+		model.addAttribute("NOW", JStr.yyyyMMddTHHmiss());
+		
+		return "home/sitemap_xml";
 	}
 	
 	/*
@@ -1020,7 +1031,9 @@ public class WebController implements InitializingBean {
 		case "B0000004" :
 		case "C0000001" :
 		case "C0000002" :
+		case "C0000003" :
 		case "E0000001" :
+		case "F0000001" :
 			params.put("ORDER_BY", "SCREEN_YN DESC, ATTR03 DESC");
 			break;
 		default:

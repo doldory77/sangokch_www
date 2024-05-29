@@ -1,5 +1,7 @@
 package sangok.utils;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -43,5 +45,12 @@ public class JStr {
 			return yyyymmdd.substring(0, 4) + div + yyyymmdd.substring(4, 6) + div + yyyymmdd.substring(6, 8);
 		}
 		return yyyymmdd;
+	}
+	
+	public static String yyyyMMddTHHmiss() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss+09:00");
+		Date dt = new Date();
+		return sdf.format(dt) + "T" + sdf2.format(dt);
 	}
 }
