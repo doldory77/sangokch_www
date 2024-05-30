@@ -34,7 +34,7 @@
 				<div class="row gy-3 ps-0 ps-md-2">
 					<c:forEach var="item" items="${BODY_IMG}" varStatus="status">
 					<div class="col-12">
-						<img src="${item.ATTR01}" style="width:100%">
+						<img src="${item.ATTR01}" style="width:100%; border-radius: 10px;">
 					</div>
 					</c:forEach>
 				</div>

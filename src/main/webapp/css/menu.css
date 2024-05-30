@@ -10,13 +10,17 @@
 .search_bar {
 	position: fixed;
     top: 82px;
-    right: -360px;
+    right: -365px;
     display: flex;
     justify-content: right;
-    align-items: center;
+    align-items: start;
     padding: 5px;
     z-index: 100;
     transition: all .35s;
+    background-color: white; 
+    width: 365px; 
+    height: 63px;  
+    border-radius: 5px 0px 0px 05px;
 }
 .search_bar input[type='checkbox'] {
 	display: none;
