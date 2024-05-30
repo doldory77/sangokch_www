@@ -21,6 +21,7 @@
     width: 365px; 
     height: 63px;  
     border-radius: 5px 0px 0px 05px;
+    box-shadow: 3px 3px 3px #434343;
 }
 .search_bar input[type='checkbox'] {
 	display: none;
