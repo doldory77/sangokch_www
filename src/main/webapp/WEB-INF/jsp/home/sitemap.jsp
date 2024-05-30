@@ -78,7 +78,9 @@
 			</div>
 		</c:forEach>
 		</div>
+		
 		<img class="bImg" src="https://cdn.pixabay.com/photo/2020/06/02/05/29/church-5249458_1280.png">
+		
 	</div>
 	
   	<script>
