@@ -13,6 +13,24 @@
   	
   	<meta name="naver-site-verification" content="218fcbbbd3b8b29ebbfa4c6ec3ae306ca224de59" />
   	
+	<meta name="robots" content="index,follow" />
+	<meta name="subject" content="산곡성결교회" />
+	<meta name="title" content="산곡성결교회" />
+	<meta name="author" content="산곡성결교회">
+	<meta name="description" content="선교,나눔,비전이 있는교회 | 산곡성결교회입니다." />
+	<meta property="og:type" content="website" />
+	<meta property="og:rich_attachment" content="true" />
+	<meta property="og:site_name" content="산곡성결교회" />
+	<meta property="og:title" content="산곡성결교회" />
+	<meta property="og:description" content="선교,나눔,비전이 있는교회 | 산곡성결교회입니다." />
+	<meta property="og:image" content="http://sangokch.org/images/sangok_ck0.png">
+	<meta property="og:image:width" content="512">
+	<meta property="og:image:height" content="384">
+	<meta property="og:url" content="http://sangokch.org" />
+	<meta itemprop="name" content="산곡성결교회" />
+	<meta itemprop="description" content="선교,나눔,비전이 있는교회 | 산곡성결교회입니다." />
+	<meta itemprop="image" content="http://sangokch.org/images/sangok_ck0.png" />  	
+  	
 	<%@ include file="/WEB-INF/jspf/head.jspf" %>
 	<link rel="stylesheet" href="/css/font.css">
     <title>${TITLE}</title>
