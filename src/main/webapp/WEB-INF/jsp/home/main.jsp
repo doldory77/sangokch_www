@@ -134,7 +134,7 @@
 		    <div class='carousel-item <c:if test="${status.index eq 0}">active</c:if>'>
 		      <img src="${item.ATTR01}" class="d-block w-100" alt="...">
 		      <div class="carousel-caption d-none d-sm-block">
-		        <h4 style="color:#fff;font-family:HSWinter;">빠른시간에 홈페이지 오픈 예정입니다.</h4>
+		        <h4 style="color:#fff;font-family:GamtanD;">산곡교회 오신 여러분을 축복합니다.</h4>
 		      </div>
 		    </div>
 		    </c:forEach>
