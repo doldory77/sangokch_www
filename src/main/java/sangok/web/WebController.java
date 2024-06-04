@@ -95,8 +95,7 @@ public class WebController implements InitializingBean {
 	    if (ip == null) {
 	        ip = request.getRemoteAddr();
 	    }
-//	    if (!"127.0.0.1".equals(ip)) 
-	    webService.getMapper().insertAccessLog(JMap.instance("REQUEST_URL", url).put("REQUEST_QUERY", request.getQueryString()).put("REQUEST_ADDR", ip).build());
+	    if (!"127.0.0.1".equals(ip)) webService.getMapper().insertAccessLog(JMap.instance("REQUEST_URL", url).put("REQUEST_QUERY", request.getQueryString()).put("REQUEST_ADDR", ip).build());
 	}
 	
 	/*
