@@ -79,6 +79,7 @@ public class WebController implements InitializingBean {
 	 */		
 	private void accessLog(HttpServletRequest request) throws Exception {
 		String ip = request.getHeader("X-Forwarded-For");
+		String url = request.getRequestURI();
 	    if (ip == null) {
 	        ip = request.getHeader("Proxy-Client-IP");
 	    }
@@ -94,7 +95,8 @@ public class WebController implements InitializingBean {
 	    if (ip == null) {
 	        ip = request.getRemoteAddr();
 	    }
-		webService.getMapper().insertAccessLog(JMap.instance("REQUEST_URL", request.getRequestURI()).put("REQUEST_ADDR", ip).build());
+//	    if (!"127.0.0.1".equals(ip)) 
+	    webService.getMapper().insertAccessLog(JMap.instance("REQUEST_URL", url).put("REQUEST_QUERY", request.getQueryString()).put("REQUEST_ADDR", ip).build());
 	}
 	
 	/*
@@ -322,7 +324,8 @@ public class WebController implements InitializingBean {
 	 * 사용자 홈페이지 접속
 	 */
 	@RequestMapping(value = "/boardDtlView.do")
-	public String boardDtlView(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+	public String boardDtlView(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlightByBoardDtlView(request, model);
 		this.commProcessSetMenu(true, model);
 		

@@ -265,13 +265,18 @@
 	
 	<insert id="insertAccessLog" parameterType="map">
 		INSERT INTO H_LOG (
-			REQUEST_URL
+			SEQ_NO
+			, REQUEST_URL
+			, REQUEST_QUERY
 			, REQUEST_DT
+			, REQUEST_TM
 			, REQUEST_ADDR
-		) VALUES (
-			#{REQUEST_URL}
+		) SELECT
+			(SELECT IFNULL(MAX(SEQ_NO)+1, 1) FROM H_LOG WHERE REQUEST_URL = #{REQUEST_URL} AND REQUEST_DT = DATE_FORMAT(SYSDATE(), '%Y%m%d'))
+			, #{REQUEST_URL}
+			, #{REQUEST_QUERY}
 			, DATE_FORMAT(SYSDATE(), '%Y%m%d')
+			, DATE_FORMAT(SYSDATE(), '%T')
 			, #{REQUEST_ADDR}
-		)
 	</insert>
 </mapper>
