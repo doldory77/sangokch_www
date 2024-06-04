@@ -139,7 +139,7 @@
 			  		</div>
 			  		<div class="col mb-2">
 			  			
-			  			<textarea name="ATTR02" id="attr02" style="width:100%">${not empty BOARD_DTL ? BOARD_DTL.ATTR02 : ''}</textarea>
+			  			<textarea name="ATTR02" id="attr02" style="width:100%; height:110px;">${not empty BOARD_DTL ? BOARD_DTL.ATTR02 : ''}</textarea>
 			  		</div>
 			  	</div>
 			  	

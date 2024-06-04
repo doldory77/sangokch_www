@@ -21,7 +21,7 @@
   	<link rel="stylesheet" href="/css/board.css?v=0.1">
   	
   	<!-- Admin CSS -->
-  	<link rel="stylesheet" href="/css/adm.css">
+  	<link rel="stylesheet" href="/css/adm.css?v=0.1">
   	
   	<!-- Jquery -->
   	<script src="https://code.jquery.com/jquery-latest.min.js"></script>

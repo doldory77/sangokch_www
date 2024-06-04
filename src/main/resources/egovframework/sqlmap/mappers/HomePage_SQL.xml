@@ -263,4 +263,15 @@
 		ORDER BY FIRST_ORDER, ATTR03 DESC
     </select>        	
 	
+	<insert id="insertAccessLog" parameterType="map">
+		INSERT INTO H_LOG (
+			REQUEST_URL
+			, REQUEST_DT
+			, REQUEST_ADDR
+		) VALUES (
+			#{REQUEST_URL}
+			, DATE_FORMAT(SYSDATE(), '%Y%m%d')
+			, #{REQUEST_ADDR}
+		)
+	</insert>
 </mapper>

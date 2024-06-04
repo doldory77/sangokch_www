@@ -55,4 +55,6 @@ public interface WebMapper {
 	Map<String, Object> selectTitle(Map<String, Object> params) throws Exception;
 	
 	List<Map<String, Object>> selectDispYnBoard(Map<String, Object> params) throws Exception;
+	
+	void insertAccessLog(Map<String, Object> params) throws Exception;
 }

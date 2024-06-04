@@ -33,7 +33,7 @@
 			<c:forEach var="mainMenu" items="${MENU_LIST}" varStatus="status">
 			<c:if test="${sessionScope.USER_INFO.authMap[mainMenu.MENU_ID] eq 'Y'}">
 			<div class="col">
-				<div class="group-menu-wrapper">
+				<div class="group-menu-wrapper" onclick="mainMenuClick(event)">
 					<div class="group-menu d-flex justify-content-between align-items-center bg-primary px-2">
 					<c:choose>
 						<c:when test="${not empty mainMenu.MNG_URL}">
@@ -56,7 +56,7 @@
 					<ul>
 						<c:forEach var="sumMenu" items="${mainMenu.SUB_MENU}">
 						<c:if test="${sessionScope.USER_INFO.authMap[sumMenu.MENU_ID] eq 'Y'}">
-						<li>
+						<li onclick="subMenuClick(event)">
 							<a href="${sumMenu.MNG_URL}"><span class="menu-nm">ㄴ ${sumMenu.MENU_NM}</span><span style="font-size:0.8rem;">${sumMenu.MENU_ID}</span></a>
 						</li>
 						</c:if>
@@ -71,7 +71,25 @@
 	</div>
 	
 	<script>
+		function mainMenuClick(event) {
+			//console.log(event.target);
+			$a = $(event.target).find('a:eq(0)');
+			$input = $(event.target).find('input:eq(0)');
+			if ($a.text()) {
+				location.href = $a.attr('href');
+			}
+			if ($input.val()) {
+				$input.trigger('click');
+			}
+			event.stopPropagation();
+		}
 		
+		function subMenuClick(event) {
+			//console.log(event.target);
+			$a = $(event.target).children('a:eq(0)');
+			location.href = $a.attr('href');
+			event.stopPropagation();
+		}
 	</script>
 	
   </body>

@@ -2,6 +2,7 @@ package sangok.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,6 +73,29 @@ public class WebController implements InitializingBean {
 	private List<Map<String, Object>> menuList = null;
 	
 	private Pattern p = Pattern.compile("^/([A-Z]{1,2}[0]{2,3}0{3}[1-9]{1})[.]do$");
+	
+	/*
+	 * 사용자 홈페이지 접근 기록
+	 */		
+	private void accessLog(HttpServletRequest request) throws Exception {
+		String ip = request.getHeader("X-Forwarded-For");
+	    if (ip == null) {
+	        ip = request.getHeader("Proxy-Client-IP");
+	    }
+	    if (ip == null) {
+	        ip = request.getHeader("WL-Proxy-Client-IP");
+	    }
+	    if (ip == null) {
+	        ip = request.getHeader("HTTP_CLIENT_IP");
+	    }
+	    if (ip == null) {
+	        ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+	    }
+	    if (ip == null) {
+	        ip = request.getRemoteAddr();
+	    }
+		webService.getMapper().insertAccessLog(JMap.instance("REQUEST_URL", request.getRequestURI()).put("REQUEST_ADDR", ip).build());
+	}
 	
 	/*
 	 * 페이지 요청시 메뉴 공통처리
@@ -245,7 +269,9 @@ public class WebController implements InitializingBean {
 	 * 사용자 홈페이지 접속
 	 */
 	@RequestMapping(value = "/home.do")
-	public String home(HttpSession session, ModelMap model) throws Exception {
+	public String home(HttpServletRequest request, ModelMap model) throws Exception {
+		
+		accessLog(request);
 		
 		commProcessSetMenu(true, model);
 		
