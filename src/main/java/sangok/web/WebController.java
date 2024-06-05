@@ -96,6 +96,7 @@ public class WebController implements InitializingBean {
 	        ip = request.getRemoteAddr();
 	    }
 	    if (!"127.0.0.1".equals(ip)) webService.getMapper().insertAccessLog(JMap.instance("REQUEST_URL", url).put("REQUEST_QUERY", request.getQueryString()).put("REQUEST_ADDR", ip).build());
+
 	}
 	
 	/*
@@ -267,7 +268,7 @@ public class WebController implements InitializingBean {
 	}	
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 홈페이지 메인 접속
 	 */
 	@RequestMapping(value = "/home.do")
 	public String home(HttpServletRequest request, ModelMap model) throws Exception {
@@ -299,10 +300,11 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 사이트맵 접속
 	 */
 	@RequestMapping(value = "/sitemap.do")
-	public String sitemap(HttpSession session, ModelMap model) throws Exception {
+	public String sitemap(HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		commProcessSetMenu(true, model);
 		
 		return "home/sitemap";
@@ -320,7 +322,7 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 개시판 세부페이지 접속
 	 */
 	@RequestMapping(value = "/boardDtlView.do")
 	public String boardDtlView(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
@@ -341,10 +343,11 @@ public class WebController implements InitializingBean {
 	}	
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 산곡교회비전 접속
 	 */
 	@RequestMapping(value = "/B0000001.do")
-	public String b0000001(HttpServletRequest request, ModelMap model) throws Exception {		
+	public String b0000001(HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -363,10 +366,11 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 섬기는분들 접속
 	 */
 	@RequestMapping(value = "/B0000002.do")
-	public String b0000002(HttpServletRequest request, ModelMap model) throws Exception {		
+	public String b0000002(HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -385,10 +389,11 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 오시는길 접속
 	 */
 	@RequestMapping(value = "/B0000003.do")
-	public String b0000003(HttpServletRequest request, ModelMap model) throws Exception {		
+	public String b0000003(HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -405,10 +410,11 @@ public class WebController implements InitializingBean {
 	}	
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 산곡교회연혁 접속
 	 */
 	@RequestMapping(value = "/B0000004.do")
-	public String b0000004(HttpServletRequest request, ModelMap model) throws Exception {		
+	public String b0000004(HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -425,10 +431,11 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 예배시간 접속
 	 */
 	@RequestMapping(value = "/B0000005.do")
-	public String b0000005(HttpServletRequest request, ModelMap model) throws Exception {		
+	public String b0000005(HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -445,10 +452,11 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 주일예배 접속
 	 */
 	@RequestMapping(value = "/C0000001.do")
-	public String c0000001(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+	public String c0000001(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -469,10 +477,11 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 경배찬양 접속
 	 */
 	@RequestMapping(value = "/C0000002.do")
-	public String c0000002(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+	public String c0000002(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -493,10 +502,11 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 기타행사 접속
 	 */
 	@RequestMapping(value = "/C0000003.do")
-	public String c0000003(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+	public String c0000003(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -517,10 +527,11 @@ public class WebController implements InitializingBean {
 	}	
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 교회학교(영상) 접속
 	 */
 	@RequestMapping(value = "/D0000001.do")
-	public String d0000001(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+	public String d0000001(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -541,10 +552,11 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 어린이부 접속
 	 */
 	@RequestMapping(value = "/D0000002.do")
-	public String d0000002(HttpServletRequest request, ModelMap model) throws Exception {		
+	public String d0000002(HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -565,10 +577,11 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 중고등부 접속
 	 */
 	@RequestMapping(value = "/D0000003.do")
-	public String d0000003(HttpServletRequest request, ModelMap model) throws Exception {		
+	public String d0000003(HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -589,10 +602,11 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 청년부 접속
 	 */
 	@RequestMapping(value = "/D0000004.do")
-	public String d0000004(HttpServletRequest request, ModelMap model) throws Exception {		
+	public String d0000004(HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -613,10 +627,11 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 온라인주보 접속
 	 */
 	@RequestMapping(value = "/E0000001.do")
-	public String e0000001(HttpServletRequest request, @RequestParam Map<String, Object> params, ModelMap model) throws Exception {		
+	public String e0000001(HttpServletRequest request, @RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -635,10 +650,11 @@ public class WebController implements InitializingBean {
 	}	
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 새각족 접속
 	 */
 	@RequestMapping(value = "/E0000002.do")
-	public String e0000002(HttpServletRequest request, ModelMap model) throws Exception {		
+	public String e0000002(HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -659,10 +675,11 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 공지사항 접속
 	 */
 	@RequestMapping(value = "/E0000003.do")
-	public String e0000003(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+	public String e0000003(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -683,10 +700,11 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 겔러리 접속
 	 */
 	@RequestMapping(value = "/E0000004.do")
-	public String e0000004(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+	public String e0000004(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -708,10 +726,11 @@ public class WebController implements InitializingBean {
 	}	
 	
 	/*
-	 * 사용자 홈페이지 접속
+	 * 사용자 세미나 접속
 	 */
 	@RequestMapping(value = "/F0000001.do")
-	public String f0000001(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {		
+	public String f0000001(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
@@ -736,6 +755,7 @@ public class WebController implements InitializingBean {
 	 */
 	@RequestMapping(value = "/admin/login.do")
 	public String adminLogin(@RequestParam(required = false, name = "LOGIN_YN") String loginYn, ModelMap model, HttpServletRequest request) throws Exception {
+		accessLog(request);
 		HttpSession session = request.getSession(false);
 		if (session != null && session.getAttribute("USER_INFO") != null) {
 			return "redirect:/admin/main.do";
@@ -827,13 +847,13 @@ public class WebController implements InitializingBean {
 	/*
 	 * JSON 요청 테스트
 	 */
-	@ResponseBody
-	@RequestMapping(value = "/admin/user/saveUserAuth.do")
-	public Map<String, Object> saveUserAuth(@RequestBody List<Map<String, Object>> params, ModelMap model) throws Exception {
-		
-		debug(params);
-		webService.updateUserAuth(params);
-		return JMap.instance("result", "SUCCESS").put("count", params.size()).build();
+//	@ResponseBody
+//	@RequestMapping(value = "/admin/user/saveUserAuth.do")
+//	public Map<String, Object> saveUserAuth(@RequestBody List<Map<String, Object>> params, ModelMap model) throws Exception {
+//		
+//		debug(params);
+//		webService.updateUserAuth(params);
+//		return JMap.instance("result", "SUCCESS").put("count", params.size()).build();
 		/*
 		$.ajax({
 			type: 'POST'
@@ -849,7 +869,7 @@ public class WebController implements InitializingBean {
 			}
 		}) 		
 		*/
-	}	
+//	}	
 	
 	/*
 	 * 사용자 저장
@@ -1124,16 +1144,16 @@ public class WebController implements InitializingBean {
 	/*
 	 * JSON 요청 테스트
 	 */
-	@ResponseBody
-	@RequestMapping(value = "/jsonTest.do")
-	public Map<String, Object> jsonTest(@RequestBody Map<String, Object> params, ModelMap model) throws Exception {
-		
-		debug(params);
-		model.put("dvsn", "A");
-		model.put("title", "B");
-		model.put("cnt", 0);
-		
-		return JMap.instance("dvsn", "A").put("title", "B").put("cnt", 0).build();
+//	@ResponseBody
+//	@RequestMapping(value = "/jsonTest.do")
+//	public Map<String, Object> jsonTest(@RequestBody Map<String, Object> params, ModelMap model) throws Exception {
+//		
+//		debug(params);
+//		model.put("dvsn", "A");
+//		model.put("title", "B");
+//		model.put("cnt", 0);
+//		
+//		return JMap.instance("dvsn", "A").put("title", "B").put("cnt", 0).build();
 		/*
 		$.ajax({
 			type: 'POST'
@@ -1149,7 +1169,7 @@ public class WebController implements InitializingBean {
 			}
 		}) 		
 		*/
-	}
+//	}
 	
 	/*
 	 * ckeditor5 이미지 저장
