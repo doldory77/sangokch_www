@@ -13,6 +13,12 @@
     <title>${TITLE}</title>
   </head>
   <body>
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PD22H4MR"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+  
 	<div class="wrapper">
   		<%@ include file="/WEB-INF/jspf/menu.jspf" %>
 	</div>
