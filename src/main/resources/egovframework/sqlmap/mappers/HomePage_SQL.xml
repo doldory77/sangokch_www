@@ -279,4 +279,22 @@
 			, DATE_FORMAT(SYSDATE(), '%T')
 			, #{REQUEST_ADDR}
 	</insert>
+	
+	<select id="selectVisitCnt" parameterType="map" resultType="map">
+		SELECT 
+			(SELECT COUNT(*) FROM (
+				SELECT REQUEST_ADDR
+				  FROM H_LOG 
+				 WHERE REQUEST_DT = DATE_FORMAT(SYSDATE(), '%Y%m%d')
+				 GROUP BY REQUEST_ADDR
+			) X) CNT_TODAY
+		
+			,(SELECT COUNT(*) FROM (
+				SELECT REQUEST_DT, REQUEST_ADDR
+				  FROM H_LOG 
+				 WHERE REQUEST_DT BETWEEN DATE_FORMAT(SYSDATE(), '%Y%m01') AND DATE_FORMAT(LAST_DAY(SYSDATE()), '%Y%m%d')
+				 GROUP BY REQUEST_DT, REQUEST_ADDR
+			) X) CNT_MONTH	
+	</select>
+	
 </mapper>

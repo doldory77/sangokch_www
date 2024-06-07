@@ -169,24 +169,24 @@ public class WebController implements InitializingBean {
 	/*
 	 * 게시판 내용중 <h1></h1> 이스케이프 처리
 	 */
-	@SuppressWarnings("unchecked")
-	private void commProcessEscapeBoard(String[] boardNameList
-			, Boolean[] boardListYn
-			, ModelMap model) throws Exception {
-		if (boardNameList != null && boardListYn != null && boardNameList.length == boardListYn.length) {			
-			for (int i=0; i<boardNameList.length; i++) {
-				if (model.get(boardNameList[i]) != null) {
-					if (model.get(boardNameList[i]) instanceof List && ((List<Map<String, Object>>) model.get(boardNameList[i])).size() > 0) {
-						if (boardListYn[i] == true) {
-							model.addAttribute(boardNameList[i], JMap.replaceFirst((List<Map<String, Object>>) model.get(boardNameList[i]), "CONTENT", "<h1>.+</h1>", ""));
-						} else {
-							if (model.get(boardNameList[i]) != null) { model.addAttribute(boardNameList[i], JMap.replaceFirst((List<Map<String, Object>>) model.get(boardNameList[i]), "CONTENT", "<h1>.+</h1>", "").get(0)); }
-						}
-					}
-				}
-			}
-		}
-	}
+//	@SuppressWarnings("unchecked")
+//	private void commProcessEscapeBoard(String[] boardNameList
+//			, Boolean[] boardListYn
+//			, ModelMap model) throws Exception {
+//		if (boardNameList != null && boardListYn != null && boardNameList.length == boardListYn.length) {			
+//			for (int i=0; i<boardNameList.length; i++) {
+//				if (model.get(boardNameList[i]) != null) {
+//					if (model.get(boardNameList[i]) instanceof List && ((List<Map<String, Object>>) model.get(boardNameList[i])).size() > 0) {
+//						if (boardListYn[i] == true) {
+//							model.addAttribute(boardNameList[i], JMap.replaceFirst((List<Map<String, Object>>) model.get(boardNameList[i]), "CONTENT", "<h1>.+</h1>", ""));
+//						} else {
+//							if (model.get(boardNameList[i]) != null) { model.addAttribute(boardNameList[i], JMap.replaceFirst((List<Map<String, Object>>) model.get(boardNameList[i]), "CONTENT", "<h1>.+</h1>", "").get(0)); }
+//						}
+//					}
+//				}
+//			}
+//		}
+//	}
 	
 	/*
 	 * 게시판 조회 공통처리
@@ -813,7 +813,9 @@ public class WebController implements InitializingBean {
 	public String adminMain(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
 		List<Map<String, Object>> menuList = webService.selectMenuByTree();
+		List<Map<String, Object>> countList = webService.getMapper().selectVisitCnt(null);
 		model.addAttribute("MENU_LIST", menuList);
+		model.addAttribute("COUNT_LIST", countList);
 		
 		return "admin/adminMain";
 	}
