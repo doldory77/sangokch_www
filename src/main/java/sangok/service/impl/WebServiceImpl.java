@@ -239,5 +239,21 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 			return webMapper.selectHymn(params);
 		}
 	}
+	
+	@Override
+	public void updateBazaar(Map<String, Object> params) throws Exception {
+		try {
+			Map<String, Object> rtnMap = webMapper.isPurchase(params);
+			if ((long)rtnMap.get("CNT") > 0) {
+				params.putIfAbsent("IS_PURCHASED", "Y");
+			} else {
+				params.putIfAbsent("IS_PURCHASED", "N");
+				webMapper.updateBazaar(params);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw processException("fail.common.sql", new String[]{"updateBazaar",e.getMessage()});
+		}
+	}	
 
 }

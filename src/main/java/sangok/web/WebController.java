@@ -736,14 +736,14 @@ public class WebController implements InitializingBean {
 		
 		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "X0000001").put("USE_YN", "Y").build());
 		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "X0000001").put("USE_YN", "Y").build());
-		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "X0000001").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+//		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "X0000001").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
 //		List<Map<String, Object>> DISP_Y_LIST = webService.getMapper().selectDispYnBoard(JMap.instance("GROUP_ID", "E0000004").put("TAG_CD", "00").build());
 		this.setBoardGalaryInitParams(params, model);
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "X0000001").build()).get("MENU_NM").toString();
 		
 		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
-		model.addAttribute("BODY_LIST", BODY_LIST);
+//		model.addAttribute("BODY_LIST", BODY_LIST);
 //		model.addAttribute("DISP_Y_LIST", DISP_Y_LIST);
 		model.addAttribute("TITLE", title);
 //		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_IMG","BODY_LIST"}, new Boolean[] {false, false, true}, model);
@@ -873,7 +873,7 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * JSON 요청 테스트
+	 * JSON 요청처리
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/admin/user/saveUserAuth.do")
@@ -1173,34 +1173,18 @@ public class WebController implements InitializingBean {
 	}	
 	
 	/*
-	 * JSON 요청 테스트
+	 * JSON 바자회 구매
 	 */
-//	@ResponseBody
-//	@RequestMapping(value = "/jsonTest.do")
-//	public Map<String, Object> jsonTest(@RequestBody Map<String, Object> params, ModelMap model) throws Exception {
-//		
-//		debug(params);
-//		model.put("dvsn", "A");
-//		model.put("title", "B");
-//		model.put("cnt", 0);
-//		
-//		return JMap.instance("dvsn", "A").put("title", "B").put("cnt", 0).build();
-		/*
-		$.ajax({
-			type: 'POST'
-			, url: '/jsonTest.do'
-			, data: JSON.stringify({age:37, name:'doldory'})
-			, dataType: 'JSON'
-			, contentType: 'application/json; charset-utf-8'
-			, success: function(result) {
-				console.log(result);
-			}
-			, error: function(xhr, status, error) {
-				console.log(error);
-			}
-		}) 		
-		*/
-//	}
+	@ResponseBody
+	@RequestMapping(value = "/bazaarPurchase.do")
+	public Map<String, Object> jsonTest(@RequestBody Map<String, Object> params) throws Exception {
+		
+		debug(params);
+		webService.updateBazaar(params);
+		
+		return JMap.instance("result", "N".equals(params.get("IS_PURCHASED")) ? "1" : "0").build();
+		
+	}
 	
 	/*
 	 * ckeditor5 이미지 저장

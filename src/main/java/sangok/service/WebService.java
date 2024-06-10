@@ -45,4 +45,6 @@ public interface WebService {
 	
 	List<Map<String, Object>> selectBibleAndHymn(Map<String, Object> params) throws Exception;
 	
+	public void updateBazaar(Map<String, Object> params) throws Exception;
+	
 }

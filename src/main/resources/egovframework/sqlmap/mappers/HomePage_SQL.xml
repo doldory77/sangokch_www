@@ -297,4 +297,21 @@
 			) X) CNT_MONTH	
 	</select>
 	
+	<update id="updateBazaar" parameterType="map">
+		UPDATE H_BOARD
+		   SET ATTR04 = #{NAME}
+		     , ATTR05 = #{CONTACT}
+		 WHERE GROUP_ID = #{GROUP_ID}
+		   AND SEQ_NO = #{SEQ_NO}
+	</update>
+	
+	<select id="isPurchase" parameterType="map" resultType="map">
+		SELECT COUNT(*) CNT
+		  FROM H_BOARD
+		 WHERE GROUP_ID = #{GROUP_ID}
+		   AND SEQ_NO = #{SEQ_NO}
+		   AND LENGTH(ATTR04) &gt; 0
+		   AND LENGTH(ATTR05) &gt; 0
+	</select>
+	
 </mapper>
