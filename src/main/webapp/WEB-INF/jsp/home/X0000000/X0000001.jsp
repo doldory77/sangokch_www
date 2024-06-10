@@ -30,13 +30,14 @@
 		  border: 20px solid #dca56b;
 		  border-image: url("/images/wood_frame.png") 50 64;
 		  box-shadow: 3px 3px 3px #6a5858;
-		  cursor:pointer;
+		  cursor: pointer;
 		}
 		
 		.is-gradient {
 		  width: 100%;
 		  border: 20px solid #f98b14;
 		  border-image: linear-gradient(-45deg, #00b9e9, #f98b14, #503370) 20;
+		  cursor: pointer;
 		}    
     </style>
   </head>
