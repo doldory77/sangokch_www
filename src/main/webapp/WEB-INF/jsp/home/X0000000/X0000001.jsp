@@ -68,7 +68,7 @@
 				    <div class="is-gradient" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
 				      <img class="is-rwd" src="${item.ATTR01}">
 				    </div>
-				    <!-- <p style="margin-top:20px; color:#000;font-family:GamtanD;">${fn:replace(item.ATTR02, newLine, '<br>')}</p> -->
+				    <p style="margin-top:20px; color:#000;font-family:GamtanD;">${fn:replace(item.ATTR02, newLine, '<br>')}
 				    <div class="row py-3 px-3">
 				    	<div class="col-9">
 				    		<input style="height:38px;" class="w-100 d-block" type="text" placeholder="성함" value="${item.ATTR04}" <c:if test="${not empty item.ATTR04}">disabled</c:if>>
