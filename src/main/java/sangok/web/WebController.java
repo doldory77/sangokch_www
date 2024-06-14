@@ -988,6 +988,17 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
+	 * 상위메뉴를 수정한다.
+	 */
+	@RequestMapping(value = "/admin/menu/saveMainMenu.do")
+	public String saveMainMenu(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		webService.updateMainMenu(params);
+		
+		return "redirect:/admin/menu/mainMenuMng.do";
+	}	
+	
+	/*
 	 * 하위메뉴를 저장한다.
 	 */
 	@RequestMapping(value = "/admin/menu/saveSubMenu.do")

@@ -26,7 +26,7 @@
 		</div>
 	</div>
 	<div class="container-md">	
-		<form method="POST" action="/admin/code/saveCodeGroup.do">
+		<form method="POST" action="/admin/menu/saveMainMenu.do">
 			<fieldset>
 				<legend></legend>
 				<div class="mb-3">
@@ -37,6 +37,10 @@
 				<div class="mb-3">
 					<label for="menuNm" class="form-label">메뉴명</label>
 					<input type="text" name="MENU_NM" class="form-control" id="menuNm">
+				</div>
+				<div class="mb-3">
+					<label for="useYn" class="form-label">사용여부</label>
+					<input type="text" name="USE_YN" class="form-control" id="useYn">
 				</div>
 				<div class="text-end"><button type="submit" class="btn btn-primary">수정</button></div>
 			</fieldset>
@@ -49,6 +53,7 @@
 					<th scope="col">#</th>
 					<th scope="col">메뉴ID</th>
 					<th scope="col">메뉴명</th>
+					<th scope="col">사용여부</th>
 					<th scope="col"></th>
 				</tr>
 			</thead>
@@ -58,6 +63,7 @@
 					<th scope="row">${menu.count}</th>
 					<td><a href="javascript:false;" onclick="selectMenu(this);">${menu.MENU_ID}</a></td>
 					<td>${menu.MENU_NM}</td>
+					<td>${menu.USE_YN}</td>
 					<td><a class="btn btn-secondary btn-sm" href="/admin/menu/subMenuMng.do?P_MENU_GROUP=${menu.MENU_ID}">하위메뉴</a></td>
 				</tr>
 				</c:forEach>
@@ -74,6 +80,7 @@
 			//alert(v_groupId + '/' + $tr.children('td:eq(1)').text());
 			$('#menuId').val(v_groupId);
 			$('#menuNm').val($tr.children('td:eq(1)').text());
+			$('#useYn').val($tr.children('td:eq(2)').text());
 		}
 	</script>
 </html>

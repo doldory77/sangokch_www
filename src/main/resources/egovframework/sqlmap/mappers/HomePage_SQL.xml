@@ -46,6 +46,7 @@
 			 , URL
 			 , MNG_URL
 			 , PARENT_MENU_ID
+			 , USE_YN
 		 FROM H_MENU 
 		WHERE PARENT_MENU_ID = #{PARENT_MENU_ID}
 		<if test="USE_YN != null and !USE_YN.equals('')">
@@ -53,6 +54,13 @@
 		</if>
 		ORDER BY ORD_NO
     </select>
+    
+    <update id="updateMainMenu" parameterType="map">
+    	UPDATE H_MENU
+    	   SET MENU_NM = #{MENU_NM}
+    	     , USE_YN = #{USE_YN}
+    	 WHERE MENU_ID = #{MENU_ID}
+    </update>
     
     <update id="updateSubMenu" statementType="CALLABLE" parameterType="map">
     	{ CALL SP_MERGE_MENU(

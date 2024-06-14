@@ -37,6 +37,16 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 	}
 	
 	@Override
+	public void updateMainMenu(Map<String, Object> params) throws Exception {
+		try {
+			webMapper.updateMainMenu(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw processException("fail.common.sql", new String[]{"updateMainMenu",e.getMessage()});
+		}
+	}
+	
+	@Override
 	public void updateSubMenu(Map<String, Object> params) throws Exception {
 		try {
 			webMapper.updateSubMenu(params);

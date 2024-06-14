@@ -14,6 +14,8 @@ public interface WebMapper {
 	
 	List<Map<String, Object>> selectMenuByParentId(Map<String, Object> params) throws Exception;
 	
+	void updateMainMenu(Map<String, Object> params) throws Exception;
+	
 	void updateSubMenu(Map<String, Object> params) throws Exception;
 	
 	List<Map<String, Object>> selectMenuBySP(Map<String, Object> params) throws Exception;
