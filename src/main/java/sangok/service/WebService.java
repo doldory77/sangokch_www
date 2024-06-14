@@ -13,7 +13,7 @@ public interface WebService {
 	
 	void updateSubMenu(Map<String, Object> params) throws Exception;
 	
-	List<Map<String, Object>> selectMenuByTree() throws Exception;
+	List<Map<String, Object>> selectMenuByTree(boolean isUseY) throws Exception;
 	
 	List<Map<String, Object>> selectCode(Map<String, Object> params) throws Exception;
 	

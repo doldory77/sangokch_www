@@ -29,7 +29,7 @@
 	</div>  
 	<div class="container-fluid">
 		<div class="d-flex justify-content-center align-items-center my-4">
-			<div><span>오눌 방문자 수: </span><strong>${COUNT_LIST[0].CNT_TODAY}</strong></div>
+			<div><span>오늘 방문자 수: </span><strong>${COUNT_LIST[0].CNT_TODAY}</strong></div>
 			<div class="ms-2"><span>당월 방문자 누적수: </span><strong>${COUNT_LIST[0].CNT_MONTH}</strong></div>
 		</div>
 		<div class="row g-4 justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-3">

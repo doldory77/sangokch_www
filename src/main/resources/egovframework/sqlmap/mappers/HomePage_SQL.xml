@@ -39,7 +39,6 @@
     
     <select id="selectMenuByParentId" parameterType="map" resultType="map">
     	/*WebMapper.selectMenuByParentId*/
-        <![CDATA[
 		SELECT MENU_ID
 			 , MENU_NM
 			 , MENU_LEVEL
@@ -49,8 +48,10 @@
 			 , PARENT_MENU_ID
 		 FROM H_MENU 
 		WHERE PARENT_MENU_ID = #{PARENT_MENU_ID}
+		<if test="USE_YN != null and !USE_YN.equals('')">
+		  AND USE_YN = #{USE_YN}
+		</if>
 		ORDER BY ORD_NO
-        ]]>
     </select>
     
     <update id="updateSubMenu" statementType="CALLABLE" parameterType="map">

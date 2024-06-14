@@ -47,9 +47,15 @@ public class WebServiceImpl extends EgovAbstractServiceImpl implements WebServic
 	}	
 	
 	@Override
-	public List<Map<String, Object>> selectMenuByTree() throws Exception {
+	public List<Map<String, Object>> selectMenuByTree(boolean isUseY) throws Exception {
 		try {
-			List<Map<String, Object>> menuLvl1 = webMapper.selectMenuByParentId(JMap.instance("PARENT_MENU_ID", "00000000").build());
+			List<Map<String, Object>> menuLvl1;
+			if (isUseY) {
+				menuLvl1 = webMapper.selectMenuByParentId(JMap.instance("PARENT_MENU_ID", "00000000").put("USE_YN", "Y").build());
+			} else {
+				menuLvl1 = webMapper.selectMenuByParentId(JMap.instance("PARENT_MENU_ID", "00000000").build());
+			}
+			
 			for (Map<String, Object> tmpMap : menuLvl1) {
 				tmpMap.put("SUB_MENU", webMapper.selectMenuByParentId(JMap.instance("PARENT_MENU_ID", tmpMap.get("MENU_ID")).build()));
 			}

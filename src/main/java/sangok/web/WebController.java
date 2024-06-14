@@ -104,7 +104,7 @@ public class WebController implements InitializingBean {
 	 */
 	private void commProcessSetMenu(boolean excludeAdmMenuYn, ModelMap model) throws Exception {
 		if (menuList == null) {
-			menuList = webService.selectMenuByTree();
+			menuList = webService.selectMenuByTree(true);
 			for (int i=menuList.size()-1; i>=0; i--) {
 				if ("A0000000".equals(menuList.get(i).get("MENU_ID"))) {
 					menuList.remove(i);
@@ -838,7 +838,7 @@ public class WebController implements InitializingBean {
 	@RequestMapping(value = "/admin/main.do")
 	public String adminMain(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
-		List<Map<String, Object>> menuList = webService.selectMenuByTree();
+		List<Map<String, Object>> menuList = webService.selectMenuByTree(false);
 		List<Map<String, Object>> countList = webService.getMapper().selectVisitCnt(null);
 		model.addAttribute("MENU_LIST", menuList);
 		model.addAttribute("COUNT_LIST", countList);
@@ -967,7 +967,7 @@ public class WebController implements InitializingBean {
 	@RequestMapping(value = "/admin/menu/mainMenuMng.do")
 	public String mainMenuMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
 		
-		List<Map<String, Object>> mainMenuList = webService.selectMenuByTree();
+		List<Map<String, Object>> mainMenuList = webService.selectMenuByTree(false);
 		model.addAttribute("MAIN_MENU", mainMenuList);
 		
 		return "admin/menu/mainMenuMng";
