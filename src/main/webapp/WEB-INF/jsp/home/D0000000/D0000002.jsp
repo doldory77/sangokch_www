@@ -78,10 +78,10 @@
 					    <div class="mainItem mainItem-b">
 					        <c:choose>
 					    	<c:when test="${not empty item.ATTR05}">
-					    		<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='${item.ATTR05}'"></div>
+					    		<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer; background-size: cover;' onclick="location.href='${item.ATTR05}'"></div>
 					    	</c:when>
 					    	<c:otherwise>
-					        	<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
+					        	<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer; background-size: cover;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
 					    	</c:otherwise>
 					    	</c:choose>
 					        <div style="color:#000;font-family:GamtanD;">
@@ -117,10 +117,10 @@
 					    <div class="mainItem mainItem-b">
 					        <c:choose>
 					    	<c:when test="${not empty item.ATTR05}">
-					    		<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='${item.ATTR05}'"></div>
+					    		<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer; background-size: cover;' onclick="location.href='${item.ATTR05}'"></div>
 					    	</c:when>
 					    	<c:otherwise>
-					        	<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
+					        	<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer; background-size: cover;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
 					    	</c:otherwise>
 					    	</c:choose>
 					        <div style="color:#000;font-family:GamtanD;">
