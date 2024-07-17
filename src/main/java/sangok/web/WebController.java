@@ -1274,10 +1274,15 @@ public class WebController implements InitializingBean {
 				.put("ATTR05", "/weekly/"+originalFileName1)
 				.build());
 		
-		File newFile1 = new File(weeklyRealPath + originalFileName1);
+		//File newFile1 = new File(weeklyRealPath + originalFileName1);
 		File newFile2 = new File(weeklyRealPath + originalFileName2);
 		
-		file1.transferTo(newFile1);
+		JStr.saveFileWithReplaceStr(file1.getBytes()
+				, new String[] {"<body><div class=\"hpa\" style=\"width:380mm;height:210mm;\">", "<div class=\"hpa\" style=\"width:380mm;height:210mm;\">"}
+				, new String[] {"<body><div class=\"hpa\" style=\"width:380mm;height:210mm;\"><img src=\"/images/weekly_out_bg.webp\" style=\"position: absolute; width:100%\">", "<div class=\"hpa\" style=\"width:380mm;height:210mm;\"><img src=\"/images/weekly_in_bg.webp\" style=\"position: absolute; width:100%\">"}
+				, weeklyRealPath + originalFileName1);
+		
+		//file1.transferTo(newFile1);
 		file2.transferTo(newFile2);
 		
 		return "redirect:/admin/adminPage.do"+"?PAGE="+page+"&GROUP_ID="+groupId;

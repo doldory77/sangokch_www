@@ -1,5 +1,7 @@
 package sangok.utils;
 
+import java.io.FileWriter;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -52,5 +54,15 @@ public class JStr {
 		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss+09:00");
 		Date dt = new Date();
 		return sdf.format(dt) + "T" + sdf2.format(dt);
+	}
+	
+	public static void saveFileWithReplaceStr(byte[] srcFileByte, String[] replaceSrc, String[] replaceCotent, String saveFilePath) throws Exception {
+		String str = new String(srcFileByte, StandardCharsets.UTF_8);
+		for (int i=0; i<replaceSrc.length; i++) {
+			str = str.replace(replaceSrc[i], replaceCotent[i]);
+		}
+		FileWriter fw = new FileWriter(saveFilePath);
+		fw.write(str);
+		fw.close();
 	}
 }
