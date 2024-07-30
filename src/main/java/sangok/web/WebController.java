@@ -1119,7 +1119,13 @@ public class WebController implements InitializingBean {
 		case "C0000001" :
 		case "C0000002" :
 		case "C0000003" :
+		case "D0000001" :
+		case "D0000002" :
+		case "D0000003" :
+		case "D0000004" :	
 		case "E0000001" :
+		case "E0000003" :
+		case "E0000004" :
 		case "F0000001" :
 			params.put("ORDER_BY", "SCREEN_YN DESC, ATTR03 DESC");
 			break;
