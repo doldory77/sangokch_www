@@ -56,6 +56,11 @@
 		</div>
 	</div>
 	
+	<div style="max-width:1280px; width:100%; padding: 30px; margin:20px auto; background-color:#ede3e3;">
+		<h4>표어</h4>
+		<p>우리는 하나님의 가능성입니다. 무엇을 보는지, 무엇을 듣는 지에 따라 그 인생은 달라집니다. 삼일교회 중등부는 영원한 하나님 나라의 가치관을 가지고 가정과 교회, 그리고 학교에서 살아가는 예배와 문화 중심 공동체입니다. 삼일교회 3대 비전을 중심으로, 우리를 향한 하나님의 부르심에 초점을 맞추어 성장하는 중학생들입니다.</p>
+	</div>
+	
 	<!-- <div class="d-flex justify-content-center align-items-center">
 		<img style="max-width:1280px; max-height:625px; width:100%; margin-top:49px;" src="https://cdn.pixabay.com/photo/2017/06/20/08/12/maintenance-2422172_1280.jpg">
 	</div> -->
