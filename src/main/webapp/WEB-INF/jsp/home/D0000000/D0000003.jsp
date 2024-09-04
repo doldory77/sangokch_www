@@ -49,10 +49,9 @@
 	</c:if> -->
 	<div style="max-width:1280px; width:100%; padding-top:49px; margin:0 auto;">
 		<div id="hImgs" style="width:100%; height:320px; overflow:hidden; position:relative">
-			<img style="visibility:hidden; position:absolute; top:-100px; left:-200px" src="http://life.sls.or.kr/user/saveDir/awd/P/0/slideImage_48320_43829.85188309374_0.jpg">
-			<img style="visibility:hidden; position:absolute; top:-100px; left:-200px" src="http://life.sls.or.kr/user/saveDir/awd/P/0/slideImage_48320_722861.3680279801_0.jpg">
-			<img style="visibility:hidden; position:absolute; top:-100px; left:-200px" src="http://life.sls.or.kr/user/saveDir/awd/P/0/slideImage_48320_780593.1756324916_0.jpg">
-			<img style="visibility:hidden; position:absolute; top:-100px; left:-200px" src="http://life.sls.or.kr/user/saveDir/awd/P/0/slideImage_48320_592865.6863081582_0.jpg">
+			<img style="visibility:hidden; position:absolute; top:-100px; left:0px" src="https://sangokch.org/images/board/img_76285a00-a0c9-4d1b-8788-0e2705522e0e.jpg">
+			<img style="visibility:hidden; position:absolute; top:-100px; left:0px" src="https://sangokch.org/images/board/img_b7350463-f36c-4967-b2b6-6ec580b03ea7.jpg">
+
 		</div>
 	</div>
 	
@@ -111,11 +110,11 @@
   			var $obj = $elem.eq(idx);
   			if ($obj && $obj.length) {
   				$obj.css('visibility','visible');
-  				$obj.animate({top:-300, left:-300}, mTime, function(){
+  				$obj.animate({top:-300, left:-10}, mTime, function(){
   					$obj.css({
   						'visibility':'hidden'
   						, 'top':'-100px'
-  						, 'left':'-200px'
+  						, 'left':'0px'
   					});
   					anim($elem, idx+1, mTime);
   				});
