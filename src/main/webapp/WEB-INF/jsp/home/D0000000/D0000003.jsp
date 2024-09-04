@@ -47,10 +47,18 @@
 		</div>
 	</div>
 	</c:if> -->
-	
-	<div class="d-flex justify-content-center align-items-center">
-		<img style="max-width:1280px; max-height:625px; width:100%; margin-top:49px;" src="https://cdn.pixabay.com/photo/2017/06/20/08/12/maintenance-2422172_1280.jpg">
+	<div style="max-width:1280px; width:100%; padding-top:49px; margin:0 auto;">
+		<div id="hImgs" style="width:100%; height:320px; overflow:hidden; position:relative">
+			<img style="visibility:hidden; position:absolute; top:-100px; left:-200px" src="http://life.sls.or.kr/user/saveDir/awd/P/0/slideImage_48320_43829.85188309374_0.jpg">
+			<img style="visibility:hidden; position:absolute; top:-100px; left:-200px" src="http://life.sls.or.kr/user/saveDir/awd/P/0/slideImage_48320_722861.3680279801_0.jpg">
+			<img style="visibility:hidden; position:absolute; top:-100px; left:-200px" src="http://life.sls.or.kr/user/saveDir/awd/P/0/slideImage_48320_780593.1756324916_0.jpg">
+			<img style="visibility:hidden; position:absolute; top:-100px; left:-200px" src="http://life.sls.or.kr/user/saveDir/awd/P/0/slideImage_48320_592865.6863081582_0.jpg">
+		</div>
 	</div>
+	
+	<!-- <div class="d-flex justify-content-center align-items-center">
+		<img style="max-width:1280px; max-height:625px; width:100%; margin-top:49px;" src="https://cdn.pixabay.com/photo/2017/06/20/08/12/maintenance-2422172_1280.jpg">
+	</div> -->
 	
 	<!-- <div class="container-md">
 		<div class="row gy-0 gx-0 justify-content-center row-cols-1 row-cols-sm-2 row-cols-lg-3 mt-4">
@@ -94,6 +102,28 @@
 	</c:if> -->
 	    
   	<script>
+  		function anim($elem, idx, mTime) {
+  			var $obj = $elem.eq(idx);
+  			if ($obj && $obj.length) {
+  				$obj.css('visibility','visible');
+  				$obj.animate({top:-300, left:-300}, mTime, function(){
+  					$obj.css({
+  						'visibility':'hidden'
+  						, 'top':'-100px'
+  						, 'left':'-200px'
+  					});
+  					anim($elem, idx+1, mTime);
+  				});
+  			} else if (idx > 0) {
+  				anim($elem, 0, mTime);
+  			}
+  		}
+  		$(document).ready(function(){
+  			/*if ($('#hImgs img:eq(0)').length) {
+  				$('#hImgs img:eq(0)').animate({top:-300, left:-300}, 10000, function(){alert('end');});
+  			}*/
+  			anim($('#hImgs img'), 0, 10000);
+  		})
   		
   	</script>
   </body>
