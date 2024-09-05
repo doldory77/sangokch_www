@@ -148,7 +148,7 @@
 			    	<c:choose>
 			    	<c:when test="${not empty item.ATTR04}">
 				    	<div>
-							<iframe width="100%" height="297.5" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							<iframe width="100%" height="330" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 						</div>
 			    	</c:when>
 			    	<c:otherwise>
@@ -175,6 +175,11 @@
 				<div class="item-badge hide show"><div>${item.GROUP_NM}</div></div>
 			    <div class="mainItem mainItem-b">
 			    	<c:choose>
+			    	<c:when test="${not empty item.ATTR04}">
+				    	<div>
+							<iframe width="100%" height="330" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+						</div>
+			    	</c:when>
 			    	<c:when test="${not empty item.ATTR05}">
 			    		<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='${item.ATTR05}'"></div>
 			    	</c:when>
