@@ -75,7 +75,7 @@
 				min-height: 140px;
 			}
 			.mainItem > div:first-child {
-				min-height: calc(340px * 7 / 8);
+				min-height: calc(380px * 7 / 8);
 			}
 		}
 		/*@media(max-width:420px) {
