@@ -164,6 +164,9 @@
 	</c:if>
 	    
   	<script>
+		function goDtl(me) {
+			$(me).next().children('div:eq(0)').click();
+		}   	
   		function anim($elem, idx, mTime) {
   			var $obj = $elem.eq(idx);
   			if ($obj && $obj.length) {

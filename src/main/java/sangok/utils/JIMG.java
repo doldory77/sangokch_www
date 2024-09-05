@@ -24,7 +24,7 @@ public class JIMG {
 				nFactor = 0.38f;
 			} else if (nStdVal >= 3000) {
 //				nFactor = 0.33f;
-				nFactor = 0.46f;
+				nFactor = 0.47f;
 			} else if (nStdVal >= 2000) {
 //				nFactor = 0.5f;
 				nFactor = 0.63f;
