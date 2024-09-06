@@ -52,7 +52,7 @@
 	<div style="max-width:1280px; width:100%; padding-top:49px; margin:0 auto;">
 		<div id="hImgs" style="width:100%; height:320px; overflow:hidden; position:relative">
 			<c:forEach var="item" items="${ROLLING_IMG}" varStatus="status">
-			<img style="visibility:hidden; position:absolute; top:-100px; left:0px" src="${item.ATTR01}">
+			<img style="visibility:hidden; position:absolute; opacity:1.0; top:${item.ATTR04}px; left:${item.ATTR05}px" data-top2="${item.ATTR04}" data-left2="${item.ATTR05}" src="${item.ATTR01}">
 			</c:forEach>
 		</div>
 	</div>
@@ -171,11 +171,12 @@
   			var $obj = $elem.eq(idx);
   			if ($obj && $obj.length) {
   				$obj.css('visibility','visible');
-  				$obj.animate({top:-300, left:-10}, mTime, function(){
+  				$obj.animate({opacity:1.0, top:-200 + Number($obj.data('top2')), left:-50 + Number($obj.data('left2'))}, mTime, function(){
   					$obj.css({
   						'visibility':'hidden'
-  						, 'top':'-100px'
-  						, 'left':'0px'
+  						, 'top':$obj.data('top2') + 'px'
+  						, 'left':$obj.data('left2') + 'px'
+  						, 'opacity':'1.0'
   					});
   					anim($elem, idx+1, mTime);
   				});
