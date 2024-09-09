@@ -50,9 +50,9 @@
 	
 	<c:if test="${not empty ROLLING_IMG}">
 	<div style="max-width:1280px; width:100%; padding-top:49px; margin:0 auto;">
-		<div id="hImgs" style="width:100%; height:320px; overflow:hidden; position:relative">
+		<div id="hImgs" style="width:100%; height:330px; overflow:hidden; position:relative;">
 			<c:forEach var="item" items="${ROLLING_IMG}" varStatus="status">
-			<img style="visibility:hidden; position:absolute; top:-100px; left:0px" src="${item.ATTR01}">
+			<img style="width:100%; visibility:hidden; position:absolute; opacity:1.0; transform:translateY(-${item.ATTR04}%);" data-top2="${item.ATTR04}" data-left2="${item.ATTR05}" src="${item.ATTR01}">
 			</c:forEach>
 		</div>
 	</div>
@@ -79,7 +79,7 @@
 					<div class="col">
 						<div class="mainItem mainItem-b">
 						<div>
-							<iframe width="100%" height="297.5" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							<iframe width="100%" height="320" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 						</div>
 						<div style="color:#000;font-family:GamtanD;">
 				        	<div><strong>${item.SUBJECT}</strong></div>
@@ -164,32 +164,31 @@
 	</c:if>
 	    
   	<script>
-		function goDtl(me) {
+	function goDtl(me) {
 			$(me).next().children('div:eq(0)').click();
-		}    	
-  		function anim($elem, idx, mTime) {
-  			var $obj = $elem.eq(idx);
-  			if ($obj && $obj.length) {
-  				$obj.css('visibility','visible');
-  				$obj.animate({top:-300, left:-10}, mTime, function(){
-  					$obj.css({
-  						'visibility':'hidden'
-  						, 'top':'-100px'
-  						, 'left':'0px'
-  					});
-  					anim($elem, idx+1, mTime);
-  				});
-  			} else if (idx > 0) {
-  				anim($elem, 0, mTime);
-  			}
-  		}
-  		$(document).ready(function(){
-  			/*if ($('#hImgs img:eq(0)').length) {
-  				$('#hImgs img:eq(0)').animate({top:-300, left:-300}, 10000, function(){alert('end');});
-  			}*/
-  			anim($('#hImgs img'), 0, 10000);
-  		})
-  		
+		}  	
+		function anim($elem, idx, mTime) {
+			var $obj = $elem.eq(idx);
+			if ($obj && $obj.length) {
+				$obj.css('visibility','visible');
+				$obj.animate({'opacity':'1.0', 'transform':'translateY(' + (-1 * (Number($obj.data('top2'))+10)) + '%)'}, mTime, function(){
+					$obj.css({
+						'visibility':'hidden'
+						, 'transform':'translateY(' + (-1 * Number($obj.data('top2'))) + '%)'
+						, 'opacity':'1.0'
+					});
+					anim($elem, idx+1, mTime);
+				});
+			} else if (idx > 0) {
+				anim($elem, 0, mTime);
+			}
+		}
+		$(document).ready(function(){
+			/*if ($('#hImgs img:eq(0)').length) {
+				$('#hImgs img:eq(0)').animate({top:-300, left:-300}, 10000, function(){alert('end');});
+			}*/
+			anim($('#hImgs img'), 0, 8000);
+		})
   	</script>
   </body>
 </html>

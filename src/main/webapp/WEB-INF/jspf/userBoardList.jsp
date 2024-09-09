@@ -59,25 +59,25 @@
 		</c:forEach>
 		<div class="mt-3 d-flex justify-content-center">
 			<c:if test="${1 lt PAGE_CTL.CURR_PAGE}">
-			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/${PAGE_CTL.PAGE}.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=1&SCREEN_YN=${PAGE_CTL.SCREEN_YN}&GROUP_ID=${PAGE_CTL.GROUP_ID}&TAG_CD=${PAGE_CTL.TAG_CD}">
+			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/${PAGE_CTL.PAGE}.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=1&SCREEN_YN=${PAGE_CTL.SCREEN_YN}&GROUP_ID=${PAGE_CTL.GROUP_ID}&TAG_CD=${PAGE_CTL.TAG_CD}&SUB=${PAGE_CTL.SUB}">
 				<span class="material-symbols-outlined">first_page</span>
 			</a>	
 			</c:if>
 			<c:if test="${1 le PAGE_CTL.CURR_PAGE-1}">
-			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/${PAGE_CTL.PAGE}.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${PAGE_CTL.CURR_PAGE-1}&SCREEN_YN=${PAGE_CTL.SCREEN_YN}&GROUP_ID=${PAGE_CTL.GROUP_ID}&TAG_CD=${PAGE_CTL.TAG_CD}">
+			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/${PAGE_CTL.PAGE}.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${PAGE_CTL.CURR_PAGE-1}&SCREEN_YN=${PAGE_CTL.SCREEN_YN}&GROUP_ID=${PAGE_CTL.GROUP_ID}&TAG_CD=${PAGE_CTL.TAG_CD}&SUB=${PAGE_CTL.SUB}">
 				<span class="material-symbols-outlined">chevron_left</span>
 			</a>
 			</c:if>
 			<c:forEach var="i" begin="${PAGE_CTL.BLOCK_START}" end="${PAGE_CTL.BLOCK_END}">
-			<a class="d-flex m-1 paging-btn justify-content-center align-items-center ${i eq PAGE_CTL.CURR_PAGE ? 'curr_page' : ''}" href="/${PAGE_CTL.PAGE}.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${i}&SCREEN_YN=${PAGE_CTL.SCREEN_YN}&GROUP_ID=${PAGE_CTL.GROUP_ID}&TAG_CD=${PAGE_CTL.TAG_CD}">${i}</a>
+			<a class="d-flex m-1 paging-btn justify-content-center align-items-center ${i eq PAGE_CTL.CURR_PAGE ? 'curr_page' : ''}" href="/${PAGE_CTL.PAGE}.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${i}&SCREEN_YN=${PAGE_CTL.SCREEN_YN}&GROUP_ID=${PAGE_CTL.GROUP_ID}&TAG_CD=${PAGE_CTL.TAG_CD}&SUB=${PAGE_CTL.SUB}">${i}</a>
 			</c:forEach>
 			<c:if test="${PAGE_CTL.TOTAL_PAGE ge PAGE_CTL.CURR_PAGE+1}">
-			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/${PAGE_CTL.PAGE}.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${PAGE_CTL.CURR_PAGE+1}&SCREEN_YN=${PAGE_CTL.SCREEN_YN}&GROUP_ID=${PAGE_CTL.GROUP_ID}&TAG_CD=${PAGE_CTL.TAG_CD}">
+			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/${PAGE_CTL.PAGE}.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${PAGE_CTL.CURR_PAGE+1}&SCREEN_YN=${PAGE_CTL.SCREEN_YN}&GROUP_ID=${PAGE_CTL.GROUP_ID}&TAG_CD=${PAGE_CTL.TAG_CD}&SUB=${PAGE_CTL.SUB}">
 				<span class="material-symbols-outlined">chevron_right</span>
 			</a>
 			</c:if>
 			<c:if test="${PAGE_CTL.TOTAL_PAGE gt PAGE_CTL.CURR_PAGE}">
-			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/${PAGE_CTL.PAGE}.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${PAGE_CTL.TOTAL_PAGE}&SCREEN_YN=${PAGE_CTL.SCREEN_YN}&GROUP_ID=${PAGE_CTL.GROUP_ID}&TAG_CD=${PAGE_CTL.TAG_CD}">
+			<a class="d-flex m-1 paging-btn justify-content-center align-items-center" href="/${PAGE_CTL.PAGE}.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${PAGE_CTL.TOTAL_PAGE}&SCREEN_YN=${PAGE_CTL.SCREEN_YN}&GROUP_ID=${PAGE_CTL.GROUP_ID}&TAG_CD=${PAGE_CTL.TAG_CD}&SUB=${PAGE_CTL.SUB}">
 				<span class="material-symbols-outlined">last_page</span>
 			</a>	
 			</c:if>	

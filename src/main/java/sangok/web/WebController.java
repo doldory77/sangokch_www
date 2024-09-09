@@ -213,6 +213,9 @@ public class WebController implements InitializingBean {
 		model.addAttribute("GROUP_ID", params.get("GROUP_ID"));
 		model.addAttribute("TAG_CD", params.get("TAG_CD"));
 		model.addAttribute("PAGE", params.get("PAGE"));
+		model.addAttribute("SUB", params.get("SUB"));
+//		if (JStr.isStr(params.get("SUB"))) {
+//		}
 		
 		model.addAttribute("BOARD_LIST", list);
 		model.addAttribute("PAGE_CTL", params);
@@ -555,10 +558,29 @@ public class WebController implements InitializingBean {
 	 * 사용자 어린이부 접속
 	 */
 	@RequestMapping(value = "/D0000002.do")
-	public String d0000002(HttpServletRequest request, ModelMap model) throws Exception {
+	public String d0000002(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
 		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
+		
+		String subPage = request.getParameter("SUB");
+		if (JStr.isStr(subPage)) {
+			
+			List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000002").put("USE_YN", "Y").build());
+			String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000002").build()).get("MENU_NM").toString();
+			
+//			Map<String, Object> params = JMap.instance("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build();
+			debug("[ADMIN PAGE PARAMS] " + params);
+			params.put("USE_YN", "Y");
+			params.put("ORDER_BY", "ATTR03 DESC");
+
+			this.setBoardListInitParams(params, model);
+			
+			model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+			model.addAttribute("TITLE", title);
+			
+			return "home/D0000000/" + subPage;
+		}
 		
 //		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000002").put("USE_YN", "Y").build());
 		List<Map<String, Object>> ROLLING_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "06").put("GROUP_ID", "D0000002").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
