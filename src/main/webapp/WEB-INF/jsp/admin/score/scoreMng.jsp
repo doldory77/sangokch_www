@@ -33,9 +33,9 @@
   		<div class="d-flex align-items-center p-2">
 	  		<div>
 	  			<label for="P_SUBJECT">제목</label>
-	  			<input name="SUBJECT" id="P_SUBJECT" type="text" style="width:400px; height:36px;" value="${PAGE_CTL.SUBJECT}">
+	  			<input name="SUBJECT" id="P_SUBJECT" type="text" style="width:300px; height:36px;" value="${PAGE_CTL.SUBJECT}">
 	  		</div>
-	  		<div class="ps-4">
+	  		<div class="ps-2">
 	  			<label for="P_S_KEY">조성</label>
 	  			<select name="S_KEY" id="P_S_KEY" style="width:80px; height:38px; text-align:center;">
 					<option value="" <c:if test="${empty PAGE_CTL.S_KEY}">selected</c:if>>전체</option>
@@ -48,7 +48,7 @@
 					<option value="B" <c:if test="${PAGE_CTL.S_KEY eq 'B'}">selected</c:if>>B</option>
 				</select>
 	  		</div>
-	  		<div class="ps-4"><input type="submit" value="조회" style="height:36px; width:80px;"></div>
+	  		<div class="ps-2"><input type="submit" value="조회" style="height:36px; width:80px;"></div>
   		</div>	
   		</form>
 	</div>
@@ -64,7 +64,7 @@
 				</div>
 				<div class="d-flex align-items-center">
 					<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}"><a href="#" onclick="delBoard('${PAGE_CTL.PAGE}','${PAGE_CTL.CURR_PAGE}','${item.SEQ_NO}'); return false;" class="btn btn-sm" style="background-color: #B80000; color: white;">삭제</a></c:if>
-					<span class="title ps-2" onclick="location.href='${item.URL}'">${item.SUBJECT}</span>
+					<span class="title ps-2" onclick="window.open('${item.URL}')">${item.SUBJECT}</span>
 				</div>
 			</div>
 		</c:forEach>
@@ -101,7 +101,11 @@
 	<div class="container-fluid mt-3">
 		<form name="frm" method="POST" action="/admin/score/save.do" enctype="multipart/form-data" onsubmit="return false;">
 		<div class="row align-items-center mt-1 p-1">
-			<div class="col-1">
+			<div class="col fs-4">등록
+			</div>
+		</div>
+		<div class="row align-items-center mt-1 p-1">
+			<div class="col-2">
 				<label for="SUBJECT">제목 :</label>
 			</div>
 			<div class="col">
@@ -109,7 +113,7 @@
 			</div>
 		</div>	
 		<div class="row align-items-center mt-1 p-1">
-			<div class="col-1">
+			<div class="col-2">
 				<label for="S_KEY">조성 :</label>
 			</div>
 			<div class="col">
@@ -125,7 +129,7 @@
 			</div>
 		</div>
 		<div class="row align-items-center mt-1 p-1">
-			<div class="col-1">
+			<div class="col-2">
 				<label for="URL">URL :</label>
 			</div>
 			<div class="col">
@@ -134,7 +138,7 @@
 		</div>			
 		<div class="row align-items-center mt-4">
 			<div class="col" style="text-align:center;">
-				<button class="btn btn-primary" onclick="goSubmit()">전송</button>
+				<button class="btn btn-primary" onclick="goSubmit()">등록</button>
 			</div>
 		</div>
 		</form>
