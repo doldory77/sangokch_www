@@ -165,7 +165,8 @@
 	    
   	<script>
 	function goDtl(me) {
-			$(me).next().children('div:eq(0)').click();
+			location.href='/D0000004.do?SUB=D0000004_SUB&GROUP_ID=D0000004&TAG_CD=00';
+			//$(me).next().children('div:eq(0)').click();
 		}  	
 		function anim($elem, idx, mTime) {
 			var $obj = $elem.eq(idx);

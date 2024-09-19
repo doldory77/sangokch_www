@@ -555,21 +555,15 @@ public class WebController implements InitializingBean {
 	}
 	
 	/*
-	 * 사용자 어린이부 접속
+	 * 서브 리스트 페이지 확인 및 리턴
 	 */
-	@RequestMapping(value = "/D0000002.do")
-	public String d0000002(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
-		accessLog(request);
-		this.commProcessMenuHighlight(request, model);
-		this.commProcessSetMenu(true, model);
-		
+	private String subListPage(String GroupId, Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
 		String subPage = request.getParameter("SUB");
 		if (JStr.isStr(subPage)) {
 			
-			List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000002").put("USE_YN", "Y").build());
-			String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000002").build()).get("MENU_NM").toString();
+			List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", GroupId).put("USE_YN", "Y").build());
+			String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", GroupId).build()).get("MENU_NM").toString();
 			
-//			Map<String, Object> params = JMap.instance("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build();
 			debug("[ADMIN PAGE PARAMS] " + params);
 			params.put("USE_YN", "Y");
 			params.put("ORDER_BY", "ATTR03 DESC");
@@ -579,10 +573,25 @@ public class WebController implements InitializingBean {
 			model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 			model.addAttribute("TITLE", title);
 			
-			return "home/D0000000/" + subPage;
+			return "home/" + GroupId.substring(0, 1) + "0000000/" + subPage;
+		}
+		return null;
+	}
+	
+	/*
+	 * 사용자 어린이부 접속
+	 */
+	@RequestMapping(value = "/D0000002.do")
+	public String d0000002(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		String subPage = this.subListPage("D0000002", params, request, model);
+		if (JStr.isStr(subPage)) {
+			return subPage;
 		}
 		
-//		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000002").put("USE_YN", "Y").build());
 		List<Map<String, Object>> ROLLING_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "06").put("GROUP_ID", "D0000002").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
 		List<Map<String, Object>> TEXT_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "07").put("GROUP_ID", "D0000002").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
 		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "D0000002").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
@@ -591,7 +600,6 @@ public class WebController implements InitializingBean {
 		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "D0000002").put("USE_YN", "Y").build());
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000002").build()).get("MENU_NM").toString();
 		
-//		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("ROLLING_IMG", ROLLING_IMG);
 		model.addAttribute("TEXT_LIST", TEXT_LIST);
 		model.addAttribute("BODY_LIST", BODY_LIST);
@@ -599,7 +607,6 @@ public class WebController implements InitializingBean {
 		model.addAttribute("FOOTER_IMG", FOOTER_IMG.size() > 0 ? FOOTER_IMG.get(0) : null);
 		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
 		model.addAttribute("TITLE", title);
-//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST","FOOTER_IMG","BODY_IMG"}, new Boolean[] {false, true, false, false}, model);
 		
 		return "home/D0000000/D0000002";
 	}
@@ -608,29 +615,31 @@ public class WebController implements InitializingBean {
 	 * 사용자 중고등부 접속
 	 */
 	@RequestMapping(value = "/D0000003.do")
-	public String d0000003(HttpServletRequest request, ModelMap model) throws Exception {
+	public String d0000003(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
 		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-//		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000003").put("USE_YN", "Y").build());
+		String subPage = this.subListPage("D0000003", params, request, model);
+		if (JStr.isStr(subPage)) {
+			return subPage;
+		}
+		
 		List<Map<String, Object>> ROLLING_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "06").put("GROUP_ID", "D0000003").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
 		List<Map<String, Object>> TEXT_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "07").put("GROUP_ID", "D0000003").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
 		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "D0000003").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
 		List<Map<String, Object>> BOARD_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "00").put("GROUP_ID", "D0000003").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
-//		List<Map<String, Object>> FOOTER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "03").put("GROUP_ID", "D0000003").put("USE_YN", "Y").build());
-//		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "D0000003").put("USE_YN", "Y").build());
+		List<Map<String, Object>> FOOTER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "03").put("GROUP_ID", "D0000003").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "D0000003").put("USE_YN", "Y").build());
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000003").build()).get("MENU_NM").toString();
 		
-//		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("ROLLING_IMG", ROLLING_IMG);
 		model.addAttribute("TEXT_LIST", TEXT_LIST);
 		model.addAttribute("BODY_LIST", BODY_LIST);
 		model.addAttribute("BOARD_LIST", BOARD_LIST);
-//		model.addAttribute("FOOTER_IMG", FOOTER_IMG.size() > 0 ? FOOTER_IMG.get(0) : null);
-//		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
+		model.addAttribute("FOOTER_IMG", FOOTER_IMG.size() > 0 ? FOOTER_IMG.get(0) : null);
+		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
 		model.addAttribute("TITLE", title);
-//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST","FOOTER_IMG","BODY_IMG"}, new Boolean[] {false, true, false, false}, model);
 		
 		return "home/D0000000/D0000003";
 	}
@@ -639,29 +648,31 @@ public class WebController implements InitializingBean {
 	 * 사용자 청년부 접속
 	 */
 	@RequestMapping(value = "/D0000004.do")
-	public String d0000004(HttpServletRequest request, ModelMap model) throws Exception {
+	public String d0000004(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
 		accessLog(request);
 		this.commProcessMenuHighlight(request, model);
 		this.commProcessSetMenu(true, model);
 		
-//		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "D0000004").put("USE_YN", "Y").build());
+		String subPage = this.subListPage("D0000004", params, request, model);
+		if (JStr.isStr(subPage)) {
+			return subPage;
+		}
+		
 		List<Map<String, Object>> ROLLING_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "06").put("GROUP_ID", "D0000004").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
 		List<Map<String, Object>> TEXT_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "07").put("GROUP_ID", "D0000004").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
 		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "D0000004").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
 		List<Map<String, Object>> BOARD_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "00").put("GROUP_ID", "D0000004").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
-//		List<Map<String, Object>> FOOTER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "03").put("GROUP_ID", "D0000004").put("USE_YN", "Y").build());
-//		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "D0000004").put("USE_YN", "Y").build());
+		List<Map<String, Object>> FOOTER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "03").put("GROUP_ID", "D0000004").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "D0000004").put("USE_YN", "Y").build());
 		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "D0000004").build()).get("MENU_NM").toString();
 		
-//		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
 		model.addAttribute("ROLLING_IMG", ROLLING_IMG);
 		model.addAttribute("TEXT_LIST", TEXT_LIST);
 		model.addAttribute("BODY_LIST", BODY_LIST);
 		model.addAttribute("BOARD_LIST", BOARD_LIST);
-//		model.addAttribute("FOOTER_IMG", FOOTER_IMG.size() > 0 ? FOOTER_IMG.get(0) : null);
-//		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
+		model.addAttribute("FOOTER_IMG", FOOTER_IMG.size() > 0 ? FOOTER_IMG.get(0) : null);
+		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
 		model.addAttribute("TITLE", title);
-//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_LIST","FOOTER_IMG","BODY_IMG"}, new Boolean[] {false, true, false, false}, model);
 		
 		return "home/D0000000/D0000004";
 	}
@@ -1333,5 +1344,51 @@ public class WebController implements InitializingBean {
 		
 		return "redirect:/admin/adminPage.do"+"?PAGE="+page+"&GROUP_ID="+groupId;
 	}
+	
+	/*
+	 * 해당 코드그룹의 코드조회
+	 */
+	@RequestMapping(value = "/admin/score/scoreMng.do")
+	public String scoreMng(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		params.put("BLOCK_START", 0);
+		params.put("BLOCK_END", 0);
+		params.put("TOTAL_PAGE", 0);
+		params.put("TOTAL_BLOCK", 0);
+		params.put("START_NUM", 0);		
+		
+		if (JNum.isInteger(params.get("CURR_PAGE")) == false) {
+			params.put("CURR_PAGE", 1);
+		}
+		if (JStr.isStr(params.get("SUBJECT")) == false) {
+			params.put("SUBJECT", null);
+		}
+		if (JStr.isStr(params.get("S_KEY")) == false) {
+			params.put("S_KEY", null);
+		}
+		
+		List<Map<String, Object>> list = webService.getMapper().selectScoreList(params);
+		
+		model.addAttribute("TITLE", "악보관리");
+		model.addAttribute("SCORE_LIST", list);
+		model.addAttribute("PAGE_CTL", params);
+		
+		return "admin/score/scoreMng";
+	}	
+	
+	/*
+	 * 악보 저장
+	 */
+	@RequestMapping(value = "/admin/score/save.do")
+	public String saveScore(@RequestParam("SUBJECT") String subject
+			, @RequestParam("S_KEY") String sKey
+			, @RequestParam("URL") String url
+			, @RequestParam(name="LYRICS", required=false) String lyrics
+			, ModelMap model) throws Exception {
+		
+		webService.getMapper().insertScore(JMap.instance("SUBJECT", subject).put("S_KEY", sKey).put("URL", url).put("LYRICS", lyrics).build());
+		
+		return "redirect:/admin/score/scoreMng.do";
+	}	
 	
 }

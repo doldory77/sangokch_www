@@ -323,4 +323,34 @@
 		   AND LENGTH(ATTR05) &gt; 0
 	</select>
 	
+	<insert id="insertScore" parameterType="map">
+		INSERT INTO SCORE (
+			SUBJECT
+			, S_KEY
+			, URL
+			, LYRICS
+		) VALUES (
+			#{SUBJECT}
+			, #{S_KEY}
+			, #{URL}
+			, #{LYRICS}
+		)	
+	</insert>
+	
+	<select id="selectScoreList" statementType="CALLABLE" parameterType="map" resultType="map">
+		{
+			CALL SP_GET_SCORE_LIST(
+				#{BLOCK_START, mode=OUT, jdbcType=INTEGER}
+				, #{BLOCK_END, mode=OUT, jdbcType=INTEGER}
+				, #{TOTAL_PAGE, mode=OUT, jdbcType=INTEGER}
+				, #{TOTAL_BLOCK, mode=OUT, jdbcType=INTEGER}
+				, #{START_NUM, mode=OUT, jdbcType=INTEGER}
+				, #{CURR_PAGE, mode=IN, jdbcType=INTEGER}
+				, #{SUBJECT, mode=IN, jdbcType=VARCHAR}
+				, #{S_KEY, mode=IN, jdbcType=VARCHAR}
+			)
+		}
+		/*WebMapper.selectScoreList*/
+	</select>		
+	
 </mapper>

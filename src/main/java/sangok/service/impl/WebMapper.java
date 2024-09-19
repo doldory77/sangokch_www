@@ -65,4 +65,8 @@ public interface WebMapper {
 	void updateBazaar(Map<String, Object> params) throws Exception;
 	
 	Map<String, Object> isPurchase(Map<String, Object> params) throws Exception;
+	
+	void insertScore(Map<String, Object> params) throws Exception;
+	
+	List<Map<String, Object>> selectScoreList(Map<String, Object> params) throws Exception;
 }
