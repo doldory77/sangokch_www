@@ -337,6 +337,11 @@
 		)	
 	</insert>
 	
+	<delete id="deleteScore" parameterType="map">
+		DELETE FROM SCORE
+		 WHERE SEQ_NO = #{SEQ_NO}
+	</delete>
+	
 	<select id="selectScoreList" statementType="CALLABLE" parameterType="map" resultType="map">
 		{
 			CALL SP_GET_SCORE_LIST(

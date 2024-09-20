@@ -14,7 +14,7 @@
   	<style>
 
 	</style>
-  	
+
   </head>
   <body>
   	<div>
@@ -63,7 +63,7 @@
 					<span class="sub1">${item.S_KEY}</span>
 				</div>
 				<div class="d-flex align-items-center">
-					<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}"><a href="#" onclick="delBoard('${PAGE_CTL.PAGE}','${PAGE_CTL.CURR_PAGE}','${item.SEQ_NO}'); return false;" class="btn btn-sm" style="background-color: #B80000; color: white;">삭제</a></c:if>
+					<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}"><a href="#" onclick="delScore(${item.SEQ_NO}, '${item.SUBJECT}'); return false;" class="btn btn-sm" style="background-color: #B80000; color: white;">삭제</a></c:if>
 					<span class="title ps-2" onclick="window.open('${item.URL}')">${item.SUBJECT}</span>
 				</div>
 			</div>
@@ -168,6 +168,11 @@
 			}
 			frm.submit();
 		}
+		function delScore(seqNo, subject){
+			if (confirm('[' + subject + ']을(를) 완전히 삭제하시겠습니까?')) {
+				location.href="/admin/score/delete.do?SEQ_NO="+seqNo+"&CURR_PAGE="+${empty PAGE_CTL.CURR_PAGE}+"&SUBJECT="+'${PAGE_CTL.SUBJECT}'+"&S_KEY="+'${PAGE_CTL.S_KEY}';
+			}
+		}  	
 	</script>
 	
   </body>

@@ -68,5 +68,7 @@ public interface WebMapper {
 	
 	void insertScore(Map<String, Object> params) throws Exception;
 	
+	void deleteScore(Map<String, Object> params) throws Exception;
+	
 	List<Map<String, Object>> selectScoreList(Map<String, Object> params) throws Exception;
 }

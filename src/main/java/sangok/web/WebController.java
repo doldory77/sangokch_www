@@ -1410,6 +1410,20 @@ public class WebController implements InitializingBean {
 		webService.getMapper().insertScore(JMap.instance("SUBJECT", subject).put("S_KEY", sKey).put("URL", url).put("LYRICS", lyrics).build());
 		
 		return "redirect:/admin/score/scoreMng.do";
+	}
+	
+	/*
+	 * 악보 삭제
+	 */
+	@RequestMapping(value = "/admin/score/delete.do")
+	public String deleteScore(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		debug(params);
+		webService.getMapper().deleteScore(params);
+		
+		return "redirect:/admin/score/scoreMng.do?CURR_PAGE=" + params.get("CURR_PAGE")
+			+ "&SUBJECT=" + JStr.ifNull(params.get("SUBJECT"), "")
+			+ "&S_KEY=" + JStr.ifNull(params.get("S_KEY"), "");
 	}	
 	
 }
