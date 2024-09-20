@@ -2,10 +2,10 @@ package sangok.web;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -1380,12 +1380,33 @@ public class WebController implements InitializingBean {
 	 * 악보 저장
 	 */
 	@RequestMapping(value = "/admin/score/save.do")
-	public String saveScore(@RequestParam("SUBJECT") String subject
+	public String saveScore(HttpServletRequest request
+			, @RequestParam(name="FILE", required=false) MultipartFile sFile
+			, @RequestParam("SUBJECT") String subject
 			, @RequestParam("S_KEY") String sKey
 			, @RequestParam("URL") String url
 			, @RequestParam(name="LYRICS", required=false) String lyrics
 			, ModelMap model) throws Exception {
 		
+		
+		if (sFile != null && JStr.isStr(sFile.getOriginalFilename())) {
+			
+			final String imgRealPath = messageSourceAccessor.getMessage("path.image.score");
+			final String imgUrlPath = request.getContextPath().concat("/images/score/");
+			
+			String originFileName = sFile.getOriginalFilename();
+			debug("[originFileName] " + originFileName);
+			String ext = FilenameUtils.getExtension(originFileName);
+			String newlnfImgFileName = "score_" + sKey + "_" + ((new Random()).nextInt(900) + 100) + "." + ext;
+			url = imgUrlPath + newlnfImgFileName;
+			File file = new File(imgRealPath + newlnfImgFileName);
+			
+			// 이미지 리싸이즈 처리
+			if (JIMG.saveToResizeImage(sFile, 0, 0, 0f, file) == false) {
+				sFile.transferTo(file);						
+			}
+			
+		}
 		webService.getMapper().insertScore(JMap.instance("SUBJECT", subject).put("S_KEY", sKey).put("URL", url).put("LYRICS", lyrics).build());
 		
 		return "redirect:/admin/score/scoreMng.do";

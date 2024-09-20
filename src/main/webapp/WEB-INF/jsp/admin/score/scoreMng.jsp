@@ -136,6 +136,14 @@
 				<input type="text" name="URL" id="URL" style="width:80%;">
 			</div>
 		</div>			
+		<div class="row align-items-center mt-1 p-1">
+			<div class="col-2">
+				<label for="FILE">파일 :</label>
+			</div>
+			<div class="col">
+				<input type="file" name="FILE" id="FILE" style="width:40%;">
+			</div>
+		</div>			
 		<div class="row align-items-center mt-4">
 			<div class="col" style="text-align:center;">
 				<button class="btn btn-primary" onclick="goSubmit()">등록</button>
@@ -152,8 +160,10 @@
 				alert('제목은 필수입니다.');
 				return;
 			}
-			if (!document.frm.URL.value) {
-				alert('URL은 필수입니다.');
+			const fileInput = document.getElementById('FILE')
+			const files = fileInput.files;
+			if (!document.frm.URL.value && files.length === 0) {
+				alert('파일선택 또는 URL입력, 둘중 하나는 필수입니다.');
 				return;
 			}
 			frm.submit();
