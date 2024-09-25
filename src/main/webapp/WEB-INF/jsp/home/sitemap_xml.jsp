@@ -10,7 +10,7 @@
 	<c:forEach var="mMenu" items="${MENU_LIST}" varStatus="status">
 		<c:forEach var="sMenu" items="${mMenu.SUB_MENU}" varStatus="statusS">
 		<sitemap>
-		    <loc>http://sangokch.org${fn:replace(sMenu.URL, '&', '&amp;')}</loc>
+		    <loc>https://sangokch.org${fn:replace(sMenu.URL, '&', '&amp;')}</loc>
 		    <lastmod>${NOW}</lastmod>
 		</sitemap>
 		</c:forEach>
