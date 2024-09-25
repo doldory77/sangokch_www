@@ -25,7 +25,7 @@
   	
 	<%@ include file="/WEB-INF/jspf/head.jspf" %>
 	<link rel="stylesheet" href="/css/font.css">
-    <title>${TITLE}</title>
+    <title>산곡성결교회</title>
     <style>
     	#footer {
     		background-color:#071952; 
@@ -126,7 +126,7 @@
 		    <div class='carousel-item <c:if test="${status.index eq 0}">active</c:if>'>
 		      <img src="${item.ATTR01}" class="d-block w-100" alt="...">
 		      <div class="carousel-caption d-none d-sm-block">
-		        <h4 style="color:#fff;font-family:GamtanD;">산곡교회 오신 여러분을 축복합니다.</h4>
+		        <h4 style="color:#fff;font-family:GamtanD;">산곡성결교회 오신 여러분을 축복합니다.</h4>
 		      </div>
 		    </div>
 		    </c:forEach>
