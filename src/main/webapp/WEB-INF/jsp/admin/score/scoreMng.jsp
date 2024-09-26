@@ -58,7 +58,7 @@
 		<div class="d-flex flex-wrap justify-content-start">
 		<c:forEach var="item" items="${SCORE_LIST}">  
 			<div class="d-flex flex-column justify-content-between board-frame p-1" >
-				<c:if test="${not empty item.URL}"><div class="board-frame-background" style='background-image: url(${item.URL});'></div></c:if>
+				<c:if test="${not empty item.URL}"><div class="board-frame-background" style="background-image: url('${item.URL}');"></div></c:if>
 				<div class="d-flex justify-content-between align-items-center">
 					<span class="sub1">${item.S_KEY}</span>
 				</div>

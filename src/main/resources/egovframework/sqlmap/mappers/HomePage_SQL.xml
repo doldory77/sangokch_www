@@ -342,6 +342,13 @@
 		 WHERE SEQ_NO = #{SEQ_NO}
 	</delete>
 	
+	<update id="updateUseYnBoard" parameterType="map">
+		UPDATE H_BOARD
+		   SET USE_YN = #{USE_YN}
+		 WHERE GROUP_ID = #{GROUP_ID}
+		   AND SEQ_NO = #{SEQ_NO}  
+	</update>
+	
 	<select id="selectScoreList" statementType="CALLABLE" parameterType="map" resultType="map">
 		{
 			CALL SP_GET_SCORE_LIST(

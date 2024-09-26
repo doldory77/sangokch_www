@@ -1144,6 +1144,20 @@ public class WebController implements InitializingBean {
 	}	
 	
 	/*
+	 * 게시판 활성비활성
+	 */
+	@RequestMapping(value = "/admin/board/useYn.do")
+	public String updateUseYnBoard(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		debug(params);
+		webService.getMapper().updateUseYnBoard(params);
+		
+		return "redirect:/admin/adminPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
+			+ "&PAGE=" + params.get("PAGE")
+			+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
+	}		
+	
+	/*
 	 * 게시판 목록 조회
 	 */
 	@RequestMapping(value = "/admin/board/list.do")

@@ -70,4 +70,68 @@
 
   gtag('config', 'G-YKHSCBC0YL');
 </script>
+
+<style>
+	.swlabel {
+	  display: inline-flex;
+	  align-items: center;
+	  gap: 0.5rem;
+	  cursor: pointer;
+	}
+	
+	.swlabel [type="checkbox"] {
+	  appearance: none;
+	  position: relative;
+	  border: max(2px, 0.1em) solid gray;
+	  border-radius: 1.25em;
+	  width: 2.25em;
+	  height: 1.25em;
+	}
+	
+	.swlabel [type="checkbox"]::before {
+	  content: "";
+	  position: absolute;
+	  left: 0;
+	  width: 1em;
+	  height: 1em;
+	  border-radius: 50%;
+	  transform: scale(0.8);
+	  background-color: gray;
+	  transition: left 250ms linear;
+	}
+	
+	.swlabel [type="checkbox"]:checked {
+	  background-color: tomato;
+	  border-color: tomato;
+	}
+	
+	.swlabel [type="checkbox"]:checked::before {
+	  background-color: white;
+	  left: 1em;
+	}
+	
+	.swlabel [type="checkbox"]:disabled {
+	  border-color: lightgray;
+	  opacity: 0.7;
+	  cursor: not-allowed;
+	}
+	
+	.swlabel [type="checkbox"]:disabled:before {
+	  background-color: lightgray;
+	}
+	
+	.swlabel [type="checkbox"]:disabled + span {
+	  opacity: 0.7;
+	  cursor: not-allowed;
+	}
+	
+	.swlabel [type="checkbox"]:focus-visible {
+	  outline-offset: max(2px, 0.1em);
+	  outline: max(2px, 0.1em) solid tomato;
+	}
+	
+	.swlabel [type="checkbox"]:enabled:hover {
+	  box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
+	}
+</style>
     
