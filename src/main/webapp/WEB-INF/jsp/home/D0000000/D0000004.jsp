@@ -90,7 +90,7 @@
 				</c:when>
 				<c:otherwise>
 					<div class="col" style="position:relative;">
-						<div class="item-badge hide show" onclick="goDtl(this);"><div>더보기</div></div>
+						<c:if test="${item.TAG_CD eq '00'}"><div class="item-badge hide show" onclick="goDtl(this);"><div>더보기</div></div></c:if>
 					    <div class="mainItem mainItem-b">
 					        <c:choose>
 					    	<c:when test="${not empty item.ATTR05}">
@@ -129,7 +129,7 @@
 				</c:when>
 				<c:otherwise>
 					<div class="col" style="position:relative;">
-						<div class="item-badge hide show" onclick="goDtl(this);"><div>더보기</div></div>
+						<c:if test="${item.TAG_CD eq '00'}"><div class="item-badge hide show" onclick="goDtl(this);"><div>더보기</div></div></c:if>
 					    <div class="mainItem mainItem-b">
 					        <c:choose>
 					    	<c:when test="${not empty item.ATTR05}">
