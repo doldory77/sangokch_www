@@ -17,7 +17,18 @@
 				<div class="d-flex justify-content-between align-items-center">
 					<span class="sub1">${item.GROUP_NM}</span>
 					<c:if test="${fn:length(item.ATTR03) le 8}"><span class="sub1">${item.ATTR03}</span></c:if>
-					<span class="sub2 text-danger"><c:choose><c:when test="${item.USE_YN eq 'Y'}">(사용)</c:when><c:otherwise>(미사용)</c:otherwise></c:choose></span>
+					<!-- <span class="sub2 text-danger">
+						<c:choose><c:when test="${item.USE_YN eq 'Y'}">(사용)</c:when><c:otherwise>(미사용)</c:otherwise></c:choose>
+					</span> -->
+					<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}">
+					<fieldset>
+					  <span class="sub2 text-danger">사용</span>
+					  <label class="swlabel">
+					    <input role="switch" id="sw_${item.SEQ_NO}" onclick="toggleBoard('${PAGE_CTL.PAGE}','${PAGE_CTL.CURR_PAGE}','${item.GROUP_ID}','${item.SEQ_NO}','${item.SUBJECT}'); return false;" type="checkbox" ${item.USE_YN eq 'Y' ? 'checked' : ''} />
+					    <span></span>
+					  </label>
+					</fieldset>
+					</c:if>
 				</div>
 				<div class="d-flex align-items-center">
 					<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}"><a href="#" onclick="delBoard('${PAGE_CTL.PAGE}','${PAGE_CTL.CURR_PAGE}','${item.GROUP_ID}','${item.SEQ_NO}','${item.SUBJECT}'); return false;" class="btn btn-sm" style="background-color: #B80000; color: white;">삭제</a></c:if>
@@ -25,8 +36,9 @@
 					
 					<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}">
 					<fieldset>
+					  <span class="sub2 text-danger">보기</span>
 					  <label class="swlabel">
-					    <input role="switch" id="sw_${item.SEQ_NO}" onclick="toggleBoard('${PAGE_CTL.PAGE}','${PAGE_CTL.CURR_PAGE}','${item.GROUP_ID}','${item.SEQ_NO}','${item.SUBJECT}'); return false;" type="checkbox" ${item.USE_YN eq 'Y' ? 'checked' : ''} />
+					    <input role="switch2" id="sw2_${item.SEQ_NO}" onclick="toggleBoard2('${PAGE_CTL.PAGE}','${PAGE_CTL.CURR_PAGE}','${item.GROUP_ID}','${item.SEQ_NO}','${item.SUBJECT}'); return false;" type="checkbox" ${item.USE_YN eq 'Y' ? 'checked' : ''} />
 					    <span></span>
 					  </label>
 					</fieldset>
@@ -116,6 +128,22 @@
 		}
 		if (confirm(msg)) {
 			location.href="/admin/board/useYn.do?PAGE="+page+"&CURR_PAGE="+currPage+"&GROUP_ID="+groupId+"&SEQ_NO="+seqNo+"&USE_YN="+useYn;
+		}
+	}
+	
+	function toggleBoard2(page, currPage, groupId, seqNo, subject){
+		var $swbtn = $('#sw2_'+seqNo);
+		var useYnFlag =  $swbtn.prop('checked');
+		var useYn = useYnFlag == true ? 'Y' : 'N'
+		var msg = '';
+		
+		if (useYnFlag) {
+			msg = '[' + subject + ']을(를) 활성화 합니다.';
+		} else {
+			msg = '[' + subject + ']을(를) 비활성화 합니다.';
+		}
+		if (confirm(msg)) {
+			location.href="/admin/board/showYn.do?PAGE="+page+"&CURR_PAGE="+currPage+"&GROUP_ID="+groupId+"&SEQ_NO="+seqNo+"&USE_YN="+useYn;
 		}
 	}
 	</script>
