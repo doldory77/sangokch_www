@@ -1189,6 +1189,7 @@ public class WebController implements InitializingBean {
 		case "D0000003" :
 		case "D0000004" :	
 		case "E0000001" :
+		case "E0000002" :
 		case "E0000003" :
 		case "E0000004" :
 		case "F0000001" :
