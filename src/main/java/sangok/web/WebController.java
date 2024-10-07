@@ -1155,6 +1155,20 @@ public class WebController implements InitializingBean {
 		return "redirect:/admin/adminPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
 			+ "&PAGE=" + params.get("PAGE")
 			+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
+	}
+	
+	/*
+	 * 게시판 메인노출토글
+	 */
+	@RequestMapping(value = "/admin/board/showYn.do")
+	public String updateMainDispYnBoard(@RequestParam Map<String, Object> params, ModelMap model) throws Exception {
+		
+		debug(params);
+		webService.getMapper().updateMainDispYnBoard(params);
+		
+		return "redirect:/admin/adminPage.do?CURR_PAGE=" + params.get("CURR_PAGE")
+		+ "&PAGE=" + params.get("PAGE")
+		+ "&GROUP_ID=" + JStr.ifNull(params.get("GROUP_ID"), "");
 	}		
 	
 	/*

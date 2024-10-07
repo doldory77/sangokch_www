@@ -349,6 +349,13 @@
 		   AND SEQ_NO = #{SEQ_NO}  
 	</update>
 	
+	<update id="updateMainDispYnBoard" parameterType="map">
+		UPDATE H_BOARD
+		   SET MAIN_DISP_YN = #{MAIN_DISP_YN}
+		 WHERE GROUP_ID = #{GROUP_ID}
+		   AND SEQ_NO = #{SEQ_NO}  
+	</update>
+	
 	<select id="selectScoreList" statementType="CALLABLE" parameterType="map" resultType="map">
 		{
 			CALL SP_GET_SCORE_LIST(

@@ -72,5 +72,7 @@ public interface WebMapper {
 	
 	void updateUseYnBoard(Map<String, Object> params) throws Exception;
 	
+	void updateMainDispYnBoard(Map<String, Object> params) throws Exception;
+	
 	List<Map<String, Object>> selectScoreList(Map<String, Object> params) throws Exception;
 }
