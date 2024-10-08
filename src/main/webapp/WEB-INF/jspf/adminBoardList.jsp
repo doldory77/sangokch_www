@@ -31,7 +31,10 @@
 					</c:if>
 				</div>
 				<div class="d-flex align-items-center">
-					<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}"><a href="#" onclick="delBoard('${PAGE_CTL.PAGE}','${PAGE_CTL.CURR_PAGE}','${item.GROUP_ID}','${item.SEQ_NO}','${item.SUBJECT}'); return false;" class="btn btn-sm" style="background-color: #B80000; color: white;">삭제</a></c:if>
+					<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}">
+						<!-- <a href="#" onclick="delBoard('${PAGE_CTL.PAGE}','${PAGE_CTL.CURR_PAGE}','${item.GROUP_ID}','${item.SEQ_NO}','${item.SUBJECT}'); return false;" class="btn btn-sm" style="background-color: #B80000; color: white;">삭제</a> -->
+						<span style="color:red; cursor:pointer;" onclick="delBoard('${PAGE_CTL.PAGE}','${PAGE_CTL.CURR_PAGE}','${item.GROUP_ID}','${item.SEQ_NO}','${item.SUBJECT}'); return false;" class="material-symbols-outlined">delete_forever</span>
+					</c:if>
 					<span class="title ps-2" onclick="location.href='/admin/board/write.do?PAGE=${PAGE_CTL.PAGE}&CURR_PAGE=${PAGE_CTL.CURR_PAGE}&GROUP_ID=${item.GROUP_ID}&SEQ_NO=${item.SEQ_NO}'">${item.SUBJECT}</span>
 					
 					<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}">

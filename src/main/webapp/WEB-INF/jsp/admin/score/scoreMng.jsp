@@ -63,7 +63,12 @@
 					<span class="sub1">${item.S_KEY}</span>
 				</div>
 				<div class="d-flex align-items-center">
-					<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}"><a href="#" onclick="delScore(${item.SEQ_NO}, '${item.SUBJECT}'); return false;" class="btn btn-sm" style="background-color: #B80000; color: white;">삭제</a></c:if>
+					<!--<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}">
+						<a href="#" onclick="delScore(${item.SEQ_NO}, '${item.SUBJECT}'); return false;" class="btn btn-sm" style="background-color: #B80000; color: white;">삭제</a>
+					</c:if>-->
+					<c:if test="${sessionScope.USER_INFO.admYn eq 'Y'}">
+						<span style="color:red; cursor:pointer;" onclick="delScore(${item.SEQ_NO}, '${item.SUBJECT}'); return false;" class="material-symbols-outlined">delete_forever</span>
+					</c:if>
 					<span class="title ps-2" onclick="window.open('${item.URL}')">${item.SUBJECT}</span>
 				</div>
 			</div>
