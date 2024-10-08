@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div class="col-2 col-sm-4 col-lg-4">
-            	<img class="img-small img-large rounded" style="height:140px; width:220px; max-height:140px; margin-top:16px; box-shadow: 3px 3px 3px gray;" src="${item.ATTR01}">
+            	<img loading="lazy" class="img-small img-large rounded" style="height:140px; width:220px; max-height:140px; margin-top:16px; box-shadow: 3px 3px 3px gray;" src="${item.ATTR01}">
             </div>
         </div>        
         </c:forEach>

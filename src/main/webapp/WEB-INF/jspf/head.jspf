@@ -69,6 +69,37 @@
   gtag('js', new Date());
 
   gtag('config', 'G-YKHSCBC0YL');
+  
+	// Check for IntersectionObserver support
+	if ('IntersectionObserver' in window) {
+	  document.addEventListener("DOMContentLoaded", function() {
+
+	    function handleIntersection(entries) {
+	      entries.map((entry) => {
+	        if (entry.isIntersecting) {
+	          // Item has crossed our observation
+	          // threshold - load src from data-src
+	          entry.target.style.backgroundImage = "url('"+entry.target.dataset.bgimage+"')";
+	          // Job done for this item - no need to watch it!
+	          observer.unobserve(entry.target);
+	        }
+	      });
+	    }
+
+	    const headers = document.querySelectorAll('.bg-lazy');
+	    const observer = new IntersectionObserver(
+	      handleIntersection
+	    );
+	    headers.forEach(header => observer.observe(header));
+	  });
+	} else {
+	  // No interaction support? Load all background images automatically
+	  const headers = document.querySelectorAll('.bg-lazy');
+	  headers.forEach(header => {
+	    header.style.backgroundImage = "url('"+header.dataset.bgimage+"')";
+	  });
+	}
+	
 </script>
 
 <style>

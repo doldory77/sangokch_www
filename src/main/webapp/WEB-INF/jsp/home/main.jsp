@@ -124,7 +124,7 @@
 		  <div class="carousel-inner">
 		  	<c:forEach var="item" items="${ROLL_IMG_LIST}" varStatus="status">
 		    <div class='carousel-item <c:if test="${status.index eq 0}">active</c:if>'>
-		      <img src="${item.ATTR01}" class="d-block w-100" alt="...">
+		      <img loading="lazy" src="${item.ATTR01}" class="d-block w-100" alt="...">
 		      <div class="carousel-caption d-none d-sm-block">
 		        <h4 style="color:#fff;font-family:GamtanD;">산곡성결교회 오신 여러분을 축복합니다.</h4>
 		      </div>
@@ -148,16 +148,16 @@
 			    	<c:choose>
 			    	<c:when test="${not empty item.ATTR04}">
 				    	<div>
-							<iframe width="100%" height="330" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							<iframe loading="lazy" width="100%" height="330" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 						</div>
 			    	</c:when>
 			    	<c:otherwise>
 				    	<c:choose>
 				    	<c:when test="${not empty item.ATTR05}">
-				    		<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='${item.ATTR05}'"></div>
+				    		<div class="small-width large-width bg-lazy" data-bgimage='${item.ATTR01}' style='cursor:pointer;' onclick="location.href='${item.ATTR05}'"></div>
 				    	</c:when>
 				    	<c:otherwise>
-				        	<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
+				        	<div class="small-width large-width bg-lazy" data-bgimage='${item.ATTR01}' style='cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
 				    	</c:otherwise>
 				    	</c:choose>
 			    	</c:otherwise>
@@ -177,14 +177,14 @@
 			    	<c:choose>
 			    	<c:when test="${not empty item.ATTR04}">
 				    	<div>
-							<iframe width="100%" height="330" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							<iframe loading="lazy" width="100%" height="330" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 						</div>
 			    	</c:when>
 			    	<c:when test="${not empty item.ATTR05}">
-			    		<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='${item.ATTR05}'"></div>
+			    		<div class="small-width large-width bg-lazy" data-bgimage='${item.ATTR01}' style='cursor:pointer;' onclick="location.href='${item.ATTR05}'"></div>
 			    	</c:when>
 			    	<c:otherwise>
-			        	<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
+			        	<div class="small-width large-width bg-lazy" data-bgimage='${item.ATTR01}' style='cursor:pointer;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
 			    	</c:otherwise>
 			    	</c:choose>
 			        <div style="color:#000;font-family:GamtanD;">
@@ -214,7 +214,7 @@
 	</div>
 	
   	<script>
-
+	 	
   		var words = ["홈페이지를", "새롭게", "단장하고 있습니다.", " 빠른 시간내에", "선보이겠습니다."],
 		    part,
 		    i = 0,

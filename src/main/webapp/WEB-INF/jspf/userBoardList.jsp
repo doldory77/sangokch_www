@@ -30,7 +30,7 @@
 			
 				<div class="col-12 col-sm-4 text-center" style="min-width:180px;">
 					<a href="${item.ATTR04}" target="blank">
-						<img src=${item.ATTR01} style="max-width:180px; max-height:142px;">
+						<img loading="lazy" src=${item.ATTR01} style="max-width:180px; max-height:142px;">
 					</a>
 				</div>
 				

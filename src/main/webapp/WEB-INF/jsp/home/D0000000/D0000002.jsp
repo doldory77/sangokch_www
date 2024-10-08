@@ -52,7 +52,7 @@
 	<div style="max-width:1280px; width:100%; padding-top:49px; margin:0 auto;">
 		<div id="hImgs" style="width:100%; height:320px; overflow:hidden; position:relative;">
 			<c:forEach var="item" items="${ROLLING_IMG}" varStatus="status">
-			<img style="width:100%; visibility:hidden; position:absolute; opacity:1.0; transform:translateY(-${item.ATTR04}%);" data-top2="${item.ATTR04}" data-left2="${item.ATTR05}" src="${item.ATTR01}">
+			<img loading="lazy" style="width:100%; visibility:hidden; position:absolute; opacity:1.0; transform:translateY(-${item.ATTR04}%);" data-top2="${item.ATTR04}" data-left2="${item.ATTR05}" src="${item.ATTR01}">
 			</c:forEach>
 		</div>
 	</div>
@@ -79,7 +79,7 @@
 					<div class="col">
 						<div class="mainItem mainItem-b">
 						<div>
-							<iframe width="100%" height="330" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							<iframe loading="lazy" width="100%" height="330" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 						</div>
 						<div style="color:#000;font-family:GamtanD;">
 				        	<div><strong>${item.SUBJECT}</strong></div>
@@ -94,10 +94,10 @@
 					    <div class="mainItem mainItem-b">
 					        <c:choose>
 					    	<c:when test="${not empty item.ATTR05}">
-					    		<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer; background-size: cover;' onclick="location.href='${item.ATTR05}'"></div>
+					    		<div class="small-width large-width bg-lazy" data-bgimage='${item.ATTR01}' style='cursor:pointer; background-size: cover;' onclick="location.href='${item.ATTR05}'"></div>
 					    	</c:when>
 					    	<c:otherwise>
-					        	<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer; background-size: cover;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
+					        	<div class="small-width large-width bg-lazy" data-bgimage='${item.ATTR01}' style='cursor:pointer; background-size: cover;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
 					    	</c:otherwise>
 					    	</c:choose>
 					        <div style="color:#000;font-family:GamtanD;">
@@ -118,7 +118,7 @@
 					<div class="col">
 						<div class="mainItem mainItem-b">
 						<div>
-							<iframe width="100%" height="330" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+							<iframe loading="lazy" width="100%" height="330" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 						</div>
 						<div style="color:#000;font-family:GamtanD;">
 				        	<div><strong>${item.SUBJECT}</strong></div>
@@ -133,10 +133,10 @@
 					    <div class="mainItem mainItem-b">
 					        <c:choose>
 					    	<c:when test="${not empty item.ATTR05}">
-					    		<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer; background-size: cover;' onclick="location.href='${item.ATTR05}'"></div>
+					    		<div class="small-width large-width bg-lazy" data-bgimage='${item.ATTR01}' style='cursor:pointer; background-size: cover;' onclick="location.href='${item.ATTR05}'"></div>
 					    	</c:when>
 					    	<c:otherwise>
-					        	<div class="small-width large-width" style='background-image:url(${item.ATTR01}); cursor:pointer; background-size: cover;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
+					        	<div class="small-width large-width bg-lazy" data-bgimage='${item.ATTR01}' style='cursor:pointer; background-size: cover;' onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'"></div>
 					    	</c:otherwise>
 					    	</c:choose>
 					        <div style="color:#000;font-family:GamtanD;">
@@ -155,7 +155,7 @@
 
 	<c:if test="${not empty FOOTER_IMG}">
 	<div class="container-fluid pt-5 px-0">
-		<div class="mainHead mainHead-b" style='position:relative; background-image:url(${FOOTER_IMG.ATTR01}); <c:if test="${not empty FOOTER_IMG.ATTR04}">background-position-y:${FOOTER_IMG.ATTR04}%;</c:if> <c:if test="${not empty FOOTER_IMG.ATTR03}">height:${FOOTER_IMG.ATTR03}px;</c:if>'>
+		<div class="mainHead mainHead-b bg-lazy" data-bgimage='${FOOTER_IMG.ATTR01}' style='position:relative; <c:if test="${not empty FOOTER_IMG.ATTR04}">background-position-y:${FOOTER_IMG.ATTR04}%;</c:if> <c:if test="${not empty FOOTER_IMG.ATTR03}">height:${FOOTER_IMG.ATTR03}px;</c:if>'>
 		    <p class="mainHead-title word fs-4" style='color: #ffffff; text-shadow: 2px 2px 3px #736b6b; padding: 0 10%;<c:if test="${not empty FOOTER_IMG.ATTR05}">margin-top:${FOOTER_IMG.ATTR05}px;</c:if>'>
 		        ${fn:replace(FOOTER_IMG.ATTR02, newLine, '<br>')}
 		    </p>
