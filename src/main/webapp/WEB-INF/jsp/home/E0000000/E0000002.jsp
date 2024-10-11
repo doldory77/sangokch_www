@@ -63,7 +63,7 @@
 				<div class="col">
 					<div class="fs-4 text-center" style="color:#000;font-family:GamtanD;font-weight:bold;">${item.SUBJECT}</div>
 				    <div class="mainItem" style="border-radius: 10px; box-shadow: 3px 3px 3px #6a5858;">
-				        <div style="background-image:url('${item.ATTR01}'); cursor:pointer;" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
+				        <div class="bg-lazy" data-bgimage='${item.ATTR01}' style="cursor:pointer;" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
 							${item.ATTR03}
 				        </div>
 				        <div style="color:#000;font-family:GamtanD;" class="d-flex flex-column justify-content-center">
@@ -85,7 +85,7 @@
 				  </figcaption>
 				  <div>			    
 				    <div class="is-wood" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
-				      <img class="is-rwd" src="${item.ATTR01}">
+				      <img loading="lazy" class="is-rwd" src="${item.ATTR01}">
 				    </div>
 				    <c:if test="${not empty item.ATTR02}">
 				    <div style="position: relative; width: 100%; height: 108px; margin-top: 8px;">
@@ -104,7 +104,7 @@
 
 	<c:if test="${not empty FOOTER_IMG}">
 	<div class="container-fluid pt-5 px-0">
-		<div class="mainHead mainHead-b" style='position:relative; background-image:url(${FOOTER_IMG.ATTR01}); <c:if test="${not empty FOOTER_IMG.ATTR04}">background-position-y:${FOOTER_IMG.ATTR04}%;</c:if> <c:if test="${not empty FOOTER_IMG.ATTR03}">height:${FOOTER_IMG.ATTR03}px;</c:if>'>
+		<div class="mainHead mainHead-b bg-lazy" data-bgimage='${FOOTER_IMG.ATTR01}' style='position:relative; <c:if test="${not empty FOOTER_IMG.ATTR04}">background-position-y:${FOOTER_IMG.ATTR04}%;</c:if> <c:if test="${not empty FOOTER_IMG.ATTR03}">height:${FOOTER_IMG.ATTR03}px;</c:if>'>
 		    <p class="mainHead-title word fs-1" style='<c:if test="${not empty FOOTER_IMG.ATTR05}">margin-top:${FOOTER_IMG.ATTR05}px;</c:if>'>
 		        ${FOOTER_IMG.ATTR02}
 		    </p>

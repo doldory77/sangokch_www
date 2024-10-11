@@ -46,7 +46,7 @@
 				  <figcaption class="fs-5 text-center" style="font-weight:bold; font-family:GamtanD;">${item.SUBJECT}</figcaption>
 				  <div>			    
 				    <div class="is-gradient" onclick="location.href='/boardDtlView.do?SEQ_NO=${item.SEQ_NO}&GROUP_ID=${item.GROUP_ID}'">
-				      <img class="is-rwd" src="${item.ATTR01}">
+				      <img loading="lazy" class="is-rwd" src="${item.ATTR01}">
 				    </div>
 				    <p style="margin-top:20px; color:#000;font-family:GamtanD;">${fn:replace(item.ATTR02, newLine, '<br>')}</p>
 				  </div>

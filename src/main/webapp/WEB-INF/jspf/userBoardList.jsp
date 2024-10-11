@@ -42,7 +42,7 @@
 					</c:if>
 					</div>
 					<c:if test="${not empty item.ATTR02}">
-					<div class="border-top fs-6 text-end pt-2 ps-3">${fn:replace(item.ATTR02, newLine, '<br>')}</div>
+					<div class="border-top fs-6 text-end pt-2 ps-3"><div style="text-align:left; display:inline-block;">${fn:replace(item.ATTR02, newLine, '<br>')}</div></div>
 					</c:if>
 				</div>
 				
