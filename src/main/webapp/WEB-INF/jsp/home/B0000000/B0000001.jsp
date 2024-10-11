@@ -29,7 +29,7 @@
 	
 	<div class="container-lg">
 
-		<div class="row mt-3">
+		<div class="row my-3">
 			<div class="col-12 col-md-6">
 				<div class="row gy-3 ps-0 ps-md-2">
 					<c:forEach var="item" items="${BODY_IMG}" varStatus="status">
