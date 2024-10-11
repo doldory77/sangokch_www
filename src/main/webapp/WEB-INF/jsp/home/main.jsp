@@ -146,7 +146,7 @@
 			<div class="col">
 			    <div class="mainItem mainItem-b">
 			    	<c:choose>
-			    	<c:when test="${not empty item.ATTR04}">
+			    	<c:when test="${not empty item.ATTR04 && fn:startsWith(item.ATTR04, 'https')}">
 				    	<div>
 							<iframe loading="lazy" width="100%" height="330" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 						</div>
@@ -175,7 +175,7 @@
 				<div class="item-badge hide show"><div>${item.GROUP_NM}</div></div>
 			    <div class="mainItem mainItem-b">
 			    	<c:choose>
-			    	<c:when test="${not empty item.ATTR04}">
+			    	<c:when test="${not empty item.ATTR04 && fn:startsWith(item.ATTR04, 'https')}">
 				    	<div>
 							<iframe loading="lazy" width="100%" height="330" src="${item.ATTR04}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 						</div>

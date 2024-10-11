@@ -36,16 +36,16 @@
 	<div class="container-fluid mt-3">
 		<form name="frm" method="POST" action="/admin/weekly/save.do" enctype="multipart/form-data" onsubmit="return false;">
 		<div class="row align-items-center mt-1">
-			<div class="col-2">
-				<label for="wFileNm">주보파일(html)</label>
+			<div class="col-3">
+				<label for="wFileNm">주보파일 <span style="color:red;">(예: 20240303.html)</span></label>
 			</div>
 			<div class="col">
 				<input type="file" name="W_FILE_NM" id="wFileNm">
 			</div>
 		</div>	
 		<div class="row align-items-center mt-1">
-			<div class="col-2">
-				<label for="">주보 스타일시트(css)</label>
+			<div class="col-3">
+				<label for="wStylNm">주보 스타일시트 <span style="color:red;">(예: 20240303_style.css)</span></label>
 			</div>
 			<div class="col">
 				<input type="file" name="W_STYL_NM" id="wStylNm">

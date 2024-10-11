@@ -14,14 +14,14 @@
 
     <style>
         .triangle { display:inline-block; border:20px solid transparent }
-        .triangle-bottom { border-bottom-color: red }
-        .l-year { text-align: right; padding: 16px; border-right: 6px solid red; font-size: 1.2rem; font-weight: bold; } 
+        .triangle-bottom { border-bottom-color: #071952 }
+        .l-year { text-align: right; padding: 16px; border-right: 6px solid #071952; font-size: 1.2rem; font-weight: bold; } 
         .r-month { position: relative; padding: 16px; }
         .r-month a { color:black; }
-        .r-month a:hover { color:red; }
-        .point1 { position: absolute; background-color:red; height: 5px; width: 10px; margin-left: -16px; margin-top: 10px; }
+        .r-month a:hover { color:#071952; }
+        .point1 { position: absolute; background-color:#071952; height: 5px; width: 10px; margin-left: -16px; margin-top: 10px; }
         .point2 { width:24px; margin-left:-31px; }
-        .base { position: absolute; background-color:red; width:20px; height:20px; border-radius: 50%; margin-left: -13px; margin-top: -5px; }
+        .base { position: absolute; background-color:#071952; width:20px; height:20px; border-radius: 50%; margin-left: -13px; margin-top: -5px; }
 		@media(max-width:480px) {
 	    	.img-small {
 	    		display:none;
