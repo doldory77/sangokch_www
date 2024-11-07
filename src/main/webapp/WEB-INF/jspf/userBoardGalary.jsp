@@ -33,6 +33,7 @@
 		  width: 100%;
 		  border: 20px solid #f98b14;
 		  border-image: linear-gradient(-45deg, #00b9e9, #f98b14, #503370) 20;
+		  cursor:pointer;
 		} 		
 	</style>
 	
