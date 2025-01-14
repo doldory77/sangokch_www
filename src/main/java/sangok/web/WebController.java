@@ -55,6 +55,7 @@ public class WebController implements InitializingBean {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(WebController.class);
 	
+	
 	@Autowired
 	DefaultListableBeanFactory beanFactory;
 	
