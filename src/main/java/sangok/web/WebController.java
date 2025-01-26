@@ -2,6 +2,7 @@ package sangok.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -1356,7 +1357,7 @@ public class WebController implements InitializingBean {
 				.put("MAIN_DISP_YN", "N")
 				.put("ATTR01", "/images/weekly_sign2.webp")
 				.put("ATTR02", null)
-				.put("ATTR03", null)
+				.put("ATTR03", JStr.formatDateStr(new Date(), null))
 				.put("ATTR04", null)
 				.put("ATTR05", "/weekly/"+originalFileName1)
 				.build());

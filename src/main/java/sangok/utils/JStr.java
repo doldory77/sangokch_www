@@ -49,6 +49,16 @@ public class JStr {
 		return yyyymmdd;
 	}
 	
+	public static String formatDateStr(Date date, String strFormat) {
+		SimpleDateFormat simpleDateFormat = null;
+		if (strFormat == null) {
+			simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+		} else {
+			simpleDateFormat = new SimpleDateFormat(strFormat);
+		}
+		return simpleDateFormat.format(date);
+	}
+	
 	public static String yyyyMMddTHHmiss() {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat sdf2 = new SimpleDateFormat("HH:mm:ss+09:00");
