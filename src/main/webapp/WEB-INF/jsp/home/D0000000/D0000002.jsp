@@ -61,11 +61,9 @@
 			<ul class="splide__list">
 			<c:forEach var="item" items="${ROLLING_IMG}" varStatus="status">
 				<li class="splide__slide">
-					<img src="${item.ATTR01}">
+					<img src="${item.ATTR01}" data-splide-lazy="${item.ATTR01}">
 				</li>
 			</c:forEach>
-			<!-- <div class="splide__slide"><img src="https://sangokch.org/images/board/img_af0e9341-34b1-4759-946e-05d11063c34c.jpg"></div>
-			<div class="splide__slide"><img src="https://sangokch.org/images/board/img_c78c8bf2-e2c3-4f00-9e3c-3135461ef742.jpg"></div> -->
 			</ul>
 		</div>
 	</div>
@@ -203,20 +201,9 @@
   			}*/
   			anim($('#hImgs img'), 0, 8000);
   		});
-  		var splide = new Splide('#splide_practice', {
-  			type: 'loop' //롤링 끝나면 반복
-  			, autoplay : true //자동시작
-  			, perPage : 1 //한 페이지에 노출되는 이미지
-  			, perMove : 1 //슬라이드 이미지 개수
-  			, arrows : true //왼쪽 오른쪽 슬라이드 버튼 제거
-  			, drag : false //드래그 비활성
-  			, interval : 3000 //3000ms(3초) 마다 슬라이드
-  			, pauseOnHover : true //마우스 오버시 일시정지 비활성
-  			, pauseOnFocus : false //포커스시 일시정지 비활성
-  			, pagenation : true //페이지네이션 점 비활성
-  			, heightRatio: 0.5
-  			, cover: true
-  		}).mount();
+
   	</script>
+  	
+  <%@ include file="/WEB-INF/jspf/foot.jspf" %>	
   </body>
 </html>
