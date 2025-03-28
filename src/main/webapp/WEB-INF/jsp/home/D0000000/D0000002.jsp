@@ -49,11 +49,22 @@
 	</c:if> -->
 	
 	<c:if test="${not empty ROLLING_IMG}">
-	<div style="max-width:1280px; width:100%; padding-top:49px; margin:0 auto;">
+	<!-- <div style="max-width:1280px; width:100%; padding-top:49px; margin:0 auto;">
 		<div id="hImgs" style="width:100%; height:320px; overflow:hidden; position:relative;">
 			<c:forEach var="item" items="${ROLLING_IMG}" varStatus="status">
 			<img loading="lazy" style="width:100%; visibility:hidden; position:absolute; opacity:1.0; transform:translateY(-${item.ATTR04}%);" data-top2="${item.ATTR04}" data-left2="${item.ATTR05}" src="${item.ATTR01}">
 			</c:forEach>
+		</div>
+	</div> -->
+	<div id="splide_practice" class="splide">
+		<div class="splide__track">
+			<ul class="splide__list">
+			<c:forEach var="item" items="${ROLLING_IMG}" varStatus="status">
+				<li class="splide__slide">
+					<img src="${item.ATTR01}" data-splide-lazy="${item.ATTR01}">
+				</li>
+			</c:forEach>
+			</ul>
 		</div>
 	</div>
 	</c:if>
@@ -167,7 +178,7 @@
 		function goDtl(me) {
 			location.href='/D0000002.do?SUB=D0000002_SUB&GROUP_ID=D0000002&TAG_CD=00';
   			//$(me).next().children('div:eq(0)').click();
-  		}  	
+  		};  	
   		function anim($elem, idx, mTime) {
   			var $obj = $elem.eq(idx);
   			if ($obj && $obj.length) {
@@ -183,13 +194,16 @@
   			} else if (idx > 0) {
   				anim($elem, 0, mTime);
   			}
-  		}
+  		};
   		$(document).ready(function(){
   			/*if ($('#hImgs img:eq(0)').length) {
   				$('#hImgs img:eq(0)').animate({top:-300, left:-300}, 10000, function(){alert('end');});
   			}*/
   			anim($('#hImgs img'), 0, 8000);
-  		})
+  		});
+
   	</script>
+  	
+  <%@ include file="/WEB-INF/jspf/foot.jspf" %>	
   </body>
 </html>

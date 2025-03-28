@@ -2,6 +2,7 @@ package sangok.web;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -54,6 +55,7 @@ import sangok.utils.JStr;
 public class WebController implements InitializingBean {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(WebController.class);
+	
 	
 	@Autowired
 	DefaultListableBeanFactory beanFactory;
@@ -1353,9 +1355,9 @@ public class WebController implements InitializingBean {
 				.put("USER_ID", "SYSTEM")
 				.put("TAG_CD", "00")
 				.put("MAIN_DISP_YN", "N")
-				.put("ATTR01", "/images/weekly_sign.webp")
+				.put("ATTR01", "/images/weekly_sign2.webp")
 				.put("ATTR02", null)
-				.put("ATTR03", null)
+				.put("ATTR03", JStr.formatDateStr(new Date(), null))
 				.put("ATTR04", null)
 				.put("ATTR05", "/weekly/"+originalFileName1)
 				.build());
@@ -1365,7 +1367,7 @@ public class WebController implements InitializingBean {
 		
 		JStr.saveFileWithReplaceStr(file1.getBytes()
 				, new String[] {"<body><div class=\"hpa\" style=\"width:380mm;height:210mm;\">", "<div class=\"hpa\" style=\"width:380mm;height:210mm;\">"}
-				, new String[] {"<body><div class=\"hpa\" style=\"width:380mm;height:210mm;\"><img src=\"/images/weekly_out_bg.webp\" style=\"position: absolute; width:100%\">", "<div class=\"hpa\" style=\"width:380mm;height:210mm;\"><img src=\"/images/weekly_in_bg.webp\" style=\"position: absolute; width:100%\">"}
+				, new String[] {"<body><div class=\"hpa\" style=\"width:380mm;height:210mm;\"><img src=\"/images/weekly_out_bg2.webp\" style=\"position: absolute; width:100%\">", "<div class=\"hpa\" style=\"width:380mm;height:210mm;\"><img src=\"/images/weekly_in_bg.webp\" style=\"position: absolute; width:100%\">"}
 				, weeklyRealPath + originalFileName1);
 		
 		//file1.transferTo(newFile1);
