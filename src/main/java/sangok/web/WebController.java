@@ -827,6 +827,32 @@ public class WebController implements InitializingBean {
 //		commProcessEscapeBoard(new String[] {"HEADER_IMG"}, new Boolean[] {false}, model);
 		
 		return "home/F0000000/F0000001";
+	}
+	
+	/*
+	 * 사용자 목장모임 접속
+	 */
+	@RequestMapping(value = "/F0000002.do")
+	public String f0000002(@RequestParam Map<String, Object> params, HttpServletRequest request, ModelMap model) throws Exception {
+		accessLog(request);
+		this.commProcessMenuHighlight(request, model);
+		this.commProcessSetMenu(true, model);
+		
+		List<Map<String, Object>> HEADER_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "01").put("GROUP_ID", "F0000002").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_IMG = webService.selectBoardDtl(JMap.instance("TAG_CD", "05").put("GROUP_ID", "F0000002").put("USE_YN", "Y").build());
+		List<Map<String, Object>> BODY_LIST = webService.selectBoardDtl(JMap.instance("TAG_CD", "02").put("GROUP_ID", "F0000002").put("USE_YN", "Y").put("ORDER_BY", "ATTR03 DESC").build());
+//		List<Map<String, Object>> DISP_Y_LIST = webService.getMapper().selectDispYnBoard(JMap.instance("GROUP_ID", "E0000004").put("TAG_CD", "00").build());
+		this.setBoardGalaryInitParams(params, model);
+		String title = webService.getMapper().selectTitle(JMap.instance("MENU_ID", "F0000002").build()).get("MENU_NM").toString();
+		
+		model.addAttribute("HEADER_IMG", HEADER_IMG.size() > 0 ? HEADER_IMG.get(0) : null);
+		model.addAttribute("BODY_IMG", BODY_IMG.size() > 0 ? BODY_IMG.get(0) : null);
+		model.addAttribute("BODY_LIST", BODY_LIST);
+//		model.addAttribute("DISP_Y_LIST", DISP_Y_LIST);
+		model.addAttribute("TITLE", title);
+//		commProcessEscapeBoard(new String[] {"HEADER_IMG","BODY_IMG","BODY_LIST"}, new Boolean[] {false, false, true}, model);
+		
+		return "home/F0000000/F0000002";
 	}	
 	
 	/*
@@ -1209,6 +1235,7 @@ public class WebController implements InitializingBean {
 		case "E0000003" :
 		case "E0000004" :
 		case "F0000001" :
+		case "F0000002" :
 			params.put("ORDER_BY", "SCREEN_YN DESC, ATTR03 DESC");
 			break;
 		default:
